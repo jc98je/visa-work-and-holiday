@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Simulador interactivo de examen IELTS con las 4 secciones y cronometro.">
+  <title>Simulador IELTS - Examen de Practica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="../css/styles.css">
+  <!-- Page Styles -->
+  <link rel="stylesheet" href="../css/simulator.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Visa<span>Work</span></a>
+    <div class="nav-timer" id="navTimer" style="display:none;">
+      <span class="timer-label" id="timerLabel">Tiempo:</span>
+      <span id="timerDisplay">00:00</span>
+      <div class="timer-box green" id="timerBox">
+        <span id="timerStatus">En curso</span>
+      </div>
+    </div>
+    <a href="ielts-guia.html" class="nav-btn">← Volver a Guia</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="heroSection">
+  <section class="hero">
+    <h1>Simulador <span>IELTS</span></h1>
+    <p>Practica con un examen completo. Elige una seccion o toma las 4.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4</div><div class="label">Secciones</div></div>
+      <div class="hero-stat"><div class="num">40+</div><div class="label">Preguntas</div></div>
+      <div class="hero-stat"><div class="num">2h 45m</div><div class="label">Duracion total</div></div>
+    </div>
+  </section>
+
+  <!-- SECTION SELECTOR -->
+  <div class="section-select">
+    <div class="section-cards">
+      <div class="section-card" onclick="startSection('listening')">
+        <div class="icon">🎧</div>
+        <h3>Listening</h3>
+        <p>4 partes, 10 preguntas</p>
+        <div class="time">⏱ 30 minutos</div>
+      </div>
+      <div class="section-card" onclick="startSection('reading')">
+        <div class="icon">📖</div>
+        <h3>Reading</h3>
+        <p>3 textos, preguntas variadas</p>
+        <div class="time">⏱ 60 minutos</div>
+      </div>
+      <div class="section-card" onclick="startSection('writing')">
+        <div class="icon">✍️</div>
+        <h3>Writing</h3>
+        <p>Task 1 + Task 2</p>
+        <div class="time">⏱ 60 minutos</div>
+      </div>
+      <div class="section-card" onclick="startSection('speaking')">
+        <div class="icon">🗣️</div>
+        <h3>Speaking</h3>
+        <p>3 partes, entrevista</p>
+        <div class="time">⏱ 11-14 minutos</div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:32px;">
+      <button class="btn btn-primary" onclick="startSection('listening')" style="font-size:1.1rem; padding:18px 40px;">
+        🚀 Empezar Examen Completo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM CONTAINER -->
+<div class="exam-container" id="examContainer">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+    <div>
+      <h2 id="sectionTitle" style="font-size:1.5rem; font-weight:800;"></h2>
+      <p id="sectionDesc" style="font-size:0.9rem; color:var(--text-secondary);"></p>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="examProgress" style="width:0%;"></div></div>
+  <div id="questionsContainer"></div>
+  <div class="btn-group" id="examButtons">
+    <button class="btn btn-secondary" onclick="prevQuestion()">← Anterior</button>
+    <button class="btn btn-primary" onclick="nextQuestion()">Siguiente →</button>
+    <button class="btn btn-green" onclick="submitSection()" style="display:none;" id="submitBtn">✅ Finalizar Seccion</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results" id="resultsSection">
+  <div class="results-header">
+    <h2>Resultado del Examen</h2>
+    <p style="color:var(--text-secondary); margin-top:8px;">Aqui tienes tu desempenio por seccion</p>
+  </div>
+  <div id="resultsContent"></div>
+  <div class="btn-group" style="justify-content:center; margin-top:40px;">
+    <button class="btn btn-primary" onclick="location.reload()">🔄 Tomar otro examen</button>
+    <a href="ielts-guia.html" class="btn btn-secondary">📚 Volver a la Guia IELTS</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p style="opacity:0.7; font-size:0.9rem; color:white;">Simulador de examen IELTS. Para el examen oficial, visita <a href="https://ielts.org" target="_blank" style="color:var(--accent-light); text-decoration:none;">ielts.org</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/simulator.js"></script>
+
+</body>
+</html>
