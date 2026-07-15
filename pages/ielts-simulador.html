@@ -3,13 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Simulador interactivo de examen IELTS con las 4 secciones y cronometro.">
-  <title>Simulador IELTS - Examen de Practica</title>
+  <meta name="description" content="Practica IELTS por niveles con checklist interactivo. Desde A1 hasta B2, desbloquea cada nivel al completar el anterior.">
+  <title>Practica IELTS por Niveles - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Shared Styles -->
   <link rel="stylesheet" href="../css/styles.css">
-  <!-- Page Styles -->
+  <link rel="stylesheet" href="../css/ielts-guide.css">
   <link rel="stylesheet" href="../css/simulator.css">
+  <style>
+    /* Level Cards */
+    .levels-container { max-width: 900px; margin: 0 auto; }
+
+    .level-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+      border: 2px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .level-card:hover { box-shadow: var(--shadow-lg); }
+
+    .level-card.locked {
+      opacity: 0.5;
+      pointer-events: none;
+      filter: grayscale(0.5);
+    }
+    .level-card.locked::after {
+      content: '🔒';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      z-index: 5;
+    }
+
+    .level-card.completed {
+      border-color: var(--green);
+      background: linear-gradient(135deg, #f0fdf4, white);
+    }
+
+    .level-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .level-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+    }
+    .level-badge.a1 { background: linear-gradient(135deg, #10b981, #059669); }
+    .level-badge.b1 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .level-badge.b2 { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+    .level-info h3 { font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .level-info p { font-size: 0.88rem; color: var(--text-secondary); }
+    .level-info .band { display: inline-block; padding: 2px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; margin-top: 6px; }
+    .band.a2 { background: #d1fae5; color: #059669; }
+    .band.b1 { background: #dbeafe; color: #1d4ed8; }
+    .band.b2 { background: #ede9fe; color: #7c3aed; }
+
+    /* Progress within level */
+    .level-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .level-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .level-progress-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+    .level-progress-fill.a1 { background: linear-gradient(90deg, #10b981, #059669); }
+    .level-progress-fill.b1 { background: linear-gradient(90deg, #3b82f6, #1d4ed8); }
+    .level-progress-fill.b2 { background: linear-gradient(90deg, #8b5cf6, #7c3aed); }
+    .level-progress-text { font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); white-space: nowrap; }
+
+    /* Skill Sections */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .skill-item:hover { border-color: var(--accent); background: white; }
+    .skill-item.checked { background: #f0fdf4; border-color: #86efac; }
+
+    .skill-checkbox {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: transparent;
+      transition: all 0.2s;
+    }
+    .skill-item.checked .skill-checkbox {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .skill-content h4 { font-size: 0.88rem; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
+    .skill-content p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+
+    /* Simulation CTA */
+    .sim-cta {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-radius: var(--radius-xl);
+      padding: 48px 32px;
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sim-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(249,115,22,.1) 0%, transparent 50%);
+    }
+    .sim-cta h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; position: relative; }
+    .sim-cta p { font-size: 1rem; opacity: 0.8; margin-bottom: 24px; position: relative; }
+    .sim-cta .btn { position: relative; font-size: 1.1rem; padding: 16px 40px; }
+    .sim-cta.locked { opacity: 0.5; }
+    .sim-cta.locked::after { content: '🔒 Completa los niveles para desbloquear'; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.85rem; opacity: 0.7; }
+
+    /* Exam Sections */
+    .exam-container { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; display: none; }
+    .exam-container.active { display: block; }
+    .exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .exam-header h2 { font-size: 1.5rem; font-weight: 800; }
+    .exam-question { background: var(--card); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 24px; }
+    .exam-question h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; color: var(--primary); }
+    .exam-options { display: grid; gap: 10px; }
+    .exam-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px;
+      cursor: pointer; transition: all 0.2s; font-size: 0.95rem;
+    }
+    .exam-option:hover { border-color: var(--accent); background: white; }
+    .exam-option.selected { border-color: var(--accent); background: #fff7ed; }
+    .exam-option .letter {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: var(--text-secondary);
+    }
+    .exam-option.selected .letter { background: var(--accent); color: white; }
+    .exam-nav { display: flex; gap: 12px; justify-content: center; margin-top: 32px; }
+
+    @media (max-width: 768px) {
+      .skill-grid { grid-template-columns: 1fr; }
+      .level-header { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
@@ -17,103 +204,425 @@
 <nav class="nav">
   <div class="nav-inner">
     <a href="../index.html" class="nav-brand">Visa<span>Work</span></a>
-    <div class="nav-timer" id="navTimer" style="display:none;">
-      <span class="timer-label" id="timerLabel">Tiempo:</span>
-      <span id="timerDisplay">00:00</span>
-      <div class="timer-box green" id="timerBox">
-        <span id="timerStatus">En curso</span>
-      </div>
-    </div>
-    <a href="ielts-guia.html" class="nav-btn">← Volver a Guia</a>
+    <a href="ielts-guia.html" class="nav-link">📖 Guia</a>
+    <a href="ielts-simulador.html" class="nav-link active">🎯 Practica</a>
+    <div class="nav-spacer"></div>
+    <a href="../mi-proceso.html" class="nav-btn">← Mi Proceso</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<div id="heroSection">
-  <section class="hero">
-    <h1>Simulador <span>IELTS</span></h1>
-    <p>Practica con un examen completo. Elige una seccion o toma las 4.</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">4</div><div class="label">Secciones</div></div>
-      <div class="hero-stat"><div class="num">40+</div><div class="label">Preguntas</div></div>
-      <div class="hero-stat"><div class="num">2h 45m</div><div class="label">Duracion total</div></div>
+<section class="hero" style="min-height:auto; padding:100px 24px 48px;">
+  <div style="max-width:700px; margin:0 auto; text-align:center;">
+    <h1>Practica <span>IELTS por Niveles</span></h1>
+    <p style="margin-bottom:24px;">Completa cada nivel desbloqueando las 6 habilidades. Cuando termines los 3 niveles, estaras listo para el examen real.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <div class="hero-stat"><div class="num" id="totalCompleted">0</div><div class="label">Completados</div></div>
+      <div class="hero-stat"><div class="num" id="totalSkills">24</div><div class="label">Habilidades</div></div>
+      <div class="hero-stat"><div class="num" id="currentLevel">A1</div><div class="label">Nivel Actual</div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SECTION SELECTOR -->
-  <div class="section-select">
-    <div class="section-cards">
-      <div class="section-card" onclick="startSection('listening')">
-        <div class="icon">🎧</div>
-        <h3>Listening</h3>
-        <p>4 partes, 10 preguntas</p>
-        <div class="time">⏱ 30 minutos</div>
-      </div>
-      <div class="section-card" onclick="startSection('reading')">
-        <div class="icon">📖</div>
-        <h3>Reading</h3>
-        <p>3 textos, preguntas variadas</p>
-        <div class="time">⏱ 60 minutos</div>
-      </div>
-      <div class="section-card" onclick="startSection('writing')">
-        <div class="icon">✍️</div>
-        <h3>Writing</h3>
-        <p>Task 1 + Task 2</p>
-        <div class="time">⏱ 60 minutos</div>
-      </div>
-      <div class="section-card" onclick="startSection('speaking')">
-        <div class="icon">🗣️</div>
-        <h3>Speaking</h3>
-        <p>3 partes, entrevista</p>
-        <div class="time">⏱ 11-14 minutos</div>
-      </div>
-    </div>
+<!-- LEVELS -->
+<div class="levels-container" id="levelsSection" style="padding:0 24px 60px;">
 
-    <div style="text-align:center; margin-top:32px;">
-      <button class="btn btn-primary" onclick="startSection('listening')" style="font-size:1.1rem; padding:18px 40px;">
-        🚀 Empezar Examen Completo
-      </button>
+  <!-- LEVEL 1: A1-A2 Basico -->
+  <div class="level-card" id="level-1" data-level="1">
+    <div class="level-header">
+      <div class="level-badge a1">A1</div>
+      <div class="level-info">
+        <h3>Nivel 1: Basico (A1-A2)</h3>
+        <p>Vocabulario basico, frases simples y comunicacion del dia a dia. Tu base para empezar.</p>
+        <span class="band a2">IELTS 3.0 - 4.0</span>
+      </div>
     </div>
+    <div class="level-progress">
+      <div class="level-progress-bar"><div class="level-progress-fill a1" id="level1Fill" style="width:0%;"></div></div>
+      <div class="level-progress-text" id="level1Text">0/4</div>
+    </div>
+    <div class="skill-grid" id="level1Skills">
+      <div class="skill-item" data-level="1" data-skill="vocab" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📚 Vocabulario Basico</h4>
+          <p>Familia, numeros, colores, comida, partes del cuerpo, ropa</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="1" data-skill="grammar" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📝 Gramatica Basica</h4>
+          <p>Present simple, plurales, articulos (a/the), preposiciones (in/on/at)</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="1" data-skill="listen" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>🎧 Listening Basico</h4>
+          <p>Entender numeros, nombres, direcciones simples, horarios</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="1" data-skill="read" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📖 Reading Basico</h4>
+          <p>Leer avisos, menus, horarios, instrucciones simples</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 2: B1 Intermedio -->
+  <div class="level-card locked" id="level-2" data-level="2">
+    <div class="level-header">
+      <div class="level-badge b1">B1</div>
+      <div class="level-info">
+        <h3>Nivel 2: Intermedio (B1)</h3>
+        <p>Frases mas complejas, opiniones, experiencias y comunicacion en trabajo.</p>
+        <span class="band b1">IELTS 4.0 - 5.0 ⭐ Tu objetivo</span>
+      </div>
+    </div>
+    <div class="level-progress">
+      <div class="level-progress-bar"><div class="level-progress-fill b1" id="level2Fill" style="width:0%;"></div></div>
+      <div class="level-progress-text" id="level2Text">0/4</div>
+    </div>
+    <div class="skill-grid" id="level2Skills">
+      <div class="skill-item" data-level="2" data-skill="vocab" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📚 Vocabulario Trabajo</h4>
+          <p>Empleo, oficina, reuniones, instrucciones, seguridad laboral</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="2" data-skill="grammar" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📝 Gramatica Intermedia</h4>
+          <p>Present perfect, comparativos, conectores (however, because, although)</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="2" data-skill="listen" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>🎧 Listening Intermedio</h4>
+          <p>Conversaciones telefonicas, instrucciones en trabajo, opiniones</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="2" data-skill="read" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📖 Reading Intermedio</h4>
+          <p>Emails de trabajo, avisos largos, instrucciones detalladas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 3: B2 Avanzado -->
+  <div class="level-card locked" id="level-3" data-level="3">
+    <div class="level-header">
+      <div class="level-badge b2">B2</div>
+      <div class="level-info">
+        <h3>Nivel 3: Avanzado (B2)</h3>
+        <p>Textos academicos, opiniones complejas, escritura formal y speaking fluido.</p>
+        <span class="band b2">IELTS 5.5 - 6.5</span>
+      </div>
+    </div>
+    <div class="level-progress">
+      <div class="level-progress-bar"><div class="level-progress-fill b2" id="level3Fill" style="width:0%;"></div></div>
+      <div class="level-progress-text" id="level3Text">0/4</div>
+    </div>
+    <div class="skill-grid" id="level3Skills">
+      <div class="skill-item" data-level="3" data-skill="vocab" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📚 Vocabulario Academico</h4>
+          <p>AWL (Academic Word List), sinonimos, collocations, phrasal verbs</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="3" data-skill="grammar" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>📝 Gramatica Avanzada</h4>
+          <p>Voz pasiva, condicionales, clausulas relativas, Reported Speech</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="3" data-skill="write" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>✍️ Writing Formal</h4>
+          <p>Ensayos opinion, cartas formales, Task 1 y Task 2</p>
+        </div>
+      </div>
+      <div class="skill-item" data-level="3" data-skill="speak" onclick="toggleSkill(this)">
+        <div class="skill-checkbox">✓</div>
+        <div class="skill-content">
+          <h4>🗣️ Speaking Fluido</h4>
+          <p>Part 1-3, opiniones, descripciones, metodo ARE</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIMULATION CTA -->
+  <div class="sim-cta locked" id="simCta">
+    <h2>🎯 Simulacion de Examen IELTS</h2>
+    <p>Completa los 3 niveles para desbloquear el examen simulado con las 4 secciones y cronometro real.</p>
+    <button class="btn btn-primary" onclick="startSimulation()" id="simBtn" disabled style="opacity:0.5; cursor:not-allowed;">
+      🚀 Empezar Simulacion
+    </button>
   </div>
 </div>
 
-<!-- EXAM CONTAINER -->
+<!-- EXAM CONTAINER (hidden by default) -->
 <div class="exam-container" id="examContainer">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+  <div class="exam-header">
     <div>
-      <h2 id="sectionTitle" style="font-size:1.5rem; font-weight:800;"></h2>
-      <p id="sectionDesc" style="font-size:0.9rem; color:var(--text-secondary);"></p>
+      <h2 id="examTitle"></h2>
+      <p id="examDesc" style="font-size:0.9rem; color:var(--text-secondary);"></p>
     </div>
+    <button class="btn btn-secondary" onclick="backToLevels()">← Volver</button>
   </div>
-  <div class="progress-bar"><div class="progress-fill" id="examProgress" style="width:0%;"></div></div>
+  <div class="level-progress-bar" style="margin-bottom:24px;"><div class="level-progress-fill b1" id="examProgress" style="width:0%;"></div></div>
   <div id="questionsContainer"></div>
-  <div class="btn-group" id="examButtons">
-    <button class="btn btn-secondary" onclick="prevQuestion()">← Anterior</button>
-    <button class="btn btn-primary" onclick="nextQuestion()">Siguiente →</button>
-    <button class="btn btn-green" onclick="submitSection()" style="display:none;" id="submitBtn">✅ Finalizar Seccion</button>
+  <div class="exam-nav">
+    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" style="display:none;">← Anterior</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Siguiente →</button>
+    <button class="btn" style="background:var(--green); color:white;" id="submitBtn" onclick="submitExam()" style="display:none;">✅ Finalizar</button>
   </div>
 </div>
 
 <!-- RESULTS -->
-<div class="results" id="resultsSection">
-  <div class="results-header">
-    <h2>Resultado del Examen</h2>
-    <p style="color:var(--text-secondary); margin-top:8px;">Aqui tienes tu desempenio por seccion</p>
-  </div>
+<div class="exam-container" id="resultsSection" style="text-align:center;">
+  <h2 style="font-size:2rem; font-weight:900; margin-bottom:16px;">🎉 Resultados</h2>
   <div id="resultsContent"></div>
-  <div class="btn-group" style="justify-content:center; margin-top:40px;">
-    <button class="btn btn-primary" onclick="location.reload()">🔄 Tomar otro examen</button>
-    <a href="ielts-guia.html" class="btn btn-secondary">📚 Volver a la Guia IELTS</a>
+  <div class="exam-nav" style="margin-top:32px;">
+    <button class="btn btn-primary" onclick="backToLevels()">← Volver a Niveles</button>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <p style="opacity:0.7; font-size:0.9rem; color:white;">Simulador de examen IELTS. Para el examen oficial, visita <a href="https://ielts.org" target="_blank" style="color:var(--accent-light); text-decoration:none;">ielts.org</a></p>
+<footer class="footer" style="margin-top:60px;">
+  <p style="opacity:0.7; font-size:0.9rem; color:white;">Practica IELTS - VisaWork Peru | Basado en el examen IELTS General Training</p>
 </footer>
 
-<script src="../js/main.js"></script>
-<script src="../js/simulator.js"></script>
+<script>
+// ==========================================
+// PROGRESSIVE LEVEL SYSTEM
+// ==========================================
 
+const LEVELS = {
+  1: { required: 4, skills: ['vocab','grammar','listen','read'] },
+  2: { required: 4, skills: ['vocab','grammar','listen','read'] },
+  3: { required: 4, skills: ['vocab','grammar','write','speak'] }
+};
+
+function getProgress() {
+  const saved = localStorage.getItem('ieltsProgress2026');
+  return saved ? JSON.parse(saved) : { 1: {}, 2: {}, 3: {} };
+}
+
+function saveProgress(progress) {
+  localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
+}
+
+function toggleSkill(el) {
+  const level = parseInt(el.dataset.level);
+  const skill = el.dataset.skill;
+  const progress = getProgress();
+
+  if (!progress[level]) progress[level] = {};
+  progress[level][skill] = !progress[level][skill];
+  saveProgress(progress);
+
+  el.classList.toggle('checked', progress[level][skill]);
+  updateUI();
+}
+
+function updateUI() {
+  const progress = getProgress();
+  let totalCompleted = 0;
+  let currentLevel = 1;
+
+  // Update each level
+  for (let l = 1; l <= 3; l++) {
+    const levelEl = document.getElementById('level-' + l);
+    const skills = LEVELS[l].skills;
+    let completed = 0;
+
+    skills.forEach(s => {
+      if (progress[l] && progress[l][s]) completed++;
+    });
+
+    totalCompleted += completed;
+    const percent = Math.round((completed / LEVELS[l].required) * 100);
+
+    // Update progress bar
+    const fill = document.getElementById('level' + l + 'Fill');
+    const text = document.getElementById('level' + l + 'Text');
+    if (fill) fill.style.width = percent + '%';
+    if (text) text.textContent = completed + '/' + LEVELS[l].required;
+
+    // Update skill items
+    const skillGrid = document.getElementById('level' + l + 'Skills');
+    if (skillGrid) {
+      skillGrid.querySelectorAll('.skill-item').forEach(item => {
+        const s = item.dataset.skill;
+        item.classList.toggle('checked', progress[l] && progress[l][s]);
+      });
+    }
+
+    // Check if level is complete
+    const isComplete = completed >= LEVELS[l].required;
+
+    if (isComplete) {
+      levelEl.classList.remove('locked');
+      levelEl.classList.add('completed');
+      currentLevel = l + 1;
+    } else if (l === 1 || (progress[1] && Object.values(progress[1]).filter(v=>v).length >= LEVELS[1].required)) {
+      levelEl.classList.remove('locked');
+    }
+  }
+
+  // Lock/unlock levels
+  const level1Complete = progress[1] && LEVELS[1].skills.every(s => progress[1][s]);
+  const level2Complete = progress[2] && LEVELS[2].skills.every(s => progress[2][s]);
+
+  document.getElementById('level-2').classList.toggle('locked', !level1Complete);
+  document.getElementById('level-3').classList.toggle('locked', !level2Complete);
+
+  // Update stats
+  document.getElementById('totalCompleted').textContent = totalCompleted;
+  document.getElementById('currentLevel').textContent = currentLevel <= 3 ? ['A1','B1','B2'][currentLevel-1] : 'Listo!';
+
+  // Simulation CTA
+  const allComplete = level1Complete && level2Complete && progress[3] && LEVELS[3].skills.every(s => progress[3][s]);
+  const simCta = document.getElementById('simCta');
+  const simBtn = document.getElementById('simBtn');
+  if (allComplete) {
+    simCta.classList.remove('locked');
+    simBtn.disabled = false;
+    simBtn.style.opacity = '1';
+    simBtn.style.cursor = 'pointer';
+  }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => { updateUI(); });
+
+// ==========================================
+// SIMULATION (Exam Mode)
+// ==========================================
+
+let currentQuestions = [];
+let currentIdx = 0;
+let answers = {};
+
+const examQuestions = [
+  // READING
+  { section: 'Reading', q: 'Read: "The meeting will be held on Monday at 3pm in Room 204."', type: 'choice', options: ['Monday at 2pm','Monday at 3pm','Tuesday at 3pm','Monday at 4pm'], answer: 1 },
+  { section: 'Reading', q: '"Please submit your report by Friday." What does "submit" mean?', type: 'choice', options: ['Read','Send/Give','Delete','Print'], answer: 1 },
+  { section: 'Reading', q: '"The train departs at 7:15 and arrives at 9:45." How long is the journey?', type: 'choice', options: ['2 hours 15 min','2 hours 30 min','2 hours 45 min','3 hours'], answer: 1 },
+  { section: 'Reading', q: '"Due to budget constraints, we cannot hire additional staff." Why?', type: 'choice', options: ['No candidates applied','Limited money available','Staff are on leave','The position is closed'], answer: 1 },
+  // LISTENING
+  { section: 'Listening', q: 'In a restaurant, the waiter says: "Your table is ready, please follow me." What should you do?', type: 'choice', options: ['Pay the bill','Follow the waiter','Order food','Leave the restaurant'], answer: 1 },
+  { section: 'Listening', q: 'A colleague says: "Could you send me that email by noon?" What do they want?', type: 'choice', options: ['To receive an email from you by 12pm','To send you an email','To meet at noon','To read an email together'], answer: 0 },
+  { section: 'Listening', q: 'The announcement says: "The 10:30 flight to Sydney has been delayed by 45 minutes." When will it depart?', type: 'choice', options: ['10:30','11:15','11:00','10:45'], answer: 1 },
+  { section: 'Listening', q: 'Someone says: "I\'d like to book a room for three nights, starting tomorrow." How many nights?', type: 'choice', options: ['Two nights','Three nights','One night','Four nights'], answer: 1 },
+  // WRITING
+  { section: 'Writing', q: 'Task 1: Write a short letter (40+ words) to your landlord about a broken heater.', type: 'text', answer: '' },
+  { section: 'Writing', q: 'Task 2: "Do you agree or disagree: Working from home is better than working in an office?" Write 100+ words.', type: 'text', answer: '' },
+  // SPEAKING
+  { section: 'Speaking', q: 'Part 1: Describe your hometown in 2-3 sentences. What is it like?', type: 'text', answer: '' },
+  { section: 'Speaking', q: 'Part 2: Talk about a skill you learned recently. What is it? How did you learn it? Why is it useful?', type: 'text', answer: '' },
+];
+
+function startSimulation() {
+  currentQuestions = examQuestions;
+  currentIdx = 0;
+  answers = {};
+  document.getElementById('levelsSection').style.display = 'none';
+  document.querySelector('.hero').parentElement.style.display = 'none';
+  document.getElementById('examContainer').classList.add('active');
+  document.getElementById('resultsSection').classList.remove('active');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = currentQuestions[currentIdx];
+  document.getElementById('examTitle').textContent = q.section;
+  document.getElementById('examDesc').textContent = `Pregunta ${currentIdx + 1} de ${currentQuestions.length}`;
+  document.getElementById('examProgress').style.width = ((currentIdx + 1) / currentQuestions.length * 100) + '%';
+
+  const container = document.getElementById('questionsContainer');
+  let html = `<div class="exam-question"><h3>${q.q}</h3>`;
+
+  if (q.type === 'choice') {
+    html += '<div class="exam-options">';
+    const letters = ['A','B','C','D'];
+    q.options.forEach((opt, i) => {
+      const sel = answers[currentIdx] === i ? 'selected' : '';
+      html += `<div class="exam-option ${sel}" onclick="selectOption(${i})"><div class="letter">${letters[i]}</div><span>${opt}</span></div>`;
+    });
+    html += '</div>';
+  } else {
+    html += `<textarea id="textAnswer" style="width:100%; min-height:120px; padding:16px; border:2px solid var(--border); border-radius:10px; font-family:inherit; font-size:0.95rem; resize:vertical;" placeholder="Escribe tu respuesta aqui...">${answers[currentIdx] || ''}</textarea>`;
+  }
+  html += '</div>';
+  container.innerHTML = html;
+
+  document.getElementById('prevBtn').style.display = currentIdx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('nextBtn').style.display = currentIdx < currentQuestions.length - 1 ? 'inline-flex' : 'none';
+  document.getElementById('submitBtn').style.display = currentIdx === currentQuestions.length - 1 ? 'inline-flex' : 'none';
+}
+
+function selectOption(i) { answers[currentIdx] = i; renderQuestion(); }
+
+function prevQuestion() { if (currentIdx > 0) { saveTextAnswer(); currentIdx--; renderQuestion(); } }
+function nextQuestion() { saveTextAnswer(); if (currentIdx < currentQuestions.length - 1) { currentIdx++; renderQuestion(); } }
+
+function saveTextAnswer() {
+  const ta = document.getElementById('textAnswer');
+  if (ta) answers[currentIdx] = ta.value;
+}
+
+function submitExam() {
+  saveTextAnswer();
+  let correct = 0;
+  let textQs = 0;
+  currentQuestions.forEach((q, i) => {
+    if (q.type === 'choice' && answers[i] === q.answer) correct++;
+    if (q.type === 'text' && answers[i] && answers[i].length > 20) textQs++;
+  });
+
+  const totalChoice = currentQuestions.filter(q => q.type === 'choice').length;
+  const percent = Math.round((correct / totalChoice) * 100);
+  const band = percent >= 90 ? '6.5' : percent >= 70 ? '5.5' : percent >= 50 ? '4.5' : percent >= 30 ? '3.5' : '2.5';
+
+  document.getElementById('examContainer').classList.remove('active');
+  document.getElementById('resultsSection').classList.add('active');
+  document.getElementById('resultsContent').innerHTML = `
+    <div style="background:var(--card); border-radius:var(--radius-xl); padding:40px; box-shadow:var(--shadow-lg); max-width:500px; margin:0 auto;">
+      <div style="font-size:4rem; margin-bottom:16px;">${percent >= 70 ? '🎉' : percent >= 50 ? '👍' : '📚'}</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--accent); margin-bottom:8px;">${percent}%</div>
+      <div style="font-size:1.2rem; font-weight:700; margin-bottom:24px;">Band Estimado: ${band}</div>
+      <div style="text-align:left; font-size:0.9rem; color:var(--text-secondary); line-height:1.8;">
+        <p>✅ Respuestas correctas: ${correct}/${totalChoice}</p>
+        <p>✍️ Ejercicios escritos: ${textQs} completados</p>
+        <p>📊 Objetivo Work & Holiday: 4.5</p>
+        <p style="margin-top:12px; padding:12px; background:${percent >= 50 ? 'var(--green-light)' : 'var(--yellow-light)'}; border-radius:8px;">
+          ${percent >= 50 ? '¡Buen trabajo! Estas cerca de tu objetivo.' : 'Sigue practicando los niveles para mejorar.'}
+        </p>
+      </div>
+    </div>`;
+}
+
+function backToLevels() {
+  document.getElementById('examContainer').classList.remove('active');
+  document.getElementById('resultsSection').classList.remove('active');
+  document.getElementById('levelsSection').style.display = '';
+  document.querySelector('.hero').parentElement.style.display = '';
+}
+</script>
 </body>
 </html>
