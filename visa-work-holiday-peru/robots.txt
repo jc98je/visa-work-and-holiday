@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://pinpon.site/sitemap.xml
-
-# Disallow internal files
-Disallow: /SESSION_HANDOFF.md
-Disallow: /README.md
