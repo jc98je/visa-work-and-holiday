@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aprende gramatica IELTS basica (A1-A2) con ejercicios interactivos: present simple, plurales, articulos y preposiciones.">
+  <title>Gramatica Basica A1-A2 - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root { --accent: #3b82f6; --green: #10b981; --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; margin: 0; }
+
+    .page-hero {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      color: white; padding: 100px 24px 48px; text-align: center;
+    }
+    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; }
+    .page-hero p { font-size: 1.05rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    .mode-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .mode-tab {
+      padding: 10px 20px; border-radius: 50px; border: 2px solid rgba(255,255,255,.3);
+      background: transparent; color: white; font-weight: 600; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .mode-tab:hover { background: rgba(255,255,255,.15); }
+    .mode-tab.active { background: white; color: #1d4ed8; border-color: white; }
+
+    .stats-bar { display: flex; gap: 16px; justify-content: center; padding: 16px 24px; flex-wrap: wrap; }
+    .stat-pill {
+      padding: 8px 16px; background: white; border-radius: 50px; font-size: 0.82rem;
+      font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    .stat-pill strong { color: #0f172a; }
+
+    .categories { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .cat-card {
+      background: white; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.25s;
+    }
+    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,.1); }
+    .cat-card.active { border-color: var(--green); background: #f0fdf4; }
+    .cat-card .cat-icon { font-size: 2rem; margin-bottom: 8px; }
+    .cat-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .cat-card p { font-size: 0.82rem; color: #64748b; }
+    .cat-card .cat-count { font-size: 0.75rem; font-weight: 700; color: var(--green); margin-top: 8px; }
+
+    /* Exercise Area */
+    .exercise-container { max-width: 700px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .exercise-container.active { display: block; }
+    .exercise-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .exercise-header h3 { font-size: 1.1rem; font-weight: 700; }
+
+    .progress-bar { height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #1d4ed8); border-radius: 10px; transition: width 0.4s; }
+    .progress-text { font-size: 0.82rem; font-weight: 700; color: #64748b; text-align: right; margin-bottom: 8px; }
+
+    .exercise-card {
+      background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; margin-bottom: 20px;
+    }
+    .exercise-card h4 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .exercise-card .instruction { font-size: 0.9rem; color: #64748b; margin-bottom: 16px; }
+    .exercise-card .sentence { font-size: 1.1rem; color: #0f172a; margin-bottom: 16px; line-height: 1.8; }
+    .exercise-card .blank { 
+      display: inline-block; min-width: 100px; border-bottom: 2px solid var(--accent); 
+      padding: 2px 8px; font-weight: 700; color: var(--accent); text-align: center;
+    }
+
+    .options-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+    .option-btn {
+      padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 10px; background: white;
+      cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; text-align: center;
+    }
+    .option-btn:hover { border-color: var(--accent); background: #eff6ff; }
+    .option-btn.selected { border-color: var(--accent); background: #dbeafe; color: var(--accent); }
+    .option-btn.correct { border-color: var(--green); background: #d1fae5; color: #059669; }
+    .option-btn.wrong { border-color: var(--red); background: #fee2e2; color: var(--red); }
+
+    .fill-blank {
+      display: inline-block; min-width: 120px; padding: 8px 12px; border: 2px dashed #cbd5e1;
+      border-radius: 8px; font-size: 1rem; font-weight: 600; text-align: center;
+      background: #f8fafc; color: var(--accent); transition: all 0.2s;
+    }
+    .fill-blank.correct { border-color: var(--green); background: #d1fae5; color: #059669; border-style: solid; }
+    .fill-blank.wrong { border-color: var(--red); background: #fee2e2; color: var(--red); border-style: solid; }
+
+    .exercise-nav { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+    .exercise-nav button {
+      padding: 12px 28px; border-radius: 12px; border: none; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-secondary { background: #e2e8f0; color: #0f172a; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-green { background: var(--green); color: white; }
+    .btn-green:hover { background: #059669; }
+
+    .result-card {
+      text-align: center; padding: 40px; background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    }
+    .result-card .score-num { font-size: 3rem; font-weight: 900; color: var(--green); }
+    .result-card .score-label { font-size: 1.1rem; font-weight: 600; color: #64748b; margin-top: 8px; }
+
+    .tip-box {
+      padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 0.9rem; line-height: 1.7;
+    }
+    .tip-box.blue { background: #dbeafe; border-left: 4px solid var(--blue); }
+    .tip-box.green { background: #d1fae5; border-left: 4px solid var(--green); }
+    .tip-box.orange { background: #fff7ed; border-left: 4px solid #f97316; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { color: #0f172a; }
+
+    @media (max-width: 600px) {
+      .page-hero h1 { font-size: 1.8rem; }
+      .options-grid { grid-template-columns: 1fr 1fr; }
+      .cat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-hero">
+  <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
+  <h1>📝 Gramatica Basica</h1>
+  <p>Nivel A1-A2: Present simple, plurales, articulos y preposiciones para tu dia a dia</p>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('categories')">📋 Ejercicios</button>
+    <button class="mode-tab" onclick="showMode('reference')">📖 Reglas</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-pill">✅ <strong id="statCompleted">0</strong> completados</div>
+  <div class="stat-pill">🎯 <strong id="statCorrect">0</strong> correctas</div>
+  <div class="stat-pill">📊 <strong id="statTotal">0</strong> total</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories" id="categoriesSection">
+  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige un tema</h2>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<!-- REFERENCE -->
+<div class="categories" id="referenceSection" style="display:none;">
+  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">📖 Reglas de Gramatica</h2>
+  
+  <div class="tip-box blue" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Present Simple</h4>
+    <p>Se usa para acciones habituales y hechos generales.</p>
+    <p style="margin-top:8px;"><strong>Afirmativa:</strong> I/You/We/They <strong>work</strong> | He/She/It <strong>works</strong></p>
+    <p><strong>Negativa:</strong> I/You/We/They <strong>don't work</strong> | He/She/It <strong>doesn't work</strong></p>
+    <p><strong>Interrogativa:</strong> <strong>Do</strong> I/you/we/they work? | <strong>Does</strong> he/she/it work?</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: She <strong>works</strong> in an office. / They <strong>don't live</strong> in Sydney.</p>
+  </div>
+
+  <div class="tip-box green" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Plurales</h4>
+    <p>Reglas para formar el plural de sustantivos:</p>
+    <p style="margin-top:8px;"><strong>Regla general:</strong> + <strong>s</strong> → book → books</p>
+    <p><strong>Termina en s, sh, ch, x, z:</strong> + <strong>es</strong> → bus → buses</p>
+    <p><strong>Termina en consonante + y:</strong> cambia y por <strong>ies</strong> → city → cities</p>
+    <p><strong>Termina en vocal + y:</strong> + <strong>s</strong> → boy → boys</p>
+    <p><strong>Termina en f/fe:</strong> cambia por <strong>ves</strong> → knife → knives</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Irregulares: man → men, woman → women, child → children, foot → feet</p>
+  </div>
+
+  <div class="tip-box orange" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Articulos (a/an/the)</h4>
+    <p><strong>A</strong> → antes de consonante: a book, a house</p>
+    <p><strong>An</strong> → antes de vocal: an apple, an office</p>
+    <p><strong>The</strong> → algo especifico/unico: the sun, the book on the table</p>
+    <p><strong>Sin articulo</strong> → nombres propios, generalidades: Lima, water is important</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I want <strong>a</strong> coffee. / She works in <strong>an</strong> office. / Pass me <strong>the</strong> salt.</p>
+  </div>
+
+  <div class="tip-box blue" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Preposiciones (in/on/at)</h4>
+    <p><strong>IN</strong> → meses, anios, partes del dia, lugares cerrados: in July, in 2026, in the morning, in the room</p>
+    <p><strong>ON</strong> → dias, fechas, superficies: on Monday, on July 15th, on the table</p>
+    <p><strong>AT</strong> → horas, lugares especificos, eventos: at 3pm, at home, at school, at the party</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I wake up <strong>at</strong> 7am <strong>in</strong> the morning. / The meeting is <strong>on</strong> Monday.</p>
+  </div>
+
+  <div style="text-align:center; margin-top:32px;">
+    <button class="btn-primary" onclick="showMode('categories')" style="padding:14px 32px; border-radius:12px; border:none; font-weight:700; font-size:1rem; cursor:pointer;">
+      🎯 Empezar Ejercicios
+    </button>
+  </div>
+</div>
+
+<!-- EXERCISES -->
+<div class="exercise-container" id="exerciseSection">
+  <div class="exercise-header">
+    <button class="back-link" onclick="showMode('categories')">← Temas</button>
+    <h3 id="exerciseTitle"></h3>
+  </div>
+  <div class="progress-text" id="exProgressText">0/0</div>
+  <div class="progress-bar"><div class="progress-fill" id="exProgressFill" style="width:0%;"></div></div>
+  <div id="exerciseContent"></div>
+  <div class="exercise-nav">
+    <button class="btn-secondary" id="exPrevBtn" onclick="prevExercise()" style="display:none;">← Anterior</button>
+    <button class="btn-primary" id="exCheckBtn" onclick="checkExercise()">✅ Verificar</button>
+    <button class="btn-green" id="exNextBtn" onclick="nextExercise()" style="display:none;">Siguiente →</button>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// GRAMMAR EXERCISES DATA
+// ==========================================
+const grammarCategories = [
+  {
+    id: 'present-simple',
+    icon: '⏰',
+    name: 'Present Simple',
+    desc: 'Acciones habituales y hechos generales',
+    exercises: [
+      { type: 'fill', sentence: 'She ___ (work) in an office.', answer: 'works', hint: 'He/She/It + verb + s' },
+      { type: 'fill', sentence: 'They ___ (not/live) in Sydney.', answer: "don't live", hint: "They + don't + verb" },
+      { type: 'fill', sentence: '___ you ___ (speak) English?', answer: 'Do...speak', hint: 'Do +主语 + verb?' },
+      { type: 'fill', sentence: 'He ___ (have) two brothers.', answer: 'has', hint: 'He/She/It: have → has' },
+      { type: 'fill', sentence: 'We ___ (not/eat) meat.', answer: "don't eat", hint: "We + don't + verb" },
+      { type: 'fill', sentence: 'The train ___ (leave) at 7:15.', answer: 'leaves', hint: 'He/She/It + verb + s' },
+      { type: 'fill', sentence: '___ she ___ (like) coffee?', answer: 'Does...like', hint: 'Does + she + verb?' },
+      { type: 'fill', sentence: 'I ___ (work) Monday to Friday.', answer: 'work', hint: 'I + verb (no s)' },
+    ]
+  },
+  {
+    id: 'plurals',
+    icon: '📝',
+    name: 'Plurales',
+    desc: 'Formar el plural de sustantivos',
+    exercises: [
+      { type: 'fill', sentence: 'One bus → Two ___', answer: 'buses', hint: 'Termina en s → +es' },
+      { type: 'fill', sentence: 'One city → Three ___', answer: 'cities', hint: 'Consonante + y → ies' },
+      { type: 'fill', sentence: 'One knife → Five ___', answer: 'knives', hint: 'f/fe → ves' },
+      { type: 'fill', sentence: 'One man → Many ___', answer: 'men', hint: 'Irregular' },
+      { type: 'fill', sentence: 'One child → Ten ___', answer: 'children', hint: 'Irregular' },
+      { type: 'fill', sentence: 'One box → Four ___', answer: 'boxes', hint: 'Termina en x → +es' },
+      { type: 'fill', sentence: 'One baby → Two ___', answer: 'babies', hint: 'Consonante + y → ies' },
+      { type: 'fill', sentence: 'One foot → Two ___', answer: 'feet', hint: 'Irregular' },
+    ]
+  },
+  {
+    id: 'articles',
+    icon: '📌',
+    name: 'Articulos',
+    desc: 'a, an, the o sin articulo',
+    exercises: [
+      { type: 'choice', sentence: 'I want ___ coffee.', options: ['a', 'an', 'the', '∅'], answer: 0, hint: 'coffee empieza con consonante' },
+      { type: 'choice', sentence: 'She works in ___ office.', options: ['a', 'an', 'the', '∅'], answer: 1, hint: 'office empieza con vocal' },
+      { type: 'choice', sentence: 'Pass me ___ salt.', options: ['a', 'an', 'the', '∅'], answer: 2, hint: 'Algo especifico en la mesa' },
+      { type: 'choice', sentence: '___ water is important.', options: ['A', 'An', 'The', '∅'], answer: 3, hint: 'Generalidad, no especifico' },
+      { type: 'choice', sentence: 'He has ___ apple.', options: ['a', 'an', 'the', '∅'], answer: 1, hint: 'apple empieza con vocal' },
+      { type: 'choice', sentence: 'I live in ___ Lima.', options: ['a', 'an', 'the', '∅'], answer: 3, hint: 'Nombre propio' },
+      { type: 'choice', sentence: 'The meeting is at ___ university.', options: ['a', 'an', 'the', '∅'], answer: 0, hint: 'university empieza con consonante (sonido)' },
+      { type: 'choice', sentence: 'She is ___ best student.', options: ['a', 'an', 'the', '∅'], answer: 2, hint: 'Superlativo = the' },
+    ]
+  },
+  {
+    id: 'prepositions',
+    icon: '📍',
+    name: 'Preposiciones',
+    desc: 'in, on, at y otras preposiciones',
+    exercises: [
+      { type: 'choice', sentence: 'I wake up ___ 7am.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'Horas = at' },
+      { type: 'choice', sentence: 'The meeting is ___ Monday.', options: ['in', 'on', 'at', 'to'], answer: 1, hint: 'Dias = on' },
+      { type: 'choice', sentence: 'I was born ___ July.', options: ['in', 'on', 'at', 'to'], answer: 0, hint: 'Meses = in' },
+      { type: 'choice', sentence: 'She works ___ an office.', options: ['in', 'on', 'at', 'to'], answer: 0, hint: 'Lugares cerrados = in' },
+      { type: 'choice', sentence: 'The book is ___ the table.', options: ['in', 'on', 'at', 'to'], answer: 1, hint: 'Superficies = on' },
+      { type: 'choice', sentence: 'I study ___ home.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'Home = at home' },
+      { type: 'choice', sentence: 'She lives ___ Sydney.', options: ['in', 'on', 'at', 'to'], answer: 0, hint: 'Ciudades = in' },
+      { type: 'choice', sentence: 'The party is ___ night.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'At night (expresion fija)' },
+    ]
+  }
+];
+
+// ==========================================
+// STATE
+// ==========================================
+let currentMode = 'categories';
+let currentCat = null;
+let exIdx = 0;
+let exerciseResults = [];
+let completedExercises = JSON.parse(localStorage.getItem('grammarCompleted2026') || '{}');
+let totalCorrect = 0;
+let totalAttempted = 0;
+
+function saveState() {
+  localStorage.setItem('grammarCompleted2026', JSON.stringify(completedExercises));
+  localStorage.setItem('grammarStats2026', JSON.stringify({ correct: totalCorrect, attempted: totalAttempted }));
+}
+
+// ==========================================
+// MODE SWITCHING
+// ==========================================
+function showMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mode-tab').forEach(t => {
+    if (mode === 'categories' && t.textContent.includes('Ejercicios')) t.classList.add('active');
+    if (mode === 'reference' && t.textContent.includes('Reglas')) t.classList.add('active');
+  });
+
+  document.getElementById('categoriesSection').style.display = mode === 'categories' ? '' : 'none';
+  document.getElementById('referenceSection').style.display = mode === 'reference' ? '' : 'none';
+  document.getElementById('exerciseSection').classList.toggle('active', mode === 'exercise');
+
+  if (mode === 'categories') renderCategories();
+  if (mode === 'exercise' && currentCat) renderExercise();
+}
+
+// ==========================================
+// CATEGORIES
+// ==========================================
+function renderCategories() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = grammarCategories.map(cat => {
+    const total = cat.exercises.length;
+    const done = completedExercises[cat.id] ? total : 0;
+    return `<div class="cat-card ${completedExercises[cat.id] ? 'active' : ''}" onclick="selectCategory('${cat.id}')">
+      <div class="cat-icon">${cat.icon}</div>
+      <h3>${cat.name}</h3>
+      <p>${cat.desc}</p>
+      <div class="cat-count">${completedExercises[cat.id] ? '✅ Completado' : `${total} ejercicios`}</div>
+    </div>`;
+  }).join('');
+  updateStats();
+}
+
+function selectCategory(catId) {
+  currentCat = grammarCategories.find(c => c.id === catId);
+  exIdx = 0;
+  exerciseResults = [];
+  showMode('exercise');
+}
+
+// ==========================================
+// EXERCISES
+// ==========================================
+function renderExercise() {
+  if (!currentCat || exIdx >= currentCat.exercises.length) {
+    finishExercises();
+    return;
+  }
+  const ex = currentCat.exercises[exIdx];
+  document.getElementById('exerciseTitle').textContent = currentCat.icon + ' ' + currentCat.name;
+  document.getElementById('exProgressText').textContent = (exIdx + 1) + '/' + currentCat.exercises.length;
+  document.getElementById('exProgressFill').style.width = ((exIdx / currentCat.exercises.length) * 100) + '%';
+
+  const container = document.getElementById('exerciseContent');
+  let html = `<div class="exercise-card">
+    <h4>Ejercicio ${exIdx + 1}</h4>
+    <p class="instruction">${ex.hint || ''}</p>
+    <p class="sentence">${ex.sentence.replace('___', '<span class="fill-blank" id="fillBlank">___</span>')}</p>`;
+
+  if (ex.type === 'choice') {
+    html += '<div class="options-grid">';
+    ex.options.forEach((opt, i) => {
+      html += `<div class="option-btn" onclick="selectOption(this, ${i})">${opt}</div>`;
+    });
+    html += '</div>';
+  } else {
+    html += `<input type="text" id="fillInput" placeholder="Escribe tu respuesta..." 
+      style="width:100%; padding:12px 16px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; font-family:inherit; margin-top:8px;"
+      onkeypress="if(event.key==='Enter') checkExercise()">`;
+  }
+  html += '</div>';
+  container.innerHTML = html;
+
+  document.getElementById('exPrevBtn').style.display = exIdx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('exCheckBtn').style.display = 'inline-flex';
+  document.getElementById('exNextBtn').style.display = 'none';
+}
+
+let selectedOption = null;
+
+function selectOption(el, idx) {
+  el.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedOption = idx;
+}
+
+function checkExercise() {
+  if (!currentCat) return;
+  const ex = currentCat.exercises[exIdx];
+  let correct = false;
+
+  if (ex.type === 'choice') {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach((btn, i) => {
+      btn.style.pointerEvents = 'none';
+      if (i === ex.answer) btn.classList.add('correct');
+      else if (i === selectedOption && i !== ex.answer) btn.classList.add('wrong');
+    });
+    correct = selectedOption === ex.answer;
+  } else {
+    const input = document.getElementById('fillInput');
+    const blank = document.getElementById('fillBlank');
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = ex.answer.toLowerCase();
+    correct = userAnswer === correctAnswer || userAnswer === correctAnswer.replace('...', '');
+    
+    input.style.pointerEvents = 'none';
+    input.style.borderColor = correct ? '#10b981' : '#ef4444';
+    input.style.background = correct ? '#d1fae5' : '#fee2e2';
+    if (blank) {
+      blank.textContent = ex.answer;
+      blank.classList.add(correct ? 'correct' : 'wrong');
+    }
+    if (!correct) {
+      input.insertAdjacentHTML('afterend', `<p style="color:#ef4444; font-size:0.88rem; margin-top:8px;">✅ Respuesta correcta: <strong>${ex.answer}</strong></p>`);
+    }
+  }
+
+  exerciseResults.push(correct);
+  totalAttempted++;
+  if (correct) totalCorrect++;
+  saveState();
+  updateStats();
+
+  document.getElementById('exCheckBtn').style.display = 'none';
+  document.getElementById('exNextBtn').style.display = 'inline-flex';
+  selectedOption = null;
+}
+
+function nextExercise() {
+  exIdx++;
+  renderExercise();
+}
+
+function prevExercise() {
+  if (exIdx > 0) { exIdx--; renderExercise(); }
+}
+
+function finishExercises() {
+  const total = currentCat.exercises.length;
+  const correct = exerciseResults.filter(r => r).length;
+  const pct = Math.round((correct / total) * 100);
+  
+  completedExercises[currentCat.id] = true;
+  saveState();
+
+  // Sync to simulator
+  const allDone = grammarCategories.every(c => completedExercises[c.id]);
+  if (allDone) {
+    const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
+    if (!progress['1']) progress['1'] = {};
+    progress['1']['grammar'] = true;
+    localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
+  }
+
+  document.getElementById('exerciseContent').innerHTML = `
+    <div class="result-card">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '📚'}</div>
+      <div class="score-num">${correct}/${total}</div>
+      <div class="score-label">ejercicios correctos (${pct}%)</div>
+      <p style="margin-top:16px; color:#64748b;">${pct >= 70 ? '¡Excelente! Dominas esta regla.' : '¡Buen intento! Repasa las reglas y vuelve a intentar.'}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn-green" onclick="selectCategory('${currentCat.id}')">🔄 Repetir</button>
+        <button class="btn-primary" onclick="showMode('categories')">📋 Otro Tema</button>
+      </div>
+    </div>`;
+  document.getElementById('exPrevBtn').style.display = 'none';
+  document.getElementById('exCheckBtn').style.display = 'none';
+  document.getElementById('exNextBtn').style.display = 'none';
+}
+
+function updateStats() {
+  document.getElementById('statCompleted').textContent = Object.keys(completedExercises).length;
+  document.getElementById('statCorrect').textContent = totalCorrect;
+  document.getElementById('statTotal').textContent = totalAttempted;
+}
+
+// ==========================================
+// FINALIZADO BUTTON
+// ==========================================
+function markAsComplete() {
+  grammarCategories.forEach(c => { completedExercises[c.id] = true; });
+  saveState();
+  
+  const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
+  if (!progress['1']) progress['1'] = {};
+  progress['1']['grammar'] = true;
+  localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
+  
+  const btn = event.target;
+  btn.textContent = '✅ ¡Completado! Redirigiendo...';
+  btn.style.background = '#059669';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = 'ielts-simulador.html'; }, 1200);
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  const stats = JSON.parse(localStorage.getItem('grammarStats2026') || '{"correct":0,"attempted":0}');
+  totalCorrect = stats.correct;
+  totalAttempted = stats.attempted;
+  renderCategories();
+});
+</script>
+
+<!-- MARCAR COMO COMPLETADO -->
+<div style="text-align:center; padding:24px;">
+  <button onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
+    ✅ Marcar Gramatica como Completada
+  </button>
+  <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Al hacer click, se sincronizara con tu progreso en el simulador</p>
+</div>
+
+</body>
+</html>
