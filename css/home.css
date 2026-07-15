@@ -776,3 +776,23 @@
   .costs-grid { grid-template-columns: 1fr 1fr; }
   .tips-grid { grid-template-columns: 1fr; }
 }
+
+/* Carta MRE & Vuelos Responsive */
+@media (max-width: 768px) {
+  #carta-mre .card > div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  #carta-mre .card > div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .nav-inner { padding: 0 12px; }
+  .nav-link { padding: 14px 8px; font-size: 0.78rem; }
+  .table-wrapper { overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+  #carta-mre .card > div[style*="repeat(4, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  #carta-mre .info-box ul { padding-left: 16px; }
+}
