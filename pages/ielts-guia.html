@@ -474,12 +474,7 @@
   </div>
 </section>
 
-<!-- CTA ESTUDIO -->
-<div style="text-align:center; padding:48px 20px 0;">
-  <a href="ielts-simulador.html" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg, var(--accent), #ff6b35); color:white; padding:14px 32px; border-radius:50px; font-weight:700; font-size:0.95rem; text-decoration:none; box-shadow:0 4px 20px rgba(255,107,53,.35); transition:all .3s ease;">
-    🚀 Comenzar a practicar
-  </a>
-</div>
+
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -489,6 +484,57 @@
 
 <script src="../js/main.js"></script>
 <script src="../js/ielts-guide.js"></script>
+
+<!-- FLOATING CTA BUTTON -->
+<style>
+  .floating-cta {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--accent), #ff6b35);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: 0 4px 24px rgba(255,107,53,.45);
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+  .floating-cta:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(255,107,53,.55);
+  }
+  .floating-cta .cta-pulse {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.4); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @media (max-width: 600px) {
+    .floating-cta {
+      bottom: 16px;
+      right: 16px;
+      padding: 12px 20px;
+      font-size: 0.82rem;
+    }
+  }
+</style>
+<a href="ielts-simulador.html" target="_blank" class="floating-cta">
+  <span class="cta-pulse"></span>
+  🚀 Practicar ahora
+</a>
 
 </body>
 </html>
