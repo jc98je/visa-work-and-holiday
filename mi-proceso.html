@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tu proceso personalizado para la visa Work and Holiday Australia 2026. Checklist interactivo y recomendaciones.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mi Proceso - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <style>
+    .process-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: white;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+    .process-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .process-hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .process-hero p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .welcome-banner {
+      background: var(--green-light);
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: -20px auto 0;
+      max-width: 800px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .welcome-banner .emoji { font-size: 2rem; }
+    .welcome-banner .text h3 { color: var(--green); font-size: 1.1rem; margin-bottom: 4px; }
+    .welcome-banner .text p { color: var(--text-secondary); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Visa<span>Work</span></a>
+    <a href="index.html#requisitos" class="nav-link">Requisitos</a>
+    <a href="index.html#carta-mre" class="nav-link">Carta MRE</a>
+    <a href="pages/ielts-guia.html" class="nav-link">🇬🇧 Ingles</a>
+    <a href="index.html#proceso" class="nav-link">Proceso</a>
+    <a href="index.html#vuelos" class="nav-link">✈️ Vuelos</a>
+    <a href="index.html#costos" class="nav-link">Costos</a>
+    <a href="mi-proceso.html" class="nav-link active">Mi Proceso</a>
+    <div class="nav-spacer"></div>
+    <div class="user-menu" id="userMenu" style="display:flex;">
+      <div class="user-avatar" id="userAvatar">?</div>
+      <span class="user-name" id="userName">Usuario</span>
+      <button class="user-logout" onclick="logout()">Salir</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="process-hero">
+  <h1>Mi Proceso <span>Work &amp; Holiday</span></h1>
+  <p>Marca cada paso cuando lo tengas listo. Tu progreso se guarda automaticamente en tu cuenta.</p>
+</section>
+
+<!-- WELCOME BANNER -->
+<div style="max-width:1200px; margin:0 auto; padding:0 24px;">
+  <div class="welcome-banner" id="welcomeBanner">
+    <div class="emoji">👋</div>
+    <div class="text">
+      <h3 id="welcomeText">Bienvenido!</h3>
+      <p>Empieza marcando los documentos que ya tengas listos. Recibiras recomendaciones personalizadas.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST + RECOMMENDATIONS -->
+<section class="section" id="checklist">
+  <div class="section-header">
+    <div class="section-tag tag-blue">Tu Progreso</div>
+    <h2>Checklist Interactivo</h2>
+    <p>Marca cada documento cuando lo tengas listo. Recibe recomendaciones personalizadas.</p>
+  </div>
+
+  <div class="checklist-progress fade-in">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-weight:600; font-size:1rem;">Tu progreso</span>
+      <span id="progressPercent" style="font-weight:700; color:var(--accent);">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%;"></div></div>
+    <div class="progress-text">
+      <span id="progressCount">0 de 14 documentos</span>
+      <span id="progressMsg">Sigue asi!</span>
+    </div>
+  </div>
+
+  <div class="checklist-grid fade-in" id="checklistGrid">
+    <div class="checklist-item" data-id="pasaporte" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Pasaporte peruano vigente</h4>
+        <p>Con al menos 6 meses de vigencia. Escanea pagina biometrica.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="carta-mre" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Carta del MRE (obligatoria)</h4>
+        <p>Min. Relaciones Exteriores. Solicitar PRIMERO. Vigencia 60 dias.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="ingles" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Certificado de ingles (IELTS/TOEFL/PTE)</h4>
+        <p>Resultado oficial con menos de 12 meses de antiguedad.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="estudios" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Certificado de estudios universitarios</h4>
+        <p>Constancia de al menos 2 anios completados con notas.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="bancario" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Extracto bancario</h4>
+        <p>Fondos de al menos $5,000 AUD + pasaje. Ultimos 3 meses.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="penales" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Antecedentes Penales</h4>
+        <p>S/ 40.40 en PAGALO.pe. Inmediato online. Vigencia 90 dias.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="foto" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Fotografia pasaporte digital</h4>
+        <p>Fondo blanco, reciente, formato JPEG/PNG.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="seguro" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Seguro OVHC contratado</h4>
+        <p>Certificado de Bupa, Medibank, NIB o Allianz.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="apostilla" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Apostilla de documentos</h4>
+        <p>Solo si la solicitan. Estudios = gratuito en Cancilleria.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="traducciones" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Traducciones juramentadas</h4>
+        <p>Si tus documentos no estan en ingles. S/ 50-150 por doc.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="medico" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Examen medico completado</h4>
+        <p>En clinica autorizada con HAP ID del DHA.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="immiaccount" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Cuenta ImmiAccount creada</h4>
+        <p>Registrada en el portal oficial del DHA.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="pasaje" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Pasaje aereo comprado</h4>
+        <p>Recomendado despues de recibir la visa. S/ 4,100 - S/ 7,800 ida y vuelta.</p>
+      </div>
+    </div>
+    <div class="checklist-item" data-id="tarjeta" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
+      <div class="checkbox">✓</div>
+      <div class="check-content">
+        <h4>Tarjeta de pago internacional</h4>
+        <p>Visa/Mastercard para pagar visa ($840 AUD).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATIONS PANEL -->
+  <div class="reco-panel fade-in" id="recoPanel">
+    <h3>🎯 Recomendaciones Personalizadas</h3>
+    <div class="reco-list" id="recoList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Visa<span>Work</span> Peru</h3>
+      <p>Tu plataforma completa para la visa Work and Holiday Australia 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Recursos</h4>
+      <a href="index.html#requisitos">Requisitos</a>
+      <a href="index.html#carta-mre">Carta del MRE</a>
+      <a href="pages/ielts-guia.html">Guia IELTS</a>
+    </div>
+    <div class="footer-col">
+      <h4>Oficiales</h4>
+      <a href="https://immi.homeaffairs.gov.au/" target="_blank">Departamento de Inmigracion</a>
+      <a href="https://online.immi.gov.au/" target="_blank">ImmiAccount</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ingles</h4>
+      <a href="https://ielts.org" target="_blank">IELTS Oficial</a>
+      <a href="https://ieltsliz.com" target="_blank">IELTS Liz</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Informacion recopilada en julio 2026. Siempre verifica en immi.homeaffairs.gov.au</p>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyC1xxrXlRo7MjEqCOD3te-nfWv6Aof3MrE",
+  authDomain: "pinpon-77a21.firebaseapp.com",
+  projectId: "pinpon-77a21",
+  storageBucket: "pinpon-77a21.firebasestorage.app",
+  messagingSenderId: "538191080129",
+  appId: "1:538191080129:web:0a19e177c0b0b803f7c240"
+};
+
+let auth = null;
+let db = null;
+let currentUser = null;
+
+function initFirebase() {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+
+    auth.onAuthStateChanged((user) => {
+      currentUser = user;
+      if (user) {
+        // Actualizar UI
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        const welcomeText = document.getElementById('welcomeText');
+        if (userName) userName.textContent = user.displayName || user.email.split('@')[0];
+        if (userAvatar) userAvatar.textContent = (user.displayName || user.email)[0].toUpperCase();
+        if (welcomeText) welcomeText.textContent = 'Bienvenido, ' + (user.displayName || user.email.split('@')[0]) + '!';
+        // Cargar checklist
+        loadChecklistFromFirestore();
+      } else {
+        // No logueado, redirigir
+        window.location.href = 'index.html';
+      }
+    });
+  } catch (error) {
+    console.log('Firebase error:', error.message);
+    window.location.href = 'index.html';
+  }
+}
+
+initFirebase();
+
+// Logout
+function logout() {
+  auth.signOut().then(() => { window.location.href = 'index.html'; });
+}
+
+// Checklist Toggle
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  item.setAttribute('aria-checked', item.classList.contains('checked'));
+  saveChecklist();
+  updateProgress();
+  generateRecommendations();
+  if (currentUser) saveChecklistToFirestore();
+}
+
+// Save/Load localStorage
+function saveChecklist() {
+  const items = document.querySelectorAll('.checklist-item');
+  const state = {};
+  items.forEach(item => { state[item.dataset.id] = item.classList.contains('checked'); });
+  localStorage.setItem('visaChecklist2026', JSON.stringify(state));
+}
+
+function loadChecklist() {
+  const saved = localStorage.getItem('visaChecklist2026');
+  if (saved) {
+    const state = JSON.parse(saved);
+    document.querySelectorAll('.checklist-item').forEach(item => {
+      if (state[item.dataset.id]) {
+        item.classList.add('checked');
+        item.setAttribute('aria-checked', 'true');
+      }
+    });
+  }
+  updateProgress();
+  generateRecommendations();
+}
+
+// Firestore
+function saveChecklistToFirestore() {
+  if (!currentUser || !db) return;
+  const items = document.querySelectorAll('.checklist-item');
+  const state = {};
+  items.forEach(item => { state[item.dataset.id] = item.classList.contains('checked'); });
+  db.collection('users').doc(currentUser.uid).set({
+    checklist: state,
+    lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+    email: currentUser.email,
+    displayName: currentUser.displayName || ''
+  }, { merge: true }).catch(err => console.error('Error guardando:', err));
+}
+
+function loadChecklistFromFirestore() {
+  if (!currentUser || !db) return;
+  db.collection('users').doc(currentUser.uid).get().then((doc) => {
+    if (doc.exists && doc.data().checklist) {
+      const state = doc.data().checklist;
+      document.querySelectorAll('.checklist-item').forEach(item => {
+        if (state[item.dataset.id]) {
+          item.classList.add('checked');
+          item.setAttribute('aria-checked', 'true');
+        } else {
+          item.classList.remove('checked');
+          item.setAttribute('aria-checked', 'false');
+        }
+      });
+      updateProgress();
+      generateRecommendations();
+    }
+  }).catch(err => console.error('Error cargando:', err));
+}
+
+// Progress
+function updateProgress() {
+  const total = document.querySelectorAll('.checklist-item').length;
+  const checked = document.querySelectorAll('.checklist-item.checked').length;
+  const percent = Math.round((checked / total) * 100);
+  document.getElementById('progressPercent').textContent = percent + '%';
+  document.getElementById('progressFill').style.width = percent + '%';
+  document.getElementById('progressCount').textContent = checked + ' de ' + total + ' documentos';
+  const msgs = ['Sigue asi!', 'Buen progreso!', 'Casi listo!', 'Excelente!', '🎉 Todo listo!'];
+  document.getElementById('progressMsg').textContent = msgs[Math.min(Math.floor(percent / 25), msgs.length - 1)];
+}
+
+// Recommendations
+function generateRecommendations() {
+  const recoList = document.getElementById('recoList');
+  if (!recoList) return;
+  const recos = [];
+  const missing = [];
+  document.querySelectorAll('.checklist-item').forEach(item => {
+    if (!item.classList.contains('checked')) missing.push(item.dataset.id);
+  });
+
+  if (missing.length === 0) {
+    recos.push({ icon: '🎉', iconBg: 'rgba(16,185,129,.2)', title: '¡Felicitaciones! Tienes todo listo', desc: 'Estas listo para aplicar a tu visa. Crea tu cuenta en ImmiAccount y envia tu solicitud.', link: 'https://online.immi.gov.au/', linkText: 'Ir a ImmiAccount' });
+  } else {
+    if (missing.includes('ingles')) recos.push({ icon: '📚', iconBg: 'rgba(249,115,22,.2)', title: 'Prepara tu ingles - IELTS 4.5', desc: 'Necesitas aprobar un examen de ingles. Revisa nuestra guia completa del IELTS.', link: 'pages/ielts-guia.html', linkText: 'Ver Guia Completa IELTS' });
+    if (missing.includes('carta-mre')) recos.push({ icon: '📄', iconBg: 'rgba(139,92,246,.2)', title: 'Solicita la Carta MRE PRIMERO', desc: 'Es obligatoria para peruanos. Tarda 15-30 dias y solo dura 60 dias. Planifica bien.', link: 'index.html#carta-mre', linkText: 'Ver info de la Carta' });
+    if (missing.includes('bancario')) recos.push({ icon: '💰', iconBg: 'rgba(59,130,246,.2)', title: 'Reune tus fondos ($5,000 AUD)', desc: 'Transfiere el dinero con anticipacion y NO lo muevas. Necesitas extracto bancario de 3 meses.', link: null, linkText: null });
+    if (missing.includes('seguro')) recos.push({ icon: '🛡️', iconBg: 'rgba(236,72,153,.2)', title: 'Contrata seguro OVHC', desc: 'Medibank ($85 AUD/mes) o NIB ($80 AUD/mes) son las opciones mas economicas.', link: 'index.html#seguro', linkText: 'Ver comparativa' });
+    if (missing.includes('medico')) recos.push({ icon: '🏥', iconBg: 'rgba(16,185,129,.2)', title: 'Examen medico (si te lo piden)', desc: 'Medical Visa Peru o Clinica Anglo Americana. Necesitas tu HAP ID primero.', link: null, linkText: null });
+    if (missing.includes('pasaporte')) recos.push({ icon: '📄', iconBg: 'rgba(59,130,246,.2)', title: 'Obten tu pasaporte peruano', desc: 'S/ 120.90 en PAGALO.pe. Mismo dia de la cita. Necesitas DNI vigente.', link: null, linkText: null });
+  }
+
+  recoList.innerHTML = recos.length === 0
+    ? '<p style="opacity:0.7; text-align:center;">Marca documentos en el checklist para recibir recomendaciones personalizadas.</p>'
+    : recos.map(r => `<div class="reco-item"><div class="reco-icon" style="background:${r.iconBg};">${r.icon}</div><div><h4>${r.title}</h4><p>${r.desc}</p>${r.link ? `<a href="${r.link}" ${r.link.startsWith('http') ? 'target="_blank"' : ''}>${r.linkText} →</a>` : ''}</div></div>`).join('');
+}
+
+// Keyboard support
+document.querySelectorAll('.checklist-item').forEach(c => {
+  c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCheck(c); } });
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => { loadChecklist(); });
+</script>
+
+</body>
+</html>

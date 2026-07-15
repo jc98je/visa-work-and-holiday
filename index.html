@@ -55,7 +55,7 @@
       </h1>
       <p>Plataforma completa para ciudadanos peruanos. Checklist interactivo, cursos de ingles, recomendaciones personalizadas y todo lo que necesitas para que tu visa sea aprobada.</p>
       <div class="hero-actions">
-        <a href="#checklist" class="btn btn-primary">Empezar mi Proceso</a>
+        <a href="#" class="btn btn-primary" onclick="startProcess(); return false;">Empezar mi Proceso</a>
         <a href="pages/ielts-guia.html" class="btn btn-secondary">📚 Guia Completa IELTS</a>
       </div>
     </div>
@@ -105,7 +105,7 @@
     <a href="#proceso" class="nav-link">Proceso</a>
     <a href="#vuelos" class="nav-link">✈️ Vuelos</a>
     <a href="#costos" class="nav-link">Costos</a>
-    <a href="#checklist" class="nav-link">Checklist</a>
+    <a href="mi-proceso.html" class="nav-link">📋 Mi Proceso</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <div class="nav-spacer"></div>
     <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
@@ -893,133 +893,7 @@
   </div>
 </section>
 
-<!-- CHECKLIST + RECOMMENDATIONS -->
-<section class="section" id="checklist" style="background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="section-header">
-    <div class="section-tag tag-blue">Tu Progreso</div>
-    <h2>Checklist Interactivo</h2>
-    <p>Marca cada documento cuando lo tengas listo. Recibe recomendaciones personalizadas.</p>
-  </div>
 
-  <div class="checklist-progress fade-in">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-weight:600; font-size:1rem;">Tu progreso</span>
-      <span id="progressPercent" style="font-weight:700; color:var(--accent);">0%</span>
-    </div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%;"></div></div>
-    <div class="progress-text">
-      <span id="progressCount">0 de 14 documentos</span>
-      <span id="progressMsg">Sigue asi!</span>
-    </div>
-  </div>
-
-  <div class="checklist-grid fade-in" id="checklistGrid">
-    <div class="checklist-item" data-id="pasaporte" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Pasaporte peruano vigente</h4>
-        <p>Con al menos 6 meses de vigencia. Escanea pagina biometrica.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="carta-mre" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Carta del MRE (obligatoria)</h4>
-        <p>Min. Relaciones Exteriores. Solicitar PRIMERO. Vigencia 60 dias.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="ingles" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Certificado de ingles (IELTS/TOEFL/PTE)</h4>
-        <p>Resultado oficial con menos de 12 meses de antiguedad.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="estudios" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Certificado de estudios universitarios</h4>
-        <p>Constancia de al menos 2 anios completados con notas.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="bancario" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Extracto bancario</h4>
-        <p>Fondos de al menos $5,000 AUD + pasaje. Ultimos 3 meses.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="penales" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Antecedentes Penales</h4>
-        <p>S/ 40.40 en PAGALO.pe. Inmediato online. Vigencia 90 dias.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="foto" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Fotografia pasaporte digital</h4>
-        <p>Fondo blanco, reciente, formato JPEG/PNG.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="seguro" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Seguro OVHC contratado</h4>
-        <p>Certificado de Bupa, Medibank, NIB o Allianz.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="apostilla" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Apostilla de documentos</h4>
-        <p>Solo si la solicitan. Estudios = gratuito en Cancilleria.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="traducciones" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Traducciones juramentadas</h4>
-        <p>Si tus documentos no estan en ingles. S/ 50-150 por doc.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="medico" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Examen medico completado</h4>
-        <p>En clinica autorizada con HAP ID del DHA.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="immiaccount" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Cuenta ImmiAccount creada</h4>
-        <p>Registrada en el portal oficial del DHA.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="pasaje" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Pasaje aereo comprado</h4>
-        <p>Recomendado despues de recibir la visa. S/ 4,100 - S/ 7,800 ida y vuelta.</p>
-      </div>
-    </div>
-    <div class="checklist-item" data-id="tarjeta" onclick="toggleCheck(this)" tabindex="0" role="checkbox" aria-checked="false">
-      <div class="checkbox">✓</div>
-      <div class="check-content">
-        <h4>Tarjeta de pago internacional</h4>
-        <p>Visa/Mastercard para pagar visa ($840 AUD).</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- RECOMMENDATIONS PANEL -->
-  <div class="reco-panel fade-in" id="recoPanel">
-    <h3>🎯 Recomendaciones Personalizadas</h3>
-    <div class="reco-list" id="recoList"></div>
-  </div>
-</section>
 
 <!-- SEGURO -->
 <section class="section" id="seguro">

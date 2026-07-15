@@ -440,6 +440,15 @@ document.querySelectorAll('.checklist-item').forEach(c => {
   });
 });
 
+// Start Process - require login first
+function startProcess() {
+  if (currentUser) {
+    window.location.href = 'mi-proceso.html';
+  } else {
+    openLoginModal();
+  }
+}
+
 // Close modal on outside click
 document.addEventListener('click', (e) => {
   const modal = document.getElementById('loginModal');
@@ -457,6 +466,5 @@ document.addEventListener('keydown', (e) => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  loadChecklist();
   calcCosts();
 });
