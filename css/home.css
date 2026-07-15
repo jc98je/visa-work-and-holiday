@@ -1103,5 +1103,5 @@
   }
   .user-name { display: none; }
   .nav-inner { overflow-x: auto; }
-  .user-dropdown-menu { position: fixed; right: 16px; top: auto; min-width: 180px; }
+  .user-dropdown-menu { position: fixed; right: 16px; top: 56px; min-width: 180px; }
 }
