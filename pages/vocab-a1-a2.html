@@ -556,8 +556,11 @@ function markAsComplete() {
   if (!progress['1']) progress['1'] = {};
   progress['1']['vocab'] = true;
   localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
-  alert('✅ Vocabulario marcado como completado! Ahora vuelve al simulador y veras el check en verde.');
-  window.location.href = 'ielts-simulador.html';
+  const btn = event.target;
+  btn.textContent = '✅ ¡Completado! Redirigiendo...';
+  btn.style.background = '#059669';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = 'ielts-simulador.html'; }, 1200);
 }
 
 function updateStats() {
