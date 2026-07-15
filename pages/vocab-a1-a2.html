@@ -548,10 +548,17 @@ function updateStats() {
   const total = allWords.length;
   const learned = allWords.filter(w => learnedWords[w.en]).length;
   const mastered = allWords.filter(w => masteredWords[w.en] >= 3).length;
-  document.getElementById('statLearned').textContent = learned;
-  document.getElementById('statMastered').textContent = mastered;
-  document.getElementById('statStreak').textContent = streak;
-  document.getElementById('statTotal').textContent = total;
+  document.getElementById("statLearned").textContent = learned;
+  document.getElementById("statMastered").textContent = mastered;
+  document.getElementById("statStreak").textContent = streak;
+  document.getElementById("statTotal").textContent = total;
+  // Sync progress to simulator level unlock system
+  if (learned >= 20) {
+    const progress = JSON.parse(localStorage.getItem("ieltsProgress2026") || "{"1":{},"2":{},"3":{}}");
+    if (!progress["1"]) progress["1"] = {};
+    progress["1"]["vocab"] = true;
+    localStorage.setItem("ieltsProgress2026", JSON.stringify(progress));
+  }
 }
 
 // ==========================================
