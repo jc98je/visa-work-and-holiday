@@ -28,11 +28,10 @@ function initFirebase() {
     auth.onAuthStateChanged((user) => {
       currentUser = user;
       updateUIForAuth(user);
-      // Si habia un pendiente de redirect, abrir mi-proceso
+      // Si habia un pendiente de redirect, ir a mi-proceso
       if (user && pendingRedirect) {
         pendingRedirect = false;
-        closeLoginModal();
-        window.open('mi-proceso.html', '_blank');
+        window.location.href = 'mi-proceso.html';
       }
     });
   } catch (error) {
@@ -451,7 +450,7 @@ let pendingRedirect = false;
 
 function startProcess() {
   if (currentUser) {
-    window.open('mi-proceso.html', '_blank');
+    window.location.href = 'mi-proceso.html';
   } else {
     pendingRedirect = true;
     openLoginModal();
