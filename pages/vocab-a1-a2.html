@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aprende vocabulario IELTS basico (A1-A2) de forma interactiva con flashcards, quizzes y progreso.">
+  <meta name="description" content="Aprende vocabulario IELTS basico (A1-A2) de forma interactiva con flashcards, quizzes y progreso. 120+ palabras organizadas por categorias.">
   <title>Vocabulario Basico A1-A2 - VisaWork Peru</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -30,8 +30,8 @@
     .mode-tab.active { background: white; color: #059669; border-color: white; }
 
     /* Categories */
-    .categories { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
-    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .categories { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
     .cat-card {
       background: white; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
       border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.25s;
@@ -79,7 +79,7 @@
     .flashcard-back .example { font-size: 0.92rem; color: #64748b; font-style: italic; line-height: 1.6; }
     .flashcard-back .example strong { color: #0f172a; font-style: normal; }
 
-    .flashcard-nav { display: flex; gap: 12px; justify-content: center; }
+    .flashcard-nav { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .flashcard-nav button {
       padding: 12px 28px; border-radius: 12px; border: none; font-weight: 700;
       font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
@@ -123,20 +123,16 @@
     .quiz-score .score-label { font-size: 1.1rem; font-weight: 600; color: #64748b; margin-top: 8px; }
 
     /* Word List */
-    .wordlist-container { max-width: 700px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .wordlist-container { max-width: 900px; margin: 0 auto; padding: 32px 24px; display: none; }
     .wordlist-container.active { display: block; }
     .word-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
     .word-table tr { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: all 0.2s; }
     .word-table tr:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-1px); }
-    .word-table td { padding: 14px 18px; }
-    .word-table td:first-child { border-radius: 12px 0 0 12px; font-weight: 700; font-size: 1rem; color: #0f172a; }
+    .word-table td { padding: 12px 16px; }
+    .word-table td:first-child { border-radius: 12px 0 0 12px; font-weight: 700; font-size: 0.95rem; color: #0f172a; }
     .word-table td:nth-child(2) { color: var(--accent); font-weight: 600; }
-    .word-table td:last-child { border-radius: 0 12px 12px 0; color: #64748b; font-size: 0.88rem; }
-    .play-btn {
-      background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 4px;
-      transition: transform 0.2s;
-    }
-    .play-btn:hover { transform: scale(1.2); }
+    .word-table td:nth-child(3) { color: #64748b; font-size: 0.78rem; font-style: italic; }
+    .word-table td:last-child { border-radius: 0 12px 12px 0; color: #64748b; font-size: 0.85rem; }
 
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
     .back-link:hover { color: #0f172a; }
@@ -153,7 +149,7 @@
       .page-hero h1 { font-size: 1.8rem; }
       .flashcard { height: 250px; }
       .flashcard-front .word { font-size: 1.6rem; }
-      .cat-grid { grid-template-columns: 1fr; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -162,9 +158,10 @@
 <div class="page-hero">
   <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
   <h1>📚 Vocabulario Basico</h1>
-  <p>Nivel A1-A2: Las palabras mas importantes para tu dia a dia en Australia</p>
+  <p>Nivel A1-A2: 120+ palabras organizadas por categorias para tu dia a dia en Australia</p>
   <div class="mode-tabs">
-    <button class="mode-tab active" onclick="showMode('flashcards')">🃏 Flashcards</button>
+    <button class="mode-tab active" onclick="showMode('categories')">📂 Categorias</button>
+    <button class="mode-tab" onclick="showMode('flashcards')">🃏 Flashcards</button>
     <button class="mode-tab" onclick="showMode('quiz')">❓ Quiz</button>
     <button class="mode-tab" onclick="showMode('wordlist')">📋 Lista Completa</button>
   </div>
@@ -178,8 +175,8 @@
 </div>
 
 <!-- MARCAR COMO COMPLETADO -->
-<div style="text-align:center; padding:24px;">
-  <button onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
+<div style="text-align:center; padding:16px;">
+  <button id="completeBtn" onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
     ✅ Marcar Vocabulario como Completado
   </button>
   <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Al hacer click, se sincronizara con tu progreso en el simulador</p>
@@ -187,14 +184,14 @@
 
 <!-- CATEGORIES -->
 <div class="categories" id="categoriesSection">
-  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige una categoria</h2>
+  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige una categoria para practicar</h2>
   <div class="cat-grid" id="catGrid"></div>
 </div>
 
 <!-- FLASHCARDS -->
 <div class="flashcard-container" id="flashcardsSection">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <button class="back-link" onclick="showCategories()">← Categorias</button>
     <h3 id="catTitle" style="font-size:1.1rem; font-weight:700;"></h3>
   </div>
   <div class="flashcard-progress">
@@ -224,7 +221,7 @@
 <!-- QUIZ -->
 <div class="quiz-container" id="quizSection">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <button class="back-link" onclick="showCategories()">← Categorias</button>
     <h3 id="quizTitle" style="font-size:1.1rem; font-weight:700;"></h3>
   </div>
   <div class="flashcard-progress">
@@ -237,93 +234,195 @@
 <!-- WORD LIST -->
 <div class="wordlist-container" id="wordlistSection">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
-    <h3 style="font-size:1.1rem; font-weight:700;">Lista Completa de Palabras</h3>
+    <button class="back-link" onclick="showCategories()">← Categorias</button>
+    <h3 style="font-size:1.1rem; font-weight:700;">📋 Lista Completa de Palabras (120+)</h3>
   </div>
   <table class="word-table" id="wordTable"></table>
 </div>
 
 <script>
 // ==========================================
-// VOCABULARY DATA
+// VOCABULARY DATA - 12 Categories, 120+ Words
 // ==========================================
 const categories = [
   {
-    id: 'family', icon: '👨‍👩‍👧‍👦', name: 'Familia', desc: 'Miembros de la familia',
+    id: 'travel', icon: '✈️', name: 'Viajes y Transporte', desc: 'Aeropuerto, trenes, autobuses',
     words: [
-      { en: 'Mother', phonetic: '/ˈmʌðər/', es: 'Madre', ex: 'My <strong>mother</strong> lives in Lima.' },
-      { en: 'Father', phonetic: '/ˈfɑːðər/', es: 'Padre', ex: 'My <strong>father</strong> works in an office.' },
-      { en: 'Sister', phonetic: '/ˈsɪstər/', es: 'Hermana', ex: 'I have one <strong>sister</strong>.' },
-      { en: 'Brother', phonetic: '/ˈbrʌðər/', es: 'Hermano', ex: 'My <strong>brother</strong> is older than me.' },
-      { en: 'Grandmother', phonetic: '/ˈɡrænmʌðər/', es: 'Abuela', ex: 'My <strong>grandmother</strong> cooks very well.' },
-      { en: 'Grandfather', phonetic: '/ˈɡrænfɑːðər/', es: 'Abuelo', ex: 'My <strong>grandfather</strong> tells stories.' },
-      { en: 'Parents', phonetic: '/ˈpeərənts/', es: 'Padres', ex: 'My <strong>parents</strong> support me.' },
-      { en: 'Family', phonetic: '/ˈfæməli/', es: 'Familia', ex: 'I love my <strong>family</strong>.' },
+      { en: 'Airport', phonetic: '/ˈeəpɔːt/', es: 'Aeropuerto', ex: 'The plane leaves from the <strong>airport</strong>.' },
+      { en: 'Ticket', phonetic: '/ˈtɪkɪt/', es: 'Billete', ex: 'Do you have your train <strong>ticket</strong>?' },
+      { en: 'Station', phonetic: '/ˈsteɪʃən/', es: 'Estacion', ex: 'Meet me at the train <strong>station</strong>.' },
+      { en: 'Flight', phonetic: '/flaɪt/', es: 'Vuelo', ex: 'My <strong>flight</strong> is at 6:00 AM.' },
+      { en: 'Passenger', phonetic: '/ˈpæsɪndʒə/', es: 'Pasajero', ex: 'The <strong>passengers</strong> are waiting.' },
+      { en: 'Passport', phonetic: '/ˈpɑːspɔːt/', es: 'Pasaporte', ex: 'Please show your <strong>passport</strong> here.' },
+      { en: 'Journey', phonetic: '/ˈdʒɜːni/', es: 'Viaje', ex: 'It was a long <strong>journey</strong> by bus.' },
+      { en: 'Taxi', phonetic: '/ˈtæksi/', es: 'Taxi', ex: "Let's take a <strong>taxi</strong> to the hotel." },
+      { en: 'Arrival', phonetic: '/əˈraɪvl/', es: 'Llegada', ex: 'What is the <strong>arrival</strong> time?' },
+      { en: 'Departure', phonetic: '/dɪˈpɑːtʃə/', es: 'Salida', ex: 'Check the <strong>departure</strong> board.' }
     ]
   },
   {
-    id: 'food', icon: '🍕', name: 'Comida', desc: 'Restaurantes y pedidos',
+    id: 'health', icon: '🏥', name: 'Salud y Cuerpo', desc: 'Doctor, medicina, sintomas',
     words: [
-      { en: 'Water', phonetic: '/ˈwɔːtər/', es: 'Agua', ex: 'Can I have some <strong>water</strong>?' },
-      { en: 'Bread', phonetic: '/bred/', es: 'Pan', ex: 'I eat <strong>bread</strong> for breakfast.' },
-      { en: 'Chicken', phonetic: '/ˈtʃɪkɪn/', es: 'Pollo', ex: 'I would like <strong>chicken</strong> please.' },
-      { en: 'Rice', phonetic: '/raɪs/', es: 'Arroz', ex: 'We eat <strong>rice</strong> every day.' },
-      { en: 'Coffee', phonetic: '/ˈkɒfi/', es: 'Cafe', ex: 'I need a <strong>coffee</strong> in the morning.' },
-      { en: 'Breakfast', phonetic: '/ˈbrekfəst/', es: 'Desayuno', ex: 'What do you have for <strong>breakfast</strong>?' },
-      { en: 'Lunch', phonetic: '/lʌntʃ/', es: 'Almuerzo', ex: 'Lunch is at 12pm.' },
-      { en: 'Dinner', phonetic: '/ˈdɪnər/', es: 'Cena', ex: 'We have <strong>dinner</strong> at 7pm.' },
+      { en: 'Doctor', phonetic: '/ˈdɒktə/', es: 'Medico', ex: 'You should see a <strong>doctor</strong> today.' },
+      { en: 'Medicine', phonetic: '/ˈmedɪsɪn/', es: 'Medicina', ex: 'Take this <strong>medicine</strong> at night.' },
+      { en: 'Headache', phonetic: '/ˈhedeɪk/', es: 'Dolor de cabeza', ex: 'I have a terrible <strong>headache</strong>.' },
+      { en: 'Stomach', phonetic: '/ˈstʌmək/', es: 'Estomago', ex: 'My <strong>stomach</strong> hurts after lunch.' },
+      { en: 'Cough', phonetic: '/kɒf/', es: 'Tos', ex: 'She has a bad <strong>cough</strong>.' },
+      { en: 'Fever', phonetic: '/ˈfiːvə/', es: 'Fiebre', ex: 'You have a slight <strong>fever</strong>.' },
+      { en: 'Healthy', phonetic: '/ˈhelθi/', es: 'Saludable', ex: 'Eating fruit is very <strong>healthy</strong>.' },
+      { en: 'Hospital', phonetic: '/ˈhɒspɪtl/', es: 'Hospital', ex: 'He works at the local <strong>hospital</strong>.' },
+      { en: 'Pain', phonetic: '/peɪn/', es: 'Dolor', ex: 'Do you feel any <strong>pain</strong> here?' },
+      { en: 'Check-up', phonetic: '/ˈtʃek ʌp/', es: 'Revision medica', ex: 'I have a regular health <strong>check-up</strong>.' }
     ]
   },
   {
-    id: 'numbers', icon: '🔢', name: 'Numeros', desc: 'Del 1 al 100 y ordinales',
+    id: 'weather', icon: '🌤️', name: 'Clima y Naturaleza', desc: 'Lluvia, sol, estaciones',
     words: [
-      { en: 'One', phonetic: '/wʌn/', es: 'Uno', ex: 'I have <strong>one</strong> brother.' },
-      { en: 'Ten', phonetic: '/ten/', es: 'Diez', ex: 'There are <strong>ten</strong> students.' },
-      { en: 'Twenty', phonetic: '/ˈtwenti/', es: 'Veinte', ex: 'I am <strong>twenty</strong> years old.' },
-      { en: 'Hundred', phonetic: '/ˈhʌndrəd/', es: 'Cien', ex: 'It costs one <strong>hundred</strong> dollars.' },
-      { en: 'First', phonetic: '/fɜːst/', es: 'Primero', ex: 'This is my <strong>first</strong> day.' },
-      { en: 'Last', phonetic: '/lɑːst/', es: 'Ultimo', ex: 'It was the <strong>last</strong> question.' },
-      { en: 'Half', phonetic: '/hɑːf/', es: 'Mitad', ex: 'Half past three.' },
-      { en: 'Quarter', phonetic: '/ˈkwɔːtər/', es: 'Cuarto', ex: 'A <strong>quarter</strong> past two.' },
+      { en: 'Rain', phonetic: '/reɪn/', es: 'Lluvia', ex: 'It is going to <strong>rain</strong> today.' },
+      { en: 'Sunny', phonetic: '/ˈsʌni/', es: 'Soleado', ex: 'It is a warm, <strong>sunny</strong> day.' },
+      { en: 'Cloudy', phonetic: '/ˈklaʊdi/', es: 'Nublado', ex: 'It is very <strong>cloudy</strong> this morning.' },
+      { en: 'Season', phonetic: '/ˈsiːzn/', es: 'Estacion', ex: 'Spring is my favorite <strong>season</strong>.' },
+      { en: 'Winter', phonetic: '/ˈwɪntə/', es: 'Invierno', ex: 'It is very cold in <strong>winter</strong>.' },
+      { en: 'Summer', phonetic: '/ˈsʌmə/', es: 'Verano', ex: 'We go to the beach in <strong>summer</strong>.' },
+      { en: 'Windy', phonetic: '/ˈwɪndi/', es: 'Ventoso', ex: 'It is too <strong>windy</strong> to go sailing.' },
+      { en: 'Storm', phonetic: '/stɔːm/', es: 'Tormenta', ex: 'A big <strong>storm</strong> is coming soon.' },
+      { en: 'Snow', phonetic: '/snəʊ/', es: 'Nieve', ex: 'The ground is covered in <strong>snow</strong>.' },
+      { en: 'Temperature', phonetic: '/ˈtemprətʃə/', es: 'Temperatura', ex: 'The <strong>temperature</strong> is falling.' }
     ]
   },
   {
-    id: 'clothes', icon: '👕', name: 'Ropa', desc: 'Vestimenta y accesorios',
+    id: 'education', icon: '📚', name: 'Educacion y Escuela', desc: 'Profesor, tareas, examenes',
     words: [
-      { en: 'Shirt', phonetic: '/ʃɜːt/', es: 'Camisa', ex: 'This <strong>shirt</strong> is blue.' },
-      { en: 'Pants', phonetic: '/pænts/', es: 'Pantalones', ex: 'I need new <strong>pants</strong>.' },
-      { en: 'Shoes', phonetic: '/ʃuːz/', es: 'Zapatos', ex: 'These <strong>shoes</strong> are comfortable.' },
-      { en: 'Jacket', phonetic: '/ˈdʒækɪt/', es: 'Chaqueta', ex: 'Take your <strong>jacket</strong>, it is cold.' },
-      { en: 'Hat', phonetic: '/hæt/', es: 'Sombrero', ex: 'She wears a <strong>hat</strong> in summer.' },
-      { en: 'Dress', phonetic: '/dres/', es: 'Vestido', ex: 'That <strong>dress</strong> is beautiful.' },
-      { en: 'Socks', phonetic: '/sɒks/', es: 'Calcetines', ex: 'I wear <strong>socks</strong> every day.' },
-      { en: 'Coat', phonetic: '/kəʊt/', es: 'Abrigo', ex: 'Wear your <strong>coat</strong> outside.' },
+      { en: 'Teacher', phonetic: '/ˈtiːtʃə/', es: 'Profesor/a', ex: 'The <strong>teacher</strong> is very kind.' },
+      { en: 'Student', phonetic: '/ˈstjuːdnt/', es: 'Estudiante', ex: 'Every <strong>student</strong> must have a book.' },
+      { en: 'Subject', phonetic: '/ˈsʌbdʒɪkt/', es: 'Asignatura', ex: 'My favorite <strong>subject</strong> is history.' },
+      { en: 'Homework', phonetic: '/ˈhəʊmwɜːk/', es: 'Tarea', ex: 'Did you finish your <strong>homework</strong>?' },
+      { en: 'Library', phonetic: '/ˈlaɪbrəri/', es: 'Biblioteca', ex: 'You can study at the <strong>library</strong>.' },
+      { en: 'Exam', phonetic: '/ɪɡˈzæm/', es: 'Examen', ex: 'I have a difficult <strong>exam</strong> tomorrow.' },
+      { en: 'Classroom', phonetic: '/ˈklɑːsruːm/', es: 'Aula', ex: 'Please go to the <strong>classroom</strong>.' },
+      { en: 'Dictionary', phonetic: '/ˈdɪkʃənri/', es: 'Diccionario', ex: 'Use a <strong>dictionary</strong> for new words.' },
+      { en: 'Lesson', phonetic: '/ˈlesn/', es: 'Leccion', ex: 'Our next <strong>lesson</strong> starts soon.' },
+      { en: 'Notebook', phonetic: '/ˈnəʊtbʊk/', es: 'Cuaderno', ex: 'Write this in your <strong>notebook</strong>.' }
     ]
   },
   {
-    id: 'body', icon: '🧍', name: 'Cuerpo', desc: 'Partes del cuerpo',
+    id: 'shopping', icon: '🛒', name: 'Compras y Dinero', desc: 'Precios, ofertas, pagos',
     words: [
-      { en: 'Head', phonetic: '/hed/', es: 'Cabeza', ex: 'My <strong>head</strong> hurts.' },
-      { en: 'Hand', phonetic: '/hænd/', es: 'Mano', ex: 'Wash your <strong>hands</strong>.' },
-      { en: 'Eye', phonetic: '/aɪ/', es: 'Ojo', ex: 'She has blue <strong>eyes</strong>.' },
-      { en: 'Foot', phonetic: '/fʊt/', es: 'Pie', ex: 'My <strong>foot</strong> is tired.' },
-      { en: 'Arm', phonetic: '/ɑːm/', es: 'Brazo', ex: 'He broke his <strong>arm</strong>.' },
-      { en: 'Leg', phonetic: '/leɡ/', es: 'Pierna', ex: 'My <strong>leg</strong> is sore from running.' },
-      { en: 'Back', phonetic: '/bæk/', es: 'Espalda', ex: 'I have <strong>back</strong> pain.' },
-      { en: 'Finger', phonetic: '/ˈfɪŋɡər/', es: 'Dedo (mano)', ex: 'I cut my <strong>finger</strong>.' },
+      { en: 'Price', phonetic: '/praɪs/', es: 'Precio', ex: 'What is the <strong>price</strong> of this shirt?' },
+      { en: 'Cheap', phonetic: '/tʃiːp/', es: 'Barato', ex: 'These shoes were very <strong>cheap</strong>.' },
+      { en: 'Expensive', phonetic: '/ɪkˈspensɪv/', es: 'Caro', ex: 'That store is too <strong>expensive</strong>.' },
+      { en: 'Sale', phonetic: '/seɪl/', es: 'Oferta', ex: 'Everything is on <strong>sale</strong> today.' },
+      { en: 'Payment', phonetic: '/ˈpeɪmənt/', es: 'Pago', ex: 'We accept credit card <strong>payment</strong>.' },
+      { en: 'Cash', phonetic: '/kæʃ/', es: 'Efectivo', ex: 'Do you have any <strong>cash</strong> on you?' },
+      { en: 'Change', phonetic: '/tʃeɪndʒ/', es: 'Cambio', ex: 'Here is your <strong>change</strong>, sir.' },
+      { en: 'Customer', phonetic: '/ˈkʌstəmə/', es: 'Cliente', ex: 'The <strong>customer</strong> wants a refund.' },
+      { en: 'Buy', phonetic: '/baɪ/', es: 'Comprar', ex: 'I need to <strong>buy</strong> some bread.' },
+      { en: 'Cost', phonetic: '/kɒst/', es: 'Costar', ex: 'How much does it <strong>cost</strong>?' }
     ]
   },
   {
-    id: 'work', icon: '💼', name: 'Trabajo', desc: 'Empleo y oficina',
+    id: 'technology', icon: '💻', name: 'Tecnologia', desc: 'Computadora, internet, email',
     words: [
-      { en: 'Job', phonetic: '/dʒɒb/', es: 'Trabajo/Empleo', ex: 'I need a <strong>job</strong> in Australia.' },
-      { en: 'Boss', phonetic: '/bɒs/', es: 'Jefe', ex: 'My <strong>boss</strong> is very nice.' },
-      { en: 'Office', phonetic: '/ˈɒfɪs/', es: 'Oficina', ex: 'I work in an <strong>office</strong>.' },
-      { en: 'Meeting', phonetic: '/ˈmiːtɪŋ/', es: 'Reunion', ex: 'The <strong>meeting</strong> is at 3pm.' },
-      { en: 'Salary', phonetic: '/ˈsæləri/', es: 'Sueldo', ex: 'What is the <strong>salary</strong>?' },
-      { en: 'Schedule', phonetic: '/ˈʃedjuːl/', es: 'Horario', ex: 'What is your <strong>schedule</strong>?' },
-      { en: 'Manager', phonetic: '/ˈmænɪdʒər/', es: 'Gerente', ex: 'Talk to the <strong>manager</strong>.' },
-      { en: 'Interview', phonetic: '/ˈɪntəvjuː/', es: 'Entrevista', ex: 'I have an <strong>interview</strong> tomorrow.' },
+      { en: 'Computer', phonetic: '/kəmˈpjuːtə/', es: 'Computadora', ex: 'I work on my <strong>computer</strong> daily.' },
+      { en: 'Phone', phonetic: '/fəʊn/', es: 'Telefono', ex: 'Can I use your <strong>phone</strong>, please?' },
+      { en: 'Internet', phonetic: '/ˈɪntənet/', es: 'Internet', ex: 'Is there free <strong>internet</strong> here?' },
+      { en: 'Email', phonetic: '/ˈiːmeɪl/', es: 'Correo', ex: 'Please send me an <strong>email</strong>.' },
+      { en: 'Website', phonetic: '/ˈwebsaɪt/', es: 'Sitio web', ex: 'This <strong>website</strong> is very useful.' },
+      { en: 'Screen', phonetic: '/skriːn/', es: 'Pantalla', ex: 'The <strong>screen</strong> is dirty.' },
+      { en: 'Click', phonetic: '/klɪk/', es: 'Hacer clic', ex: '<strong>Click</strong> here to start the game.' },
+      { en: 'Online', phonetic: '/ˌɒnˈlaɪn/', es: 'En linea', ex: 'Is the teacher <strong>online</strong> now?' },
+      { en: 'Password', phonetic: '/ˈpɑːswɜːd/', es: 'Contrasena', ex: 'Never share your <strong>password</strong>.' },
+      { en: 'Device', phonetic: '/dɪˈvaɪs/', es: 'Dispositivo', ex: 'This <strong>device</strong> is easy to use.' }
+    ]
+  },
+  {
+    id: 'home', icon: '🏠', name: 'Casa y Hogar', desc: 'Muebles, habitaciones, limpieza',
+    words: [
+      { en: 'Furniture', phonetic: '/ˈfɜːnɪtʃə/', es: 'Muebles', ex: 'We need new living room <strong>furniture</strong>.' },
+      { en: 'Bedroom', phonetic: '/ˈbedruːm/', es: 'Dormitorio', ex: 'My <strong>bedroom</strong> is very tidy.' },
+      { en: 'Kitchen', phonetic: '/ˈkɪtʃɪn/', es: 'Cocina', ex: 'She is cooking in the <strong>kitchen</strong>.' },
+      { en: 'Clean', phonetic: '/kliːn/', es: 'Limpiar', ex: 'Can you <strong>clean</strong> the table?' },
+      { en: 'Sofa', phonetic: '/ˈsəʊfə/', es: 'Sofa', ex: 'We sat on the <strong>sofa</strong> to watch TV.' },
+      { en: 'Bathroom', phonetic: '/ˈbɑːθruːm/', es: 'Bano', ex: 'Where is the <strong>bathroom</strong>?' },
+      { en: 'Floor', phonetic: '/flɔː/', es: 'Piso', ex: 'The <strong>floor</strong> is clean now.' },
+      { en: 'Window', phonetic: '/ˈwɪndəʊ/', es: 'Ventana', ex: 'Please open the <strong>window</strong>.' },
+      { en: 'Key', phonetic: '/kiː/', es: 'Llave', ex: 'Use your <strong>key</strong> to open the door.' },
+      { en: 'Living room', phonetic: '/ˈlɪvɪŋ ruːm/', es: 'Sala de estar', ex: 'The family is in the <strong>living room</strong>.' }
+    ]
+  },
+  {
+    id: 'sports', icon: '⚽', name: 'Deportes y Hobbies', desc: 'Ejercicio, juegos, actividades',
+    words: [
+      { en: 'Exercise', phonetic: '/ˈeksəsaɪz/', es: 'Ejercicio', ex: 'Do you <strong>exercise</strong> every day?' },
+      { en: 'Game', phonetic: '/ɡeɪm/', es: 'Juego', ex: 'The football <strong>game</strong> was amazing.' },
+      { en: 'Activity', phonetic: '/ækˈtɪvɪti/', es: 'Actividad', ex: 'What is your favorite <strong>activity</strong>?' },
+      { en: 'Soccer', phonetic: '/ˈsɒkə/', es: 'Futbol', ex: 'He plays <strong>soccer</strong> at the park.' },
+      { en: 'Tennis', phonetic: '/ˈtenɪs/', es: 'Tenis', ex: 'I play <strong>tennis</strong> on Sundays.' },
+      { en: 'Team', phonetic: '/tiːm/', es: 'Equipo', ex: 'Which <strong>team</strong> do you support?' },
+      { en: 'Swimming', phonetic: '/ˈswɪmɪŋ/', es: 'Natacion', ex: '<strong>Swimming</strong> is good exercise.' },
+      { en: 'Hobby', phonetic: '/ˈhɒbi/', es: 'Pasatiempo', ex: 'Reading is my main <strong>hobby</strong>.' },
+      { en: 'Match', phonetic: '/mætʃ/', es: 'Partido', ex: 'We won the tennis <strong>match</strong>.' },
+      { en: 'Runner', phonetic: '/ˈrʌnə/', es: 'Corredor', ex: 'She is a very fast <strong>runner</strong>.' }
+    ]
+  },
+  {
+    id: 'emotions', icon: '😊', name: 'Emociones y Sentimientos', desc: 'Feliz, triste, enojado',
+    words: [
+      { en: 'Happy', phonetic: '/ˈhæpi/', es: 'Feliz', ex: 'I am so <strong>happy</strong> to see you!' },
+      { en: 'Sad', phonetic: '/sæd/', es: 'Triste', ex: 'Why are you feeling <strong>sad</strong>?' },
+      { en: 'Angry', phonetic: '/ˈæŋɡri/', es: 'Enojado', ex: "Don't be <strong>angry</strong> with me." },
+      { en: 'Excited', phonetic: '/ɪkˈsaɪtɪd/', es: 'Emocionado', ex: 'I am <strong>excited</strong> about the trip!' },
+      { en: 'Bored', phonetic: '/bɔːd/', es: 'Aburrido', ex: 'This movie is very boring.' },
+      { en: 'Tired', phonetic: '/ˈtaɪəd/', es: 'Cansado', ex: 'You look very <strong>tired</strong> today.' },
+      { en: 'Scared', phonetic: '/skeəd/', es: 'Asustado', ex: 'Are you <strong>scared</strong> of the dark?' },
+      { en: 'Hungry', phonetic: '/ˈhʌŋɡri/', es: 'Hambriento', ex: 'We are <strong>hungry</strong> after the walk.' },
+      { en: 'Thirsty', phonetic: '/ˈθɜːsti/', es: 'Sediento', ex: "I am <strong>thirsty</strong>; can I have water?" },
+      { en: 'Surprised', phonetic: '/səˈpraɪzd/', es: 'Sorprendido', ex: 'I was <strong>surprised</strong> by the news.' }
+    ]
+  },
+  {
+    id: 'restaurant', icon: '🍽️', name: 'Comida y Restaurante', desc: 'Menu, pedir, cuenta',
+    words: [
+      { en: 'Menu', phonetic: '/ˈmenjuː/', es: 'Menu', ex: 'Can I see the <strong>menu</strong>, please?' },
+      { en: 'Order', phonetic: '/ˈɔːdə/', es: 'Pedir', ex: 'It is time to <strong>order</strong> our dinner.' },
+      { en: 'Bill', phonetic: '/bɪl/', es: 'Cuenta', ex: 'Excuse me, can I have the <strong>bill</strong>?' },
+      { en: 'Waiter', phonetic: '/ˈweɪtə/', es: 'Camarero', ex: 'The <strong>waiter</strong> was very helpful.' },
+      { en: 'Delicious', phonetic: '/dɪˈlɪʃəs/', es: 'Delicioso', ex: 'This food is <strong>delicious</strong>.' },
+      { en: 'Breakfast', phonetic: '/ˈbrekfəst/', es: 'Desayuno', ex: '<strong>Breakfast</strong> is my favorite meal.' },
+      { en: 'Dinner', phonetic: '/ˈdɪnə/', es: 'Cena', ex: 'We are having <strong>dinner</strong> at 8:00.' },
+      { en: 'Drink', phonetic: '/drɪŋk/', es: 'Bebida', ex: 'What would you like to <strong>drink</strong>?' },
+      { en: 'Table', phonetic: '/ˈteɪbl/', es: 'Mesa', ex: 'Is this <strong>table</strong> free?' },
+      { en: 'Lunch', phonetic: '/lʌntʃ/', es: 'Almuerzo', ex: 'Do you want <strong>lunch</strong> with me?' }
+    ]
+  },
+  {
+    id: 'jobs', icon: '💼', name: 'Trabajos y Profesiones', desc: 'Oficina, reuniones, salario',
+    words: [
+      { en: 'Work', phonetic: '/wɜːk/', es: 'Trabajo', ex: 'Where do you <strong>work</strong>?' },
+      { en: 'Office', phonetic: '/ˈɒfɪs/', es: 'Oficina', ex: 'He goes to the <strong>office</strong> by car.' },
+      { en: 'Colleague', phonetic: '/ˈkɒliːɡ/', es: 'Colega', ex: 'She is a kind <strong>colleague</strong>.' },
+      { en: 'Job', phonetic: '/dʒɒb/', es: 'Trabajo', ex: 'He has a new <strong>job</strong> in London.' },
+      { en: 'Manager', phonetic: '/ˈmænɪdʒə/', es: 'Gerente', ex: 'Talk to your <strong>manager</strong> about it.' },
+      { en: 'Business', phonetic: '/ˈbɪznəs/', es: 'Negocio', ex: 'She runs a small <strong>business</strong>.' },
+      { en: 'Worker', phonetic: '/ˈwɜːkə/', es: 'Trabajador', ex: 'All <strong>workers</strong> must wear safety gear.' },
+      { en: 'Salary', phonetic: '/ˈsæləri/', es: 'Salario', ex: 'My <strong>salary</strong> is paid monthly.' },
+      { en: 'Meeting', phonetic: '/ˈmiːtɪŋ/', es: 'Reunion', ex: 'We have a <strong>meeting</strong> at two.' },
+      { en: 'Task', phonetic: '/tɑːsk/', es: 'Tarea', ex: 'This is a very difficult <strong>task</strong>.' }
+    ]
+  },
+  {
+    id: 'city', icon: '🏙️', name: 'Ciudad y Direcciones', desc: 'Calles, edificios, transporte',
+    words: [
+      { en: 'Street', phonetic: '/striːt/', es: 'Calle', ex: 'That <strong>street</strong> is very busy.' },
+      { en: 'Building', phonetic: '/ˈbɪldɪŋ/', es: 'Edificio', ex: 'Our office is in that <strong>building</strong>.' },
+      { en: 'Left', phonetic: '/left/', es: 'Izquierda', ex: 'Turn <strong>left</strong> at the corner.' },
+      { en: 'Right', phonetic: '/raɪt/', es: 'Derecha', ex: 'Turn <strong>right</strong> at the traffic lights.' },
+      { en: 'Straight', phonetic: '/streɪt/', es: 'Recto', ex: 'Go <strong>straight</strong> for two blocks.' },
+      { en: 'Map', phonetic: '/mæp/', es: 'Mapa', ex: 'Use the <strong>map</strong> to find the park.' },
+      { en: 'City', phonetic: '/ˈsɪti/', es: 'Ciudad', ex: 'This is a very beautiful <strong>city</strong>.' },
+      { en: 'Town', phonetic: '/taʊn/', es: 'Pueblo', ex: 'My hometown is a small <strong>town</strong>.' },
+      { en: 'Traffic', phonetic: '/ˈtræfɪk/', es: 'Trafico', ex: 'There is too much <strong>traffic</strong> today.' },
+      { en: 'Corner', phonetic: '/ˈkɔːnə/', es: 'Esquina', ex: 'The bank is on the <strong>corner</strong>.' }
     ]
   }
 ];
@@ -331,7 +430,7 @@ const categories = [
 // ==========================================
 // STATE
 // ==========================================
-let currentMode = 'flashcards';
+let currentMode = 'categories';
 let currentCat = null;
 let fcIdx = 0;
 let fcKnown = 0;
@@ -354,9 +453,17 @@ function saveState() {
 function showMode(mode) {
   currentMode = mode;
   document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.mode-tab').forEach(t => { if (t.textContent.toLowerCase().includes(mode === 'flashcards' ? 'flash' : mode)) t.classList.add('active'); });
+  document.querySelectorAll('.mode-tab').forEach(t => {
+    const text = t.textContent.toLowerCase();
+    if ((mode === 'categories' && text.includes('categor')) ||
+        (mode === 'flashcards' && text.includes('flash')) ||
+        (mode === 'quiz' && text.includes('quiz')) ||
+        (mode === 'wordlist' && text.includes('lista'))) {
+      t.classList.add('active');
+    }
+  });
 
-  document.getElementById('categoriesSection').style.display = (mode === 'categories' || !currentCat) && mode !== 'quiz' && mode !== 'wordlist' ? '' : 'none';
+  document.getElementById('categoriesSection').style.display = mode === 'categories' || (!currentCat && mode !== 'wordlist') ? '' : 'none';
   document.getElementById('flashcardsSection').classList.toggle('active', mode === 'flashcards' && currentCat);
   document.getElementById('quizSection').classList.toggle('active', mode === 'quiz' && currentCat);
   document.getElementById('wordlistSection').classList.toggle('active', mode === 'wordlist');
@@ -364,7 +471,7 @@ function showMode(mode) {
   if (mode === 'wordlist') renderWordList();
   if (mode === 'quiz' && currentCat) startQuiz();
   if (mode === 'flashcards' && currentCat) showCard();
-  if (!currentCat && mode !== 'wordlist') {
+  if (mode === 'categories') {
     document.getElementById('categoriesSection').style.display = '';
   }
 
@@ -373,8 +480,14 @@ function showMode(mode) {
 
 function showCategories() {
   currentCat = null;
-  showMode('categories');
+  currentMode = 'categories';
   document.getElementById('categoriesSection').style.display = '';
+  document.getElementById('flashcardsSection').classList.remove('active');
+  document.getElementById('quizSection').classList.remove('active');
+  document.getElementById('wordlistSection').classList.remove('active');
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.mode-tab').classList.add('active');
+  updateStats();
 }
 
 // ==========================================
@@ -385,11 +498,20 @@ function renderCategories() {
   grid.innerHTML = categories.map(cat => {
     const total = cat.words.length;
     const learned = cat.words.filter(w => learnedWords[w.en]).length;
+    const pct = Math.round((learned / total) * 100);
     return `<div class="cat-card" onclick="selectCategory('${cat.id}')">
       <div class="cat-icon">${cat.icon}</div>
       <h3>${cat.name}</h3>
       <p>${cat.desc}</p>
-      <div class="cat-count">${learned}/${total} palabras aprendidas</div>
+      <div style="margin-top:8px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:4px;">
+          <span style="color:#64748b;">${learned}/${total}</span>
+          <span style="font-weight:700; color:var(--green);">${pct}%</span>
+        </div>
+        <div style="height:6px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+          <div style="height:100%; width:${pct}%; background:linear-gradient(90deg, var(--green), #059669); border-radius:10px; transition:width 0.4s;"></div>
+        </div>
+      </div>
     </div>`;
   }).join('');
 }
@@ -398,7 +520,7 @@ function selectCategory(catId) {
   currentCat = categories.find(c => c.id === catId);
   fcIdx = 0; fcKnown = 0;
   document.getElementById('catTitle').textContent = currentCat.icon + ' ' + currentCat.name;
-  showMode(currentMode === 'quiz' ? 'quiz' : 'flashcards');
+  showMode('flashcards');
 }
 
 // ==========================================
@@ -442,6 +564,7 @@ function markWord(known) {
   fcIdx++;
   showCard();
   updateStats();
+  renderCategories();
 }
 
 function finishFlashcards() {
@@ -453,9 +576,9 @@ function finishFlashcards() {
       <div class="score-num">${fcKnown}/${total}</div>
       <div class="score-label">palabras que sabes en ${currentCat.name}</div>
       <p style="margin-top:16px; color:#64748b;">${pct >= 70 ? '¡Excelente! Sigue con otra categoria.' : '¡Buen intento! Repite para mejorar.'}</p>
-      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px;">
-        <button class="btn-know" onclick="selectCategory('${currentCat.id}'); showMode('flashcards');">🔄 Repetir</button>
-        <button class="btn-flip" onclick="showCategories()">📋 Otra Categoria</button>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn-know" onclick="selectCategory('${currentCat.id}');">🔄 Repetir</button>
+        <button class="btn-flip" onclick="showCategories();">📋 Otra Categoria</button>
         <button class="btn-dontknow" onclick="startQuiz(); showMode('quiz');">❓ Hacer Quiz</button>
       </div>
     </div>`;
@@ -516,9 +639,9 @@ function finishQuiz() {
       <div class="score-num">${quizCorrect}/${quizQuestions.length}</div>
       <div class="score-label">respuestas correctas (${pct}%)</div>
       <p style="margin-top:16px; color:#64748b;">${pct >= 80 ? '¡Dominas este vocabulario!' : pct >= 60 ? '¡Muy bien! Sigue practicando.' : 'Repasa las flashcards y vuelve a intentar.'}</p>
-      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px;">
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
         <button class="btn-know" onclick="startQuiz(); showMode('quiz');">🔄 Repetir Quiz</button>
-        <button class="btn-flip" onclick="showCategories()">📋 Otra Categoria</button>
+        <button class="btn-flip" onclick="showCategories();">📋 Otra Categoria</button>
       </div>
     </div>`;
 }
@@ -529,12 +652,13 @@ function finishQuiz() {
 function renderWordList() {
   let html = '';
   categories.forEach(cat => {
-    html += `<tr><td colspan="3" style="background:transparent; font-weight:800; font-size:1.1rem; color:#0f172a; padding:16px 18px 8px;">${cat.icon} ${cat.name}</td></tr>`;
+    html += `<tr><td colspan="4" style="background:transparent; font-weight:800; font-size:1.1rem; color:#0f172a; padding:16px 18px 8px;">${cat.icon} ${cat.name} (${cat.words.length} palabras)</td></tr>`;
     cat.words.forEach(w => {
       const status = masteredWords[w.en] >= 3 ? '⭐' : learnedWords[w.en] ? '✅' : '';
       html += `<tr>
         <td>${w.en} ${status}</td>
         <td>${w.es}</td>
+        <td>${w.phonetic}</td>
         <td>${w.ex}</td>
       </tr>`;
     });
@@ -556,7 +680,7 @@ function markAsComplete() {
   if (!progress['1']) progress['1'] = {};
   progress['1']['vocab'] = true;
   localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
-  const btn = event.target;
+  const btn = document.getElementById('completeBtn');
   btn.textContent = '✅ ¡Completado! Redirigiendo...';
   btn.style.background = '#059669';
   btn.disabled = true;
@@ -574,7 +698,7 @@ function updateStats() {
   document.getElementById("statTotal").textContent = total;
   // Sync progress to simulator level unlock system
   if (learned >= 20) {
-    const progress = JSON.parse(localStorage.getItem("ieltsProgress2026") || "{"1":{},"2":{},"3":{}}");
+    const progress = JSON.parse(localStorage.getItem("ieltsProgress2026") || '{"1":{},"2":{},"3":{}}');
     if (!progress["1"]) progress["1"] = {};
     progress["1"]["vocab"] = true;
     localStorage.setItem("ieltsProgress2026", JSON.stringify(progress));
@@ -587,6 +711,7 @@ function updateStats() {
 document.addEventListener('DOMContentLoaded', () => {
   renderCategories();
   updateStats();
+  showMode('categories');
 });
 </script>
 </body>
