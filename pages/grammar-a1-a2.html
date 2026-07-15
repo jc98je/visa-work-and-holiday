@@ -407,7 +407,13 @@ function checkExercise() {
     const blank = document.getElementById('fillBlank');
     const userAnswer = input.value.trim().toLowerCase();
     const correctAnswer = ex.answer.toLowerCase();
-    correct = userAnswer === correctAnswer || userAnswer === correctAnswer.replace('...', '');
+    // Handle compound answers like 'Do...speak' - check parts
+    if (correctAnswer.includes('...')) {
+      const parts = correctAnswer.split('...');
+      correct = parts.every(p => userAnswer.includes(p.trim()));
+    } else {
+      correct = userAnswer === correctAnswer;
+    }
     
     input.style.pointerEvents = 'none';
     input.style.borderColor = correct ? '#10b981' : '#ef4444';
