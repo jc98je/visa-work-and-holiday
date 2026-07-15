@@ -9,9 +9,16 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 
-document.addEventListener('DOMContentLoaded', () => {
+function initFadeIn() {
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-});
+}
+
+// Run immediately if DOM already loaded, otherwise wait
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFadeIn);
+} else {
+  initFadeIn();
+}
 
 // Accordion Toggle
 function toggleAcc(item) {
