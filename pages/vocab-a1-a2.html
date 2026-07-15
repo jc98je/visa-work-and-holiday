@@ -177,6 +177,14 @@
   <div class="stat-pill">📊 <strong id="statTotal">0</strong> total</div>
 </div>
 
+<!-- MARCAR COMO COMPLETADO -->
+<div style="text-align:center; padding:24px;">
+  <button onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
+    ✅ Marcar Vocabulario como Completado
+  </button>
+  <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Al hacer click, se sincronizara con tu progreso en el simulador</p>
+</div>
+
 <!-- CATEGORIES -->
 <div class="categories" id="categoriesSection">
   <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige una categoria</h2>
@@ -541,6 +549,15 @@ function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
   return a;
+}
+
+function markAsComplete() {
+  const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
+  if (!progress['1']) progress['1'] = {};
+  progress['1']['vocab'] = true;
+  localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
+  alert('✅ Vocabulario marcado como completado! Ahora vuelve al simulador y veras el check en verde.');
+  window.location.href = 'ielts-simulador.html';
 }
 
 function updateStats() {
