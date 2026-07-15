@@ -28,6 +28,12 @@ function initFirebase() {
     auth.onAuthStateChanged((user) => {
       currentUser = user;
       updateUIForAuth(user);
+      // Si habia un pendiente de redirect, abrir mi-proceso
+      if (user && pendingRedirect) {
+        pendingRedirect = false;
+        closeLoginModal();
+        window.open('mi-proceso.html', '_blank');
+      }
     });
   } catch (error) {
     console.log('Firebase no disponible:', error.message);
@@ -441,10 +447,13 @@ document.querySelectorAll('.checklist-item').forEach(c => {
 });
 
 // Start Process - require login first
+let pendingRedirect = false;
+
 function startProcess() {
   if (currentUser) {
-    window.location.href = 'mi-proceso.html';
+    window.open('mi-proceso.html', '_blank');
   } else {
+    pendingRedirect = true;
     openLoginModal();
   }
 }
