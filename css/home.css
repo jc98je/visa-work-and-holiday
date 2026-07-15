@@ -1102,5 +1102,6 @@
     margin: 16px;
   }
   .user-name { display: none; }
-  .user-dropdown-menu { right: -10px; }
+  .nav-inner { overflow-x: auto; }
+  .user-dropdown-menu { position: fixed; right: 16px; top: auto; min-width: 180px; }
 }
