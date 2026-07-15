@@ -431,6 +431,10 @@ function updateAccountUI(user) {
   const since = document.getElementById('memberSince');
   const navAvatar = document.getElementById('userAvatar');
   const navName = document.getElementById('userName');
+  const loginBtn = document.getElementById('loginBtn');
+
+  // Hide login button, show user menu
+  if (loginBtn) loginBtn.style.display = 'none';
 
   const displayName = user.displayName || user.email.split('@')[0];
   const initial = displayName[0].toUpperCase();
