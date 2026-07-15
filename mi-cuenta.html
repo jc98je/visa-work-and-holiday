@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tu cuenta en VisaWork Peru. Configura tu perfil y preferencias.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mi Cuenta - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <style>
+    .account-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: white;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+    .account-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .account-hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .account-hero p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .profile-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      max-width: 800px;
+      margin: -30px auto 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .profile-info h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .profile-info p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+    .profile-info .member-since {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .settings-section {
+      margin-bottom: 32px;
+    }
+    .settings-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .setting-item {
+      padding: 20px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .setting-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    .setting-item h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .setting-item p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .quick-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .quick-link:hover {
+      border-color: var(--accent);
+      background: white;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .quick-link .icon {
+      font-size: 1.3rem;
+    }
+    .danger-zone {
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--red-light);
+      border-radius: 12px;
+      border: 1px solid #fecaca;
+    }
+    .danger-zone h3 {
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    .danger-zone p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .btn-danger {
+      padding: 10px 20px;
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      .settings-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Visa<span>Work</span></a>
+    <a href="index.html#requisitos" class="nav-link">Requisitos</a>
+    <a href="index.html#carta-mre" class="nav-link">Carta MRE</a>
+    <a href="pages/ielts-guia.html" class="nav-link" target="_blank">🇬🇧 Ingles</a>
+    <a href="index.html#proceso" class="nav-link">Proceso</a>
+    <a href="index.html#vuelos" class="nav-link">✈️ Vuelos</a>
+    <a href="index.html#costos" class="nav-link">Costos</a>
+    <div class="nav-spacer"></div>
+    <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
+    <div class="user-menu" id="userMenu" style="display:flex;">
+      <div class="user-dropdown" onclick="toggleUserDropdown(event)">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span class="user-name" id="userName">Usuario</span>
+        <span class="user-dropdown-arrow">▾</span>
+      </div>
+      <div class="user-dropdown-menu" id="userDropdownMenu">
+        <a href="mi-cuenta.html" class="dropdown-item"><span class="dropdown-icon">👤</span> Mi Cuenta</a>
+        <a href="mi-proceso.html" class="dropdown-item"><span class="dropdown-icon">📋</span> Mi Proceso</a>
+        <a href="pages/ielts-guia.html" class="dropdown-item" target="_blank"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" onclick="closeUserDropdown(); return false;"><span class="dropdown-icon">⚙️</span> Configuracion</a>
+        <a href="#" class="dropdown-item dropdown-logout" onclick="logout(); closeUserDropdown();"><span class="dropdown-icon">🚪</span> Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="account-hero">
+  <h1>Mi <span>Cuenta</span></h1>
+  <p>Administra tu perfil, revisa tu progreso y configura tus preferencias.</p>
+</section>
+
+<!-- PROFILE CARD -->
+<div style="max-width:1200px; margin:0 auto; padding:0 24px;">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div class="profile-info">
+        <h2 id="profileName">Cargando...</h2>
+        <p id="profileEmail">...</p>
+        <div class="member-since" id="memberSince">Miembro desde: ---</div>
+      </div>
+    </div>
+
+    <!-- QUICK STATS -->
+    <div class="settings-section">
+      <h3>📊 Tu Progreso</h3>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <h4>📋 Documentos</h4>
+          <p id="statDocs">0 de 14 completados</p>
+        </div>
+        <div class="setting-item">
+          <h4>🎯 Nivel de Ingles</h4>
+          <p id="statEnglish">Sin evaluar</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="settings-section">
+      <h3>⚙️ Configuracion de Cuenta</h3>
+      <div class="settings-grid">
+        <div class="setting-item">
+          <h4>🔔 Notificaciones</h4>
+          <p>Recibe recordatorios sobre documentos pendientes y fechas limite.</p>
+        </div>
+        <div class="setting-item">
+          <h4>🌍 Idioma</h4>
+          <p>Espanol (Peru) — Idioma predeterminado de la plataforma.</p>
+        </div>
+        <div class="setting-item">
+          <h4>🔒 Seguridad</h4>
+          <p>Cuenta protegida con Google Authentication.</p>
+        </div>
+        <div class="setting-item">
+          <h4>💾 Datos</h4>
+          <p>Tu progreso se guarda automaticamente en la nube.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="settings-section">
+      <h3>🚀 Accesos Rapidos</h3>
+      <div class="quick-links">
+        <a href="mi-proceso.html" class="quick-link">
+          <span class="icon">📋</span>
+          <span>Mi Proceso</span>
+        </a>
+        <a href="pages/ielts-guia.html" class="quick-link" target="_blank">
+          <span class="icon">📚</span>
+          <span>Guia IELTS</span>
+        </a>
+        <a href="pages/ielts-simulador.html" class="quick-link" target="_blank">
+          <span class="icon">🎯</span>
+          <span>Simulador</span>
+        </a>
+        <a href="index.html#costos" class="quick-link">
+          <span class="icon">💰</span>
+          <span>Calculadora</span>
+        </a>
+        <a href="index.html#vuelos" class="quick-link">
+          <span class="icon">✈️</span>
+          <span>Vuelos</span>
+        </a>
+        <a href="https://online.immi.gov.au/" class="quick-link" target="_blank">
+          <span class="icon">🇦🇺</span>
+          <span>ImmiAccount</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
+    <div class="danger-zone">
+      <h3>⚠️ Zona de Peligro</h3>
+      <p>Si eliminas tu cuenta, se perderan todos tus datos y progreso. Esta accion no se puede deshacer.</p>
+      <button class="btn-danger" onclick="if(confirm('¿Estas seguro? Esta accion no se puede deshacer.')) { alert('Funcionalidad proximamente.'); }">Eliminar mi cuenta</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Visa<span>Work</span> Peru</h3>
+      <p>Tu plataforma completa para la visa Work and Holiday Australia 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Recursos</h4>
+      <a href="index.html#requisitos">Requisitos</a>
+      <a href="index.html#carta-mre">Carta del MRE</a>
+      <a href="pages/ielts-guia.html" target="_blank">Guia IELTS</a>
+    </div>
+    <div class="footer-col">
+      <h4>Mi Cuenta</h4>
+      <a href="mi-proceso.html">Mi Proceso</a>
+      <a href="mi-cuenta.html">Configuracion</a>
+      <a href="index.html">Volver al inicio</a>
+    </div>
+    <div class="footer-col">
+      <h4>Oficiales</h4>
+      <a href="https://immi.homeaffairs.gov.au/" target="_blank">Departamento de Inmigracion</a>
+      <a href="https://online.immi.gov.au/" target="_blank">ImmiAccount</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Informacion recopilada en julio 2026. Siempre verifica en immi.homeaffairs.gov.au</p>
+  </div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="login-modal" style="display:none;">
+  <div class="login-modal-content">
+    <button class="login-close" onclick="closeLoginModal()">&times;</button>
+    <div class="login-header">
+      <div class="login-logo">Visa<span>Work</span></div>
+      <h2>Iniciar Sesion</h2>
+      <p>Accede a tu cuenta para guardar tu progreso</p>
+    </div>
+    <button class="login-google-btn" onclick="loginWithGoogle()">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuar con Google
+    </button>
+    <div class="login-divider"><span>o</span></div>
+    <form class="login-form" onsubmit="handleEmailLogin(event)">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Contrasena</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="login-submit-btn">Iniciar Sesion</button>
+    </form>
+    <div class="login-footer">
+      ¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Crear cuenta</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyC1xxrXlRo7MjEqCOD3te-nfWv6Aof3MrE",
+  authDomain: "pinpon-77a21.firebaseapp.com",
+  projectId: "pinpon-77a21",
+  storageBucket: "pinpon-77a21.firebasestorage.app",
+  messagingSenderId: "538191080129",
+  appId: "1:538191080129:web:0a19e177c0b0b803f7c240"
+};
+
+let auth = null;
+let db = null;
+let currentUser = null;
+
+function initFirebase() {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+
+    auth.onAuthStateChanged((user) => {
+      currentUser = user;
+      if (user) {
+        updateAccountUI(user);
+        loadStatsFromFirestore(user);
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+  } catch (error) {
+    console.log('Firebase error:', error.message);
+    window.location.href = 'index.html';
+  }
+}
+
+initFirebase();
+
+function updateAccountUI(user) {
+  const avatar = document.getElementById('profileAvatar');
+  const name = document.getElementById('profileName');
+  const email = document.getElementById('profileEmail');
+  const since = document.getElementById('memberSince');
+  const navAvatar = document.getElementById('userAvatar');
+  const navName = document.getElementById('userName');
+
+  const displayName = user.displayName || user.email.split('@')[0];
+  const initial = displayName[0].toUpperCase();
+
+  if (avatar) avatar.textContent = initial;
+  if (name) name.textContent = displayName;
+  if (email) email.textContent = user.email;
+  if (since) {
+    const creationDate = user.metadata.creationTime ? new Date(user.metadata.creationTime).toLocaleDateString('es-PE', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Reciente';
+    since.textContent = 'Miembro desde: ' + creationDate;
+  }
+  if (navAvatar) navAvatar.textContent = initial;
+  if (navName) navName.textContent = displayName;
+}
+
+function loadStatsFromFirestore(user) {
+  if (!db) return;
+  db.collection('users').doc(user.uid).get()
+    .then((doc) => {
+      if (doc.exists && doc.data().checklist) {
+        const checklist = doc.data().checklist;
+        const total = 14;
+        const checked = Object.values(checklist).filter(v => v === true).length;
+        const inglesChecked = checklist['ingles'] === true;
+
+        document.getElementById('statDocs').textContent = checked + ' de ' + total + ' completados';
+        document.getElementById('statEnglish').textContent = inglesChecked ? 'Certificado listo ✅' : 'Sin evaluar — Necesitas IELTS 4.5';
+      }
+    })
+    .catch(err => console.error('Error cargando stats:', err));
+}
+
+function logout() {
+  auth.signOut().then(() => { window.location.href = 'index.html'; });
+}
+
+function toggleUserDropdown(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) {
+    menu.classList.toggle('show');
+    if (arrow) arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : '';
+  }
+}
+
+function closeUserDropdown() {
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) menu.classList.remove('show');
+  if (arrow) arrow.style.transform = '';
+}
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('userDropdownMenu');
+  if (menu && !e.target.closest('.user-dropdown') && !e.target.closest('.user-dropdown-menu')) {
+    closeUserDropdown();
+  }
+  const modal = document.getElementById('loginModal');
+  if (modal && e.target === modal) {
+    closeLoginModal();
+  }
+});
+
+function openLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      closeLoginModal();
+    })
+    .catch((error) => {
+      alert('Error al iniciar sesion: ' + error.message);
+    });
+}
+
+function handleEmailLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => closeLoginModal())
+    .catch((error) => alert('Error: ' + error.message));
+}
+</script>
+
+</body>
+</html>
