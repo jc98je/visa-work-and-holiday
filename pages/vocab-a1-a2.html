@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aprende vocabulario IELTS basico (A1-A2) de forma interactiva con flashcards, quizzes y progreso.">
+  <title>Vocabulario Basico A1-A2 - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root { --accent: #f97316; --green: #10b981; --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; margin: 0; }
+
+    .page-hero {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white; padding: 100px 24px 48px; text-align: center;
+    }
+    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; }
+    .page-hero p { font-size: 1.05rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* Mode Tabs */
+    .mode-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .mode-tab {
+      padding: 10px 20px; border-radius: 50px; border: 2px solid rgba(255,255,255,.3);
+      background: transparent; color: white; font-weight: 600; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .mode-tab:hover { background: rgba(255,255,255,.15); }
+    .mode-tab.active { background: white; color: #059669; border-color: white; }
+
+    /* Categories */
+    .categories { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+    .cat-card {
+      background: white; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.25s;
+    }
+    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,.1); }
+    .cat-card.active { border-color: var(--green); background: #f0fdf4; }
+    .cat-card .cat-icon { font-size: 2rem; margin-bottom: 8px; }
+    .cat-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .cat-card p { font-size: 0.82rem; color: #64748b; }
+    .cat-card .cat-count { font-size: 0.75rem; font-weight: 700; color: var(--green); margin-top: 8px; }
+
+    /* Flashcard */
+    .flashcard-container { max-width: 500px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .flashcard-container.active { display: block; }
+    .flashcard-progress { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .flashcard-progress-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+    .flashcard-progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), #059669); border-radius: 10px; transition: width 0.4s; }
+    .flashcard-progress-text { font-size: 0.82rem; font-weight: 700; color: #64748b; white-space: nowrap; }
+
+    .flashcard {
+      perspective: 1000px; width: 100%; height: 300px; cursor: pointer; margin-bottom: 24px;
+    }
+    .flashcard-inner {
+      width: 100%; height: 100%; position: relative; transition: transform 0.5s;
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+    .flashcard-front, .flashcard-back {
+      position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+      border-radius: 20px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 32px; text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    }
+    .flashcard-front {
+      background: linear-gradient(135deg, #0f172a, #1e293b); color: white;
+    }
+    .flashcard-front .word { font-size: 2.2rem; font-weight: 900; margin-bottom: 8px; }
+    .flashcard-front .phonetic { font-size: 1rem; opacity: 0.7; margin-bottom: 16px; }
+    .flashcard-front .hint { font-size: 0.82rem; opacity: 0.5; }
+    .flashcard-back {
+      background: white; color: #0f172a; transform: rotateY(180deg);
+      border: 2px solid #e2e8f0;
+    }
+    .flashcard-back .translation { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+    .flashcard-back .example { font-size: 0.92rem; color: #64748b; font-style: italic; line-height: 1.6; }
+    .flashcard-back .example strong { color: #0f172a; font-style: normal; }
+
+    .flashcard-nav { display: flex; gap: 12px; justify-content: center; }
+    .flashcard-nav button {
+      padding: 12px 28px; border-radius: 12px; border: none; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-know { background: var(--green); color: white; }
+    .btn-know:hover { background: #059669; }
+    .btn-dontknow { background: #fee2e2; color: var(--red); }
+    .btn-dontknow:hover { background: var(--red); color: white; }
+    .btn-flip { background: #e2e8f0; color: #0f172a; }
+    .btn-flip:hover { background: #cbd5e1; }
+
+    /* Quiz */
+    .quiz-container { max-width: 600px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .quiz-container.active { display: block; }
+    .quiz-question {
+      background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; margin-bottom: 20px;
+    }
+    .quiz-question h3 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 20px; }
+    .quiz-options { display: grid; gap: 10px; }
+    .quiz-option {
+      padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 12px;
+      cursor: pointer; transition: all 0.2s; font-size: 0.95rem; display: flex; align-items: center; gap: 12px;
+    }
+    .quiz-option:hover { border-color: var(--accent); background: #fff7ed; }
+    .quiz-option.correct { border-color: var(--green); background: #f0fdf4; color: var(--green); }
+    .quiz-option.wrong { border-color: var(--red); background: #fef2f2; color: var(--red); }
+    .quiz-option .q-letter {
+      width: 28px; height: 28px; border-radius: 8px; background: #f1f5f9;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem; color: #64748b; flex-shrink: 0;
+    }
+    .quiz-option.correct .q-letter { background: var(--green); color: white; }
+    .quiz-option.wrong .q-letter { background: var(--red); color: white; }
+    .quiz-nav { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+    .quiz-score {
+      text-align: center; padding: 40px; background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    }
+    .quiz-score .score-num { font-size: 3rem; font-weight: 900; color: var(--green); }
+    .quiz-score .score-label { font-size: 1.1rem; font-weight: 600; color: #64748b; margin-top: 8px; }
+
+    /* Word List */
+    .wordlist-container { max-width: 700px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .wordlist-container.active { display: block; }
+    .word-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+    .word-table tr { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: all 0.2s; }
+    .word-table tr:hover { box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-1px); }
+    .word-table td { padding: 14px 18px; }
+    .word-table td:first-child { border-radius: 12px 0 0 12px; font-weight: 700; font-size: 1rem; color: #0f172a; }
+    .word-table td:nth-child(2) { color: var(--accent); font-weight: 600; }
+    .word-table td:last-child { border-radius: 0 12px 12px 0; color: #64748b; font-size: 0.88rem; }
+    .play-btn {
+      background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 4px;
+      transition: transform 0.2s;
+    }
+    .play-btn:hover { transform: scale(1.2); }
+
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { color: #0f172a; }
+
+    /* Stats Bar */
+    .stats-bar { display: flex; gap: 16px; justify-content: center; padding: 16px 24px; flex-wrap: wrap; }
+    .stat-pill {
+      padding: 8px 16px; background: white; border-radius: 50px; font-size: 0.82rem;
+      font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    .stat-pill strong { color: #0f172a; }
+
+    @media (max-width: 600px) {
+      .page-hero h1 { font-size: 1.8rem; }
+      .flashcard { height: 250px; }
+      .flashcard-front .word { font-size: 1.6rem; }
+      .cat-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-hero">
+  <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
+  <h1>📚 Vocabulario Basico</h1>
+  <p>Nivel A1-A2: Las palabras mas importantes para tu dia a dia en Australia</p>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('flashcards')">🃏 Flashcards</button>
+    <button class="mode-tab" onclick="showMode('quiz')">❓ Quiz</button>
+    <button class="mode-tab" onclick="showMode('wordlist')">📋 Lista Completa</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-pill">📚 <strong id="statLearned">0</strong> aprendidas</div>
+  <div class="stat-pill">🎯 <strong id="statMastered">0</strong> dominadas</div>
+  <div class="stat-pill">🔥 <strong id="statStreak">0</strong> racha</div>
+  <div class="stat-pill">📊 <strong id="statTotal">0</strong> total</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories" id="categoriesSection">
+  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige una categoria</h2>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="flashcard-container" id="flashcardsSection">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <h3 id="catTitle" style="font-size:1.1rem; font-weight:700;"></h3>
+  </div>
+  <div class="flashcard-progress">
+    <div class="flashcard-progress-bar"><div class="flashcard-progress-fill" id="fcProgress" style="width:0%;"></div></div>
+    <div class="flashcard-progress-text" id="fcProgressText">0/0</div>
+  </div>
+  <div class="flashcard" id="flashcard" onclick="flipCard()">
+    <div class="flashcard-inner" id="flashcardInner">
+      <div class="flashcard-front">
+        <div class="word" id="fcWord"></div>
+        <div class="phonetic" id="fcPhonetic"></div>
+        <div class="hint">Toca para ver la traduccion</div>
+      </div>
+      <div class="flashcard-back">
+        <div class="translation" id="fcTranslation"></div>
+        <div class="example" id="fcExample"></div>
+      </div>
+    </div>
+  </div>
+  <div class="flashcard-nav">
+    <button class="btn-dontknow" onclick="markWord(false)">❌ No se</button>
+    <button class="btn-flip" onclick="flipCard()">🔄 Voltear</button>
+    <button class="btn-know" onclick="markWord(true)">✅ Se</button>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-container" id="quizSection">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <h3 id="quizTitle" style="font-size:1.1rem; font-weight:700;"></h3>
+  </div>
+  <div class="flashcard-progress">
+    <div class="flashcard-progress-bar"><div class="flashcard-progress-fill" id="quizProgressFill" style="width:0%;"></div></div>
+    <div class="flashcard-progress-text" id="quizProgressText">0/0</div>
+  </div>
+  <div id="quizContent"></div>
+</div>
+
+<!-- WORD LIST -->
+<div class="wordlist-container" id="wordlistSection">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <h3 style="font-size:1.1rem; font-weight:700;">Lista Completa de Palabras</h3>
+  </div>
+  <table class="word-table" id="wordTable"></table>
+</div>
+
+<script>
+// ==========================================
+// VOCABULARY DATA
+// ==========================================
+const categories = [
+  {
+    id: 'family', icon: '👨‍👩‍👧‍👦', name: 'Familia', desc: 'Miembros de la familia',
+    words: [
+      { en: 'Mother', phonetic: '/ˈmʌðər/', es: 'Madre', ex: 'My <strong>mother</strong> lives in Lima.' },
+      { en: 'Father', phonetic: '/ˈfɑːðər/', es: 'Padre', ex: 'My <strong>father</strong> works in an office.' },
+      { en: 'Sister', phonetic: '/ˈsɪstər/', es: 'Hermana', ex: 'I have one <strong>sister</strong>.' },
+      { en: 'Brother', phonetic: '/ˈbrʌðər/', es: 'Hermano', ex: 'My <strong>brother</strong> is older than me.' },
+      { en: 'Grandmother', phonetic: '/ˈɡrænmʌðər/', es: 'Abuela', ex: 'My <strong>grandmother</strong> cooks very well.' },
+      { en: 'Grandfather', phonetic: '/ˈɡrænfɑːðər/', es: 'Abuelo', ex: 'My <strong>grandfather</strong> tells stories.' },
+      { en: 'Parents', phonetic: '/ˈpeərənts/', es: 'Padres', ex: 'My <strong>parents</strong> support me.' },
+      { en: 'Family', phonetic: '/ˈfæməli/', es: 'Familia', ex: 'I love my <strong>family</strong>.' },
+    ]
+  },
+  {
+    id: 'food', icon: '🍕', name: 'Comida', desc: 'Restaurantes y pedidos',
+    words: [
+      { en: 'Water', phonetic: '/ˈwɔːtər/', es: 'Agua', ex: 'Can I have some <strong>water</strong>?' },
+      { en: 'Bread', phonetic: '/bred/', es: 'Pan', ex: 'I eat <strong>bread</strong> for breakfast.' },
+      { en: 'Chicken', phonetic: '/ˈtʃɪkɪn/', es: 'Pollo', ex: 'I would like <strong>chicken</strong> please.' },
+      { en: 'Rice', phonetic: '/raɪs/', es: 'Arroz', ex: 'We eat <strong>rice</strong> every day.' },
+      { en: 'Coffee', phonetic: '/ˈkɒfi/', es: 'Cafe', ex: 'I need a <strong>coffee</strong> in the morning.' },
+      { en: 'Breakfast', phonetic: '/ˈbrekfəst/', es: 'Desayuno', ex: 'What do you have for <strong>breakfast</strong>?' },
+      { en: 'Lunch', phonetic: '/lʌntʃ/', es: 'Almuerzo', ex: 'Lunch is at 12pm.' },
+      { en: 'Dinner', phonetic: '/ˈdɪnər/', es: 'Cena', ex: 'We have <strong>dinner</strong> at 7pm.' },
+    ]
+  },
+  {
+    id: 'numbers', icon: '🔢', name: 'Numeros', desc: 'Del 1 al 100 y ordinales',
+    words: [
+      { en: 'One', phonetic: '/wʌn/', es: 'Uno', ex: 'I have <strong>one</strong> brother.' },
+      { en: 'Ten', phonetic: '/ten/', es: 'Diez', ex: 'There are <strong>ten</strong> students.' },
+      { en: 'Twenty', phonetic: '/ˈtwenti/', es: 'Veinte', ex: 'I am <strong>twenty</strong> years old.' },
+      { en: 'Hundred', phonetic: '/ˈhʌndrəd/', es: 'Cien', ex: 'It costs one <strong>hundred</strong> dollars.' },
+      { en: 'First', phonetic: '/fɜːst/', es: 'Primero', ex: 'This is my <strong>first</strong> day.' },
+      { en: 'Last', phonetic: '/lɑːst/', es: 'Ultimo', ex: 'It was the <strong>last</strong> question.' },
+      { en: 'Half', phonetic: '/hɑːf/', es: 'Mitad', ex: 'Half past three.' },
+      { en: 'Quarter', phonetic: '/ˈkwɔːtər/', es: 'Cuarto', ex: 'A <strong>quarter</strong> past two.' },
+    ]
+  },
+  {
+    id: 'clothes', icon: '👕', name: 'Ropa', desc: 'Vestimenta y accesorios',
+    words: [
+      { en: 'Shirt', phonetic: '/ʃɜːt/', es: 'Camisa', ex: 'This <strong>shirt</strong> is blue.' },
+      { en: 'Pants', phonetic: '/pænts/', es: 'Pantalones', ex: 'I need new <strong>pants</strong>.' },
+      { en: 'Shoes', phonetic: '/ʃuːz/', es: 'Zapatos', ex: 'These <strong>shoes</strong> are comfortable.' },
+      { en: 'Jacket', phonetic: '/ˈdʒækɪt/', es: 'Chaqueta', ex: 'Take your <strong>jacket</strong>, it is cold.' },
+      { en: 'Hat', phonetic: '/hæt/', es: 'Sombrero', ex: 'She wears a <strong>hat</strong> in summer.' },
+      { en: 'Dress', phonetic: '/dres/', es: 'Vestido', ex: 'That <strong>dress</strong> is beautiful.' },
+      { en: 'Socks', phonetic: '/sɒks/', es: 'Calcetines', ex: 'I wear <strong>socks</strong> every day.' },
+      { en: 'Coat', phonetic: '/kəʊt/', es: 'Abrigo', ex: 'Wear your <strong>coat</strong> outside.' },
+    ]
+  },
+  {
+    id: 'body', icon: '🧍', name: 'Cuerpo', desc: 'Partes del cuerpo',
+    words: [
+      { en: 'Head', phonetic: '/hed/', es: 'Cabeza', ex: 'My <strong>head</strong> hurts.' },
+      { en: 'Hand', phonetic: '/hænd/', es: 'Mano', ex: 'Wash your <strong>hands</strong>.' },
+      { en: 'Eye', phonetic: '/aɪ/', es: 'Ojo', ex: 'She has blue <strong>eyes</strong>.' },
+      { en: 'Foot', phonetic: '/fʊt/', es: 'Pie', ex: 'My <strong>foot</strong> is tired.' },
+      { en: 'Arm', phonetic: '/ɑːm/', es: 'Brazo', ex: 'He broke his <strong>arm</strong>.' },
+      { en: 'Leg', phonetic: '/leɡ/', es: 'Pierna', ex: 'My <strong>leg</strong> is sore from running.' },
+      { en: 'Back', phonetic: '/bæk/', es: 'Espalda', ex: 'I have <strong>back</strong> pain.' },
+      { en: 'Finger', phonetic: '/ˈfɪŋɡər/', es: 'Dedo (mano)', ex: 'I cut my <strong>finger</strong>.' },
+    ]
+  },
+  {
+    id: 'work', icon: '💼', name: 'Trabajo', desc: 'Empleo y oficina',
+    words: [
+      { en: 'Job', phonetic: '/dʒɒb/', es: 'Trabajo/Empleo', ex: 'I need a <strong>job</strong> in Australia.' },
+      { en: 'Boss', phonetic: '/bɒs/', es: 'Jefe', ex: 'My <strong>boss</strong> is very nice.' },
+      { en: 'Office', phonetic: '/ˈɒfɪs/', es: 'Oficina', ex: 'I work in an <strong>office</strong>.' },
+      { en: 'Meeting', phonetic: '/ˈmiːtɪŋ/', es: 'Reunion', ex: 'The <strong>meeting</strong> is at 3pm.' },
+      { en: 'Salary', phonetic: '/ˈsæləri/', es: 'Sueldo', ex: 'What is the <strong>salary</strong>?' },
+      { en: 'Schedule', phonetic: '/ˈʃedjuːl/', es: 'Horario', ex: 'What is your <strong>schedule</strong>?' },
+      { en: 'Manager', phonetic: '/ˈmænɪdʒər/', es: 'Gerente', ex: 'Talk to the <strong>manager</strong>.' },
+      { en: 'Interview', phonetic: '/ˈɪntəvjuː/', es: 'Entrevista', ex: 'I have an <strong>interview</strong> tomorrow.' },
+    ]
+  }
+];
+
+// ==========================================
+// STATE
+// ==========================================
+let currentMode = 'flashcards';
+let currentCat = null;
+let fcIdx = 0;
+let fcKnown = 0;
+let quizIdx = 0;
+let quizCorrect = 0;
+let quizQuestions = [];
+let learnedWords = JSON.parse(localStorage.getItem('vocabLearned2026') || '{}');
+let masteredWords = JSON.parse(localStorage.getItem('vocabMastered2026') || '{}');
+let streak = parseInt(localStorage.getItem('vocabStreak2026') || '0');
+
+function saveState() {
+  localStorage.setItem('vocabLearned2026', JSON.stringify(learnedWords));
+  localStorage.setItem('vocabMastered2026', JSON.stringify(masteredWords));
+  localStorage.setItem('vocabStreak2026', streak.toString());
+}
+
+// ==========================================
+// MODE SWITCHING
+// ==========================================
+function showMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mode-tab').forEach(t => { if (t.textContent.toLowerCase().includes(mode === 'flashcards' ? 'flash' : mode)) t.classList.add('active'); });
+
+  document.getElementById('categoriesSection').style.display = (mode === 'categories' || !currentCat) && mode !== 'quiz' && mode !== 'wordlist' ? '' : 'none';
+  document.getElementById('flashcardsSection').classList.toggle('active', mode === 'flashcards' && currentCat);
+  document.getElementById('quizSection').classList.toggle('active', mode === 'quiz' && currentCat);
+  document.getElementById('wordlistSection').classList.toggle('active', mode === 'wordlist');
+
+  if (mode === 'wordlist') renderWordList();
+  if (mode === 'quiz' && currentCat) startQuiz();
+  if (mode === 'flashcards' && currentCat) showCard();
+  if (!currentCat && mode !== 'wordlist') {
+    document.getElementById('categoriesSection').style.display = '';
+  }
+
+  updateStats();
+}
+
+function showCategories() {
+  currentCat = null;
+  showMode('categories');
+  document.getElementById('categoriesSection').style.display = '';
+}
+
+// ==========================================
+// CATEGORIES
+// ==========================================
+function renderCategories() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = categories.map(cat => {
+    const total = cat.words.length;
+    const learned = cat.words.filter(w => learnedWords[w.en]).length;
+    return `<div class="cat-card" onclick="selectCategory('${cat.id}')">
+      <div class="cat-icon">${cat.icon}</div>
+      <h3>${cat.name}</h3>
+      <p>${cat.desc}</p>
+      <div class="cat-count">${learned}/${total} palabras aprendidas</div>
+    </div>`;
+  }).join('');
+}
+
+function selectCategory(catId) {
+  currentCat = categories.find(c => c.id === catId);
+  fcIdx = 0; fcKnown = 0;
+  document.getElementById('catTitle').textContent = currentCat.icon + ' ' + currentCat.name;
+  showMode(currentMode === 'quiz' ? 'quiz' : 'flashcards');
+}
+
+// ==========================================
+// FLASHCARDS
+// ==========================================
+function showCard() {
+  if (!currentCat) return;
+  const words = currentCat.words;
+  if (fcIdx >= words.length) {
+    finishFlashcards();
+    return;
+  }
+  const w = words[fcIdx];
+  document.getElementById('fcWord').textContent = w.en;
+  document.getElementById('fcPhonetic').textContent = w.phonetic;
+  document.getElementById('fcTranslation').textContent = w.es;
+  document.getElementById('fcExample').innerHTML = w.ex;
+  document.getElementById('fcProgress').style.width = ((fcIdx / words.length) * 100) + '%';
+  document.getElementById('fcProgressText').textContent = (fcIdx + 1) + '/' + words.length;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('flashcard').classList.toggle('flipped');
+}
+
+function markWord(known) {
+  if (!currentCat) return;
+  const w = currentCat.words[fcIdx];
+  if (known) {
+    fcKnown++;
+    learnedWords[w.en] = true;
+    if (!masteredWords[w.en]) masteredWords[w.en] = 0;
+    masteredWords[w.en]++;
+    if (masteredWords[w.en] >= 3) masteredWords[w.en] = 3;
+  } else {
+    delete learnedWords[w.en];
+    masteredWords[w.en] = 0;
+  }
+  saveState();
+  fcIdx++;
+  showCard();
+  updateStats();
+}
+
+function finishFlashcards() {
+  const total = currentCat.words.length;
+  const pct = Math.round((fcKnown / total) * 100);
+  document.getElementById('flashcardsSection').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 70 ? '🎉' : '💪'}</div>
+      <div class="score-num">${fcKnown}/${total}</div>
+      <div class="score-label">palabras que sabes en ${currentCat.name}</div>
+      <p style="margin-top:16px; color:#64748b;">${pct >= 70 ? '¡Excelente! Sigue con otra categoria.' : '¡Buen intento! Repite para mejorar.'}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px;">
+        <button class="btn-know" onclick="selectCategory('${currentCat.id}'); showMode('flashcards');">🔄 Repetir</button>
+        <button class="btn-flip" onclick="showCategories()">📋 Otra Categoria</button>
+        <button class="btn-dontknow" onclick="startQuiz(); showMode('quiz');">❓ Hacer Quiz</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
+// QUIZ
+// ==========================================
+function startQuiz() {
+  if (!currentCat) return;
+  quizIdx = 0; quizCorrect = 0;
+  quizQuestions = [];
+  const words = [...currentCat.words];
+  words.forEach(w => {
+    const others = categories.flatMap(c => c.words).filter(x => x.en !== w.en);
+    const wrong = shuffle(others).slice(0, 3).map(x => x.es);
+    const opts = shuffle([w.es, ...wrong]);
+    quizQuestions.push({ word: w, options: opts, answer: w.es });
+  });
+  quizQuestions = shuffle(quizQuestions).slice(0, 10);
+  document.getElementById('quizTitle').textContent = currentCat.icon + ' Quiz: ' + currentCat.name;
+  showQuizQuestion();
+}
+
+function showQuizQuestion() {
+  if (quizIdx >= quizQuestions.length) { finishQuiz(); return; }
+  const q = quizQuestions[quizIdx];
+  document.getElementById('quizProgressFill').style.width = ((quizIdx / quizQuestions.length) * 100) + '%';
+  document.getElementById('quizProgressText').textContent = (quizIdx + 1) + '/' + quizQuestions.length;
+  const letters = ['A','B','C','D'];
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-question">
+      <h3>¿Que significa "<strong>${q.word.en}</strong>"?</h3>
+      <div class="quiz-options">
+        ${q.options.map((opt, i) => `<div class="quiz-option" onclick="answerQuiz(this, '${opt.replace(/'/g, "\\'")}', '${q.answer.replace(/'/g, "\\'")}')"><div class="q-letter">${letters[i]}</div><span>${opt}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function answerQuiz(el, selected, correct) {
+  if (el.parentElement.querySelector('.correct, .wrong')) return;
+  const opts = el.parentElement.querySelectorAll('.quiz-option');
+  opts.forEach(o => {
+    if (o.querySelector('span').textContent === correct) o.classList.add('correct');
+    else if (o === el && selected !== correct) o.classList.add('wrong');
+  });
+  if (selected === correct) quizCorrect++;
+  setTimeout(() => { quizIdx++; showQuizQuestion(); }, 800);
+}
+
+function finishQuiz() {
+  const pct = Math.round((quizCorrect / quizQuestions.length) * 100);
+  streak = pct >= 60 ? streak + 1 : 0;
+  saveState();
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 80 ? '🏆' : pct >= 60 ? '🎉' : '📚'}</div>
+      <div class="score-num">${quizCorrect}/${quizQuestions.length}</div>
+      <div class="score-label">respuestas correctas (${pct}%)</div>
+      <p style="margin-top:16px; color:#64748b;">${pct >= 80 ? '¡Dominas este vocabulario!' : pct >= 60 ? '¡Muy bien! Sigue practicando.' : 'Repasa las flashcards y vuelve a intentar.'}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px;">
+        <button class="btn-know" onclick="startQuiz(); showMode('quiz');">🔄 Repetir Quiz</button>
+        <button class="btn-flip" onclick="showCategories()">📋 Otra Categoria</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
+// WORD LIST
+// ==========================================
+function renderWordList() {
+  let html = '';
+  categories.forEach(cat => {
+    html += `<tr><td colspan="3" style="background:transparent; font-weight:800; font-size:1.1rem; color:#0f172a; padding:16px 18px 8px;">${cat.icon} ${cat.name}</td></tr>`;
+    cat.words.forEach(w => {
+      const status = masteredWords[w.en] >= 3 ? '⭐' : learnedWords[w.en] ? '✅' : '';
+      html += `<tr>
+        <td>${w.en} ${status}</td>
+        <td>${w.es}</td>
+        <td>${w.ex}</td>
+      </tr>`;
+    });
+  });
+  document.getElementById('wordTable').innerHTML = html;
+}
+
+// ==========================================
+// UTILS
+// ==========================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function updateStats() {
+  const allWords = categories.flatMap(c => c.words);
+  const total = allWords.length;
+  const learned = allWords.filter(w => learnedWords[w.en]).length;
+  const mastered = allWords.filter(w => masteredWords[w.en] >= 3).length;
+  document.getElementById('statLearned').textContent = learned;
+  document.getElementById('statMastered').textContent = mastered;
+  document.getElementById('statStreak').textContent = streak;
+  document.getElementById('statTotal').textContent = total;
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderCategories();
+  updateStats();
+});
+</script>
+</body>
+</html>
