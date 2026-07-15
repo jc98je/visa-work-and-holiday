@@ -457,8 +457,33 @@ function startProcess() {
   }
 }
 
-// Close modal on outside click
+// ==========================================
+// USER DROPDOWN
+// ==========================================
+
+function toggleUserDropdown(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) {
+    menu.classList.toggle('show');
+    if (arrow) arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : '';
+  }
+}
+
+function closeUserDropdown() {
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) menu.classList.remove('show');
+  if (arrow) arrow.style.transform = '';
+}
+
+// Close dropdown on outside click
 document.addEventListener('click', (e) => {
+  const menu = document.getElementById('userDropdownMenu');
+  if (menu && !e.target.closest('.user-dropdown') && !e.target.closest('.user-dropdown-menu')) {
+    closeUserDropdown();
+  }
   const modal = document.getElementById('loginModal');
   if (modal && e.target === modal) {
     closeLoginModal();

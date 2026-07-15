@@ -110,9 +110,19 @@
     <div class="nav-spacer"></div>
     <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
     <div class="user-menu" id="userMenu">
-      <div class="user-avatar" id="userAvatar">?</div>
-      <span class="user-name" id="userName">Usuario</span>
-      <button class="user-logout" onclick="logout()">Salir</button>
+      <div class="user-dropdown" onclick="toggleUserDropdown(event)">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span class="user-name" id="userName">Usuario</span>
+        <span class="user-dropdown-arrow">▾</span>
+      </div>
+      <div class="user-dropdown-menu" id="userDropdownMenu">
+        <a href="#" class="dropdown-item" onclick="closeUserDropdown()"><span class="dropdown-icon">👤</span> Mi Cuenta</a>
+        <a href="mi-proceso.html" class="dropdown-item"><span class="dropdown-icon">📋</span> Mi Proceso</a>
+        <a href="pages/ielts-guia.html" class="dropdown-item" target="_blank"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item"><span class="dropdown-icon">⚙️</span> Configuracion</a>
+        <a href="#" class="dropdown-item dropdown-logout" onclick="logout(); closeUserDropdown();"><span class="dropdown-icon">🚪</span> Cerrar Sesion</a>
+      </div>
     </div>
   </div>
 </nav>
