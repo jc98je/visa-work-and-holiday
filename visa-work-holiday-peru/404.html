@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Pagina no encontrada | VisaWork Peru</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+    .error-code {
+      font-size: 8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #00b4d8, #0077b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-bottom: 32px;
+      max-width: 400px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all .3s;
+    }
+    .btn-primary {
+      background: #00b4d8;
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,180,216,.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,180,216,.4);
+    }
+    .links {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .links a {
+      color: #0077b6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="error-code">404</div>
+  <h1>Pagina no encontrada</h1>
+  <p>Lo sentimos, la pagina que buscas no existe o fue movida. Pero no te preocupes, hay mucho contenido util para tu visa.</p>
+  <a href="/" class="btn btn-primary">🏠 Volver al Inicio</a>
+  <div class="links">
+    <a href="/">Inicio</a>
+    <a href="/pages/ielts-guia.html">Guia IELTS</a>
+    <a href="/pages/ielts-simulador.html">Simulador IELTS</a>
+  </div>
+</body>
+</html>
