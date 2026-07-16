@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Practica listening IELTS basico (A1-A2) con videos reales de YouTube. Escucha frases cortas y mejora tu comprension auditiva.">
+  <meta name="description" content="Practica listening IELTS basico (A1-A2) con clips reales de peliculas y series. Escucha frases naturales y mejora tu comprension auditiva.">
   <title>Listening Basico A1-A2 - VisaWork Peru</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -78,6 +78,7 @@
     .phrase-english { font-size: 1.8rem; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
     .phrase-spanish { font-size: 1rem; color: #64748b; }
     .phrase-phonetic { font-size: 0.85rem; color: var(--accent); font-style: italic; margin-top: 4px; }
+    .phrase-movie { font-size: 0.82rem; color: var(--purple); font-weight: 600; margin-top: 8px; }
 
     .listen-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -125,7 +126,7 @@
 <div class="page-hero">
   <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
   <h1>🎧 Listening Basico</h1>
-  <p>Nivel A1-A2: Escucha frases reales en videos de YouTube y practica tu comprension auditiva</p>
+  <p>Nivel A1-A2: Escucha frases reales de peliculas y series en YouTube</p>
   <div class="mode-tabs">
     <button class="mode-tab active" onclick="showMode('categories')">📂 Categorias</button>
     <button class="mode-tab" onclick="showMode('practice')">🎯 Practica</button>
@@ -169,18 +170,17 @@
 
 <script>
 // ==========================================
-// LISTENING DATA - VERIFIED YouTube Videos
-// Each video contains the EXACT phrase spoken clearly
+// LISTENING DATA - REAL MOVIE/SERIES CLIPS
+// Each clip is from a real movie or TV series
 // ==========================================
 const listenCategories = [
   {
-    id: 'greetings',
-    icon: '👋',
-    name: 'Saludos y Presentaciones',
-    desc: 'Hello, hi, nice to meet you',
+    id: 'movie-phrases',
+    icon: '🎬',
+    name: 'Frases de Peliculas',
+    desc: 'Dialogos reales de cine y series',
     phrases: [
-      { en: 'Hello, how are you?', es: 'Hola, como estas?', phonetic: '/həˈloʊ haʊ ɑr juː/', videoId: 'tVlcKp3bWH8', start: 6, end: 10, hint: 'Saludo basico - Super Simple Songs' },
-      { en: 'My name is Kate.', es: 'Mi nombre es Kate.', phonetic: '/maɪ neɪm ɪz keɪt/', videoId: 'AA5hOCxlRaI', start: 64, end: 68, hint: 'Presentacion personal - English Singsing' },
+      { en: "I need your help.", es: 'Necesito tu ayuda.', phonetic: '/aɪ niːd jɔːr hɛlp/', videoId: 'FBjIMmv8L-E', start: 8, end: 12, hint: 'Run All Night (2015)', movie: '🎬 Run All Night' },
     ]
   }
 ];
@@ -291,10 +291,9 @@ function renderPractice() {
         <div class="phrase-english" id="phraseText" style="filter: blur(8px); cursor: pointer;" onclick="revealPhrase()">${p.en}</div>
         <div class="phrase-spanish" id="phraseTranslation" style="filter: blur(8px); cursor: pointer;" onclick="revealPhrase()">${p.es}</div>
         <div class="phrase-phonetic">${p.phonetic}</div>
+        <div class="phrase-movie">${p.movie}</div>
         <p style="font-size:0.82rem; color:var(--accent); margin-top:8px;">💡 Toca la frase para revelar la respuesta</p>
       </div>
-
-      <p style="text-align:center; font-size:0.88rem; color:#64748b; margin-bottom:16px;">${p.hint}</p>
 
       <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
         <button class="listen-btn" style="width:auto; padding:12px 24px;" onclick="markListened(true)">✅ La escuche</button>
