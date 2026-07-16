@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Practica listening IELTS basico (A1-A2) con videos reales de YouTube. Escucha frases cortas y mejora tu comprension auditiva.">
+  <title>Listening Basico A1-A2 - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    :root { --accent: #8b5cf6; --green: #10b981; --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; }
+    body { font-family: 'Inter', sans-serif; background: #f8fafc; margin: 0; }
+
+    .page-hero {
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      color: white; padding: 100px 24px 48px; text-align: center;
+    }
+    .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; }
+    .page-hero p { font-size: 1.05rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    .mode-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .mode-tab {
+      padding: 10px 20px; border-radius: 50px; border: 2px solid rgba(255,255,255,.3);
+      background: transparent; color: white; font-weight: 600; font-size: 0.88rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .mode-tab:hover { background: rgba(255,255,255,.15); }
+    .mode-tab.active { background: white; color: #7c3aed; border-color: white; }
+
+    .stats-bar { display: flex; gap: 16px; justify-content: center; padding: 16px 24px; flex-wrap: wrap; }
+    .stat-pill {
+      padding: 8px 16px; background: white; border-radius: 50px; font-size: 0.82rem;
+      font-weight: 600; color: #64748b; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+    }
+    .stat-pill strong { color: #0f172a; }
+
+    /* Categories */
+    .categories { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .cat-card {
+      background: white; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.25s;
+    }
+    .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,.1); }
+    .cat-card .cat-icon { font-size: 2rem; margin-bottom: 8px; }
+    .cat-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .cat-card p { font-size: 0.82rem; color: #64748b; }
+    .cat-card .cat-count { font-size: 0.75rem; font-weight: 700; color: var(--green); margin-top: 8px; }
+
+    /* Practice Area */
+    .practice-container { max-width: 700px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .practice-container.active { display: block; }
+    .practice-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .practice-header h3 { font-size: 1.1rem; font-weight: 700; }
+
+    .progress-bar { height: 8px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-bottom: 24px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #7c3aed); border-radius: 10px; transition: width 0.4s; }
+    .progress-text { font-size: 0.82rem; font-weight: 700; color: #64748b; text-align: right; margin-bottom: 8px; }
+
+    /* Video Card */
+    .video-card {
+      background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; margin-bottom: 20px;
+    }
+    .video-card h4 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
+
+    .video-wrapper {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      border-radius: 12px; margin-bottom: 16px; background: #1e293b;
+    }
+    .video-wrapper iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      border: none; border-radius: 12px;
+    }
+
+    .phrase-display {
+      text-align: center; padding: 20px; background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border-radius: 12px; margin-bottom: 16px;
+    }
+    .phrase-english { font-size: 1.8rem; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
+    .phrase-spanish { font-size: 1rem; color: #64748b; }
+    .phrase-phonetic { font-size: 0.85rem; color: var(--accent); font-style: italic; margin-top: 4px; }
+
+    .listen-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 14px; border: 2px solid var(--accent); border-radius: 12px;
+      background: white; color: var(--accent); font-weight: 700; font-size: 1rem;
+      cursor: pointer; transition: all 0.2s; margin-bottom: 16px;
+    }
+    .listen-btn:hover { background: var(--accent); color: white; }
+    .listen-btn.playing { background: var(--accent); color: white; }
+
+    /* Quiz Options */
+    .quiz-options { display: grid; gap: 10px; }
+    .quiz-option {
+      padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 12px;
+      cursor: pointer; transition: all 0.2s; font-size: 0.95rem; display: flex; align-items: center; gap: 12px;
+    }
+    .quiz-option:hover { border-color: var(--accent); background: #f5f3ff; }
+    .quiz-option.correct { border-color: var(--green); background: #f0fdf4; color: #059669; }
+    .quiz-option.wrong { border-color: var(--red); background: #fef2f2; color: var(--red); }
+    .quiz-option .q-letter {
+      width: 28px; height: 28px; border-radius: 8px; background: #f1f5f9;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.82rem; color: #64748b; flex-shrink: 0;
+    }
+    .quiz-option.correct .q-letter { background: var(--green); color: white; }
+    .quiz-option.wrong .q-letter { background: var(--red); color: white; }
+
+    /* Result */
+    .result-card {
+      text-align: center; padding: 40px; background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.1);
+    }
+    .result-card .score-num { font-size: 3rem; font-weight: 900; color: var(--green); }
+    .result-card .score-label { font-size: 1.1rem; font-weight: 600; color: #64748b; margin-top: 8px; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { color: #0f172a; }
+
+    @media (max-width: 600px) {
+      .page-hero h1 { font-size: 1.8rem; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .phrase-english { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-hero">
+  <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
+  <h1>🎧 Listening Basico</h1>
+  <p>Nivel A1-A2: Escucha frases reales en videos de YouTube y practica tu comprension auditiva</p>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('categories')">📂 Categorias</button>
+    <button class="mode-tab" onclick="showMode('practice')">🎯 Practica</button>
+    <button class="mode-tab" onclick="showMode('quiz')">❓ Quiz</button>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-pill">🎧 <strong id="statListened">0</strong> escuchadas</div>
+  <div class="stat-pill">✅ <strong id="statCorrect">0</strong> correctas</div>
+  <div class="stat-pill">📊 <strong id="statTotal">0</strong> total</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories" id="categoriesSection">
+  <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">Elige una categoria para practicar listening</h2>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<!-- PRACTICE -->
+<div class="practice-container" id="practiceSection">
+  <div class="practice-header">
+    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <h3 id="practiceTitle"></h3>
+  </div>
+  <div class="progress-text" id="practiceProgressText">0/0</div>
+  <div class="progress-bar"><div class="progress-fill" id="practiceProgressFill" style="width:0%;"></div></div>
+  <div id="practiceContent"></div>
+</div>
+
+<!-- QUIZ -->
+<div class="practice-container" id="quizSection">
+  <div class="practice-header">
+    <button class="back-link" onclick="showMode('categories')">← Categorias</button>
+    <h3 id="quizTitle"></h3>
+  </div>
+  <div class="progress-text" id="quizProgressText">0/0</div>
+  <div class="progress-bar"><div class="progress-fill" id="quizProgressFill" style="width:0%;"></div></div>
+  <div id="quizContent"></div>
+</div>
+
+<script>
+// ==========================================
+// LISTENING DATA - YouTube Videos + Phrases
+// ==========================================
+const listenCategories = [
+  {
+    id: 'greetings',
+    icon: '👋',
+    name: 'Saludos y Presentaciones',
+    desc: 'Hello, hi, nice to meet you',
+    phrases: [
+      { en: 'Hello, how are you?', es: 'Hola, como estas?', phonetic: '/həˈloʊ haʊ ɑr juː/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Saludo basico' },
+      { en: 'My name is John.', es: 'Mi nombre es John.', phonetic: '/maɪ neɪm ɪz dʒɒn/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Presentacion personal' },
+      { en: 'Nice to meet you.', es: 'Mucho gusto.', phonetic: '/naɪs tə miːt juː/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Expresion de cortesia' },
+      { en: 'How old are you?', es: 'Cuantos anios tienes?', phonetic: '/haʊ oʊld ɑr juː/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Preguntar edad' },
+      { en: 'Where are you from?', es: 'De donde eres?', phonetic: '/wɛr ɑr juː frɒm/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Preguntar origen' },
+      { en: 'What do you do?', es: 'A que te dedicas?', phonetic: '/wɒt duː juː duː/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Preguntar trabajo' },
+      { en: 'See you later.', es: 'Hasta luego.', phonetic: '/siː juː ˈleɪtə/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Despedida' },
+      { en: 'Good morning.', es: 'Buenos dias.', phonetic: '/ɡʊd ˈmɔːrnɪŋ/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Saludo matutino' },
+    ]
+  },
+  {
+    id: 'numbers',
+    icon: '🔢',
+    name: 'Numeros y Tiempo',
+    desc: 'Uno, dos, tres, horarios',
+    phrases: [
+      { en: 'What time is it?', es: 'Que hora es?', phonetic: '/wɒt taɪm ɪz ɪt/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Preguntar hora' },
+      { en: 'I have two brothers.', es: 'Tengo dos hermanos.', phonetic: '/aɪ hæv tuː ˈbrʌðərz/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Numero dos' },
+      { en: 'There are three cats.', es: 'Hay tres gatos.', phonetic: '/ðɛr ɑr θriː kæts/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Numero tres' },
+      { en: 'How much does it cost?', es: 'Cuanto cuesta?', phonetic: '/haʊ mʌtʃ dʌz ɪt kɒst/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Preguntar precio' },
+      { en: 'It costs five dollars.', es: 'Cuesta cinco dolares.', phonetic: '/ɪt kɒsts faɪv ˈdɒlərz/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Precio' },
+      { en: 'My birthday is in July.', es: 'Mi cumpleanos es en julio.', phonetic: '/maɪ ˈbɜːrθdeɪ ɪz ɪn dʒuːˈlaɪ/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Fecha' },
+      { en: 'I wake up at seven.', es: 'Me despierto a las siete.', phonetic: '/aɪ weɪk ʌp æt ˈsɛvən/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Horario' },
+      { en: 'The meeting is at noon.', es: 'La reunion es al mediodia.', phonetic: '/ðə ˈmiːtɪŋ ɪz æt nuːn/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Mediodia' },
+    ]
+  },
+  {
+    id: 'directions',
+    icon: '🧭',
+    name: 'Direcciones y Lugares',
+    desc: 'Izquierda, derecha, recto',
+    phrases: [
+      { en: 'Turn left at the corner.', es: 'Gira a la izquierda en la esquina.', phonetic: '/tɜːrn left æt ðə ˈkɔːrnər/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Direccion izquierda' },
+      { en: 'Turn right at the traffic lights.', es: 'Gira a la derecha en el semaforo.', phonetic: '/tɜːrn raɪt æt ðə ˈtræfɪk laɪts/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Direccion derecha' },
+      { en: 'Go straight for two blocks.', es: 'Sigue recto por dos cuadras.', phonetic: '/ɡoʊ streɪt fɔːr tuː blɒks/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Ir recto' },
+      { en: 'Where is the nearest bank?', es: 'Donde esta el banco mas cercano?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst bæŋk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Buscar banco' },
+      { en: 'It is next to the supermarket.', es: 'Esta al lado del supermercado.', phonetic: '/ɪt ɪz nɛkst tə ðə ˈsuːpərmɑːrkɪt/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Ubicacion' },
+      { en: 'How far is the station?', es: 'Que tan lejos queda la estacion?', phonetic: '/haʊ fɑːr ɪz ðə ˈsteɪʃən/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Distancia' },
+      { en: 'Can you show me on the map?', es: 'Puedes mostrarme en el mapa?', phonetic: '/kən juː ʃoʊ miː ɒn ðə mæp/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Pedir ayuda' },
+      { en: 'I am lost.', es: 'Estoy perdido.', phonetic: '/aɪ æm lɒst/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Perdido' },
+    ]
+  },
+  {
+    id: 'restaurant',
+    icon: '🍽️',
+    name: 'Restaurante y Comida',
+    desc: 'Pedir comida, cuenta, mesa',
+    phrases: [
+      { en: 'Can I see the menu, please?', es: 'Puedo ver el menu, por favor?', phonetic: '/kən aɪ siː ðə ˈmenjuː pliːz/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Pedir menu' },
+      { en: 'I would like a coffee.', es: 'Me gustaria un cafe.', phonetic: '/aɪ wʊd laɪk ə ˈkɒfi/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Pedir bebida' },
+      { en: 'How much is the bill?', es: 'Cuanto es la cuenta?', phonetic: '/haʊ mʌtʃ ɪz ðə bɪl/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Pedir cuenta' },
+      { en: 'This is delicious.', es: 'Esto esta delicioso.', phonetic: '/ðɪs ɪz dɪˈlɪʃəs/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Felicitacion' },
+      { en: 'Do you have any allergies?', es: 'Tiene alguna alergia?', phonetic: '/duː juː hæv ˈɛni ˈælərdʒiz/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pregunta alergia' },
+      { en: 'Can I have some water?', es: 'Me puede dar agua?', phonetic: '/kən aɪ hæv sʌm ˈwɔːtər/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Pedir agua' },
+      { en: 'Is this table free?', es: 'Esta mesa esta libre?', phonetic: '/ɪz ðɪs ˈteɪbl friː/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Buscar mesa' },
+      { en: 'Thank you, it was great.', es: 'Gracias, estuvo genial.', phonetic: '/θæŋk juː ɪt wɒz ɡreɪt/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Agradecimiento' },
+    ]
+  },
+  {
+    id: 'shopping',
+    icon: '🛒',
+    name: 'Compras y Tiendas',
+    desc: 'Precios, tallas, pagar',
+    phrases: [
+      { en: 'How much does this cost?', es: 'Cuanto cuesta esto?', phonetic: '/haʊ mʌtʃ dʌz ðɪs kɒst/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Preguntar precio' },
+      { en: 'Do you have a smaller size?', es: 'Tiene una talla mas chica?', phonetic: '/duː juː hæv ə ˈsmɔːlər saɪz/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Pedir talla' },
+      { en: 'I am just looking, thanks.', es: 'Solo estoy mirando, gracias.', phonetic: '/aɪ æm dʒʌst ˈlʊkɪŋ θæŋks/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Rechazar ayuda' },
+      { en: 'Can I pay by card?', es: 'Puedo pagar con tarjeta?', phonetic: '/kən aɪ peɪ baɪ kɑːrd/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Forma de pago' },
+      { en: 'Is there a discount?', es: 'Hay algun descuento?', phonetic: '/ɪz ðɛr ə ˈdɪskaʊnt/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pedir descuento' },
+      { en: 'Where is the fitting room?', es: 'Donde esta el probador?', phonetic: '/wɛr ɪz ðə ˈfɪtɪŋ ruːm/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Probador' },
+      { en: 'This one is too expensive.', es: 'Este es muy caro.', phonetic: '/ðɪs wʌn ɪz tuː ɪkˈspɛnsɪv/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Opinion precio' },
+      { en: 'I will take this one.', es: 'Me llevo este.', phonetic: '/aɪ wɪl teɪk ðɪs wʌn/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Decision compra' },
+    ]
+  },
+  {
+    id: 'transport',
+    icon: '🚗',
+    name: 'Transporte y Viajes',
+    desc: 'Bus, taxi, avion, estacion',
+    phrases: [
+      { en: 'Where is the bus stop?', es: 'Donde esta la parada del autobus?', phonetic: '/wɛr ɪz ðə bʌs stɒp/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Parada de bus' },
+      { en: 'How do I get to the airport?', es: 'Como llego al aeropuerto?', phonetic: '/haʊ duː aɪ ɡɛt tə ðə ˈeərpɔːrt/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Ir al aeropuerto' },
+      { en: 'Can you take me to this address?', es: 'Puede llevarme a esta direccion?', phonetic: '/kən juː teɪk miː tə ðɪs əˈdrɛs/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Pedir taxi' },
+      { en: 'How long does it take?', es: 'Cuanto tiempo toma?', phonetic: '/haʊ lɒŋ dʌz ɪt teɪk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Duracion' },
+      { en: 'Which platform is the train?', es: 'En que anden esta el tren?', phonetic: '/wɪtʃ ˈplætfɔːrm ɪz ðə treɪn/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Estacion' },
+      { en: 'I need to buy a ticket.', es: 'Necesito comprar un billete.', phonetic: '/aɪ niːd tə baɪ ə ˈtɪkɪt/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Comprar billete' },
+      { en: 'The flight is delayed.', es: 'El vuelo esta retrasado.', phonetic: '/ðə flaɪt ɪz dɪˈleɪd/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Retraso' },
+      { en: 'Where can I pick up my luggage?', es: 'Donde puedo recoger mi equipaje?', phonetic: '/wɛr kən aɪ pɪk ʌp maɪ ˈlʌɡɪdʒ/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Equipaje' },
+    ]
+  },
+  {
+    id: 'health',
+    icon: '🏥',
+    name: 'Salud y Emergencia',
+    desc: 'Doctor, dolor, farmacia',
+    phrases: [
+      { en: 'I need to see a doctor.', es: 'Necesito ver a un medico.', phonetic: '/aɪ niːd tə siː ə ˈdɒktər/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Ver doctor' },
+      { en: 'I have a headache.', es: 'Tengo dolor de cabeza.', phonetic: '/aɪ hæv ə ˈhedeɪk/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Dolor de cabeza' },
+      { en: 'Where is the nearest pharmacy?', es: 'Donde esta la farmacia mas cercana?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst ˈfɑːrməsi/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Buscar farmacia' },
+      { en: 'I feel sick.', es: 'Me siento mal.', phonetic: '/aɪ fiːl sɪk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Sentirse mal' },
+      { en: 'It hurts here.', es: 'Aqui duele.', phonetic: '/ɪt hɜːrts hɪr/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Dolor localizado' },
+      { en: 'I need medicine.', es: 'Necesito medicina.', phonetic: '/aɪ niːd ˈmɛdɪsɪn/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Pedir medicina' },
+      { en: 'Call an ambulance!', es: 'Llame a una ambulancia!', phonetic: '/kɔːl ən ˈæmbjələns/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Emergencia' },
+      { en: 'I have a fever.', es: 'Tengo fiebre.', phonetic: '/aɪ hæv ə ˈfiːvər/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Fiebre' },
+    ]
+  },
+  {
+    id: 'phone',
+    icon: '📞',
+    name: 'Telefono y Comunicacion',
+    desc: 'Llamar, mensajes, internet',
+    phrases: [
+      { en: 'Can I use your phone?', es: 'Puedo usar tu telefono?', phonetic: '/kən aɪ juːz jɔːr fəʊn/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Pedir telefono' },
+      { en: 'What is your phone number?', es: 'Cual es tu numero de telefono?', phonetic: '/wɒt ɪz jɔːr fəʊn ˈnʌmbər/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Preguntar numero' },
+      { en: 'Send me a message.', es: 'Enviame un mensaje.', phonetic: '/sɛnd miː ə ˈmɛsɪdʒ/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Enviar mensaje' },
+      { en: 'Can I borrow your charger?', es: 'Puedo prestar tu cargador?', phonetic: '/kən aɪ ˈbɒroʊ jɔːr ˈtʃɑːrdʒər/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Pedir cargador' },
+      { en: 'Is there Wi-Fi here?', es: 'Hay Wi-Fi aqui?', phonetic: '/ɪz ðɛr ˈwaɪfaɪ hɪr/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Internet' },
+      { en: 'I will call you back.', es: 'Te devuelvo la llamada.', phonetic: '/aɪ wɪl kɔːl juː bæk/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Devolver llamada' },
+      { en: 'Can you repeat that?', es: 'Puede repetir eso?', phonetic: '/kən juː rɪˈpiːt ðæt/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Pedir repeticion' },
+      { en: 'I do not understand.', es: 'No entiendo.', phonetic: '/aɪ duː nɒt ˌʌndərˈstænd/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'No entender' },
+    ]
+  },
+  {
+    id: 'work',
+    icon: '💼',
+    name: 'Trabajo y Oficina',
+    desc: 'Entrevista, reunion, tareas',
+    phrases: [
+      { en: 'I am looking for a job.', es: 'Estoy buscando trabajo.', phonetic: '/aɪ æm ˈlʊkɪŋ fɔːr ə dʒɒb/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Buscar trabajo' },
+      { en: 'What time does work start?', es: 'A que hora empieza el trabajo?', phonetic: '/wɒt taɪm dʌz wɜːrk stɑːrt/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Horario trabajo' },
+      { en: 'I have a meeting at two.', es: 'Tengo una reunion a las dos.', phonetic: '/aɪ hæv ə ˈmiːtɪŋ æt tuː/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Reunion' },
+      { en: 'Can you send me that email?', es: 'Puede enviarme ese correo?', phonetic: '/kən juː sɛnd miː ðæt ˈiːmeɪl/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Pedir email' },
+      { en: 'I need more time.', es: 'Necesito mas tiempo.', phonetic: '/aɪ niːd mɔːr taɪm/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pedir tiempo' },
+      { en: 'The deadline is Friday.', es: 'La fecha limite es viernes.', phonetic: '/ðə ˈdɛdlaɪn ɪz ˈfraɪdeɪ/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Plazo' },
+      { en: 'I work from home.', es: 'Trabajo desde casa.', phonetic: '/aɪ wɜːrk frɒm hoʊm/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Trabajo remoto' },
+      { en: 'Can I take a day off?', es: 'Puedo tomarme un dia libre?', phonetic: '/kən aɪ teɪk ə deɪ ɒf/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Pedir dia libre' },
+    ]
+  }
+];
+
+// ==========================================
+// STATE
+// ==========================================
+let currentMode = 'categories';
+let currentCat = null;
+let practiceIdx = 0;
+let practiceCorrect = 0;
+let quizIdx = 0;
+let quizCorrect = 0;
+let quizQuestions = [];
+let listenedPhrases = JSON.parse(localStorage.getItem('listeningListened2026') || '{}');
+let quizStats = JSON.parse(localStorage.getItem('listeningQuizStats2026') || '{"correct":0,"attempted":0}');
+
+function saveState() {
+  localStorage.setItem('listeningListened2026', JSON.stringify(listenedPhrases));
+  localStorage.setItem('listeningQuizStats2026', JSON.stringify(quizStats));
+}
+
+// ==========================================
+// MODE SWITCHING
+// ==========================================
+function showMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.mode-tab').forEach(t => {
+    if (mode === 'categories' && t.textContent.includes('Categor')) t.classList.add('active');
+    if (mode === 'practice' && t.textContent.includes('Practica')) t.classList.add('active');
+    if (mode === 'quiz' && t.textContent.includes('Quiz')) t.classList.add('active');
+  });
+
+  document.getElementById('categoriesSection').style.display = mode === 'categories' ? '' : 'none';
+  document.getElementById('practiceSection').classList.toggle('active', mode === 'practice' && currentCat);
+  document.getElementById('quizSection').classList.toggle('active', mode === 'quiz' && currentCat);
+
+  if (mode === 'categories') renderCategories();
+  if (mode === 'practice' && currentCat) renderPractice();
+  if (mode === 'quiz' && currentCat) startQuiz();
+  updateStats();
+}
+
+function showCategories() {
+  currentCat = null;
+  showMode('categories');
+}
+
+// ==========================================
+// CATEGORIES
+// ==========================================
+function renderCategories() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = listenCategories.map(cat => {
+    const total = cat.phrases.length;
+    const listened = cat.phrases.filter(p => listenedPhrases[p.en]).length;
+    const pct = Math.round((listened / total) * 100);
+    return `<div class="cat-card" onclick="selectCategory('${cat.id}')">
+      <div class="cat-icon">${cat.icon}</div>
+      <h3>${cat.name}</h3>
+      <p>${cat.desc}</p>
+      <div style="margin-top:8px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:4px;">
+          <span style="color:#64748b;">${listened}/${total}</span>
+          <span style="font-weight:700; color:var(--green);">${pct}%</span>
+        </div>
+        <div style="height:6px; background:#e2e8f0; border-radius:10px; overflow:hidden;">
+          <div style="height:100%; width:${pct}%; background:linear-gradient(90deg, var(--green), #059669); border-radius:10px; transition:width 0.4s;"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectCategory(catId) {
+  currentCat = listenCategories.find(c => c.id === catId);
+  practiceIdx = 0; practiceCorrect = 0;
+  showMode('practice');
+}
+
+// ==========================================
+// PRACTICE (Watch & Listen)
+// ==========================================
+function renderPractice() {
+  if (!currentCat || practiceIdx >= currentCat.phrases.length) { finishPractice(); return; }
+  const p = currentCat.phrases[practiceIdx];
+
+  document.getElementById('practiceTitle').textContent = currentCat.icon + ' ' + currentCat.name;
+  document.getElementById('practiceProgressText').textContent = (practiceIdx + 1) + '/' + currentCat.phrases.length;
+  document.getElementById('practiceProgressFill').style.width = ((practiceIdx / currentCat.phrases.length) * 100) + '%';
+
+  const embedUrl = `https://www.youtube.com/embed/${p.videoId}?start=${p.start}&end=${p.end}&autoplay=1&rel=0&modestbranding=1`;
+
+  document.getElementById('practiceContent').innerHTML = `
+    <div class="video-card">
+      <h4>🎧 Escucha la frase (${p.end - p.start} segundos)</h4>
+
+      <div class="video-wrapper">
+        <iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+
+      <button class="listen-btn" onclick="replayVideo(this)" data-url="${embedUrl.replace('autoplay=1', 'autoplay=1')}">
+        🔄 Repetir clip
+      </button>
+
+      <div class="phrase-display">
+        <div class="phrase-english" id="phraseText" style="filter: blur(8px); cursor: pointer;" onclick="revealPhrase()">${p.en}</div>
+        <div class="phrase-spanish" id="phraseTranslation" style="filter: blur(8px); cursor: pointer;" onclick="revealPhrase()">${p.es}</div>
+        <div class="phrase-phonetic">${p.phonetic}</div>
+        <p style="font-size:0.82rem; color:var(--accent); margin-top:8px;">💡 Toca la frase para revelar la respuesta</p>
+      </div>
+
+      <p style="text-align:center; font-size:0.88rem; color:#64748b; margin-bottom:16px;">${p.hint}</p>
+
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="listen-btn" style="width:auto; padding:12px 24px;" onclick="markListened(true)">✅ La escuche</button>
+        <button class="listen-btn" style="width:auto; padding:12px 24px; border-color:var(--red); color:var(--red);" onclick="markListened(false)">❌ No la escuche</button>
+      </div>
+    </div>`;
+}
+
+function replayVideo(btn) {
+  const url = btn.dataset.url;
+  const wrapper = btn.previousElementSibling;
+  wrapper.innerHTML = `<iframe src="${url}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  btn.classList.add('playing');
+  setTimeout(() => btn.classList.remove('playing'), 2000);
+}
+
+function revealPhrase() {
+  document.getElementById('phraseText').style.filter = 'none';
+  document.getElementById('phraseTranslation').style.filter = 'none';
+}
+
+function markListened(heard) {
+  const p = currentCat.phrases[practiceIdx];
+  if (heard) {
+    listenedPhrases[p.en] = true;
+    practiceCorrect++;
+  } else {
+    delete listenedPhrases[p.en];
+  }
+  saveState();
+  practiceIdx++;
+  renderPractice();
+  updateStats();
+}
+
+function finishPractice() {
+  const total = currentCat.phrases.length;
+  const pct = Math.round((practiceCorrect / total) * 100);
+  document.getElementById('practiceContent').innerHTML = `
+    <div class="result-card">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 70 ? '🎉' : '💪'}</div>
+      <div class="score-num">${practiceCorrect}/${total}</div>
+      <div class="score-label">frases escuchadas (${pct}%)</div>
+      <p style="margin-top:16px; color:#64748b;">${pct >= 70 ? '¡Excelente! Tu listening esta mejorando.' : '¡Sigue practicando! Escucha mas veces.'}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="listen-btn" style="width:auto; padding:12px 24px; background:var(--accent); color:white;" onclick="selectCategory('${currentCat.id}')">🔄 Repetir</button>
+        <button class="listen-btn" style="width:auto; padding:12px 24px; background:var(--green); color:white;" onclick="showMode('quiz')">❓ Hacer Quiz</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
+// QUIZ
+// ==========================================
+function startQuiz() {
+  if (!currentCat) return;
+  quizIdx = 0; quizCorrect = 0;
+
+  const phrases = [...currentCat.phrases];
+  quizQuestions = phrases.map(p => {
+    const others = listenCategories.flatMap(c => c.phrases).filter(x => x.en !== p.en);
+    const wrong = shuffle(others).slice(0, 3).map(x => x.en);
+    return { phrase: p, options: shuffle([p.en, ...wrong]), answer: p.en };
+  });
+  quizQuestions = shuffle(quizQuestions).slice(0, 8);
+
+  document.getElementById('quizTitle').textContent = currentCat.icon + ' Quiz: ' + currentCat.name;
+  showQuizQuestion();
+}
+
+function showQuizQuestion() {
+  if (quizIdx >= quizQuestions.length) { finishQuiz(); return; }
+  const q = quizQuestions[quizIdx];
+  const p = q.phrase;
+  const embedUrl = `https://www.youtube.com/embed/${p.videoId}?start=${p.start}&end=${p.end}&autoplay=1&rel=0&modestbranding=1`;
+
+  document.getElementById('quizProgressFill').style.width = ((quizIdx / quizQuestions.length) * 100) + '%';
+  document.getElementById('quizProgressText').textContent = (quizIdx + 1) + '/' + quizQuestions.length;
+
+  const letters = ['A','B','C','D'];
+  document.getElementById('quizContent').innerHTML = `
+    <div class="video-card">
+      <h4>🎧 Que frase escuchaste?</h4>
+      <div class="video-wrapper">
+        <iframe src="${embedUrl}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <button class="listen-btn" onclick="replayQuizVideo(this)" data-url="${embedUrl}">
+        🔄 Repetir clip
+      </button>
+      <div class="quiz-options" style="margin-top:16px;">
+        ${q.options.map((opt, i) => `<div class="quiz-option" onclick="answerQuiz(this, '${esc(opt)}', '${esc(q.answer)}')"><div class="q-letter">${letters[i]}</div><span>${opt}</span></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function replayQuizVideo(btn) {
+  const url = btn.dataset.url;
+  const wrapper = btn.previousElementSibling;
+  wrapper.innerHTML = `<iframe src="${url}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+}
+
+function answerQuiz(el, selected, correct) {
+  if (el.parentElement.querySelector('.correct, .wrong')) return;
+  el.parentElement.querySelectorAll('.quiz-option').forEach(o => {
+    if (o.querySelector('span').textContent === correct) o.classList.add('correct');
+    else if (o === el && selected !== correct) o.classList.add('wrong');
+  });
+  if (selected === correct) {
+    quizCorrect++;
+    quizStats.correct++;
+  }
+  quizStats.attempted++;
+  saveState();
+  updateStats();
+  setTimeout(() => { quizIdx++; showQuizQuestion(); }, 1200);
+}
+
+function finishQuiz() {
+  const pct = Math.round((quizCorrect / quizQuestions.length) * 100);
+  document.getElementById('quizContent').innerHTML = `
+    <div class="result-card">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 80 ? '🏆' : pct >= 60 ? '🎉' : '📚'}</div>
+      <div class="score-num">${quizCorrect}/${quizQuestions.length}</div>
+      <div class="score-label">respuestas correctas (${pct}%)</div>
+      <p style="margin-top:16px; color:#64748b;">${pct >= 80 ? '¡Dominas el listening de esta categoria!' : pct >= 60 ? '¡Muy bien! Sigue escuchando.' : 'Practica mas con las frases antes de volver.'}</p>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="listen-btn" style="width:auto; padding:12px 24px; background:var(--accent); color:white;" onclick="startQuiz(); showMode('quiz');">🔄 Repetir Quiz</button>
+        <button class="listen-btn" style="width:auto; padding:12px 24px; background:#e2e8f0; color:#0f172a;" onclick="showCategories();">📋 Otra Categoria</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
+// UTILS
+// ==========================================
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+
+function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '\\"'); }
+
+function markAsComplete() {
+  const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
+  if (!progress['1']) progress['1'] = {};
+  progress['1']['listen'] = true;
+  localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
+  const btn = document.getElementById('completeBtn');
+  btn.textContent = '✅ ¡Completado! Redirigiendo...';
+  btn.style.background = '#059669';
+  btn.disabled = true;
+  setTimeout(() => { window.location.href = 'ielts-simulador.html'; }, 1200);
+}
+
+function updateStats() {
+  const totalPhrases = listenCategories.flatMap(c => c.phrases).length;
+  const listened = Object.keys(listenedPhrases).length;
+  document.getElementById('statListened').textContent = listened;
+  document.getElementById('statCorrect').textContent = quizStats.correct;
+  document.getElementById('statTotal').textContent = totalPhrases;
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderCategories();
+  updateStats();
+  showMode('categories');
+});
+</script>
+
+<!-- MARCAR COMO COMPLETADO -->
+<div style="text-align:center; padding:24px;">
+  <button id="completeBtn" onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
+    ✅ Marcar Listening como Completado
+  </button>
+  <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Al hacer click, se sincronizara con tu progreso en el simulador</p>
+</div>
+
+</body>
+</html>
