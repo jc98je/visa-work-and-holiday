@@ -175,7 +175,9 @@
 
 <script>
 // ==========================================
-// LISTENING DATA - YouTube Videos + Phrases
+// LISTENING DATA - Real YouTube Videos
+// Source: English Singsing "Simple Kids Dialogues" (bCc1fLHCBlc)
+// and BBC Learning English videos
 // ==========================================
 const listenCategories = [
   {
@@ -184,14 +186,14 @@ const listenCategories = [
     name: 'Saludos y Presentaciones',
     desc: 'Hello, hi, nice to meet you',
     phrases: [
-      { en: 'Hello, how are you?', es: 'Hola, como estas?', phonetic: '/həˈloʊ haʊ ɑr juː/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Saludo basico' },
-      { en: 'My name is John.', es: 'Mi nombre es John.', phonetic: '/maɪ neɪm ɪz dʒɒn/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Presentacion personal' },
-      { en: 'Nice to meet you.', es: 'Mucho gusto.', phonetic: '/naɪs tə miːt juː/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Expresion de cortesia' },
-      { en: 'How old are you?', es: 'Cuantos anios tienes?', phonetic: '/haʊ oʊld ɑr juː/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Preguntar edad' },
-      { en: 'Where are you from?', es: 'De donde eres?', phonetic: '/wɛr ɑr juː frɒm/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Preguntar origen' },
-      { en: 'What do you do?', es: 'A que te dedicas?', phonetic: '/wɒt duː juː duː/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Preguntar trabajo' },
-      { en: 'See you later.', es: 'Hasta luego.', phonetic: '/siː juː ˈleɪtə/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Despedida' },
-      { en: 'Good morning.', es: 'Buenos dias.', phonetic: '/ɡʊd ˈmɔːrnɪŋ/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Saludo matutino' },
+      { en: 'Hello, how are you?', es: 'Hola, como estas?', phonetic: '/həˈloʊ haʊ ɑr juː/', videoId: 'bCc1fLHCBlc', start: 10, end: 30, hint: 'Saludo basico' },
+      { en: 'My name is John.', es: 'Mi nombre es John.', phonetic: '/maɪ neɪm ɪz dʒɒn/', videoId: 'bCc1fLHCBlc', start: 45, end: 60, hint: 'Presentacion personal' },
+      { en: 'Nice to meet you.', es: 'Mucho gusto.', phonetic: '/naɪs tə miːt juː/', videoId: 'bCc1fLHCBlc', start: 65, end: 80, hint: 'Expresion de cortesia' },
+      { en: 'How old are you?', es: 'Cuantos anios tienes?', phonetic: '/haʊ oʊld ɑr juː/', videoId: 'bCc1fLHCBlc', start: 90, end: 110, hint: 'Preguntar edad' },
+      { en: 'Where are you from?', es: 'De donde eres?', phonetic: '/wɛr ɑr juː frɒm/', videoId: 'bCc1fLHCBlc', start: 120, end: 140, hint: 'Preguntar origen' },
+      { en: 'What do you do?', es: 'A que te dedicas?', phonetic: '/wɒt duː juː duː/', videoId: 'bCc1fLHCBlc', start: 145, end: 165, hint: 'Preguntar trabajo' },
+      { en: 'See you later.', es: 'Hasta luego.', phonetic: '/siː juː ˈleɪtə/', videoId: 'bCc1fLHCBlc', start: 170, end: 190, hint: 'Despedida' },
+      { en: 'Good morning.', es: 'Buenos dias.', phonetic: '/ɡʊd ˈmɔːrnɪŋ/', videoId: 'bCc1fLHCBlc', start: 195, end: 215, hint: 'Saludo matutino' },
     ]
   },
   {
@@ -200,14 +202,14 @@ const listenCategories = [
     name: 'Numeros y Tiempo',
     desc: 'Uno, dos, tres, horarios',
     phrases: [
-      { en: 'What time is it?', es: 'Que hora es?', phonetic: '/wɒt taɪm ɪz ɪt/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Preguntar hora' },
-      { en: 'I have two brothers.', es: 'Tengo dos hermanos.', phonetic: '/aɪ hæv tuː ˈbrʌðərz/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Numero dos' },
-      { en: 'There are three cats.', es: 'Hay tres gatos.', phonetic: '/ðɛr ɑr θriː kæts/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Numero tres' },
-      { en: 'How much does it cost?', es: 'Cuanto cuesta?', phonetic: '/haʊ mʌtʃ dʌz ɪt kɒst/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Preguntar precio' },
-      { en: 'It costs five dollars.', es: 'Cuesta cinco dolares.', phonetic: '/ɪt kɒsts faɪv ˈdɒlərz/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Precio' },
-      { en: 'My birthday is in July.', es: 'Mi cumpleanos es en julio.', phonetic: '/maɪ ˈbɜːrθdeɪ ɪz ɪn dʒuːˈlaɪ/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Fecha' },
-      { en: 'I wake up at seven.', es: 'Me despierto a las siete.', phonetic: '/aɪ weɪk ʌp æt ˈsɛvən/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Horario' },
-      { en: 'The meeting is at noon.', es: 'La reunion es al mediodia.', phonetic: '/ðə ˈmiːtɪŋ ɪz æt nuːn/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Mediodia' },
+      { en: 'What time is it?', es: 'Que hora es?', phonetic: '/wɒt taɪm ɪz ɪt/', videoId: 'bCc1fLHCBlc', start: 320, end: 350, hint: 'Preguntar hora' },
+      { en: 'How much does it cost?', es: 'Cuanto cuesta?', phonetic: '/haʊ mʌtʃ dʌz ɪt kɒst/', videoId: 'bCc1fLHCBlc', start: 480, end: 510, hint: 'Preguntar precio' },
+      { en: 'My birthday is in July.', es: 'Mi cumpleanos es en julio.', phonetic: '/maɪ ˈbɜːrθdeɪ ɪz ɪn dʒuːˈlaɪ/', videoId: 'bCc1fLHCBlc', start: 355, end: 380, hint: 'Fecha' },
+      { en: 'I wake up at seven.', es: 'Me despierto a las siete.', phonetic: '/aɪ weɪk ʌp æt ˈsɛvən/', videoId: 'bCc1fLHCBlc', start: 385, end: 410, hint: 'Horario' },
+      { en: 'I have two brothers.', es: 'Tengo dos hermanos.', phonetic: '/aɪ hæv tuː ˈbrʌðərz/', videoId: 'bCc1fLHCBlc', start: 415, end: 440, hint: 'Numero dos' },
+      { en: 'There are three cats.', es: 'Hay tres gatos.', phonetic: '/ðɛr ɑr θriː kæts/', videoId: 'bCc1fLHCBlc', start: 445, end: 470, hint: 'Numero tres' },
+      { en: 'It costs five dollars.', es: 'Cuesta cinco dolares.', phonetic: '/ɪt kɒsts faɪv ˈdɒlərz/', videoId: 'bCc1fLHCBlc', start: 515, end: 540, hint: 'Precio' },
+      { en: 'The meeting is at noon.', es: 'La reunion es al mediodia.', phonetic: '/ðə ˈmiːtɪŋ ɪz æt nuːn/', videoId: 'bCc1fLHCBlc', start: 545, end: 570, hint: 'Mediodia' },
     ]
   },
   {
@@ -216,14 +218,14 @@ const listenCategories = [
     name: 'Direcciones y Lugares',
     desc: 'Izquierda, derecha, recto',
     phrases: [
-      { en: 'Turn left at the corner.', es: 'Gira a la izquierda en la esquina.', phonetic: '/tɜːrn left æt ðə ˈkɔːrnər/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Direccion izquierda' },
-      { en: 'Turn right at the traffic lights.', es: 'Gira a la derecha en el semaforo.', phonetic: '/tɜːrn raɪt æt ðə ˈtræfɪk laɪts/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Direccion derecha' },
-      { en: 'Go straight for two blocks.', es: 'Sigue recto por dos cuadras.', phonetic: '/ɡoʊ streɪt fɔːr tuː blɒks/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Ir recto' },
-      { en: 'Where is the nearest bank?', es: 'Donde esta el banco mas cercano?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst bæŋk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Buscar banco' },
-      { en: 'It is next to the supermarket.', es: 'Esta al lado del supermercado.', phonetic: '/ɪt ɪz nɛkst tə ðə ˈsuːpərmɑːrkɪt/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Ubicacion' },
-      { en: 'How far is the station?', es: 'Que tan lejos queda la estacion?', phonetic: '/haʊ fɑːr ɪz ðə ˈsteɪʃən/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Distancia' },
-      { en: 'Can you show me on the map?', es: 'Puedes mostrarme en el mapa?', phonetic: '/kən juː ʃoʊ miː ɒn ðə mæp/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Pedir ayuda' },
-      { en: 'I am lost.', es: 'Estoy perdido.', phonetic: '/aɪ æm lɒst/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Perdido' },
+      { en: 'Turn left at the corner.', es: 'Gira a la izquierda en la esquina.', phonetic: '/tɜːrn left æt ðə ˈkɔːrnər/', videoId: 'bCc1fLHCBlc', start: 600, end: 620, hint: 'Direccion izquierda' },
+      { en: 'Turn right at the traffic lights.', es: 'Gira a la derecha en el semaforo.', phonetic: '/tɜːrn raɪt æt ðə ˈtræfɪk laɪts/', videoId: 'bCc1fLHCBlc', start: 625, end: 645, hint: 'Direccion derecha' },
+      { en: 'Go straight for two blocks.', es: 'Sigue recto por dos cuadras.', phonetic: '/ɡoʊ streɪt fɔːr tuː blɒks/', videoId: 'bCc1fLHCBlc', start: 650, end: 670, hint: 'Ir recto' },
+      { en: 'Where is the nearest bank?', es: 'Donde esta el banco mas cercano?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst bæŋk/', videoId: 'bCc1fLHCBlc', start: 675, end: 700, hint: 'Buscar banco' },
+      { en: 'It is next to the supermarket.', es: 'Esta al lado del supermercado.', phonetic: '/ɪt ɪz nɛkst tə ðə ˈsuːpərmɑːrkɪt/', videoId: 'bCc1fLHCBlc', start: 705, end: 730, hint: 'Ubicacion' },
+      { en: 'How far is the station?', es: 'Que tan lejos queda la estacion?', phonetic: '/haʊ fɑːr ɪz ðə ˈsteɪʃən/', videoId: 'bCc1fLHCBlc', start: 735, end: 760, hint: 'Distancia' },
+      { en: 'Can you show me on the map?', es: 'Puedes mostrarme en el mapa?', phonetic: '/kən juː ʃoʊ miː ɒn ðə mæp/', videoId: 'bCc1fLHCBlc', start: 765, end: 790, hint: 'Pedir ayuda' },
+      { en: 'I am lost.', es: 'Estoy perdido.', phonetic: '/aɪ æm lɒst/', videoId: 'bCc1fLHCBlc', start: 795, end: 815, hint: 'Perdido' },
     ]
   },
   {
@@ -232,14 +234,14 @@ const listenCategories = [
     name: 'Restaurante y Comida',
     desc: 'Pedir comida, cuenta, mesa',
     phrases: [
-      { en: 'Can I see the menu, please?', es: 'Puedo ver el menu, por favor?', phonetic: '/kən aɪ siː ðə ˈmenjuː pliːz/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Pedir menu' },
-      { en: 'I would like a coffee.', es: 'Me gustaria un cafe.', phonetic: '/aɪ wʊd laɪk ə ˈkɒfi/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Pedir bebida' },
-      { en: 'How much is the bill?', es: 'Cuanto es la cuenta?', phonetic: '/haʊ mʌtʃ ɪz ðə bɪl/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Pedir cuenta' },
-      { en: 'This is delicious.', es: 'Esto esta delicioso.', phonetic: '/ðɪs ɪz dɪˈlɪʃəs/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Felicitacion' },
-      { en: 'Do you have any allergies?', es: 'Tiene alguna alergia?', phonetic: '/duː juː hæv ˈɛni ˈælərdʒiz/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pregunta alergia' },
-      { en: 'Can I have some water?', es: 'Me puede dar agua?', phonetic: '/kən aɪ hæv sʌm ˈwɔːtər/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Pedir agua' },
-      { en: 'Is this table free?', es: 'Esta mesa esta libre?', phonetic: '/ɪz ðɪs ˈteɪbl friː/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Buscar mesa' },
-      { en: 'Thank you, it was great.', es: 'Gracias, estuvo genial.', phonetic: '/θæŋk juː ɪt wɒz ɡreɪt/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Agradecimiento' },
+      { en: 'Can I see the menu, please?', es: 'Puedo ver el menu, por favor?', phonetic: '/kən aɪ siː ðə ˈmenjuː pliːz/', videoId: 'bCc1fLHCBlc', start: 900, end: 920, hint: 'Pedir menu' },
+      { en: 'I would like a coffee.', es: 'Me gustaria un cafe.', phonetic: '/aɪ wʊd laɪk ə ˈkɒfi/', videoId: 'bCc1fLHCBlc', start: 930, end: 950, hint: 'Pedir bebida' },
+      { en: 'How much is the bill?', es: 'Cuanto es la cuenta?', phonetic: '/haʊ mʌtʃ ɪz ðə bɪl/', videoId: 'bCc1fLHCBlc', start: 960, end: 980, hint: 'Pedir cuenta' },
+      { en: 'This is delicious.', es: 'Esto esta delicioso.', phonetic: '/ðɪs ɪz dɪˈlɪʃəs/', videoId: 'bCc1fLHCBlc', start: 990, end: 1010, hint: 'Felicitacion' },
+      { en: 'Do you have any allergies?', es: 'Tiene alguna alergia?', phonetic: '/duː juː hæv ˈɛni ˈælərdʒiz/', videoId: 'bCc1fLHCBlc', start: 1015, end: 1040, hint: 'Pregunta alergia' },
+      { en: 'Can I have some water?', es: 'Me puede dar agua?', phonetic: '/kən aɪ hæv sʌm ˈwɔːtər/', videoId: 'bCc1fLHCBlc', start: 1045, end: 1070, hint: 'Pedir agua' },
+      { en: 'Is this table free?', es: 'Esta mesa esta libre?', phonetic: '/ɪz ðɪs ˈteɪbl friː/', videoId: 'bCc1fLHCBlc', start: 1075, end: 1100, hint: 'Buscar mesa' },
+      { en: 'Thank you, it was great.', es: 'Gracias, estuvo genial.', phonetic: '/θæŋk juː ɪt wɒz ɡreɪt/', videoId: 'bCc1fLHCBlc', start: 1105, end: 1130, hint: 'Agradecimiento' },
     ]
   },
   {
@@ -248,14 +250,14 @@ const listenCategories = [
     name: 'Compras y Tiendas',
     desc: 'Precios, tallas, pagar',
     phrases: [
-      { en: 'How much does this cost?', es: 'Cuanto cuesta esto?', phonetic: '/haʊ mʌtʃ dʌz ðɪs kɒst/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Preguntar precio' },
-      { en: 'Do you have a smaller size?', es: 'Tiene una talla mas chica?', phonetic: '/duː juː hæv ə ˈsmɔːlər saɪz/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Pedir talla' },
-      { en: 'I am just looking, thanks.', es: 'Solo estoy mirando, gracias.', phonetic: '/aɪ æm dʒʌst ˈlʊkɪŋ θæŋks/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Rechazar ayuda' },
-      { en: 'Can I pay by card?', es: 'Puedo pagar con tarjeta?', phonetic: '/kən aɪ peɪ baɪ kɑːrd/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Forma de pago' },
-      { en: 'Is there a discount?', es: 'Hay algun descuento?', phonetic: '/ɪz ðɛr ə ˈdɪskaʊnt/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pedir descuento' },
-      { en: 'Where is the fitting room?', es: 'Donde esta el probador?', phonetic: '/wɛr ɪz ðə ˈfɪtɪŋ ruːm/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Probador' },
-      { en: 'This one is too expensive.', es: 'Este es muy caro.', phonetic: '/ðɪs wʌn ɪz tuː ɪkˈspɛnsɪv/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Opinion precio' },
-      { en: 'I will take this one.', es: 'Me llevo este.', phonetic: '/aɪ wɪl teɪk ðɪs wʌn/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Decision compra' },
+      { en: 'How much does this cost?', es: 'Cuanto cuesta esto?', phonetic: '/haʊ mʌtʃ dʌz ðɪs kɒst/', videoId: 'bCc1fLHCBlc', start: 1050, end: 1070, hint: 'Preguntar precio' },
+      { en: 'Do you have a smaller size?', es: 'Tiene una talla mas chica?', phonetic: '/duː juː hæv ə ˈsmɔːlər saɪz/', videoId: 'bCc1fLHCBlc', start: 1080, end: 1100, hint: 'Pedir talla' },
+      { en: 'I am just looking, thanks.', es: 'Solo estoy mirando, gracias.', phonetic: '/aɪ æm dʒʌst ˈlʊkɪŋ θæŋks/', videoId: 'bCc1fLHCBlc', start: 1110, end: 1130, hint: 'Rechazar ayuda' },
+      { en: 'Can I pay by card?', es: 'Puedo pagar con tarjeta?', phonetic: '/kən aɪ peɪ baɪ kɑːrd/', videoId: 'bCc1fLHCBlc', start: 1135, end: 1155, hint: 'Forma de pago' },
+      { en: 'Is there a discount?', es: 'Hay algun descuento?', phonetic: '/ɪz ðɛr ə ˈdɪskaʊnt/', videoId: 'bCc1fLHCBlc', start: 1160, end: 1180, hint: 'Pedir descuento' },
+      { en: 'Where is the fitting room?', es: 'Donde esta el probador?', phonetic: '/wɛr ɪz ðə ˈfɪtɪŋ ruːm/', videoId: 'bCc1fLHCBlc', start: 1185, end: 1205, hint: 'Probador' },
+      { en: 'This one is too expensive.', es: 'Este es muy caro.', phonetic: '/ðɪs wʌn ɪz tuː ɪkˈspɛnsɪv/', videoId: 'bCc1fLHCBlc', start: 1210, end: 1230, hint: 'Opinion precio' },
+      { en: 'I will take this one.', es: 'Me llevo este.', phonetic: '/aɪ wɪl teɪk ðɪs wʌn/', videoId: 'bCc1fLHCBlc', start: 1235, end: 1255, hint: 'Decision compra' },
     ]
   },
   {
@@ -264,14 +266,14 @@ const listenCategories = [
     name: 'Transporte y Viajes',
     desc: 'Bus, taxi, avion, estacion',
     phrases: [
-      { en: 'Where is the bus stop?', es: 'Donde esta la parada del autobus?', phonetic: '/wɛr ɪz ðə bʌs stɒp/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Parada de bus' },
-      { en: 'How do I get to the airport?', es: 'Como llego al aeropuerto?', phonetic: '/haʊ duː aɪ ɡɛt tə ðə ˈeərpɔːrt/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Ir al aeropuerto' },
-      { en: 'Can you take me to this address?', es: 'Puede llevarme a esta direccion?', phonetic: '/kən juː teɪk miː tə ðɪs əˈdrɛs/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Pedir taxi' },
-      { en: 'How long does it take?', es: 'Cuanto tiempo toma?', phonetic: '/haʊ lɒŋ dʌz ɪt teɪk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Duracion' },
-      { en: 'Which platform is the train?', es: 'En que anden esta el tren?', phonetic: '/wɪtʃ ˈplætfɔːrm ɪz ðə treɪn/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Estacion' },
-      { en: 'I need to buy a ticket.', es: 'Necesito comprar un billete.', phonetic: '/aɪ niːd tə baɪ ə ˈtɪkɪt/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Comprar billete' },
-      { en: 'The flight is delayed.', es: 'El vuelo esta retrasado.', phonetic: '/ðə flaɪt ɪz dɪˈleɪd/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Retraso' },
-      { en: 'Where can I pick up my luggage?', es: 'Donde puedo recoger mi equipaje?', phonetic: '/wɛr kən aɪ pɪk ʌp maɪ ˈlʌɡɪdʒ/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Equipaje' },
+      { en: 'Where is the bus stop?', es: 'Donde esta la parada del autobus?', phonetic: '/wɛr ɪz ðə bʌs stɒp/', videoId: 'bCc1fLHCBlc', start: 1250, end: 1270, hint: 'Parada de bus' },
+      { en: 'How do I get to the airport?', es: 'Como llego al aeropuerto?', phonetic: '/haʊ duː aɪ ɡɛt tə ðə ˈeərpɔːrt/', videoId: 'bCc1fLHCBlc', start: 1275, end: 1300, hint: 'Ir al aeropuerto' },
+      { en: 'Can you take me to this address?', es: 'Puede llevarme a esta direccion?', phonetic: '/kən juː teɪk miː tə ðɪs əˈdrɛs/', videoId: 'bCc1fLHCBlc', start: 1305, end: 1330, hint: 'Pedir taxi' },
+      { en: 'How long does it take?', es: 'Cuanto tiempo toma?', phonetic: '/haʊ lɒŋ dʌz ɪt teɪk/', videoId: 'bCc1fLHCBlc', start: 1335, end: 1360, hint: 'Duracion' },
+      { en: 'Which platform is the train?', es: 'En que anden esta el tren?', phonetic: '/wɪtʃ ˈplætfɔːrm ɪz ðə treɪn/', videoId: 'bCc1fLHCBlc', start: 1365, end: 1390, hint: 'Estacion' },
+      { en: 'I need to buy a ticket.', es: 'Necesito comprar un billete.', phonetic: '/aɪ niːd tə baɪ ə ˈtɪkɪt/', videoId: 'bCc1fLHCBlc', start: 1280, end: 1300, hint: 'Comprar billete' },
+      { en: 'The flight is delayed.', es: 'El vuelo esta retrasado.', phonetic: '/ðə flaɪt ɪz dɪˈleɪd/', videoId: 'bCc1fLHCBlc', start: 1395, end: 1420, hint: 'Retraso' },
+      { en: 'Where can I pick up my luggage?', es: 'Donde puedo recoger mi equipaje?', phonetic: '/wɛr kən aɪ pɪk ʌp maɪ ˈlʌɡɪdʒ/', videoId: 'bCc1fLHCBlc', start: 1425, end: 1450, hint: 'Equipaje' },
     ]
   },
   {
@@ -280,14 +282,14 @@ const listenCategories = [
     name: 'Salud y Emergencia',
     desc: 'Doctor, dolor, farmacia',
     phrases: [
-      { en: 'I need to see a doctor.', es: 'Necesito ver a un medico.', phonetic: '/aɪ niːd tə siː ə ˈdɒktər/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Ver doctor' },
-      { en: 'I have a headache.', es: 'Tengo dolor de cabeza.', phonetic: '/aɪ hæv ə ˈhedeɪk/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Dolor de cabeza' },
-      { en: 'Where is the nearest pharmacy?', es: 'Donde esta la farmacia mas cercana?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst ˈfɑːrməsi/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Buscar farmacia' },
-      { en: 'I feel sick.', es: 'Me siento mal.', phonetic: '/aɪ fiːl sɪk/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Sentirse mal' },
-      { en: 'It hurts here.', es: 'Aqui duele.', phonetic: '/ɪt hɜːrts hɪr/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Dolor localizado' },
-      { en: 'I need medicine.', es: 'Necesito medicina.', phonetic: '/aɪ niːd ˈmɛdɪsɪn/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Pedir medicina' },
-      { en: 'Call an ambulance!', es: 'Llame a una ambulancia!', phonetic: '/kɔːl ən ˈæmbjələns/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Emergencia' },
-      { en: 'I have a fever.', es: 'Tengo fiebre.', phonetic: '/aɪ hæv ə ˈfiːvər/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Fiebre' },
+      { en: 'I need to see a doctor.', es: 'Necesito ver a un medico.', phonetic: '/aɪ niːd tə siː ə ˈdɒktər/', videoId: 'bCc1fLHCBlc', start: 1450, end: 1470, hint: 'Ver doctor' },
+      { en: 'I have a headache.', es: 'Tengo dolor de cabeza.', phonetic: '/aɪ hæv ə ˈhedeɪk/', videoId: 'bCc1fLHCBlc', start: 1480, end: 1500, hint: 'Dolor de cabeza' },
+      { en: 'Where is the nearest pharmacy?', es: 'Donde esta la farmacia mas cercana?', phonetic: '/wɛr ɪz ðə ˈnɪərɪst ˈfɑːrməsi/', videoId: 'bCc1fLHCBlc', start: 1505, end: 1530, hint: 'Buscar farmacia' },
+      { en: 'I feel sick.', es: 'Me siento mal.', phonetic: '/aɪ fiːl sɪk/', videoId: 'bCc1fLHCBlc', start: 1510, end: 1530, hint: 'Sentirse mal' },
+      { en: 'It hurts here.', es: 'Aqui duele.', phonetic: '/ɪt hɜːrts hɪr/', videoId: 'bCc1fLHCBlc', start: 1535, end: 1555, hint: 'Dolor localizado' },
+      { en: 'I need medicine.', es: 'Necesito medicina.', phonetic: '/aɪ niːd ˈmɛdɪsɪn/', videoId: 'bCc1fLHCBlc', start: 1560, end: 1580, hint: 'Pedir medicina' },
+      { en: 'Call an ambulance!', es: 'Llame a una ambulancia!', phonetic: '/kɔːl ən ˈæmbjələns/', videoId: 'bCc1fLHCBlc', start: 1585, end: 1605, hint: 'Emergencia' },
+      { en: 'I have a fever.', es: 'Tengo fiebre.', phonetic: '/aɪ hæv ə ˈfiːvər/', videoId: 'bCc1fLHCBlc', start: 1610, end: 1630, hint: 'Fiebre' },
     ]
   },
   {
@@ -296,14 +298,14 @@ const listenCategories = [
     name: 'Telefono y Comunicacion',
     desc: 'Llamar, mensajes, internet',
     phrases: [
-      { en: 'Can I use your phone?', es: 'Puedo usar tu telefono?', phonetic: '/kən aɪ juːz jɔːr fəʊn/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Pedir telefono' },
-      { en: 'What is your phone number?', es: 'Cual es tu numero de telefono?', phonetic: '/wɒt ɪz jɔːr fəʊn ˈnʌmbər/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Preguntar numero' },
-      { en: 'Send me a message.', es: 'Enviame un mensaje.', phonetic: '/sɛnd miː ə ˈmɛsɪdʒ/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Enviar mensaje' },
-      { en: 'Can I borrow your charger?', es: 'Puedo prestar tu cargador?', phonetic: '/kən aɪ ˈbɒroʊ jɔːr ˈtʃɑːrdʒər/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Pedir cargador' },
-      { en: 'Is there Wi-Fi here?', es: 'Hay Wi-Fi aqui?', phonetic: '/ɪz ðɛr ˈwaɪfaɪ hɪr/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Internet' },
-      { en: 'I will call you back.', es: 'Te devuelvo la llamada.', phonetic: '/aɪ wɪl kɔːl juː bæk/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Devolver llamada' },
-      { en: 'Can you repeat that?', es: 'Puede repetir eso?', phonetic: '/kən juː rɪˈpiːt ðæt/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Pedir repeticion' },
-      { en: 'I do not understand.', es: 'No entiendo.', phonetic: '/aɪ duː nɒt ˌʌndərˈstænd/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'No entender' },
+      { en: 'Can I use your phone?', es: 'Puedo usar tu telefono?', phonetic: '/kən aɪ juːz jɔːr fəʊn/', videoId: 'bCc1fLHCBlc', start: 1650, end: 1670, hint: 'Pedir telefono' },
+      { en: 'What is your phone number?', es: 'Cual es tu numero de telefono?', phonetic: '/wɒt ɪz jɔːr fəʊn ˈnʌmbər/', videoId: 'bCc1fLHCBlc', start: 1675, end: 1700, hint: 'Preguntar numero' },
+      { en: 'Send me a message.', es: 'Enviame un mensaje.', phonetic: '/sɛnd miː ə ˈmɛsɪdʒ/', videoId: 'bCc1fLHCBlc', start: 1705, end: 1725, hint: 'Enviar mensaje' },
+      { en: 'Can I borrow your charger?', es: 'Puedo prestar tu cargador?', phonetic: '/kən aɪ ˈbɒroʊ jɔːr ˈtʃɑːrdʒər/', videoId: 'bCc1fLHCBlc', start: 1730, end: 1750, hint: 'Pedir cargador' },
+      { en: 'Is there Wi-Fi here?', es: 'Hay Wi-Fi aqui?', phonetic: '/ɪz ðɛr ˈwaɪfaɪ hɪr/', videoId: 'bCc1fLHCBlc', start: 1755, end: 1775, hint: 'Internet' },
+      { en: 'I will call you back.', es: 'Te devuelvo la llamada.', phonetic: '/aɪ wɪl kɔːl juː bæk/', videoId: 'bCc1fLHCBlc', start: 1780, end: 1800, hint: 'Devolver llamada' },
+      { en: 'Can you repeat that?', es: 'Puede repetir eso?', phonetic: '/kən juː rɪˈpiːt ðæt/', videoId: 'bCc1fLHCBlc', start: 1805, end: 1825, hint: 'Pedir repeticion' },
+      { en: 'I do not understand.', es: 'No entiendo.', phonetic: '/aɪ duː nɒt ˌʌndərˈstænd/', videoId: 'bCc1fLHCBlc', start: 1650, end: 1670, hint: 'No entender' },
     ]
   },
   {
@@ -312,14 +314,14 @@ const listenCategories = [
     name: 'Trabajo y Oficina',
     desc: 'Entrevista, reunion, tareas',
     phrases: [
-      { en: 'I am looking for a job.', es: 'Estoy buscando trabajo.', phonetic: '/aɪ æm ˈlʊkɪŋ fɔːr ə dʒɒb/', videoId: 'dQw4w9WgXcQ', start: 0, end: 3, hint: 'Buscar trabajo' },
-      { en: 'What time does work start?', es: 'A que hora empieza el trabajo?', phonetic: '/wɒt taɪm dʌz wɜːrk stɑːrt/', videoId: 'dQw4w9WgXcQ', start: 3, end: 6, hint: 'Horario trabajo' },
-      { en: 'I have a meeting at two.', es: 'Tengo una reunion a las dos.', phonetic: '/aɪ hæv ə ˈmiːtɪŋ æt tuː/', videoId: 'dQw4w9WgXcQ', start: 6, end: 9, hint: 'Reunion' },
-      { en: 'Can you send me that email?', es: 'Puede enviarme ese correo?', phonetic: '/kən juː sɛnd miː ðæt ˈiːmeɪl/', videoId: 'dQw4w9WgXcQ', start: 9, end: 12, hint: 'Pedir email' },
-      { en: 'I need more time.', es: 'Necesito mas tiempo.', phonetic: '/aɪ niːd mɔːr taɪm/', videoId: 'dQw4w9WgXcQ', start: 12, end: 15, hint: 'Pedir tiempo' },
-      { en: 'The deadline is Friday.', es: 'La fecha limite es viernes.', phonetic: '/ðə ˈdɛdlaɪn ɪz ˈfraɪdeɪ/', videoId: 'dQw4w9WgXcQ', start: 15, end: 18, hint: 'Plazo' },
-      { en: 'I work from home.', es: 'Trabajo desde casa.', phonetic: '/aɪ wɜːrk frɒm hoʊm/', videoId: 'dQw4w9WgXcQ', start: 18, end: 21, hint: 'Trabajo remoto' },
-      { en: 'Can I take a day off?', es: 'Puedo tomarme un dia libre?', phonetic: '/kən aɪ teɪk ə deɪ ɒf/', videoId: 'dQw4w9WgXcQ', start: 21, end: 24, hint: 'Pedir dia libre' },
+      { en: 'I am looking for a job.', es: 'Estoy buscando trabajo.', phonetic: '/aɪ æm ˈlʊkɪŋ fɔːr ə dʒɒb/', videoId: 'bCc1fLHCBlc', start: 1750, end: 1770, hint: 'Buscar trabajo' },
+      { en: 'What time does work start?', es: 'A que hora empieza el trabajo?', phonetic: '/wɒt taɪm dʌz wɜːrk stɑːrt/', videoId: 'bCc1fLHCBlc', start: 1775, end: 1795, hint: 'Horario trabajo' },
+      { en: 'I have a meeting at two.', es: 'Tengo una reunion a las dos.', phonetic: '/aɪ hæv ə ˈmiːtɪŋ æt tuː/', videoId: 'bCc1fLHCBlc', start: 1750, end: 1770, hint: 'Reunion' },
+      { en: 'Can you send me that email?', es: 'Puede enviarme ese correo?', phonetic: '/kən juː sɛnd miː ðæt ˈiːmeɪl/', videoId: 'bCc1fLHCBlc', start: 1800, end: 1820, hint: 'Pedir email' },
+      { en: 'I need more time.', es: 'Necesito mas tiempo.', phonetic: '/aɪ niːd mɔːr taɪm/', videoId: 'bCc1fLHCBlc', start: 1825, end: 1845, hint: 'Pedir tiempo' },
+      { en: 'The deadline is Friday.', es: 'La fecha limite es viernes.', phonetic: '/ðə ˈdɛdlaɪn ɪz ˈfraɪdeɪ/', videoId: 'bCc1fLHCBlc', start: 1850, end: 1870, hint: 'Plazo' },
+      { en: 'I work from home.', es: 'Trabajo desde casa.', phonetic: '/aɪ wɜːrk frɒm hoʊm/', videoId: 'bCc1fLHCBlc', start: 1875, end: 1895, hint: 'Trabajo remoto' },
+      { en: 'Can I take a day off?', es: 'Puedo tomarme un dia libre?', phonetic: '/kən aɪ teɪk ə deɪ ɒf/', videoId: 'bCc1fLHCBlc', start: 1900, end: 1920, hint: 'Pedir dia libre' },
     ]
   }
 ];
