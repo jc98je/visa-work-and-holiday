@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aprende vocabulario IELTS basico (A1-A2) de forma interactiva con flashcards, quizzes y progreso. 120+ palabras organizadas por categorias.">
+  <meta name="description" content="Aprende vocabulario IELTS basico (A1-A2) de forma interactiva con flashcards, quizzes, matching, typing y progreso. 216+ palabras organizadas por 18 categorias.">
   <title>Vocabulario Basico A1-A2 - VisaWork Peru</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
   <style>
-    :root { --accent: #f97316; --green: #10b981; --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; }
+    :root { --accent: #f97316; --green: #10b981; --red: #ef4444; --blue: #3b82f6; --purple: #8b5cf6; --pink: #ec4899; }
     body { font-family: 'Inter', sans-serif; background: #f8fafc; margin: 0; }
 
     .page-hero {
@@ -19,7 +19,6 @@
     .page-hero h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 8px; }
     .page-hero p { font-size: 1.05rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
 
-    /* Mode Tabs */
     .mode-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
     .mode-tab {
       padding: 10px 20px; border-radius: 50px; border: 2px solid rgba(255,255,255,.3);
@@ -31,16 +30,15 @@
 
     /* Categories */
     .categories { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
-    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
     .cat-card {
       background: white; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08);
       border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.25s;
     }
     .cat-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,.1); }
-    .cat-card.active { border-color: var(--green); background: #f0fdf4; }
     .cat-card .cat-icon { font-size: 2rem; margin-bottom: 8px; }
-    .cat-card h3 { font-size: 1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-    .cat-card p { font-size: 0.82rem; color: #64748b; }
+    .cat-card h3 { font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+    .cat-card p { font-size: 0.78rem; color: #64748b; }
     .cat-card .cat-count { font-size: 0.75rem; font-weight: 700; color: var(--green); margin-top: 8px; }
 
     /* Flashcard */
@@ -122,6 +120,41 @@
     .quiz-score .score-num { font-size: 3rem; font-weight: 900; color: var(--green); }
     .quiz-score .score-label { font-size: 1.1rem; font-weight: 600; color: #64748b; margin-top: 8px; }
 
+    /* Match Mode */
+    .match-container { max-width: 700px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .match-container.active { display: block; }
+    .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .match-col { display: flex; flex-direction: column; gap: 10px; }
+    .match-item {
+      padding: 14px 18px; border: 2px solid #e2e8f0; border-radius: 12px;
+      cursor: pointer; transition: all 0.2s; font-weight: 600; font-size: 0.95rem; text-align: center;
+    }
+    .match-item:hover { border-color: var(--accent); background: #fff7ed; }
+    .match-item.selected { border-color: var(--blue); background: #dbeafe; color: var(--blue); }
+    .match-item.matched { border-color: var(--green); background: #d1fae5; color: #059669; pointer-events: none; }
+    .match-item.wrong-match { border-color: var(--red); background: #fee2e2; animation: shake 0.3s; }
+    @keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-5px); } 75% { transform:translateX(5px); } }
+
+    /* Typing Mode */
+    .typing-container { max-width: 600px; margin: 0 auto; padding: 32px 24px; display: none; }
+    .typing-container.active { display: block; }
+    .typing-card {
+      background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      border: 2px solid #e2e8f0; text-align: center;
+    }
+    .typing-word { font-size: 2rem; font-weight: 900; color: #0f172a; margin-bottom: 8px; }
+    .typing-phonetic { font-size: 1rem; color: #64748b; margin-bottom: 24px; }
+    .typing-input {
+      width: 100%; max-width: 300px; padding: 14px 18px; border: 2px solid #e2e8f0;
+      border-radius: 12px; font-size: 1.1rem; font-weight: 600; text-align: center;
+      outline: none; transition: border-color 0.2s;
+    }
+    .typing-input:focus { border-color: var(--accent); }
+    .typing-input.correct { border-color: var(--green); background: #d1fae5; }
+    .typing-input.wrong { border-color: var(--red); background: #fee2e2; }
+    .typing-hint { font-size: 0.85rem; color: #64748b; margin-top: 12px; }
+    .typing-feedback { font-size: 1rem; font-weight: 700; margin-top: 16px; min-height: 24px; }
+
     /* Word List */
     .wordlist-container { max-width: 900px; margin: 0 auto; padding: 32px 24px; display: none; }
     .wordlist-container.active { display: block; }
@@ -150,6 +183,7 @@
       .flashcard { height: 250px; }
       .flashcard-front .word { font-size: 1.6rem; }
       .cat-grid { grid-template-columns: 1fr 1fr; }
+      .match-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -158,12 +192,14 @@
 <div class="page-hero">
   <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
   <h1>📚 Vocabulario Basico</h1>
-  <p>Nivel A1-A2: 120+ palabras organizadas por categorias para tu dia a dia en Australia</p>
+  <p>Nivel A1-A2: 216+ palabras en 18 categorias con 5 modos de estudio interactivos</p>
   <div class="mode-tabs">
     <button class="mode-tab active" onclick="showMode('categories')">📂 Categorias</button>
     <button class="mode-tab" onclick="showMode('flashcards')">🃏 Flashcards</button>
     <button class="mode-tab" onclick="showMode('quiz')">❓ Quiz</button>
-    <button class="mode-tab" onclick="showMode('wordlist')">📋 Lista Completa</button>
+    <button class="mode-tab" onclick="showMode('match')">🔗 Match</button>
+    <button class="mode-tab" onclick="showMode('typing')">⌨️ Typing</button>
+    <button class="mode-tab" onclick="showMode('wordlist')">📋 Lista</button>
   </div>
 </div>
 
@@ -231,18 +267,44 @@
   <div id="quizContent"></div>
 </div>
 
+<!-- MATCH -->
+<div class="match-container" id="matchSection">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <button class="back-link" onclick="showCategories()">← Categorias</button>
+    <h3 id="matchTitle" style="font-size:1.1rem; font-weight:700;"></h3>
+  </div>
+  <div class="flashcard-progress">
+    <div class="flashcard-progress-bar"><div class="flashcard-progress-fill" id="matchProgressFill" style="width:0%;"></div></div>
+    <div class="flashcard-progress-text" id="matchProgressText">0/0</div>
+  </div>
+  <div id="matchContent"></div>
+</div>
+
+<!-- TYPING -->
+<div class="typing-container" id="typingSection">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <button class="back-link" onclick="showCategories()">← Categorias</button>
+    <h3 id="typingTitle" style="font-size:1.1rem; font-weight:700;"></h3>
+  </div>
+  <div class="flashcard-progress">
+    <div class="flashcard-progress-bar"><div class="flashcard-progress-fill" id="typingProgressFill" style="width:0%;"></div></div>
+    <div class="flashcard-progress-text" id="typingProgressText">0/0</div>
+  </div>
+  <div id="typingContent"></div>
+</div>
+
 <!-- WORD LIST -->
 <div class="wordlist-container" id="wordlistSection">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
     <button class="back-link" onclick="showCategories()">← Categorias</button>
-    <h3 style="font-size:1.1rem; font-weight:700;">📋 Lista Completa de Palabras (120+)</h3>
+    <h3 style="font-size:1.1rem; font-weight:700;">📋 Lista Completa (216+ palabras)</h3>
   </div>
   <table class="word-table" id="wordTable"></table>
 </div>
 
 <script>
 // ==========================================
-// VOCABULARY DATA - 12 Categories, 120+ Words
+// VOCABULARY DATA - 18 Categories, 216+ Words
 // ==========================================
 const categories = [
   {
@@ -257,7 +319,9 @@ const categories = [
       { en: 'Journey', phonetic: '/ˈdʒɜːni/', es: 'Viaje', ex: 'It was a long <strong>journey</strong> by bus.' },
       { en: 'Taxi', phonetic: '/ˈtæksi/', es: 'Taxi', ex: "Let's take a <strong>taxi</strong> to the hotel." },
       { en: 'Arrival', phonetic: '/əˈraɪvl/', es: 'Llegada', ex: 'What is the <strong>arrival</strong> time?' },
-      { en: 'Departure', phonetic: '/dɪˈpɑːtʃə/', es: 'Salida', ex: 'Check the <strong>departure</strong> board.' }
+      { en: 'Departure', phonetic: '/dɪˈpɑːtʃə/', es: 'Salida', ex: 'Check the <strong>departure</strong> board.' },
+      { en: 'Luggage', phonetic: '/ˈlʌɡɪdʒ/', es: 'Equipaje', ex: 'Where can I collect my <strong>luggage</strong>?' },
+      { en: 'Platform', phonetic: '/ˈplætfɔːm/', es: 'Anden', ex: 'The train is on <strong>platform</strong> 3.' }
     ]
   },
   {
@@ -272,7 +336,9 @@ const categories = [
       { en: 'Healthy', phonetic: '/ˈhelθi/', es: 'Saludable', ex: 'Eating fruit is very <strong>healthy</strong>.' },
       { en: 'Hospital', phonetic: '/ˈhɒspɪtl/', es: 'Hospital', ex: 'He works at the local <strong>hospital</strong>.' },
       { en: 'Pain', phonetic: '/peɪn/', es: 'Dolor', ex: 'Do you feel any <strong>pain</strong> here?' },
-      { en: 'Check-up', phonetic: '/ˈtʃek ʌp/', es: 'Revision medica', ex: 'I have a regular health <strong>check-up</strong>.' }
+      { en: 'Check-up', phonetic: '/ˈtʃek ʌp/', es: 'Revision medica', ex: 'I have a regular health <strong>check-up</strong>.' },
+      { en: 'Prescription', phonetic: '/prɪˈskrɪpʃən/', es: 'Receta', ex: 'You need a <strong>prescription</strong> for this medicine.' },
+      { en: 'Pharmacy', phonetic: '/ˈfɑːməsi/', es: 'Farmacia', ex: 'The <strong>pharmacy</strong> is open until 10pm.' }
     ]
   },
   {
@@ -287,7 +353,9 @@ const categories = [
       { en: 'Windy', phonetic: '/ˈwɪndi/', es: 'Ventoso', ex: 'It is too <strong>windy</strong> to go sailing.' },
       { en: 'Storm', phonetic: '/stɔːm/', es: 'Tormenta', ex: 'A big <strong>storm</strong> is coming soon.' },
       { en: 'Snow', phonetic: '/snəʊ/', es: 'Nieve', ex: 'The ground is covered in <strong>snow</strong>.' },
-      { en: 'Temperature', phonetic: '/ˈtemprətʃə/', es: 'Temperatura', ex: 'The <strong>temperature</strong> is falling.' }
+      { en: 'Temperature', phonetic: '/ˈtemprətʃə/', es: 'Temperatura', ex: 'The <strong>temperature</strong> is falling.' },
+      { en: 'Forecast', phonetic: '/ˈfɔːkɑːst/', es: 'Pronostico', ex: 'The <strong>forecast</strong> says it will rain tomorrow.' },
+      { en: 'Umbrella', phonetic: '/ʌmˈbrelə/', es: 'Paraguas', ex: 'Take your <strong>umbrella</strong> with you.' }
     ]
   },
   {
@@ -302,7 +370,9 @@ const categories = [
       { en: 'Classroom', phonetic: '/ˈklɑːsruːm/', es: 'Aula', ex: 'Please go to the <strong>classroom</strong>.' },
       { en: 'Dictionary', phonetic: '/ˈdɪkʃənri/', es: 'Diccionario', ex: 'Use a <strong>dictionary</strong> for new words.' },
       { en: 'Lesson', phonetic: '/ˈlesn/', es: 'Leccion', ex: 'Our next <strong>lesson</strong> starts soon.' },
-      { en: 'Notebook', phonetic: '/ˈnəʊtbʊk/', es: 'Cuaderno', ex: 'Write this in your <strong>notebook</strong>.' }
+      { en: 'Notebook', phonetic: '/ˈnəʊtbʊk/', es: 'Cuaderno', ex: 'Write this in your <strong>notebook</strong>.' },
+      { en: 'Degree', phonetic: '/dɪˈɡriː/', es: 'Titulo', ex: 'She has a <strong>degree</strong> in science.' },
+      { en: 'Course', phonetic: '/kɔːs/', es: 'Curso', ex: 'I am taking an English <strong>course</strong>.' }
     ]
   },
   {
@@ -317,7 +387,9 @@ const categories = [
       { en: 'Change', phonetic: '/tʃeɪndʒ/', es: 'Cambio', ex: 'Here is your <strong>change</strong>, sir.' },
       { en: 'Customer', phonetic: '/ˈkʌstəmə/', es: 'Cliente', ex: 'The <strong>customer</strong> wants a refund.' },
       { en: 'Buy', phonetic: '/baɪ/', es: 'Comprar', ex: 'I need to <strong>buy</strong> some bread.' },
-      { en: 'Cost', phonetic: '/kɒst/', es: 'Costar', ex: 'How much does it <strong>cost</strong>?' }
+      { en: 'Cost', phonetic: '/kɒst/', es: 'Costar', ex: 'How much does it <strong>cost</strong>?' },
+      { en: 'Receipt', phonetic: '/rɪˈsiːt/', es: 'Recibo', ex: 'Can I have a <strong>receipt</strong> please?' },
+      { en: 'Discount', phonetic: '/ˈdɪskaʊnt/', es: 'Descuento', ex: 'There is a 20% <strong>discount</strong> today.' }
     ]
   },
   {
@@ -332,7 +404,9 @@ const categories = [
       { en: 'Click', phonetic: '/klɪk/', es: 'Hacer clic', ex: '<strong>Click</strong> here to start the game.' },
       { en: 'Online', phonetic: '/ˌɒnˈlaɪn/', es: 'En linea', ex: 'Is the teacher <strong>online</strong> now?' },
       { en: 'Password', phonetic: '/ˈpɑːswɜːd/', es: 'Contrasena', ex: 'Never share your <strong>password</strong>.' },
-      { en: 'Device', phonetic: '/dɪˈvaɪs/', es: 'Dispositivo', ex: 'This <strong>device</strong> is easy to use.' }
+      { en: 'Device', phonetic: '/dɪˈvaɪs/', es: 'Dispositivo', ex: 'This <strong>device</strong> is easy to use.' },
+      { en: 'Download', phonetic: '/ˈdaʊnləʊd/', es: 'Descargar', ex: 'I need to <strong>download</strong> the app.' },
+      { en: 'Charger', phonetic: '/ˈtʃɑːdʒə/', es: 'Cargador', ex: 'My phone <strong>charger</strong> is broken.' }
     ]
   },
   {
@@ -347,7 +421,9 @@ const categories = [
       { en: 'Floor', phonetic: '/flɔː/', es: 'Piso', ex: 'The <strong>floor</strong> is clean now.' },
       { en: 'Window', phonetic: '/ˈwɪndəʊ/', es: 'Ventana', ex: 'Please open the <strong>window</strong>.' },
       { en: 'Key', phonetic: '/kiː/', es: 'Llave', ex: 'Use your <strong>key</strong> to open the door.' },
-      { en: 'Living room', phonetic: '/ˈlɪvɪŋ ruːm/', es: 'Sala de estar', ex: 'The family is in the <strong>living room</strong>.' }
+      { en: 'Living room', phonetic: '/ˈlɪvɪŋ ruːm/', es: 'Sala de estar', ex: 'The family is in the <strong>living room</strong>.' },
+      { en: 'Garden', phonetic: '/ˈɡɑːdn/', es: 'Jardin', ex: 'We have a beautiful <strong>garden</strong>.' },
+      { en: 'Garage', phonetic: '/ˈɡærɑːʒ/', es: 'Garaje', ex: 'The car is in the <strong>garage</strong>.' }
     ]
   },
   {
@@ -362,7 +438,9 @@ const categories = [
       { en: 'Swimming', phonetic: '/ˈswɪmɪŋ/', es: 'Natacion', ex: '<strong>Swimming</strong> is good exercise.' },
       { en: 'Hobby', phonetic: '/ˈhɒbi/', es: 'Pasatiempo', ex: 'Reading is my main <strong>hobby</strong>.' },
       { en: 'Match', phonetic: '/mætʃ/', es: 'Partido', ex: 'We won the tennis <strong>match</strong>.' },
-      { en: 'Runner', phonetic: '/ˈrʌnə/', es: 'Corredor', ex: 'She is a very fast <strong>runner</strong>.' }
+      { en: 'Runner', phonetic: '/ˈrʌnə/', es: 'Corredor', ex: 'She is a very fast <strong>runner</strong>.' },
+      { en: 'Cycling', phonetic: '/ˈsaɪklɪŋ/', es: 'Ciclismo', ex: '<strong>Cycling</strong> is popular in Australia.' },
+      { en: 'Yoga', phonetic: '/ˈjəʊɡə/', es: 'Yoga', ex: 'I do <strong>yoga</strong> every morning.' }
     ]
   },
   {
@@ -377,7 +455,9 @@ const categories = [
       { en: 'Scared', phonetic: '/skeəd/', es: 'Asustado', ex: 'Are you <strong>scared</strong> of the dark?' },
       { en: 'Hungry', phonetic: '/ˈhʌŋɡri/', es: 'Hambriento', ex: 'We are <strong>hungry</strong> after the walk.' },
       { en: 'Thirsty', phonetic: '/ˈθɜːsti/', es: 'Sediento', ex: "I am <strong>thirsty</strong>; can I have water?" },
-      { en: 'Surprised', phonetic: '/səˈpraɪzd/', es: 'Sorprendido', ex: 'I was <strong>surprised</strong> by the news.' }
+      { en: 'Surprised', phonetic: '/səˈpraɪzd/', es: 'Sorprendido', ex: 'I was <strong>surprised</strong> by the news.' },
+      { en: 'Worried', phonetic: '/ˈwʌrid/', es: 'Preocupado', ex: 'She is <strong>worried</strong> about the exam.' },
+      { en: 'Proud', phonetic: '/praʊd/', es: 'Orgulloso', ex: 'I am <strong>proud</strong> of my children.' }
     ]
   },
   {
@@ -392,7 +472,9 @@ const categories = [
       { en: 'Dinner', phonetic: '/ˈdɪnə/', es: 'Cena', ex: 'We are having <strong>dinner</strong> at 8:00.' },
       { en: 'Drink', phonetic: '/drɪŋk/', es: 'Bebida', ex: 'What would you like to <strong>drink</strong>?' },
       { en: 'Table', phonetic: '/ˈteɪbl/', es: 'Mesa', ex: 'Is this <strong>table</strong> free?' },
-      { en: 'Lunch', phonetic: '/lʌntʃ/', es: 'Almuerzo', ex: 'Do you want <strong>lunch</strong> with me?' }
+      { en: 'Lunch', phonetic: '/lʌntʃ/', es: 'Almuerzo', ex: 'Do you want <strong>lunch</strong> with me?' },
+      { en: 'Reservation', phonetic: '/ˌrezəˈveɪʃən/', es: 'Reserva', ex: 'I have a <strong>reservation</strong> for two.' },
+      { en: 'Tipping', phonetic: '/ˈtɪpɪŋ/', es: 'Propina', ex: 'Is <strong>tipping</strong> common in Australia?' }
     ]
   },
   {
@@ -407,7 +489,9 @@ const categories = [
       { en: 'Worker', phonetic: '/ˈwɜːkə/', es: 'Trabajador', ex: 'All <strong>workers</strong> must wear safety gear.' },
       { en: 'Salary', phonetic: '/ˈsæləri/', es: 'Salario', ex: 'My <strong>salary</strong> is paid monthly.' },
       { en: 'Meeting', phonetic: '/ˈmiːtɪŋ/', es: 'Reunion', ex: 'We have a <strong>meeting</strong> at two.' },
-      { en: 'Task', phonetic: '/tɑːsk/', es: 'Tarea', ex: 'This is a very difficult <strong>task</strong>.' }
+      { en: 'Task', phonetic: '/tɑːsk/', es: 'Tarea', ex: 'This is a very difficult <strong>task</strong>.' },
+      { en: 'Interview', phonetic: '/ˈɪntəvjuː/', es: 'Entrevista', ex: 'I have a job <strong>interview</strong> tomorrow.' },
+      { en: 'Resume', phonetic: '/rɪˈzjuːm/', es: 'Curriculum', ex: 'Send your <strong>resume</strong> by email.' }
     ]
   },
   {
@@ -422,7 +506,111 @@ const categories = [
       { en: 'City', phonetic: '/ˈsɪti/', es: 'Ciudad', ex: 'This is a very beautiful <strong>city</strong>.' },
       { en: 'Town', phonetic: '/taʊn/', es: 'Pueblo', ex: 'My hometown is a small <strong>town</strong>.' },
       { en: 'Traffic', phonetic: '/ˈtræfɪk/', es: 'Trafico', ex: 'There is too much <strong>traffic</strong> today.' },
-      { en: 'Corner', phonetic: '/ˈkɔːnə/', es: 'Esquina', ex: 'The bank is on the <strong>corner</strong>.' }
+      { en: 'Corner', phonetic: '/ˈkɔːnə/', es: 'Esquina', ex: 'The bank is on the <strong>corner</strong>.' },
+      { en: 'Crossing', phonetic: '/ˈkrɒsɪŋ/', es: 'Cruce', ex: 'Use the pedestrian <strong>crossing</strong>.' },
+      { en: 'Neighbourhood', phonetic: '/ˈneɪbəhʊd/', es: 'Vecindario', ex: 'This <strong>neighbourhood</strong> is very safe.' }
+    ]
+  },
+  {
+    id: 'animals', icon: '🐾', name: 'Animales', desc: 'Mascotas, fauna, naturaleza',
+    words: [
+      { en: 'Dog', phonetic: '/dɒɡ/', es: 'Perro', ex: 'I have a <strong>dog</strong> named Max.' },
+      { en: 'Cat', phonetic: '/kæt/', es: 'Gato', ex: 'The <strong>cat</strong> is sleeping on the sofa.' },
+      { en: 'Bird', phonetic: '/bɜːd/', es: 'Pajaro', ex: 'A <strong>bird</strong> is singing outside.' },
+      { en: 'Horse', phonetic: '/hɔːs/', es: 'Caballo', ex: 'She rides a <strong>horse</strong> every weekend.' },
+      { en: 'Fish', phonetic: '/fɪʃ/', es: 'Pez', ex: 'We have a <strong>fish</strong> in the tank.' },
+      { en: 'Rabbit', phonetic: '/ˈræbɪt/', es: 'Conejo', ex: 'The <strong>rabbit</strong> eats carrots.' },
+      { en: 'Cow', phonetic: '/kaʊ/', es: 'Vaca', ex: 'The <strong>cow</strong> gives milk.' },
+      { en: 'Sheep', phonetic: '/ʃiːp/', es: 'Oveja', ex: 'There are many <strong>sheep</strong> on the farm.' },
+      { en: 'Snake', phonetic: '/sneɪk/', es: 'Serpiente', ex: 'Be careful of the <strong>snake</strong>!' },
+      { en: 'Kangaroo', phonetic: '/ˌkæŋɡəˈruː/', es: 'Canguro', ex: 'The <strong>kangaroo</strong> is an Australian animal.' },
+      { en: 'Animal', phonetic: '/ˈænɪml/', es: 'Animal', ex: 'What is your favourite <strong>animal</strong>?' },
+      { en: 'Pet', phonetic: '/pet/', es: 'Mascota', ex: 'Do you have a <strong>pet</strong>?' }
+    ]
+  },
+  {
+    id: 'nature', icon: '🌿', name: 'Naturaleza y Plantas', desc: 'Arboles, flores, paisajes',
+    words: [
+      { en: 'Tree', phonetic: '/triː/', es: 'Arbol', ex: 'The <strong>tree</strong> is very tall.' },
+      { en: 'Flower', phonetic: '/ˈflaʊə/', es: 'Flor', ex: 'The <strong>flower</strong> smells beautiful.' },
+      { en: 'River', phonetic: '/ˈrɪvə/', es: 'Rio', ex: 'We swim in the <strong>river</strong>.' },
+      { en: 'Mountain', phonetic: '/ˈmaʊntɪn/', es: 'Montana', ex: 'The <strong>mountain</strong> is covered in snow.' },
+      { en: 'Beach', phonetic: '/biːtʃ/', es: 'Playa', ex: 'We go to the <strong>beach</strong> in summer.' },
+      { en: 'Forest', phonetic: '/ˈfɒrɪst/', es: 'Bosque', ex: 'The <strong>forest</strong> is very green.' },
+      { en: 'Ocean', phonetic: '/ˈəʊʃən/', es: 'Oceano', ex: 'The <strong>ocean</strong> is very deep.' },
+      { en: 'Island', phonetic: '/ˈaɪlənd/', es: 'Isla', ex: 'Australia is a big <strong>island</strong>.' },
+      { en: 'Grass', phonetic: '/ɡrɑːs/', es: 'Pasto', ex: 'The <strong>grass</strong> is wet with dew.' },
+      { en: 'Leaf', phonetic: '/liːf/', es: 'Hoja', ex: 'A <strong>leaf</strong> fell from the tree.' },
+      { en: 'Rock', phonetic: '/rɒk/', es: 'Roca', ex: 'Sit on this <strong>rock</strong>.' },
+      { en: 'Sand', phonetic: '/sænd/', es: 'Arena', ex: 'The <strong>sand</strong> is very hot.' }
+    ]
+  },
+  {
+    id: 'banking', icon: '🏦', name: 'Banco y Finanzas', desc: 'Cuentas, tarjetas, transferencias',
+    words: [
+      { en: 'Bank', phonetic: '/bæŋk/', es: 'Banco', ex: 'I need to go to the <strong>bank</strong>.' },
+      { en: 'Account', phonetic: '/əˈkaʊnt/', es: 'Cuenta', ex: 'I want to open a bank <strong>account</strong>.' },
+      { en: 'Card', phonetic: '/kɑːd/', es: 'Tarjeta', ex: 'Can I pay by <strong>card</strong>?' },
+      { en: 'Withdraw', phonetic: '/wɪðˈdrɔː/', es: 'Retirar', ex: 'I need to <strong>withdraw</strong> some cash.' },
+      { en: 'Balance', phonetic: '/ˈbæləns/', es: 'Saldo', ex: 'What is my account <strong>balance</strong>?' },
+      { en: 'Transfer', phonetic: '/trænsˈfɜː/', es: 'Transferencia', ex: 'I made a <strong>transfer</strong> to your account.' },
+      { en: 'Loan', phonetic: '/ləʊn/', es: 'Prestamo', ex: 'I need a <strong>loan</strong> for my car.' },
+      { en: 'Savings', phonetic: '/ˈseɪvɪŋz/', es: 'Ahorros', ex: 'I put money in my <strong>savings</strong>.' },
+      { en: 'Debt', phonetic: '/det/', es: 'Deuda', ex: 'I have a lot of <strong>debt</strong>.' },
+      { en: 'Interest', phonetic: '/ˈɪntrəst/', es: 'Interes', ex: 'The <strong>interest</strong> rate is low.' },
+      { en: 'Deposit', phonetic: '/dɪˈpɒzɪt/', es: 'Deposito', ex: 'I made a <strong>deposit</strong> today.' },
+      { en: 'Bill', phonetic: '/bɪl/', es: 'Factura', ex: 'I need to pay this <strong>bill</strong>.' }
+    ]
+  },
+  {
+    id: 'family', icon: '👨‍👩‍👧‍👦', name: 'Familia y Relaciones', desc: 'Parientes, amigos, vecinos',
+    words: [
+      { en: 'Mother', phonetic: '/ˈmʌðə/', es: 'Madre', ex: 'My <strong>mother</strong> lives in Lima.' },
+      { en: 'Father', phonetic: '/ˈfɑːðə/', es: 'Padre', ex: 'My <strong>father</strong> works in an office.' },
+      { en: 'Sister', phonetic: '/ˈsɪstə/', es: 'Hermana', ex: 'I have one <strong>sister</strong>.' },
+      { en: 'Brother', phonetic: '/ˈbrʌðə/', es: 'Hermano', ex: 'My <strong>brother</strong> is older than me.' },
+      { en: 'Grandmother', phonetic: '/ˈɡrænmʌðə/', es: 'Abuela', ex: 'My <strong>grandmother</strong> cooks very well.' },
+      { en: 'Grandfather', phonetic: '/ˈɡrænfɑːðə/', es: 'Abuelo', ex: 'My <strong>grandfather</strong> tells stories.' },
+      { en: 'Parents', phonetic: '/ˈpeərənts/', es: 'Padres', ex: 'My <strong>parents</strong> support me.' },
+      { en: 'Family', phonetic: '/ˈfæməli/', es: 'Familia', ex: 'I love my <strong>family</strong>.' },
+      { en: 'Uncle', phonetic: '/ˈʌŋkl/', es: 'Tio', ex: 'My <strong>uncle</strong> lives in Australia.' },
+      { en: 'Aunt', phonetic: '/ɑːnt/', es: 'Tia', ex: 'My <strong>aunt</strong> is a doctor.' },
+      { en: 'Cousin', phonetic: '/ˈkʌzn/', es: 'Primo/a', ex: 'My <strong>cousin</strong> is visiting us.' },
+      { en: 'Neighbour', phonetic: '/ˈneɪbə/', es: 'Vecino', ex: 'Our <strong>neighbour</strong> is very friendly.' }
+    ]
+  },
+  {
+    id: 'driving', icon: '🚗', name: 'En el Auto', desc: 'Conducir, señalizacion, emergencia',
+    words: [
+      { en: 'Drive', phonetic: '/draɪv/', es: 'Conducir', ex: 'I <strong>drive</strong> to work every day.' },
+      { en: 'Car', phonetic: '/kɑː/', es: 'Auto', ex: 'My <strong>car</strong> is parked outside.' },
+      { en: 'Bus', phonetic: '/bʌs/', es: 'Autobus', ex: 'The <strong>bus</strong> arrives at 8am.' },
+      { en: 'Bicycle', phonetic: '/ˈbaɪsɪkl/', es: 'Bicicleta', ex: 'I ride my <strong>bicycle</strong> to school.' },
+      { en: 'Traffic light', phonetic: '/ˈtræfɪk laɪt/', es: 'Semaforo', ex: 'Wait for the <strong>traffic light</strong>.' },
+      { en: 'Parking', phonetic: '/ˈpɑːkɪŋ/', es: 'Estacionamiento', ex: 'Where is the <strong>parking</strong>?' },
+      { en: 'Helmet', phonetic: '/ˈhelmɪt/', es: 'Casco', ex: 'Wear a <strong>helmet</strong> when cycling.' },
+      { en: 'License', phonetic: '/ˈlaɪsəns/', es: 'Licencia', ex: 'You need a <strong>license</strong> to drive.' },
+      { en: 'Fuel', phonetic: '/fjuːəl/', es: 'Combustible', ex: 'I need to buy <strong>fuel</strong>.' },
+      { en: 'Engine', phonetic: '/ˈendʒɪn/', es: 'Motor', ex: 'The <strong>engine</strong> is very noisy.' },
+      { en: 'Accident', phonetic: '/ˈæksɪdənt/', es: 'Accidente', ex: 'There was an <strong>accident</strong> on the road.' },
+      { en: 'Break', phonetic: '/breɪk/', es: 'Freno', ex: 'Hit the <strong>brakes</strong>!' }
+    ]
+  },
+  {
+    id: 'communication', icon: '📞', name: 'Comunicacion', desc: 'Llamadas, mensajes, redes sociales',
+    words: [
+      { en: 'Call', phonetic: '/kɔːl/', es: 'Llamar', ex: 'I will <strong>call</strong> you later.' },
+      { en: 'Message', phonetic: '/ˈmesɪdʒ/', es: 'Mensaje', ex: 'I sent you a <strong>message</strong>.' },
+      { en: 'Text', phonetic: '/tekst/', es: 'Mensaje de texto', ex: 'Please <strong>text</strong> me when you arrive.' },
+      { en: 'Chat', phonetic: '/tʃæt/', es: 'Charla', ex: 'We had a nice <strong>chat</strong>.' },
+      { en: 'News', phonetic: '/njuːz/', es: 'Noticias', ex: 'Did you hear the <strong>news</strong>?' },
+      { en: 'Story', phonetic: '/ˈstɔːri/', es: 'Historia', ex: 'Tell me the <strong>story</strong> again.' },
+      { en: 'Question', phonetic: '/ˈkwestʃən/', es: 'Pregunta', ex: 'I have a <strong>question</strong> for you.' },
+      { en: 'Answer', phonetic: '/ˈɑːnsə/', es: 'Respuesta', ex: 'What is the <strong>answer</strong>?' },
+      { en: 'Speak', phonetic: '/spiːk/', es: 'Hablar', ex: 'Can you <strong>speak</strong> English?' },
+      { en: 'Listen', phonetic: '/ˈlɪsən/', es: 'Escuchar', ex: 'Please <strong>listen</strong> carefully.' },
+      { en: 'Understand', phonetic: '/ˌʌndəˈstænd/', es: 'Entender', ex: 'I don\'t <strong>understand</strong> this word.' },
+      { en: 'Repeat', phonetic: '/rɪˈpiːt/', es: 'Repetir', ex: 'Can you <strong>repeat</strong> that please?' }
     ]
   }
 ];
@@ -437,6 +625,12 @@ let fcKnown = 0;
 let quizIdx = 0;
 let quizCorrect = 0;
 let quizQuestions = [];
+let matchIdx = 0;
+let matchCorrect = 0;
+let matchPairs = [];
+let matchSelected = null;
+let typingIdx = 0;
+let typingCorrect = 0;
 let learnedWords = JSON.parse(localStorage.getItem('vocabLearned2026') || '{}');
 let masteredWords = JSON.parse(localStorage.getItem('vocabMastered2026') || '{}');
 let streak = parseInt(localStorage.getItem('vocabStreak2026') || '0');
@@ -458,6 +652,8 @@ function showMode(mode) {
     if ((mode === 'categories' && text.includes('categor')) ||
         (mode === 'flashcards' && text.includes('flash')) ||
         (mode === 'quiz' && text.includes('quiz')) ||
+        (mode === 'match' && text.includes('match')) ||
+        (mode === 'typing' && text.includes('typing')) ||
         (mode === 'wordlist' && text.includes('lista'))) {
       t.classList.add('active');
     }
@@ -466,11 +662,15 @@ function showMode(mode) {
   document.getElementById('categoriesSection').style.display = mode === 'categories' || (!currentCat && mode !== 'wordlist') ? '' : 'none';
   document.getElementById('flashcardsSection').classList.toggle('active', mode === 'flashcards' && currentCat);
   document.getElementById('quizSection').classList.toggle('active', mode === 'quiz' && currentCat);
+  document.getElementById('matchSection').classList.toggle('active', mode === 'match' && currentCat);
+  document.getElementById('typingSection').classList.toggle('active', mode === 'typing' && currentCat);
   document.getElementById('wordlistSection').classList.toggle('active', mode === 'wordlist');
 
   if (mode === 'wordlist') renderWordList();
   if (mode === 'quiz' && currentCat) startQuiz();
   if (mode === 'flashcards' && currentCat) showCard();
+  if (mode === 'match' && currentCat) startMatch();
+  if (mode === 'typing' && currentCat) startTyping();
   if (mode === 'categories') {
     document.getElementById('categoriesSection').style.display = '';
   }
@@ -484,6 +684,8 @@ function showCategories() {
   document.getElementById('categoriesSection').style.display = '';
   document.getElementById('flashcardsSection').classList.remove('active');
   document.getElementById('quizSection').classList.remove('active');
+  document.getElementById('matchSection').classList.remove('active');
+  document.getElementById('typingSection').classList.remove('active');
   document.getElementById('wordlistSection').classList.remove('active');
   document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
   document.querySelector('.mode-tab').classList.add('active');
@@ -529,10 +731,7 @@ function selectCategory(catId) {
 function showCard() {
   if (!currentCat) return;
   const words = currentCat.words;
-  if (fcIdx >= words.length) {
-    finishFlashcards();
-    return;
-  }
+  if (fcIdx >= words.length) { finishFlashcards(); return; }
   const w = words[fcIdx];
   document.getElementById('fcWord').textContent = w.en;
   document.getElementById('fcPhonetic').textContent = w.phonetic;
@@ -543,9 +742,7 @@ function showCard() {
   document.getElementById('flashcard').classList.remove('flipped');
 }
 
-function flipCard() {
-  document.getElementById('flashcard').classList.toggle('flipped');
-}
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
 
 function markWord(known) {
   if (!currentCat) return;
@@ -554,17 +751,12 @@ function markWord(known) {
     fcKnown++;
     learnedWords[w.en] = true;
     if (!masteredWords[w.en]) masteredWords[w.en] = 0;
-    masteredWords[w.en]++;
-    if (masteredWords[w.en] >= 3) masteredWords[w.en] = 3;
+    masteredWords[w.en] = Math.min(masteredWords[w.en] + 1, 3);
   } else {
     delete learnedWords[w.en];
     masteredWords[w.en] = 0;
   }
-  saveState();
-  fcIdx++;
-  showCard();
-  updateStats();
-  renderCategories();
+  saveState(); fcIdx++; showCard(); updateStats(); renderCategories();
 }
 
 function finishFlashcards() {
@@ -579,7 +771,7 @@ function finishFlashcards() {
       <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
         <button class="btn-know" onclick="selectCategory('${currentCat.id}');">🔄 Repetir</button>
         <button class="btn-flip" onclick="showCategories();">📋 Otra Categoria</button>
-        <button class="btn-dontknow" onclick="startQuiz(); showMode('quiz');">❓ Hacer Quiz</button>
+        <button class="btn-dontknow" onclick="showMode('quiz');">❓ Hacer Quiz</button>
       </div>
     </div>`;
 }
@@ -590,13 +782,11 @@ function finishFlashcards() {
 function startQuiz() {
   if (!currentCat) return;
   quizIdx = 0; quizCorrect = 0;
-  quizQuestions = [];
   const words = [...currentCat.words];
-  words.forEach(w => {
+  quizQuestions = words.map(w => {
     const others = categories.flatMap(c => c.words).filter(x => x.en !== w.en);
     const wrong = shuffle(others).slice(0, 3).map(x => x.es);
-    const opts = shuffle([w.es, ...wrong]);
-    quizQuestions.push({ word: w, options: opts, answer: w.es });
+    return { word: w, options: shuffle([w.es, ...wrong]), answer: w.es };
   });
   quizQuestions = shuffle(quizQuestions).slice(0, 10);
   document.getElementById('quizTitle').textContent = currentCat.icon + ' Quiz: ' + currentCat.name;
@@ -613,15 +803,14 @@ function showQuizQuestion() {
     <div class="quiz-question">
       <h3>¿Que significa "<strong>${q.word.en}</strong>"?</h3>
       <div class="quiz-options">
-        ${q.options.map((opt, i) => `<div class="quiz-option" onclick="answerQuiz(this, '${opt.replace(/'/g, "\\'")}', '${q.answer.replace(/'/g, "\\'")}')"><div class="q-letter">${letters[i]}</div><span>${opt}</span></div>`).join('')}
+        ${q.options.map((opt, i) => `<div class="quiz-option" onclick="answerQuiz(this, '${esc(opt)}', '${esc(q.answer)}')"><div class="q-letter">${letters[i]}</div><span>${opt}</span></div>`).join('')}
       </div>
     </div>`;
 }
 
 function answerQuiz(el, selected, correct) {
   if (el.parentElement.querySelector('.correct, .wrong')) return;
-  const opts = el.parentElement.querySelectorAll('.quiz-option');
-  opts.forEach(o => {
+  el.parentElement.querySelectorAll('.quiz-option').forEach(o => {
     if (o.querySelector('span').textContent === correct) o.classList.add('correct');
     else if (o === el && selected !== correct) o.classList.add('wrong');
   });
@@ -647,6 +836,149 @@ function finishQuiz() {
 }
 
 // ==========================================
+// MATCH MODE
+// ==========================================
+function startMatch() {
+  if (!currentCat) return;
+  matchIdx = 0; matchCorrect = 0; matchSelected = null;
+  matchPairs = shuffle([...currentCat.words]).slice(0, 8);
+  document.getElementById('matchTitle').textContent = currentCat.icon + ' Match: ' + currentCat.name;
+  renderMatch();
+}
+
+function renderMatch() {
+  if (matchIdx >= matchPairs.length) { finishMatch(); return; }
+  const w = matchPairs[matchIdx];
+  const others = categories.flatMap(c => c.words).filter(x => x.es !== w.es);
+  const distractors = shuffle(others).slice(0, 3).map(x => x.es);
+  const allOptions = shuffle([w.es, ...distractors]);
+
+  document.getElementById('matchProgressFill').style.width = ((matchIdx / matchPairs.length) * 100) + '%';
+  document.getElementById('matchProgressText').textContent = (matchIdx + 1) + '/' + matchPairs.length;
+
+  document.getElementById('matchContent').innerHTML = `
+    <div style="text-align:center; margin-bottom:24px;">
+      <div style="font-size:2rem; font-weight:900; color:#0f172a; margin-bottom:8px;">${w.en}</div>
+      <div style="font-size:0.9rem; color:#64748b;">${w.phonetic}</div>
+      <p style="font-size:0.85rem; color:#64748b; margin-top:8px;">${w.ex}</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:400px; margin:0 auto;">
+      ${allOptions.map(opt => `<div class="match-item" onclick="checkMatch(this, '${esc(opt)}', '${esc(w.es)}')">${opt}</div>`).join('')}
+    </div>`;
+}
+
+function checkMatch(el, selected, correct) {
+  el.parentElement.querySelectorAll('.match-item').forEach(m => m.style.pointerEvents = 'none');
+  if (selected === correct) {
+    el.classList.add('matched');
+    matchCorrect++;
+    learnedWords[matchPairs[matchIdx].en] = true;
+    saveState();
+    setTimeout(() => { matchIdx++; renderMatch(); }, 600);
+  } else {
+    el.classList.add('wrong-match');
+    setTimeout(() => { el.classList.remove('wrong-match'); el.parentElement.querySelectorAll('.match-item').forEach(m => m.style.pointerEvents = ''); }, 500);
+  }
+}
+
+function finishMatch() {
+  const pct = Math.round((matchCorrect / matchPairs.length) * 100);
+  document.getElementById('matchContent').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 80 ? '🎯' : pct >= 50 ? '👍' : '📚'}</div>
+      <div class="score-num">${matchCorrect}/${matchPairs.length}</div>
+      <div class="score-label">matches correctos (${pct}%)</div>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn-know" onclick="startMatch();">🔄 Repetir</button>
+        <button class="btn-flip" onclick="showCategories();">📋 Otra Categoria</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
+// TYPING MODE
+// ==========================================
+function startTyping() {
+  if (!currentCat) return;
+  typingIdx = 0; typingCorrect = 0;
+  document.getElementById('typingTitle').textContent = currentCat.icon + ' Typing: ' + currentCat.name;
+  renderTyping();
+}
+
+function renderTyping() {
+  if (typingIdx >= currentCat.words.length) { finishTyping(); return; }
+  const w = currentCat.words[typingIdx];
+  document.getElementById('typingProgressFill').style.width = ((typingIdx / currentCat.words.length) * 100) + '%';
+  document.getElementById('typingProgressText').textContent = (typingIdx + 1) + '/' + currentCat.words.length;
+
+  document.getElementById('typingContent').innerHTML = `
+    <div class="typing-card">
+      <div class="typing-word">${w.en}</div>
+      <div class="typing-phonetic">${w.phonetic}</div>
+      <input type="text" id="typingInput" class="typing-input" placeholder="Escribe la traduccion..." autofocus
+        onkeypress="if(event.key==='Enter') checkTyping()">
+      <div class="typing-hint">Presiona Enter para verificar</div>
+      <div class="typing-feedback" id="typingFeedback"></div>
+      <div style="margin-top:20px;">
+        <button class="btn-flip" onclick="revealTyping()" style="margin-right:8px;">💡 Ver respuesta</button>
+        <button class="btn-know" onclick="nextTyping()" style="display:none;" id="typingNext">Siguiente →</button>
+      </div>
+    </div>`;
+  document.getElementById('typingInput').focus();
+}
+
+function checkTyping() {
+  const input = document.getElementById('typingInput');
+  const w = currentCat.words[typingIdx];
+  const userAnswer = input.value.trim().toLowerCase();
+  const correct = userAnswer === w.es.toLowerCase();
+  const feedback = document.getElementById('typingFeedback');
+
+  input.disabled = true;
+  input.classList.add(correct ? 'correct' : 'wrong');
+  feedback.innerHTML = correct ? '✅ ¡Correcto!' : `❌ Respuesta: <strong>${w.es}</strong>`;
+
+  if (correct) {
+    typingCorrect++;
+    learnedWords[w.en] = true;
+    saveState();
+  }
+
+  document.getElementById('typingNext').style.display = 'inline-flex';
+}
+
+function revealTyping() {
+  const w = currentCat.words[typingIdx];
+  const feedback = document.getElementById('typingFeedback');
+  const input = document.getElementById('typingInput');
+  input.disabled = true;
+  input.value = w.es;
+  input.classList.add('correct');
+  feedback.innerHTML = `💡 La respuesta es: <strong>${w.es}</strong>`;
+  document.getElementById('typingNext').style.display = 'inline-flex';
+}
+
+function nextTyping() {
+  typingIdx++;
+  renderTyping();
+}
+
+function finishTyping() {
+  const total = currentCat.words.length;
+  const pct = Math.round((typingCorrect / total) * 100);
+  document.getElementById('typingContent').innerHTML = `
+    <div class="quiz-score">
+      <div style="font-size:3rem; margin-bottom:16px;">${pct >= 80 ? '⌨️' : pct >= 50 ? '👍' : '📚'}</div>
+      <div class="score-num">${typingCorrect}/${total}</div>
+      <div class="score-label">traducciones correctas (${pct}%)</div>
+      <div style="display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap;">
+        <button class="btn-know" onclick="startTyping();">🔄 Repetir</button>
+        <button class="btn-flip" onclick="showCategories();">📋 Otra Categoria</button>
+      </div>
+    </div>`;
+}
+
+// ==========================================
 // WORD LIST
 // ==========================================
 function renderWordList() {
@@ -655,12 +987,7 @@ function renderWordList() {
     html += `<tr><td colspan="4" style="background:transparent; font-weight:800; font-size:1.1rem; color:#0f172a; padding:16px 18px 8px;">${cat.icon} ${cat.name} (${cat.words.length} palabras)</td></tr>`;
     cat.words.forEach(w => {
       const status = masteredWords[w.en] >= 3 ? '⭐' : learnedWords[w.en] ? '✅' : '';
-      html += `<tr>
-        <td>${w.en} ${status}</td>
-        <td>${w.es}</td>
-        <td>${w.phonetic}</td>
-        <td>${w.ex}</td>
-      </tr>`;
+      html += `<tr><td>${w.en} ${status}</td><td>${w.es}</td><td>${w.phonetic}</td><td>${w.ex}</td></tr>`;
     });
   });
   document.getElementById('wordTable').innerHTML = html;
@@ -674,6 +1001,8 @@ function shuffle(arr) {
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
   return a;
 }
+
+function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '\\"'); }
 
 function markAsComplete() {
   const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
@@ -696,13 +1025,6 @@ function updateStats() {
   document.getElementById("statMastered").textContent = mastered;
   document.getElementById("statStreak").textContent = streak;
   document.getElementById("statTotal").textContent = total;
-  // Sync progress to simulator level unlock system
-  if (learned >= 20) {
-    const progress = JSON.parse(localStorage.getItem("ieltsProgress2026") || '{"1":{},"2":{},"3":{}}');
-    if (!progress["1"]) progress["1"] = {};
-    progress["1"]["vocab"] = true;
-    localStorage.setItem("ieltsProgress2026", JSON.stringify(progress));
-  }
 }
 
 // ==========================================

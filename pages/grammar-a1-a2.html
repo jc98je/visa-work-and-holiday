@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aprende gramatica IELTS basica (A1-A2) con ejercicios interactivos: present simple, plurales, articulos y preposiciones.">
+  <meta name="description" content="Aprende gramatica IELTS basica (A1-A2) con ejercicios interactivos: present simple, past simple, future, modals, comparatives, articles, prepositions y mas.">
   <title>Gramatica Basica A1-A2 - VisaWork Peru</title>
   <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -65,8 +65,8 @@
     .exercise-card h4 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
     .exercise-card .instruction { font-size: 0.9rem; color: #64748b; margin-bottom: 16px; }
     .exercise-card .sentence { font-size: 1.1rem; color: #0f172a; margin-bottom: 16px; line-height: 1.8; }
-    .exercise-card .blank { 
-      display: inline-block; min-width: 100px; border-bottom: 2px solid var(--accent); 
+    .exercise-card .blank {
+      display: inline-block; min-width: 100px; border-bottom: 2px solid var(--accent);
       padding: 2px 8px; font-weight: 700; color: var(--accent); text-align: center;
     }
 
@@ -113,6 +113,8 @@
     .tip-box.blue { background: #dbeafe; border-left: 4px solid var(--blue); }
     .tip-box.green { background: #d1fae5; border-left: 4px solid var(--green); }
     .tip-box.orange { background: #fff7ed; border-left: 4px solid #f97316; }
+    .tip-box.purple { background: #ede9fe; border-left: 4px solid var(--purple); }
+    .tip-box.pink { background: #fce7f3; border-left: 4px solid #ec4899; }
 
     .back-link { display: inline-flex; align-items: center; gap: 6px; color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
     .back-link:hover { color: #0f172a; }
@@ -129,7 +131,7 @@
 <div class="page-hero">
   <a href="ielts-simulador.html" class="back-link" style="position:absolute; top:80px; left:24px; color:rgba(255,255,255,.8);">← Volver al Simulador</a>
   <h1>📝 Gramatica Basica</h1>
-  <p>Nivel A1-A2: Present simple, plurales, articulos y preposiciones para tu dia a dia</p>
+  <p>Nivel A1-A2: 10 temas con 100+ ejercicios interactivos para dominar la gramatica esencial</p>
   <div class="mode-tabs">
     <button class="mode-tab active" onclick="showMode('categories')">📋 Ejercicios</button>
     <button class="mode-tab" onclick="showMode('reference')">📖 Reglas</button>
@@ -151,7 +153,7 @@
 <!-- REFERENCE -->
 <div class="categories" id="referenceSection" style="display:none;">
   <h2 style="text-align:center; font-size:1.5rem; font-weight:800; margin-bottom:24px;">📖 Reglas de Gramatica</h2>
-  
+
   <div class="tip-box blue" style="margin-bottom:16px;">
     <h4 style="margin-bottom:8px;">📌 Present Simple</h4>
     <p>Se usa para acciones habituales y hechos generales.</p>
@@ -162,17 +164,67 @@
   </div>
 
   <div class="tip-box green" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Past Simple (Regular)</h4>
+    <p>Se usa para acciones terminadas en el pasado.</p>
+    <p style="margin-top:8px;"><strong>Afirmativa:</strong> I/You/We/They <strong>worked</strong> | He/She/It <strong>worked</strong></p>
+    <p><strong>Negativa:</strong> I/You/We/They <strong>didn't work</strong> | He/She/It <strong>didn't work</strong></p>
+    <p><strong>Interrogativa:</strong> <strong>Did</strong> I/you/we/they <strong>work</strong>?</p>
+    <p style="margin-top:8px;"><strong>Reglas:</strong> Verbo + <strong>ed</strong> (work→worked) | Termina en e: +<strong>d</strong> (live→lived) | Consonante+y: cambia y por <strong>ied</strong> (study→studied)</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I <strong>visited</strong> Sydney last year. / She <strong>didn't go</strong> to school yesterday.</p>
+  </div>
+
+  <div class="tip-box orange" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Past Simple (Irregulares)</h4>
+    <p>Verbos que cambian completamente en pasado:</p>
+    <p style="margin-top:8px;"><strong>go→went</strong> | <strong>have→had</strong> | <strong>eat→ate</strong> | <strong>see→saw</strong> | <strong>come→came</strong></p>
+    <p><strong>take→took</strong> | <strong>give→gave</strong> | <strong>know→knew</strong> | <strong>think→thought</strong> | <strong>buy→bought</strong></p>
+    <p><strong>write→wrote</strong> | <strong>read→read</strong> | <strong>speak→spoke</strong> | <strong>run→ran</strong> | <strong>make→made</strong></p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I <strong>went</strong> to the beach. / She <strong>ate</strong> lunch at noon.</p>
+  </div>
+
+  <div class="tip-box blue" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Future (will / going to)</h4>
+    <p><strong>Will</strong> → decision espontanea, predicciones, promesas</p>
+    <p><strong>Going to</strong> → planes ya decididos, intenciones</p>
+    <p style="margin-top:8px;"><strong>Will:</strong> I/You/We/They <strong>will work</strong> | He/She/It <strong>will work</strong></p>
+    <p><strong>Going to:</strong> I <strong>am going to work</strong> | She <strong>is going to work</strong></p>
+    <p><strong>Negativa:</strong> I <strong>won't work</strong> (will not) | I <strong>am not going to work</strong></p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: It <strong>will rain</strong> tomorrow. / I<strong>'m going to study</strong> English.</p>
+  </div>
+
+  <div class="tip-box green" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Modals (can / should / must)</h4>
+    <p><strong>Can</strong> → habilidad, permiso, posibilidad</p>
+    <p><strong>Should</strong> → consejo, recomendacion</p>
+    <p><strong>Must</strong> → obligacion, necesidad fuerte</p>
+    <p style="margin-top:8px;"><strong>Can:</strong> I/You/We/They <strong>can work</strong> | He/She/It <strong>can work</strong> (sin -s)</p>
+    <p><strong>Should:</strong> I <strong>should study</strong> more.</p>
+    <p><strong>Must:</strong> You <strong>must wear</strong> a helmet.</p>
+    <p><strong>Negativa:</strong> can't / shouldn't / mustn't (prohibicion)</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I <strong>can swim</strong>. / You <strong>should exercise</strong>. / You <strong>must not</strong> smoke here.</p>
+  </div>
+
+  <div class="tip-box purple" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Comparativos y Superlativos</h4>
+    <p><strong>Adjetivo corto (1 silaba):</strong> + <strong>er</strong> / + <strong>est</strong> → tall→taller→tallest</p>
+    <p><strong>Adjetivo largo (2+ silabas):</strong> + <strong>more</strong> / + <strong>most</strong> → beautiful→more beautiful→most beautiful</p>
+    <p><strong>Irregulares:</strong> good→better→best | bad→worse→worst | far→farther→farthest</p>
+    <p style="margin-top:8px;"><strong>Comparativo:</strong> A is <strong>taller than</strong> B. | A is <strong>more expensive than</strong> B.</p>
+    <p><strong>Superlativo:</strong> A is <strong>the tallest</strong> in the class. | A is <strong>the most beautiful</strong> city.</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: Sydney is <strong>bigger than</strong> Perth. / This is <strong>the best</strong> restaurant.</p>
+  </div>
+
+  <div class="tip-box orange" style="margin-bottom:16px;">
     <h4 style="margin-bottom:8px;">📌 Plurales</h4>
-    <p>Reglas para formar el plural de sustantivos:</p>
-    <p style="margin-top:8px;"><strong>Regla general:</strong> + <strong>s</strong> → book → books</p>
+    <p><strong>Regla general:</strong> + <strong>s</strong> → book → books</p>
     <p><strong>Termina en s, sh, ch, x, z:</strong> + <strong>es</strong> → bus → buses</p>
     <p><strong>Termina en consonante + y:</strong> cambia y por <strong>ies</strong> → city → cities</p>
     <p><strong>Termina en vocal + y:</strong> + <strong>s</strong> → boy → boys</p>
     <p><strong>Termina en f/fe:</strong> cambia por <strong>ves</strong> → knife → knives</p>
-    <p style="margin-top:8px; font-style:italic; color:#64748b;">Irregulares: man → men, woman → women, child → children, foot → feet</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Irregulares: man→men, woman→women, child→children, foot→feet, tooth→teeth, mouse→mice</p>
   </div>
 
-  <div class="tip-box orange" style="margin-bottom:16px;">
+  <div class="tip-box pink" style="margin-bottom:16px;">
     <h4 style="margin-bottom:8px;">📌 Articulos (a/an/the)</h4>
     <p><strong>A</strong> → antes de consonante: a book, a house</p>
     <p><strong>An</strong> → antes de vocal: an apple, an office</p>
@@ -187,6 +239,27 @@
     <p><strong>ON</strong> → dias, fechas, superficies: on Monday, on July 15th, on the table</p>
     <p><strong>AT</strong> → horas, lugares especificos, eventos: at 3pm, at home, at school, at the party</p>
     <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: I wake up <strong>at</strong> 7am <strong>in</strong> the morning. / The meeting is <strong>on</strong> Monday.</p>
+  </div>
+
+  <div class="tip-box green" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 There is / There are</h4>
+    <p><strong>There is</strong> + sustantivo singular: There <strong>is</strong> a book on the table.</p>
+    <p><strong>There are</strong> + sustantivo plural: There <strong>are</strong> many books on the table.</p>
+    <p><strong>Negativa:</strong> There <strong>isn't</strong> / There <strong>aren't</strong></p>
+    <p><strong>Interrogativa:</strong> <strong>Is there</strong> a book? / <strong>Are there</strong> any books?</p>
+    <p style="margin-top:8px; font-style:italic; color:#64748b;">Ejemplo: There <strong>is</strong> a cat in the garden. / There <strong>are</strong> 20 students in the class.</p>
+  </div>
+
+  <div class="tip-box purple" style="margin-bottom:16px;">
+    <h4 style="margin-bottom:8px;">📌 Question Words (Wh-questions)</h4>
+    <p><strong>What</strong> → que: What is your name?</p>
+    <p><strong>Where</strong> → donde: Where do you live?</p>
+    <p><strong>When</strong> → cuando: When is the meeting?</p>
+    <p><strong>Who</strong> → quien: Who is your teacher?</p>
+    <p><strong>Why</strong> → por que: Why are you late?</p>
+    <p><strong>How</strong> → como: How are you? / How much is this?</p>
+    <p><strong>How many</strong> → cuantos (contable): How many brothers do you have?</p>
+    <p><strong>How much</strong> → cuanto (incontable/precio): How much does it cost?</p>
   </div>
 
   <div style="text-align:center; margin-top:32px;">
@@ -214,7 +287,7 @@
 
 <script>
 // ==========================================
-// GRAMMAR EXERCISES DATA
+// GRAMMAR EXERCISES DATA - 10 Topics, 100+ Exercises
 // ==========================================
 const grammarCategories = [
   {
@@ -231,6 +304,98 @@ const grammarCategories = [
       { type: 'fill', sentence: 'The train ___ (leave) at 7:15.', answer: 'leaves', hint: 'He/She/It + verb + s' },
       { type: 'fill', sentence: '___ she ___ (like) coffee?', answer: 'Does...like', hint: 'Does + she + verb?' },
       { type: 'fill', sentence: 'I ___ (work) Monday to Friday.', answer: 'work', hint: 'I + verb (no s)' },
+      { type: 'choice', sentence: 'He ___ to school every day.', options: ['go', 'goes', 'going', 'gone'], answer: 1, hint: 'He + verb + s' },
+      { type: 'choice', sentence: '___ it rain a lot in Lima?', options: ['Do', 'Does', 'Is', 'Are'], answer: 1, hint: 'It = He/She/It → Does' },
+    ]
+  },
+  {
+    id: 'past-simple-regular',
+    icon: '⏪',
+    name: 'Past Simple (Regular)',
+    desc: 'Acciones terminadas en el pasado',
+    exercises: [
+      { type: 'fill', sentence: 'I ___ (visit) Sydney last year.', answer: 'visited', hint: 'Verb + ed' },
+      { type: 'fill', sentence: 'She ___ (not/go) to school yesterday.', answer: "didn't go", hint: "didn't + base verb" },
+      { type: 'fill', sentence: '___ you ___ (study) English last night?', answer: 'Did...study', hint: 'Did + subject + base verb?' },
+      { type: 'fill', sentence: 'We ___ (live) in Lima for 5 years.', answer: 'lived', hint: 'live → lived (drop e + d)' },
+      { type: 'fill', sentence: 'He ___ (try) the new restaurant.', answer: 'tried', hint: 'try → tried (y→ied)' },
+      { type: 'fill', sentence: 'They ___ (play) football yesterday.', answer: 'played', hint: 'play → played (+d)' },
+      { type: 'fill', sentence: 'I ___ (not/watch) TV last night.', answer: "didn't watch", hint: "didn't + base verb" },
+      { type: 'fill', sentence: 'She ___ (wash) her car on Sunday.', answer: 'washed', hint: 'wash → washed (+ed)' },
+      { type: 'choice', sentence: 'Yesterday I ___ to the beach.', options: ['go', 'went', 'goed', 'going'], answer: 1, hint: 'Irregular: go → went' },
+      { type: 'choice', sentence: 'She ___ a letter to her friend.', options: ['wrote', 'writed', 'writing', 'writes'], answer: 0, hint: 'Irregular: write → wrote' },
+    ]
+  },
+  {
+    id: 'past-simple-irregular',
+    icon: '⏪',
+    name: 'Past Simple (Irregulares)',
+    desc: 'Verbos irregulares del pasado',
+    exercises: [
+      { type: 'choice', sentence: 'I ___ (go) to the cinema yesterday.', options: ['went', 'goed', 'goes', 'going'], answer: 0, hint: 'go → went' },
+      { type: 'choice', sentence: 'She ___ (have) breakfast at 8am.', options: ['had', 'haved', 'has', 'having'], answer: 0, hint: 'have → had' },
+      { type: 'choice', sentence: 'We ___ (see) a beautiful sunset.', options: ['saw', 'seed', 'seen', 'seeing'], answer: 0, hint: 'see → saw' },
+      { type: 'choice', sentence: 'He ___ (eat) lunch at noon.', options: ['eated', 'ate', 'eaten', 'eating'], answer: 1, hint: 'eat → ate' },
+      { type: 'choice', sentence: 'They ___ (come) to the party.', options: ['comed', 'come', 'came', 'coming'], answer: 2, hint: 'come → came' },
+      { type: 'choice', sentence: 'I ___ (take) the bus to work.', options: ['took', 'taked', 'take', 'taking'], answer: 0, hint: 'take → took' },
+      { type: 'choice', sentence: 'She ___ (buy) a new dress.', options: ['buyed', 'bought', 'buys', 'buying'], answer: 1, hint: 'buy → bought' },
+      { type: 'choice', sentence: 'We ___ (make) a cake yesterday.', options: ['make', 'maked', 'made', 'making'], answer: 2, hint: 'make → made' },
+      { type: 'fill', sentence: 'I ___ (run) 5 kilometers yesterday.', answer: 'ran', hint: 'run → ran' },
+      { type: 'fill', sentence: 'She ___ (think) the movie was good.', answer: 'thought', hint: 'think → thought' },
+    ]
+  },
+  {
+    id: 'future',
+    icon: '⏩',
+    name: 'Future (will / going to)',
+    desc: 'Planes, predicciones e intenciones',
+    exercises: [
+      { type: 'choice', sentence: 'I ___ (study) English tomorrow.', options: ['will', 'am going to', 'was', 'did'], answer: 1, hint: 'Plan decidido = going to' },
+      { type: 'choice', sentence: 'Look at those clouds! It ___ (rain).', options: ['will', 'is going to', 'was', 'does'], answer: 1, hint: 'Evidencia visual = going to' },
+      { type: 'fill', sentence: 'I ___ (not/go) to the party tonight.', answer: "won't go", hint: "will not = won't" },
+      { type: 'fill', sentence: '___ you ___ (help) me with this?', answer: 'Will...help', hint: 'Will + subject + base verb?' },
+      { type: 'choice', sentence: 'She ___ (have) a baby next month.', options: ['will', 'is going to', 'was', 'has'], answer: 1, hint: 'Plan ya decidido = going to' },
+      { type: 'choice', sentence: 'I think it ___ (be) sunny tomorrow.', options: ['will', 'is going to', 'was', 'is'], answer: 0, hint: 'Prediccion personal = will' },
+      { type: 'fill', sentence: 'We ___ (move) to Sydney next year.', answer: "are going to move", hint: 'Plan decidido = going to' },
+      { type: 'fill', sentence: 'I promise I ___ (call) you later.', answer: 'will call', hint: 'Promesa = will' },
+      { type: 'choice', sentence: 'He ___ (not/be) at the meeting tomorrow.', options: ["won't", "isn't going to", "wasn't", "didn't"], answer: 0, hint: 'will not = won\'t' },
+      { type: 'choice', sentence: 'They ___ (travel) to Peru next summer.', options: ['will', 'are going to', 'were', 'do'], answer: 1, hint: 'Plan decidido = going to' },
+    ]
+  },
+  {
+    id: 'modals',
+    icon: ' modal',
+    name: 'Modals (can / should / must)',
+    desc: 'Habilidad, consejo y obligacion',
+    exercises: [
+      { type: 'choice', sentence: 'I ___ speak English and Spanish.', options: ['can', 'cans', 'am can', 'can to'], answer: 0, hint: 'can + base verb (sin -s)' },
+      { type: 'choice', sentence: 'You ___ exercise more often.', options: ['should', 'shoulds', 'are should', 'should to'], answer: 0, hint: 'should + base verb (consejo)' },
+      { type: 'choice', sentence: 'You ___ not smoke here.', options: ['must', 'musts', 'are must', 'must to'], answer: 0, hint: 'must not = prohibicion' },
+      { type: 'fill', sentence: '___ you swim?', answer: 'Can', hint: 'Preguntar habilidad = Can' },
+      { type: 'fill', sentence: 'I ___ drive, but I ___ (not/have) a car.', answer: "can...don't have", hint: 'can + base verb' },
+      { type: 'choice', sentence: 'You ___ see a doctor.', options: ['should', 'can', 'must', 'will'], answer: 0, hint: 'Consejo = should' },
+      { type: 'choice', sentence: 'We ___ wear uniforms at school.', options: ['must', 'can', 'should', 'will'], answer: 0, hint: 'Obligacion fuerte = must' },
+      { type: 'fill', sentence: 'She ___ (not/be) able to come tomorrow.', answer: "won't be", hint: 'won\'t be able to' },
+      { type: 'choice', sentence: '___ I borrow your pen?', options: ['Can', 'Must', 'Should', 'Will'], answer: 0, hint: 'Pedir permiso = Can' },
+      { type: 'fill', sentence: 'You ___ (not/must) be late.', answer: "mustn't", hint: 'Prohibicion = must not' },
+    ]
+  },
+  {
+    id: 'comparatives',
+    icon: '⚖️',
+    name: 'Comparativos y Superlativos',
+    desc: 'Comparar personas, cosas y lugares',
+    exercises: [
+      { type: 'choice', sentence: 'Sydney is ___ than Perth.', options: ['bigger', 'more big', 'biggest', 'more bigger'], answer: 0, hint: 'big → bigger (corto +er)' },
+      { type: 'choice', sentence: 'This book is ___ than that one.', options: ['more interesting', 'interestingest', 'more interestinger', 'interestinger'], answer: 0, hint: 'Largo (2+ silabas) = more + adj' },
+      { type: 'choice', sentence: 'She is ___ student in the class.', options: ['the best', 'the better', 'best', 'more good'], answer: 0, hint: 'Superlativo = the + best' },
+      { type: 'fill', sentence: 'This coffee is ___ (good) than yesterday.', answer: 'better', hint: 'good → better (irregular)' },
+      { type: 'fill', sentence: 'He is ___ (tall) than his brother.', answer: 'taller', hint: 'tall → taller (+er)' },
+      { type: 'choice', sentence: 'This is ___ restaurant in town.', options: ['the worst', 'the worse', 'worst', 'more bad'], answer: 0, hint: 'bad → worst (superlativo)' },
+      { type: 'fill', sentence: 'Australia is ___ (far) from Peru than from Chile.', answer: 'farther', hint: 'far → farther (+er)' },
+      { type: 'choice', sentence: 'The weather today is ___ than yesterday.', options: ['worse', 'worst', 'more bad', 'baddest'], answer: 0, hint: 'bad → worse (comparativo)' },
+      { type: 'fill', sentence: 'This is the ___ (expensive) car in the shop.', answer: 'most expensive', hint: 'Largo = most + adj' },
+      { type: 'choice', sentence: 'My house is ___ than yours.', options: ['smaller', 'more small', 'smallest', 'small'], answer: 0, hint: 'small → smaller (+er)' },
     ]
   },
   {
@@ -247,6 +412,8 @@ const grammarCategories = [
       { type: 'fill', sentence: 'One box → Four ___', answer: 'boxes', hint: 'Termina en x → +es' },
       { type: 'fill', sentence: 'One baby → Two ___', answer: 'babies', hint: 'Consonante + y → ies' },
       { type: 'fill', sentence: 'One foot → Two ___', answer: 'feet', hint: 'Irregular' },
+      { type: 'fill', sentence: 'One tooth → Many ___', answer: 'teeth', hint: 'Irregular' },
+      { type: 'fill', sentence: 'One mouse → Three ___', answer: 'mice', hint: 'Irregular' },
     ]
   },
   {
@@ -263,6 +430,8 @@ const grammarCategories = [
       { type: 'choice', sentence: 'I live in ___ Lima.', options: ['a', 'an', 'the', '∅'], answer: 3, hint: 'Nombre propio' },
       { type: 'choice', sentence: 'The meeting is at ___ university.', options: ['a', 'an', 'the', '∅'], answer: 0, hint: 'university empieza con consonante (sonido)' },
       { type: 'choice', sentence: 'She is ___ best student.', options: ['a', 'an', 'the', '∅'], answer: 2, hint: 'Superlativo = the' },
+      { type: 'choice', sentence: 'We saw ___ elephant at the zoo.', options: ['a', 'an', 'the', '∅'], answer: 1, hint: 'elephant empieza con vocal' },
+      { type: 'choice', sentence: 'I like ___ music.', options: ['a', 'an', 'the', '∅'], answer: 3, hint: 'Generalidad' },
     ]
   },
   {
@@ -279,6 +448,44 @@ const grammarCategories = [
       { type: 'choice', sentence: 'I study ___ home.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'Home = at home' },
       { type: 'choice', sentence: 'She lives ___ Sydney.', options: ['in', 'on', 'at', 'to'], answer: 0, hint: 'Ciudades = in' },
       { type: 'choice', sentence: 'The party is ___ night.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'At night (expresion fija)' },
+      { type: 'choice', sentence: 'I arrived ___ the airport.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'Lugares especificos = at' },
+      { type: 'choice', sentence: 'The movie starts ___ 8pm.', options: ['in', 'on', 'at', 'to'], answer: 2, hint: 'Horas = at' },
+    ]
+  },
+  {
+    id: 'there-is-are',
+    icon: '🌍',
+    name: 'There is / There are',
+    desc: 'Existencia de personas y cosas',
+    exercises: [
+      { type: 'choice', sentence: 'There ___ a cat in the garden.', options: ['is', 'are', 'has', 'have'], answer: 0, hint: 'Singular = there is' },
+      { type: 'choice', sentence: 'There ___ 20 students in the class.', options: ['is', 'are', 'has', 'have'], answer: 1, hint: 'Plural = there are' },
+      { type: 'choice', sentence: '___ there a pharmacy near here?', options: ['Is', 'Are', 'Do', 'Does'], answer: 0, hint: 'Singular = Is there?' },
+      { type: 'choice', sentence: '___ there any restaurants in this street?', options: ['Is', 'Are', 'Do', 'Does'], answer: 1, hint: 'Plural = Are there?' },
+      { type: 'fill', sentence: 'There ___ (not/be) any milk in the fridge.', answer: "isn't", hint: "isn't = is not (milk es incontable)" },
+      { type: 'fill', sentence: 'There ___ (not/be) any books on the shelf.', answer: "aren't", hint: "aren't = are not (books es plural)" },
+      { type: 'choice', sentence: 'There is a book and two pens ___ the table.', options: ['in', 'on', 'at', 'under'], answer: 1, hint: 'Superficies = on' },
+      { type: 'fill', sentence: 'There ___ (be) many people at the party.', answer: 'were', hint: 'Pasado plural = were' },
+      { type: 'choice', sentence: 'How many people ___ there in your family?', options: ['is', 'are', 'has', 'have'], answer: 1, hint: 'people es plural = are' },
+      { type: 'fill', sentence: 'There ___ (be) a beautiful park in this city.', answer: 'is', hint: 'park es singular = is' },
+    ]
+  },
+  {
+    id: 'wh-questions',
+    icon: '❓',
+    name: 'Question Words',
+    desc: 'Que, donde, cuando, como, por que',
+    exercises: [
+      { type: 'choice', sentence: '___ is your name?', options: ['What', 'Where', 'When', 'Who'], answer: 0, hint: 'Nombre = What' },
+      { type: 'choice', sentence: '___ do you live?', options: ['What', 'Where', 'When', 'Who'], answer: 1, hint: 'Lugar = Where' },
+      { type: 'choice', sentence: '___ is the meeting?', options: ['What', 'Where', 'When', 'Who'], answer: 2, hint: 'Hora = When' },
+      { type: 'choice', sentence: '___ is your teacher?', options: ['What', 'Where', 'When', 'Who'], answer: 3, hint: 'Persona = Who' },
+      { type: 'choice', sentence: '___ are you late?', options: ['What', 'Where', 'When', 'Why'], answer: 3, hint: 'Razon = Why' },
+      { type: 'choice', sentence: '___ are you today?', options: ['What', 'Where', 'How', 'Who'], answer: 2, hint: 'Estado = How' },
+      { type: 'choice', sentence: '___ much does this cost?', options: ['How many', 'How much', 'What', 'Where'], answer: 1, hint: 'Precio = How much' },
+      { type: 'choice', sentence: '___ many brothers do you have?', options: ['How many', 'How much', 'What', 'Where'], answer: 0, hint: 'Contable plural = How many' },
+      { type: 'fill', sentence: '___ time does the train leave?', answer: 'What', hint: 'Hora = What time' },
+      { type: 'fill', sentence: '___ do you go to work?', answer: 'How', hint: 'Transporte = How' },
     ]
   }
 ];
@@ -347,10 +554,7 @@ function selectCategory(catId) {
 // EXERCISES
 // ==========================================
 function renderExercise() {
-  if (!currentCat || exIdx >= currentCat.exercises.length) {
-    finishExercises();
-    return;
-  }
+  if (!currentCat || exIdx >= currentCat.exercises.length) { finishExercises(); return; }
   const ex = currentCat.exercises[exIdx];
   document.getElementById('exerciseTitle').textContent = currentCat.icon + ' ' + currentCat.name;
   document.getElementById('exProgressText').textContent = (exIdx + 1) + '/' + currentCat.exercises.length;
@@ -369,7 +573,7 @@ function renderExercise() {
     });
     html += '</div>';
   } else {
-    html += `<input type="text" id="fillInput" placeholder="Escribe tu respuesta..." 
+    html += `<input type="text" id="fillInput" placeholder="Escribe tu respuesta..."
       style="width:100%; padding:12px 16px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; font-family:inherit; margin-top:8px;"
       onkeypress="if(event.key==='Enter') checkExercise()">`;
   }
@@ -407,14 +611,12 @@ function checkExercise() {
     const blank = document.getElementById('fillBlank');
     const userAnswer = input.value.trim().toLowerCase();
     const correctAnswer = ex.answer.toLowerCase();
-    // Handle compound answers like 'Do...speak' - check parts
     if (correctAnswer.includes('...')) {
       const parts = correctAnswer.split('...');
       correct = parts.every(p => userAnswer.includes(p.trim()));
     } else {
       correct = userAnswer === correctAnswer;
     }
-    
     input.style.pointerEvents = 'none';
     input.style.borderColor = correct ? '#10b981' : '#ef4444';
     input.style.background = correct ? '#d1fae5' : '#fee2e2';
@@ -438,20 +640,13 @@ function checkExercise() {
   selectedOption = null;
 }
 
-function nextExercise() {
-  exIdx++;
-  renderExercise();
-}
-
-function prevExercise() {
-  if (exIdx > 0) { exIdx--; renderExercise(); }
-}
+function nextExercise() { exIdx++; renderExercise(); }
+function prevExercise() { if (exIdx > 0) { exIdx--; renderExercise(); } }
 
 function finishExercises() {
   const total = currentCat.exercises.length;
   const correct = exerciseResults.filter(r => r).length;
   const pct = Math.round((correct / total) * 100);
-  
   completedExercises[currentCat.id] = true;
   saveState();
 
@@ -492,13 +687,13 @@ function updateStats() {
 function markAsComplete() {
   grammarCategories.forEach(c => { completedExercises[c.id] = true; });
   saveState();
-  
+
   const progress = JSON.parse(localStorage.getItem('ieltsProgress2026') || '{"1":{},"2":{},"3":{}}');
   if (!progress['1']) progress['1'] = {};
   progress['1']['grammar'] = true;
   localStorage.setItem('ieltsProgress2026', JSON.stringify(progress));
-  
-  const btn = event.target;
+
+  const btn = document.getElementById('completeBtn');
   btn.textContent = '✅ ¡Completado! Redirigiendo...';
   btn.style.background = '#059669';
   btn.disabled = true;
@@ -518,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- MARCAR COMO COMPLETADO -->
 <div style="text-align:center; padding:24px;">
-  <button onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
+  <button id="completeBtn" onclick="markAsComplete()" style="padding:14px 32px; font-size:1rem; font-weight:700; background:var(--green); color:white; border:none; border-radius:12px; cursor:pointer; transition:all 0.2s;">
     ✅ Marcar Gramatica como Completada
   </button>
   <p style="font-size:0.82rem; color:#64748b; margin-top:8px;">Al hacer click, se sincronizara con tu progreso en el simulador</p>

@@ -507,7 +507,11 @@ function updateUI() {
   }
 }
 
-// Initialize
+// Initialize - Clear old progress so checks only appear after Finalizado button
+const SIMULATOR_KEY = 'ieltsProgress2026';
+if (localStorage.getItem(SIMULATOR_KEY)) {
+  localStorage.removeItem(SIMULATOR_KEY);
+}
 document.addEventListener('DOMContentLoaded', () => { updateUI(); });
 
 // ==========================================
