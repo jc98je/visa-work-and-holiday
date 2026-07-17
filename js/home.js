@@ -33,6 +33,11 @@ function initFirebase() {
         pendingRedirect = false;
         window.location.href = 'mi-proceso.html';
       }
+      // Si habia un pendiente de redirect para guia, ir a ielts-guia
+      if (user && pendingGuideRedirect) {
+        pendingGuideRedirect = false;
+        window.location.href = 'pages/ielts-guia.html';
+      }
     });
   } catch (error) {
     console.log('Firebase no disponible:', error.message);
@@ -447,12 +452,23 @@ document.querySelectorAll('.checklist-item').forEach(c => {
 
 // Start Process - require login first
 let pendingRedirect = false;
+let pendingGuideRedirect = false;
 
 function startProcess() {
   if (currentUser) {
     window.location.href = 'mi-proceso.html';
   } else {
     pendingRedirect = true;
+    openLoginModal();
+  }
+}
+
+// Start Guide - require login first
+function startGuide() {
+  if (currentUser) {
+    window.location.href = 'pages/ielts-guia.html';
+  } else {
+    pendingGuideRedirect = true;
     openLoginModal();
   }
 }
