@@ -78,7 +78,7 @@
       <div class="user-dropdown-menu" id="userDropdownMenu">
         <a href="mi-cuenta.html" class="dropdown-item"><span class="dropdown-icon">👤</span> Mi Cuenta</a>
         <a href="mi-proceso.html" class="dropdown-item"><span class="dropdown-icon">📋</span> Mi Proceso</a>
-        <a href="pages/ielts-guia.html" class="dropdown-item" target="_blank"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
+        <a href="pages/ielts-guia.html" class="dropdown-item"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item" onclick="closeUserDropdown(); return false;"><span class="dropdown-icon">⚙️</span> Configuracion</a>
         <a href="#" class="dropdown-item dropdown-logout" onclick="logout(); closeUserDropdown();"><span class="dropdown-icon">🚪</span> Cerrar Sesion</a>
@@ -244,12 +244,12 @@
     <div class="card" style="border-top:4px solid var(--accent);">
       <h3>📖 Guia Completa IELTS</h3>
       <p>Toda la estructura del examen, estrategias, vocabulario y gramatica esencial.</p>
-      <a href="pages/ielts-guia.html" target="_blank" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-weight:600; margin-top:16px;">Ver Guia →</a>
+      <a href="pages/ielts-guia.html" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-weight:600; margin-top:16px;">Ver Guia →</a>
     </div>
     <div class="card" style="border-top:4px solid var(--green);">
       <h3>🎯 Simulador de Examen</h3>
       <p>Practica con preguntas reales de IELTS. Listening, Reading, Writing y Speaking.</p>
-      <a href="pages/ielts-simulador.html" target="_blank" style="display:inline-flex; align-items:center; gap:6px; color:var(--green); font-weight:600; margin-top:16px;">Comenzar Practica →</a>
+      <a href="pages/ielts-simulador.html" style="display:inline-flex; align-items:center; gap:6px; color:var(--green); font-weight:600; margin-top:16px;">Comenzar Practica →</a>
     </div>
   </div>
 
@@ -277,13 +277,13 @@
     </div>
     <div class="footer-col">
       <h4>Oficiales</h4>
-      <a href="https://immi.homeaffairs.gov.au/" target="_blank">Departamento de Inmigracion</a>
-      <a href="https://online.immi.gov.au/" target="_blank">ImmiAccount</a>
+      <a href="https://immi.homeaffairs.gov.au/">Departamento de Inmigracion</a>
+      <a href="https://online.immi.gov.au/">ImmiAccount</a>
     </div>
     <div class="footer-col">
       <h4>Ingles</h4>
-      <a href="https://ielts.org" target="_blank">IELTS Oficial</a>
-      <a href="https://ieltsliz.com" target="_blank">IELTS Liz</a>
+      <a href="https://ielts.org">IELTS Oficial</a>
+      <a href="https://ieltsliz.com">IELTS Liz</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -474,7 +474,7 @@ function generateRecommendations() {
 
   recoList.innerHTML = recos.length === 0
     ? '<p style="opacity:0.7; text-align:center;">Marca documentos en el checklist para recibir recomendaciones personalizadas.</p>'
-    : recos.map(r => `<div class="reco-item"><div class="reco-icon" style="background:${r.iconBg};">${r.icon}</div><div><h4>${r.title}</h4><p>${r.desc}</p>${r.link ? `<a href="${r.link}" ${r.link.startsWith('http') ? 'target="_blank"' : ''}>${r.linkText} →</a>` : ''}</div></div>`).join('');
+    : recos.map(r => `<div class="reco-item"><div class="reco-icon" style="background:${r.iconBg};">${r.icon}</div><div><h4>${r.title}</h4><p>${r.desc}</p>${r.link ? `<a href="${r.link}">${r.linkText} →</a>` : ''}</div></div>`).join('');
 }
 
 // Keyboard support

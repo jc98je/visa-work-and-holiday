@@ -408,7 +408,7 @@ function generateRecommendations() {
         <div>
           <h4>${r.title}</h4>
           <p>${r.desc}</p>
-          ${r.link ? `<a href="${r.link}" ${r.link.startsWith('#') ? '' : 'target="_blank"'}>${r.linkText} →</a>` : ''}
+          ${r.link ? `<a href="${r.link}">${r.linkText} →</a>` : ''}
         </div>
       </div>
     `).join('');
