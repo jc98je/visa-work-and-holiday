@@ -836,28 +836,56 @@ document.querySelectorAll('#mainnav a,.level-card').forEach(el=>{
 el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)return;document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));const n=document.querySelector('#mainnav a[data-tab="'+t+'"]');if(n)n.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});});
 });
 /* Audio Player - Speech Synthesis */
-let synth=window.speechSynthesis;
-let audioVoices=[];
+var synth=window.speechSynthesis;
+var audioVoices=[];
+var currentPlayingId=null;
 function loadVoices(){audioVoices=synth.getVoices();}
 if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
 loadVoices();
+
 function playAudio(id){
+  // Stop any currently playing audio first
   synth.cancel();
-  var el=document.getElementById(id);
-  if(!el)return;
-  var text=el.getAttribute('data-text');
-  var rate=parseFloat(el.getAttribute('data-rate')||'0.85');
-  var utt=new SpeechSynthesisUtterance(text);
-  utt.lang='en-GB';
-  utt.rate=rate;
-  var voice=audioVoices.find(function(v){return v.lang==='en-GB';})||audioVoices.find(function(v){return v.lang.startsWith('en');});
-  if(voice)utt.voice=voice;
-  var btn=el.querySelector('.play-btn');
-  if(btn)btn.textContent='⏸';
-  utt.onend=function(){if(btn)btn.textContent='▶';};
-  synth.speak(utt);
+  // Small delay to ensure cancel is processed before speaking
+  setTimeout(function(){
+    var el=document.getElementById(id);
+    if(!el)return;
+    var text=el.getAttribute('data-text');
+    var rate=parseFloat(el.getAttribute('data-rate')||'0.85');
+    var utt=new SpeechSynthesisUtterance(text);
+    utt.lang='en-GB';
+    utt.rate=rate;
+    var voice=audioVoices.find(function(v){return v.lang==='en-GB';})||audioVoices.find(function(v){return v.lang.startsWith('en');});
+    if(voice)utt.voice=voice;
+    var btn=el.querySelector('.play-btn');
+    if(btn)btn.textContent='⏸';
+    currentPlayingId=id;
+    utt.onend=function(){
+      if(btn)btn.textContent='▶';
+      currentPlayingId=null;
+    };
+    utt.onerror=function(){
+      if(btn)btn.textContent='▶';
+      currentPlayingId=null;
+    };
+    synth.speak(utt);
+  },50);
 }
-function stopAll(){synth.cancel();document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});}
+
+function restartAudio(id){
+  synth.cancel();
+  setTimeout(function(){
+    synth.resume();
+    playAudio(id);
+  },100);
+}
+
+function stopAll(){
+  synth.cancel();
+  synth.resume();
+  currentPlayingId=null;
+  document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});
+}
 
 /* Accordion */
 document.querySelectorAll('.acc-h').forEach(function(h){h.addEventListener('click',function(){this.parentElement.classList.toggle('open');});});
