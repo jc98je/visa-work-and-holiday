@@ -839,6 +839,15 @@ document.querySelectorAll('.acc-head').forEach(h=>{
   });
 });
 
+/* ---------- Progress ---------- */
+function updateProgress(){
+  const total = planItems.length;
+  const done = planItems.filter((_,i)=>localStorage.getItem('plan-'+i)==='true').length;
+  const pct = Math.round((done/total)*100);
+  document.getElementById('progress-bar-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = pct+'% del plan completado';
+}
+
 /* ---------- Fill-in-the-blank ---------- */
 function checkFill(btn){
   const card = btn.closest('.card');
@@ -996,13 +1005,6 @@ planItems.forEach((text,i)=>{
   });
 });
 
-function updateProgress(){
-  const total = planItems.length;
-  const done = planItems.filter((_,i)=>localStorage.getItem('plan-'+i)==='true').length;
-  const pct = Math.round((done/total)*100);
-  document.getElementById('progress-bar-fill').style.width = pct+'%';
-  document.getElementById('progress-text').textContent = pct+'% del plan completado';
-}
 updateProgress();
 </script>
 
