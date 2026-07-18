@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Guía completa IELTS para visa Work & Holiday Australia. Vocabulario, gramática, listening, reading, writing y speaking organizados por niveles.">
+  <title>IELTS Completo — Guía de Estudio por Niveles | VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0b2942;
+      --navy2: #164066;
+      --red: #c8102e;
+      --gold: #d4a017;
+      --bg: #f7f5f0;
+      --card: #fff;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --green: #2e7d32;
+      --blue: #1565c0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    /* Hero */
+    header { background: linear-gradient(135deg, var(--navy), var(--navy2)); color: #fff; padding: 100px 20px 48px; text-align: center; border-bottom: 6px solid var(--gold); }
+    header h1 { margin: 0 0 8px; font-size: 2.3em; }
+    header p { color: #dbe6f0; margin: 4px 0; }
+    header .subtitle { font-size: .85em; color: var(--gold); }
+
+    /* Progress Bar */
+    #progress-wrap { max-width: 1000px; margin: 18px auto 0; padding: 0 20px; }
+    #progress-bar-bg { background: rgba(255,255,255,.15); border-radius: 20px; height: 10px; overflow: hidden; }
+    #progress-bar-fill { background: var(--gold); height: 100%; width: 0%; transition: width .4s ease; }
+    #progress-text { color: #dbe6f0; font-size: .8em; margin-top: 6px; text-align: center; }
+
+    /* Navigation */
+    nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; background: var(--navy); padding: 12px 10px; position: sticky; top: 0; z-index: 200; box-shadow: 0 3px 10px rgba(0,0,0,.2); }
+    nav a { color: #fff; text-decoration: none; padding: 7px 13px; border-radius: 18px; font-size: .85em; background: rgba(255,255,255,.08); cursor: pointer; transition: .2s; }
+    nav a:hover, nav a.active { background: var(--gold); color: var(--navy); }
+
+    /* Container */
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px 90px; }
+
+    /* Tab Panels */
+    .tabpanel { display: none; }
+    .tabpanel.active { display: block; animation: fadein .35s ease; }
+    @keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Typography */
+    h2.section-title { font-size: 1.8em; color: var(--navy); border-bottom: 3px solid var(--red); padding-bottom: 8px; margin-top: 10px; }
+    h3.sub { color: var(--red); font-size: 1.2em; margin-top: 26px; border-left: 4px solid var(--gold); padding-left: 10px; }
+
+    /* Cards */
+    .card { background: var(--card); border-radius: 10px; padding: 20px 24px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,.06); border: 1px solid #e8e4da; }
+
+    /* Tags */
+    .tag { display: inline-block; background: var(--gold); color: var(--navy); font-weight: bold; font-size: .75em; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; text-transform: uppercase; }
+    .tag.gram { background: #c8102e; color: #fff; }
+    .tag.vocab { background: #2e7d32; color: #fff; }
+    .tag.strat { background: #1565c0; color: #fff; }
+    .tag.band { background: var(--navy); color: #fff; }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: .92em; }
+    th, td { border: 1px solid #ddd; padding: 7px 10px; text-align: left; }
+    th { background: var(--navy); color: #fff; }
+    tr:nth-child(even) { background: #f2efe8; }
+
+    /* Examples */
+    .example { background: #fdf6e3; border-left: 4px solid var(--gold); padding: 9px 14px; margin: 8px 0; border-radius: 4px; }
+
+    ul { padding-left: 22px; }
+    li { margin-bottom: 5px; }
+
+    /* Footer */
+    footer { text-align: center; padding: 30px; background: var(--navy); color: #cfd9e3; font-size: .85em; }
+
+    /* Skill Cards Grid */
+    .grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 16px 0; }
+    .skillcard { background: var(--card); border-radius: 10px; padding: 18px; border: 1px solid #e8e4da; border-top: 5px solid var(--gold); box-shadow: 0 2px 8px rgba(0,0,0,.06); cursor: pointer; transition: .2s; }
+    .skillcard:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,.12); }
+    .skillcard h4 { margin: 6px 0; color: var(--navy); }
+    .skillcard .icon { font-size: 1.8em; }
+
+    /* Accordion */
+    .acc { background: var(--card); border: 1px solid #e8e4da; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+    .acc-head { padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #fff; font-weight: 600; color: var(--navy); }
+    .acc-head:hover { background: #f2efe8; }
+    .acc-head .plus { font-size: 1.3em; color: var(--red); transition: .25s; }
+    .acc.open .plus { transform: rotate(45deg); }
+    .acc-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; padding: 0 18px; }
+    .acc.open .acc-body { padding: 0 18px 16px; }
+
+    /* Quiz */
+    .quiz-q { margin-bottom: 14px; padding: 12px 14px; border: 1px solid #e8e4da; border-radius: 8px; background: #fcfbf8; }
+    .quiz-q .opts button { display: block; width: 100%; text-align: left; margin: 5px 0; padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; background: #fff; cursor: pointer; font-size: .92em; }
+    .quiz-q .opts button:hover { background: #f0ece0; }
+    .quiz-q .opts button.correct { background: #d9f2d9; border-color: var(--green); font-weight: bold; }
+    .quiz-q .opts button.wrong { background: #fbdcdc; border-color: var(--red); }
+    .quiz-score { font-weight: bold; color: var(--navy); margin-top: 10px; }
+    
+    .btn { background: var(--navy); color: #fff; border: none; padding: 9px 16px; border-radius: 20px; cursor: pointer; font-size: .9em; }
+    .btn:hover { background: var(--red); }
+    .btn.reset { background: #888; }
+
+    /* Fill Blank */
+    .fillblank input { border: none; border-bottom: 2px solid var(--gold); background: #fdf6e3; padding: 2px 6px; font-size: .95em; width: 130px; text-align: center; font-family: inherit; }
+    .fillblank input.ok { background: #d9f2d9; border-color: var(--green); }
+    .fillblank input.bad { background: #fbdcdc; border-color: var(--red); }
+    .check-row { margin-top: 10px; }
+
+    /* Flashcards */
+    .flash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; margin: 14px 0; }
+    .flash { perspective: 1000px; height: 130px; cursor: pointer; }
+    .flash-inner { position: relative; width: 100%; height: 100%; transition: transform .5s; transform-style: preserve-3d; }
+    .flash.flipped .flash-inner { transform: rotateY(180deg); }
+    .flash-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; font-size: .92em; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    .flash-front { background: var(--navy); color: #fff; font-weight: 600; }
+    .flash-back { background: var(--gold); color: var(--navy); transform: rotateY(180deg); font-size: .85em; }
+
+    /* Checklist */
+    .check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px dashed #ddd; }
+    .check-item input { margin-top: 4px; width: 16px; height: 16px; }
+    .check-item.done label { text-decoration: line-through; color: #999; }
+
+    /* Band Scale */
+    .band-scale { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+    .band-pill { background: var(--navy); color: #fff; padding: 6px 10px; border-radius: 16px; font-size: .8em; }
+
+    .toc-mini { font-size: .85em; color: var(--muted); margin-bottom: 20px; }
+    .toc-mini a { color: var(--blue); text-decoration: none; }
+    .toc-mini a:hover { text-decoration: underline; }
+
+    /* Level Cards */
+    .level-section { margin-bottom: 40px; }
+    .level-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; padding: 20px; background: linear-gradient(135deg, var(--navy), var(--navy2)); border-radius: 12px; color: white; }
+    .level-badge { width: 60px; height: 60px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: white; flex-shrink: 0; }
+    .level-badge.a1 { background: linear-gradient(135deg, #10b981, #059669); }
+    .level-badge.b1 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .level-badge.b2 { background: linear-gradient(135deg, #c8102e, #991b1b); }
+    .level-info h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; }
+    .level-info p { font-size: 0.88rem; opacity: 0.8; }
+    .level-info .band { display: inline-block; padding: 2px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; margin-top: 6px; background: rgba(255,255,255,.2); }
+
+    @media(max-width: 600px) {
+      header h1 { font-size: 1.6em; }
+      nav a { font-size: .78em; padding: 6px 10px; }
+      .grid4 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📘 IELTS — Guía Completa por Niveles</h1>
+  <p>Listening · Reading · Writing · Speaking · Gramática · Vocabulario</p>
+  <p class="subtitle">Preparación integral para tu visa Work & Holiday Australia</p>
+  <div id="progress-wrap">
+    <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+    <div id="progress-text">0% completado</div>
+  </div>
+</header>
+
+<nav id="mainnav">
+  <a data-tab="inicio" class="active">🏠 Inicio</a>
+  <a data-tab="nivel1">📗 Nivel 1 (A1-A2)</a>
+  <a data-tab="nivel2">📙 Nivel 2 (B1)</a>
+  <a data-tab="nivel3">📕 Nivel 3 (B2)</a>
+  <a data-tab="listening">🎧 Listening</a>
+  <a data-tab="reading">📖 Reading</a>
+  <a data-tab="writing">✍️ Writing</a>
+  <a data-tab="speaking">🗣️ Speaking</a>
+  <a data-tab="gramatica">📐 Gramática</a>
+  <a data-tab="bandas">📊 Bandas</a>
+  <a data-tab="plan">🗓️ Plan</a>
+  <a href="ielts-simulador.html" style="background:var(--red); color:white;">← Simulador</a>
+</nav>
+
+<div class="container">
+
+<!-- ===================== INICIO ===================== -->
+<section id="tab-inicio" class="tabpanel active">
+  <h2 class="section-title">Bienvenido/a a tu guía IELTS</h2>
+  <div class="card">
+    <p>El IELTS evalúa tu inglés en cuatro destrezas: <b>Listening, Reading, Writing y Speaking</b>. Para tu visa Work & Holiday Australia necesitas <b>4.5 promedio</b> (nivel A2-B1).</p>
+    <table>
+      <tr><th>Módulo</th><th>Duración</th><th>Partes</th><th>Objetivo</th></tr>
+      <tr><td>🎧 Listening</td><td>30 min</td><td>4 secciones</td><td>4.0+</td></tr>
+      <tr><td>📖 Reading</td><td>60 min</td><td>3 textos</td><td>4.0+</td></tr>
+      <tr><td>✍️ Writing</td><td>60 min</td><td>2 tareas</td><td>4.0+</td></tr>
+      <tr><td>🗣️ Speaking</td><td>11-14 min</td><td>3 partes</td><td>4.0+</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">📚 Explora por nivel</h3>
+  <div class="grid4">
+    <div class="skillcard" data-tab="nivel1"><span class="icon">📗</span><h4>Nivel 1: A1-A2</h4><p style="font-size:.85em;color:var(--muted)">Vocabulario básico, frases simples, comunicación del día a día.</p></div>
+    <div class="skillcard" data-tab="nivel2"><span class="icon">📙</span><h4>Nivel 2: B1</h4><p style="font-size:.85em;color:var(--muted)">Opiniones, experiencias, comunicación en trabajo.</p></div>
+    <div class="skillcard" data-tab="nivel3"><span class="icon">📕</span><h4>Nivel 3: B2</h4><p style="font-size:.85em;color:var(--muted)">Textos académicos, escritura formal, speaking fluido.</p></div>
+    <div class="skillcard" data-tab="plan"><span class="icon">🗓️</span><h4>Plan de Estudio</h4><p style="font-size:.85em;color:var(--muted)">Checklist personalizado para tu preparación.</p></div>
+  </div>
+
+  <h3 class="sub">🎯 Tu objetivo: IELTS 4.5</h3>
+  <div class="card">
+    <p>Solo necesitas nivel <b>funcional</b> (básico-intermedio). Con 2-3 meses de práctica diaria es alcanzable.</p>
+    <div class="band-scale">
+      <span class="band-pill" style="background:#2e7d32;">⭐ 4.5 Tu objetivo</span>
+      <span class="band-pill">5 Modest</span>
+      <span class="band-pill">6 Competent</span>
+      <span class="band-pill">7 Good</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NIVEL 1: A1-A2 ===================== -->
+<section id="tab-nivel1" class="tabpanel">
+  <div class="level-section">
+    <div class="level-header">
+      <div class="level-badge a1">A1-A2</div>
+      <div class="level-info">
+        <h3>📗 Nivel 1: Básico</h3>
+        <p>Vocabulario básico, frases simples y comunicación del día a día. Tu base para empezar.</p>
+        <span class="band">IELTS 3.0 - 4.0</span>
+      </div>
+    </div>
+
+    <!-- VOCABULARIO NIVEL 1 -->
+    <h3 class="sub">🧩 Vocabulario Básico (200+ palabras)</h3>
+    
+    <div class="acc"><div class="acc-head">✈️ Viajes y Transporte <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Airport</div><div class="flash-face flash-back">Aeropuerto<br><small>The plane leaves from the <b>airport</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Ticket</div><div class="flash-face flash-back">Billete<br><small>Do you have your train <b>ticket</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Passport</div><div class="flash-face flash-back">Pasaporte<br><small>Please show your <b>passport</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Flight</div><div class="flash-face flash-back">Vuelo<br><small>My <b>flight</b> is at 6:00 AM.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Luggage</div><div class="flash-face flash-back">Equipaje<br><small>Where can I collect my <b>luggage</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Departure</div><div class="flash-face flash-back">Salida<br><small>Check the <b>departure</b> board.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Arrival</div><div class="flash-face flash-back">Llegada<br><small>What is the <b>arrival</b> time?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Platform</div><div class="flash-face flash-back">Andén<br><small>The train is on <b>platform</b> 3.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🏥 Salud y Cuerpo <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Doctor</div><div class="flash-face flash-back">Médico<br><small>You should see a <b>doctor</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Medicine</div><div class="flash-face flash-back">Medicina<br><small>Take this <b>medicine</b> at night.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Headache</div><div class="flash-face flash-back">Dolor de cabeza<br><small>I have a terrible <b>headache</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Hospital</div><div class="flash-face flash-back">Hospital<br><small>He works at the local <b>hospital</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Pharmacy</div><div class="flash-face flash-back">Farmacia<br><small>The <b>pharmacy</b> is open until 10pm.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Fever</div><div class="flash-face flash-back">Fiebre<br><small>You have a slight <b>fever</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Appointment</div><div class="flash-face flash-back">Cita médica<br><small>I have a <b>appointment</b> at 3pm.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Prescription</div><div class="flash-face flash-back">Receta médica<br><small>You need a <b>prescription</b> for this.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🌤️ Clima y Naturaleza <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sunny</div><div class="flash-face flash-back">Soleado<br><small>It is a warm, <b>sunny</b> day.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Rainy</div><div class="flash-face flash-back">Lluvioso<br><small>It's very <b>rainy</b> today.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cloudy</div><div class="flash-face flash-back">Nublado<br><small>It is <b>cloudy</b> this morning.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Windy</div><div class="flash-face flash-back">Ventoso<br><small>It's very <b>windy</b> outside.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Season</div><div class="flash-face flash-back">Estación<br><small>Spring is my favourite <b>season</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Temperature</div><div class="flash-face flash-back">Temperatura<br><small>The <b>temperature</b> is 25 degrees.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Storm</div><div class="flash-face flash-back">Tormenta<br><small>There is a <b>storm</b> tonight.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Snow</div><div class="flash-face flash-back">Nieve<br><small>It never <b>snows</b> in Lima.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📚 Educación y Escuela <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Teacher</div><div class="flash-face flash-back">Profesor<br><small>My <b>teacher</b> is very kind.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Student</div><div class="flash-face flash-back">Estudiante<br><small>She is a good <b>student</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Book</div><div class="flash-face flash-back">Libro<br><small>I'm reading a <b>book</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Homework</div><div class="flash-face flash-back">Tarea<br><small>I have a lot of <b>homework</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Exam</div><div class="flash-face flash-back">Examen<br><small>The <b>exam</b> is tomorrow.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Classroom</div><div class="flash-face flash-back">Aula<br><small>The <b>classroom</b> is big.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">University</div><div class="flash-face flash-back">Universidad<br><small>She studies at <b>university</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Diploma</div><div class="flash-face flash-back">Título<br><small>I got my <b>diploma</b> last year.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🛒 Compras y Dinero <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Price</div><div class="flash-face flash-back">Precio<br><small>What is the <b>price</b> of this?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cheap</div><div class="flash-face flash-back">Barato<br><small>This shirt is very <b>cheap</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Expensive</div><div class="flash-face flash-back">Caro<br><small>The car is too <b>expensive</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Money</div><div class="flash-face flash-back">Dinero<br><small>I don't have enough <b>money</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Discount</div><div class="flash-face flash-back">Descuento<br><small>Is there a <b>discount</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Receipt</div><div class="flash-face flash-back">Recibo<br><small>Can I have the <b>receipt</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cash</div><div class="flash-face flash-back">Efectivo<br><small>Do you pay by <b>cash</b> or card?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Credit Card</div><div class="flash-face flash-back">Tarjeta de crédito<br><small>I'll pay with my <b>credit card</b>.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">💻 Tecnología <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Computer</div><div class="flash-face flash-back">Computadora<br><small>I use my <b>computer</b> every day.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Internet</div><div class="flash-face flash-back">Internet<br><small>The <b>internet</b> is slow.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Phone</div><div class="flash-face flash-back">Teléfono<br><small>Can I use your <b>phone</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Password</div><div class="flash-face flash-back">Contraseña<br><small>What is your <b>password</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Email</div><div class="flash-face flash-back">Correo electrónico<br><small>Send me an <b>email</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Download</div><div class="flash-face flash-back">Descargar<br><small>I need to <b>download</b> the app.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Website</div><div class="flash-face flash-back">Sitio web<br><small>Visit our <b>website</b> for more info.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Software</div><div class="flash-face flash-back">Programa<br><small>This <b>software</b> is easy to use.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🏠 Casa y Hogar <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Kitchen</div><div class="flash-face flash-back">Cocina<br><small>I cook in the <b>kitchen</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Bedroom</div><div class="flash-face flash-back">Dormitorio<br><small>My <b>bedroom</b> is upstairs.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Furniture</div><div class="flash-face flash-back">Muebles<br><small>The <b>furniture</b> is new.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Garden</div><div class="flash-face flash-back">Jardín<br><small>There are flowers in the <b>garden</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Bathroom</div><div class="flash-face flash-back">Baño<br><small>The <b>bathroom</b> is clean.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Repair</div><div class="flash-face flash-back">Reparar<br><small>I need to <b>repair</b> the door.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Rent</div><div class="flash-face flash-back">Alquiler<br><small>The <b>rent</b> is $500 per month.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lease</div><div class="flash-face flash-back">Contrato de alquiler<br><small>Sign the <b>lease</b> please.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">⚽ Deportes y Hobbies <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Football</div><div class="flash-face flash-back">Fútbol<br><small>I play <b>football</b> on Sundays.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Swimming</div><div class="flash-face flash-back">Natación<br><small>I like <b>swimming</b> in the pool.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Running</div><div class="flash-face flash-back">Correr<br><small>She goes <b>running</b> every morning.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Hobby</div><div class="flash-face flash-back">Pasatiempo<br><small>My <b>hobby</b> is photography.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Team</div><div class="flash-face flash-back">Equipo<br><small>Our <b>team</b> won the game.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Match</div><div class="flash-face flash-back">Partido<br><small>The <b>match</b> starts at 3pm.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Gym</div><div class="flash-face flash-back">Gimnasio<br><small>I go to the <b>gym</b> every day.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tennis</div><div class="flash-face flash-back">Tenis<br><small>Do you play <b>tennis</b>?</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">😊 Emociones y Sentimientos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Happy</div><div class="flash-face flash-back">Feliz<br><small>I am very <b>happy</b> today.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sad</div><div class="flash-face flash-back">Triste<br><small>She feels <b>sad</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Excited</div><div class="flash-face flash-back">Emocionado<br><small>I'm <b>excited</b> about the trip!</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tired</div><div class="flash-face flash-back">Cansado<br><small>I'm so <b>tired</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Nervous</div><div class="flash-face flash-back">Nervioso<br><small>I feel <b>nervous</b> about the exam.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Confident</div><div class="flash-face flash-back">Seguro de sí mismo<br><small>She is very <b>confident</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Angry</div><div class="flash-face flash-back">Enojado<br><small>Don't be <b>angry</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Surprised</div><div class="flash-face flash-back">Sorprendido<br><small>I was <b>surprised</b> by the news.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🍽️ Comida y Restaurante <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Breakfast</div><div class="flash-face flash-back">Desayuno<br><small>I have <b>breakfast</b> at 7am.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lunch</div><div class="flash-face flash-back">Almuerzo<br><small>Let's have <b>lunch</b> together.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Dinner</div><div class="flash-face flash-back">Cena<br><small>We had <b>dinner</b> at 8pm.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Menu</div><div class="flash-face flash-back">Menú<br><small>Can I see the <b>menu</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Order</div><div class="flash-face flash-back">Pedido<br><small>I'd like to place my <b>order</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Delicious</div><div class="flash-face flash-back">Delicioso<br><small>The food is <b>delicious</b>!</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Reservation</div><div class="flash-face flash-back">Reserva<br><small>I have a <b>reservation</b> at 7pm.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tip</div><div class="flash-face flash-back">Propina<br><small>Do you leave a <b>tip</b>?</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">💼 Trabajos y Profesiones <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Waiter</div><div class="flash-face flash-back">Mesero<br><small>The <b>waiter</b> brought our food.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Driver</div><div class="flash-face flash-back">Conductor<br><small>The <b>driver</b> is very friendly.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cook</div><div class="flash-face flash-back">Cocinero<br><small>He is a great <b>cook</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Office</div><div class="flash-face flash-back">Oficina<br><small>She works in an <b>office</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Manager</div><div class="flash-face flash-back">Gerente<br><small>The <b>manager</b> approved it.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Salary</div><div class="flash-face flash-back">Salario<br><small>What is the <b>salary</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Employer</div><div class="flash-face flash-back">Empleador<br><small>My <b>employer</b> is very nice.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Colleague</div><div class="flash-face flash-back">Colega<br><small>My <b>colleague</b> helped me.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🏙️ Ciudad y Direcciones <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Left</div><div class="flash-face flash-back">Izquierda<br><small>Turn <b>left</b> at the corner.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Right</div><div class="flash-face flash-back">Derecha<br><small>Turn <b>right</b> here.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Straight</div><div class="flash-face flash-back">Recto<br><small>Go <b>straight</b> for 200 metres.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Corner</div><div class="flash-face flash-back">Esquina<br><small>The shop is on the <b>corner</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Bridge</div><div class="flash-face flash-back">Puente<br><small>Cross the <b>bridge</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Traffic</div><div class="flash-face flash-back">Tráfico<br><small>The <b>traffic</b> is heavy.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Suburb</div><div class="flash-face flash-back">Barrio<br><small>I live in a quiet <b>suburb</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Neighbourhood</div><div class="flash-face flash-back">Vecindario<br><small>It's a safe <b>neighbourhood</b>.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAMÁTICA NIVEL 1 -->
+    <h3 class="sub">📐 Gramática Básica</h3>
+    
+    <div class="acc"><div class="acc-head">⏰ Present Simple <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Acciones habituales y hechos generales.</p>
+        <table>
+          <tr><th>Tipo</th><th>Estructura</th><th>Ejemplo</th></tr>
+          <tr><td>Afirmativa</td><td>I/You/We/They + verbo | He/She/It + verbo<b>s</b></td><td>I <b>work</b>. She <b>works</b>.</td></tr>
+          <tr><td>Negativa</td><td>don't/doesn't + verbo</td><td>I <b>don't work</b>. She <b>doesn't work</b>.</td></tr>
+          <tr><td>Interrogativa</td><td>Do/Does + sujeto + verbo?</td><td><b>Do</b> you work? <b>Does</b> she work?</td></tr>
+        </table>
+        <div class="example">She <b>works</b> in an office. / They <b>don't live</b> in Sydney.</div>
+        <p><b>💡 Tip:</b> IELTS 4.5 solo necesitas usar bien present simple y past simple.</p>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">⏪ Past Simple <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Acciones terminadas en el pasado.</p>
+        <table>
+          <tr><th>Regular</th><th>Irregular</th></tr>
+          <tr><td>work → work<b>ed</b></td><td>go → <b>went</b></td></tr>
+          <tr><td>live → liv<b>ed</b></td><td>have → <b>had</b></td></tr>
+          <tr><td>play → play<b>ed</b></td><td>see → <b>saw</b></td></tr>
+          <tr><td>study → stud<b>ied</b></td><td>eat → <b>ate</b></td></tr>
+        </table>
+        <div class="example">I <b>visited</b> Sydney last year. / She <b>ate</b> lunch at noon.</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">⏩ Future (will / going to) <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Will:</b> Decisiones espontáneas, predicciones, promesas</p>
+        <p><b>Going to:</b> Planes ya decididos, intenciones</p>
+        <div class="example">It <b>will rain</b> tomorrow. / I<strong>'m going to study</strong> English.</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">⚖️ Comparativos y Superlativos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Adjetivo corto</th><th>Adjetivo largo</th><th>Irregulares</th></tr>
+          <tr><td>tall → tall<b>er</b> → tall<b>est</b></td><td>beautiful → <b>more</b> beautiful → <b>most</b> beautiful</td><td>good → <b>better</b> → <b>best</b></td></tr>
+          <tr><td>big → bigg<b>er</b> → bigg<b>est</b></td><td>expensive → <b>more</b> expensive</td><td>bad → <b>worse</b> → <b>worst</b></td></tr>
+        </table>
+        <div class="example">Sydney is <b>bigger than</b> Perth. / This is <b>the best</b> restaurant.</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📌 Artículos (a/an/the) <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>A</b> → antes de consonante: a book, a house</p>
+        <p><b>An</b> → antes de vocal: an apple, an office</p>
+        <p><b>The</b> → algo específico/único: the sun, the book on the table</p>
+        <p><b>Sin artículo</b> → nombres propios, generalidades: Lima, water is important</p>
+        <div class="example">I want <b>a</b> coffee. / She works in <b>an</b> office.</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📍 Preposiciones (in/on/at) <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>IN</th><th>ON</th><th>AT</th></tr>
+          <tr><td>meses, años, partes del día</td><td>días, fechas, superficies</td><td>horas, lugares específicos</td></tr>
+          <tr><td>in July, in 2026, in the morning</td><td>on Monday, on July 15th, on the table</td><td>at 3pm, at home, at school</td></tr>
+        </table>
+        <div class="example">I wake up <b>at</b> 7am <b>in</b> the morning. / The meeting is <b>on</b> Monday.</div>
+      </div>
+    </div>
+
+    <!-- LISTENING NIVEL 1 -->
+    <h3 class="sub">🎧 Listening Básico</h3>
+    <div class="card">
+      <p><b>Para tu visa Work & Holiday</b>, necesitas entender:</p>
+      <ul>
+        <li>✅ Números, horarios y direcciones</li>
+        <li>✅ Instrucciones simples ("Turn left", "Go straight")</li>
+        <li>✅ Información personal (nombre, dirección, teléfono)</li>
+        <li>✅ Conversaciones cotidianas (reservar hotel, pedir comida)</li>
+      </ul>
+      <div class="example"><b>Ejercicio:</b> "I'd like to book a room for <input type="text" class="fb" data-answer="three"> nights, please."</div>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <!-- READING NIVEL 1 -->
+    <h3 class="sub">📖 Reading Básico</h3>
+    <div class="card">
+      <p><b>Practica leyendo:</b></p>
+      <ul>
+        <li>✅ Menús de restaurantes</li>
+        <li>✅ Horarios de trenes/autobuses</li>
+        <li>✅ Señales y avisos públicos</li>
+        <li>✅ Instrucciones simples</li>
+      </ul>
+      <div class="example"><b>Ejemplo:</b> "The meeting will be held on Monday at 3pm in Room 204."<br><b>Pregunta:</b> When is the meeting? → <b>Monday at 3pm</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NIVEL 2: B1 ===================== -->
+<section id="tab-nivel2" class="tabpanel">
+  <div class="level-section">
+    <div class="level-header">
+      <div class="level-badge b1">B1</div>
+      <div class="level-info">
+        <h3>📙 Nivel 2: Intermedio</h3>
+        <p>Frases más complejas, opiniones, experiencias y comunicación en trabajo.</p>
+        <span class="band">IELTS 4.0 - 5.0 ⭐ Tu objetivo</span>
+      </div>
+    </div>
+
+    <!-- VOCABULARIO NIVEL 2 -->
+    <h3 class="sub">🧩 Vocabulario Intermedio (150+ palabras)</h3>
+    
+    <div class="acc"><div class="acc-head">💼 Trabajo y Empleo <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Interview</div><div class="flash-face flash-back">Entrevista<br><small>I have a job <b>interview</b> tomorrow.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Resume/CV</div><div class="flash-face flash-back">Currículum<br><small>Send your <b>resume</b> by email.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Qualification</div><div class="flash-face flash-back">Cualificación<br><small>What <b>qualifications</b> do you have?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Experience</div><div class="flash-face flash-back">Experiencia<br><small>Do you have work <b>experience</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Deadline</div><div class="flash-face flash-back">Fecha límite<br><small>The <b>deadline</b> is Friday.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Overtime</div><div class="flash-face flash-back">Horas extras<br><small>I worked <b>overtime</b> yesterday.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Promotion</div><div class="flash-face flash-back">Promoción<br><small>She got a <b>promotion</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Shift</div><div class="flash-face flash-back">Turno<br><small>What <b>shift</b> do you work?</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🏠 Vivienda y Alquiler <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Landlord</div><div class="flash-face flash-back">Propietario<br><small>The <b>landlord</b> fixed the tap.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tenant</div><div class="flash-face flash-back">Inquilino<br><small>The <b>tenant</b> pays rent monthly.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lease</div><div class="flash-face flash-back">Contrato<br><small>Sign the <b>lease</b> for 12 months.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Deposit</div><div class="flash-face flash-back">Depósito<br><small>You need a <b>deposit</b> of $1000.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Furnished</div><div class="flash-face flash-back">Amueblado<br><small>Is the flat <b>furnished</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Utilities</div><div class="flash-face flash-back">Servicios públicos<br><small>Are <b>utilities</b> included in the rent?</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🏥 Salud y Emergencias <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Emergency</div><div class="flash-face flash-back">Emergencia<br><small>Call 000 in an <b>emergency</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Symptoms</div><div class="flash-face flash-back">Síntomas<br><small>What are your <b>symptoms</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Treatment</div><div class="flash-face flash-back">Tratamiento<br><small>You need <b>treatment</b> for this.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Insurance</div><div class="flash-face flash-back">Seguro<br><small>Do you have health <b>insurance</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Ambulance</div><div class="flash-face flash-back">Ambulancia<br><small>We need an <b>ambulance</b>!</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Allergy</div><div class="flash-face flash-back">Alergia<br><small>I have a nut <b>allergy</b>.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">✈️ Viajes y Aeropuerto <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Customs</div><div class="flash-face flash-back">Aduana<br><small>Please go to <b>customs</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Immigration</div><div class="flash-face flash-back">Migración<br><small>Present your passport at <b>immigration</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Layover</div><div class="flash-face flash-back">Escalá<br><small>We have a 2-hour <b>layover</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Gate</div><div class="flash-face flash-back">Puerta<br><small>Go to <b>gate</b> 12.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Boarding Pass</div><div class="flash-face flash-back">Tarjeta de embarque<br><small>Show your <b>boarding pass</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Carry-on</div><div class="flash-face flash-back">Equipaje de mano<br><small>Is this your <b>carry-on</b>?</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">💰 Finanzas y Banco <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Account</div><div class="flash-face flash-back">Cuenta<br><small>Open a bank <b>account</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Transfer</div><div class="flash-face flash-back">Transferencia<br><small>I made a <b>transfer</b> today.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Balance</div><div class="flash-face flash-back">Saldo<br><small>Check your <b>balance</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">ATM</div><div class="flash-face flash-back">Cajero automático<br><small>I need cash from the <b>ATM</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Exchange Rate</div><div class="flash-face flash-back">Tipo de cambio<br><small>What is the <b>exchange rate</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Budget</div><div class="flash-face flash-back">Presupuesto<br><small>I'm on a tight <b>budget</b>.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🗣️ Comunicación y Conversación <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Agree</div><div class="flash-face flash-back">Estoy de acuerdo<br><small>I <b>agree</b> with you.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Disagree</div><div class="flash-face flash-back">No estoy de acuerdo<br><small>I <b>disagree</b> with that.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Suggestion</div><div class="flash-face flash-back">Sugerencia<br><small>Can I make a <b>suggestion</b>?</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Opinion</div><div class="flash-face flash-back">Opinión<br><small>In my <b>opinion</b>...</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Explanation</div><div class="flash-face flash-back">Explicación<br><small>Let me give you an <b>explanation</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Example</div><div class="flash-face flash-back">Ejemplo<br><small>For <b>example</b>, I like coffee.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAMÁTICA NIVEL 2 -->
+    <h3 class="sub">📐 Gramática Intermedia</h3>
+    
+    <div class="acc"><div class="acc-head">⏳ Present Perfect <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Experiencias sin tiempo definido / acción que empezó en el pasado y sigue ahora.</p>
+        <table>
+          <tr><th>Tipo</th><th>Estructura</th><th>Ejemplo</th></tr>
+          <tr><td>Afirmativa</td><td>have/has + participio</td><td>I <b>have visited</b> Sydney.</td></tr>
+          <tr><td>Negativa</td><td>haven't/hasn't + participio</td><td>I <b>haven't been</b> to Perth.</td></tr>
+          <tr><td>Interrogativa</td><td>Have/Has + sujeto + participio?</td><td><b>Have</b> you <b>worked</b> in Australia?</td></tr>
+        </table>
+        <div class="example">I <b>have lived</b> in Lima for 5 years. (vivo aquí desde hace 5 años)</div>
+        <p><b>💡 Tip:</b> Usa con "for" (duración) y "since" (punto de partida).</p>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🔄 Present Perfect Continuous <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Énfasis en la duración de una acción que empezó en el pasado y continúa.</p>
+        <div class="example">I <b>have been studying</b> English for 3 months. / She <b>has been working</b> all day.</div>
+        <p><b>Diferencia:</b> "I've read that book" (terminé) vs "I've been reading" (todavía lo leo).</p>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🔮 First Conditional <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Situaciones futuras reales/posibles.</p>
+        <div class="example">If it <b>rains</b>, I <b>will take</b> an umbrella. / If you <b>study</b> hard, you <b>will pass</b>.</div>
+        <p><b>⚠️ Importante:</b> NO uses "will" después de "if".</p>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">💭 Second Conditional <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Hipotético presente/futuro improbable.</p>
+        <div class="example">If I <b>had</b> more money, I <b>would travel</b> the world. / If I <b>were</b> you, I <b>would accept</b> the job.</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📝 Passives (Voz Pasiva) <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Cuando la acción importa más que quién la realiza.</p>
+        <table>
+          <tr><th>Tiempo</th><th>Estructura</th><th>Ejemplo</th></tr>
+          <tr><td>Present Simple</td><td>am/is/are + participio</td><td>English <b>is spoken</b> here.</td></tr>
+          <tr><td>Past Simple</td><td>was/were + participio</td><td>The house <b>was built</b> in 2010.</td></tr>
+          <tr><td>Present Perfect</td><td>has/have been + participio</td><td>The report <b>has been finished</b>.</td></tr>
+          <tr><td>Future</td><td>will be + participio</td><td>The results <b>will be announced</b>.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📊 Reported Speech <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Reportar lo que otra persona dijo.</p>
+        <table>
+          <tr><th>Directo</th><th>Indirecto</th></tr>
+          <tr><td>"I <b>am</b> tired."</td><td>She said she <b>was</b> tired.</td></tr>
+          <tr><td>"I <b>will</b> come."</td><td>He said he <b>would</b> come.</td></tr>
+          <tr><td>"I <b>have finished</b>."</td><td>She said she <b>had finished</b>.</td></tr>
+        </table>
+        <div class="example">"I'm working hard." → She <b>said</b> she <b>was working</b> hard.</div>
+      </div>
+    </div>
+
+    <!-- LISTENING NIVEL 2 -->
+    <h3 class="sub">🎧 Listening Intermedio</h3>
+    <div class="card">
+      <p><b>Practica con:</b></p>
+      <ul>
+        <li>✅ Conversaciones sobre trabajo y alquiler</li>
+        <li>✅ Instrucciones más largas</li>
+        <li>✅ Información en anuncios públicos</li>
+        <li>✅ Resúmenes de noticias</li>
+      </ul>
+      <div class="example"><b>Ejercicio:</b> "If you <input type="text" class="fb" data-answer="have"> any questions, please let me know."</div>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <!-- READING NIVEL 2 -->
+    <h3 class="sub">📖 Reading Intermedio</h3>
+    <div class="card">
+      <p><b>Practica leyendo:</b></p>
+      <ul>
+        <li>✅ Contratos de trabajo simples</li>
+        <li>✅ Artículos de noticias cortos</li>
+        <li>✅ Correos electrónicos formales</li>
+        <li>✅ Instrucciones de trabajo</li>
+      </ul>
+      <div class="example"><b>Ejemplo:</b> "The company has decided to implement a new flexible working policy from next month."<br><b>Pregunta:</b> What will the company do? → <b>Implement flexible working</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NIVEL 3: B2 ===================== -->
+<section id="tab-nivel3" class="tabpanel">
+  <div class="level-section">
+    <div class="level-header">
+      <div class="level-badge b2">B2</div>
+      <div class="level-info">
+        <h3>📕 Nivel 3: Intermedio Alto</h3>
+        <p>Textos académicos, escritura formal, speaking fluido y vocabulario avanzado.</p>
+        <span class="band">IELTS 5.0 - 6.0+</span>
+      </div>
+    </div>
+
+    <!-- VOCABULARIO NIVEL 3 -->
+    <h3 class="sub">🧩 Vocabulario Avanzado</h3>
+    
+    <div class="acc"><div class="acc-head">🎓 Educación Superior <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Curriculum</div><div class="flash-face flash-back">Plan de estudios<br><small>The <b>curriculum</b> has been updated.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Thesis</div><div class="flash-face flash-back">Tesis<br><small>She submitted her <b>thesis</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lecture</div><div class="flash-face flash-back">Conferencia<br><small>The <b>lecture</b> was very informative.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Seminar</div><div class="flash-face flash-back">Seminario<br><small>Attend the <b>seminar</b> on Friday.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Dissertation</div><div class="flash-face flash-back">Disertación<br><small>His <b>dissertation</b> was excellent.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Academic</div><div class="flash-face flash-back">Académico<br><small>She has an <b>academic</b> background.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🌍 Temas Globales <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sustainability</div><div class="flash-face flash-back">Sostenibilidad<br><small><b>Sustainability</b> is crucial for the future.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Globalisation</div><div class="flash-face flash-back">Globalización<br><small><b>Globalisation</b> has both benefits and drawbacks.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Inequality</div><div class="flash-face flash-back">Desigualdad<br><small>Income <b>inequality</b> is increasing.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Climate Change</div><div class="flash-face flash-back">Cambio climático<br><small><b>Climate change</b> affects everyone.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Democracy</div><div class="flash-face flash-back">Democracia<br><small><b>Democracy</b> requires active participation.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Urbanisation</div><div class="flash-face flash-back">Urbanización<br><small>Rapid <b>urbanisation</b> causes many issues.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">💼 Negocios y Empresa <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Entrepreneur</div><div class="flash-face flash-back">Emprendedor<br><small>She is a successful <b>entrepreneur</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Revenue</div><div class="flash-face flash-back">Ingresos<br><small>The company's <b>revenue</b> increased.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Investment</div><div class="flash-face flash-back">Inversión<br><small>Make a wise <b>investment</b>.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Strategy</div><div class="flash-face flash-back">Estrategia<br><small>Their marketing <b>strategy</b> worked.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Innovation</div><div class="flash-face flash-back">Innovación<br><small><b>Innovation</b> drives growth.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sustainable</div><div class="flash-face flash-back">Sostenible<br><small>They want <b>sustainable</b> practices.</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🔗 Conectores y Cohesión <span class="plus">+</span></div>
+      <div class="acc-body">
+        <div class="flash-grid">
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Furthermore</div><div class="flash-face flash-back">Además<br><small><b>Furthermore</b>, there are other benefits.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Nevertheless</div><div class="flash-face flash-back">Sin embargo<br><small><b>Nevertheless</b>, I disagree.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Consequently</div><div class="flash-face flash-back">Como consecuencia<br><small><b>Consequently</b>, prices rose.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Nevertheless</div><div class="flash-face flash-back">No obstante<br><small>The plan is good; <b>nevertheless</b>, we need more time.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Conversely</div><div class="flash-face flash-back">Por el contrario<br><small><b>Conversely</b>, others think it's bad.</small></div></div></div>
+          <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">In contrast</div><div class="flash-face flash-back">En contraste<br><small><b>In contrast</b>, the second study showed...</small></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAMÁTICA NIVEL 3 -->
+    <h3 class="sub">📐 Gramática Avanzada</h3>
+    
+    <div class="acc"><div class="acc-head">💭 Third Conditional <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Hipotético pasado (cosas que NO pasaron).</p>
+        <div class="example">If I <b>had studied</b> harder, I <b>would have passed</b> the exam.<br>(No estudié lo suficiente → no aprobé)</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🔄 Mixed Conditionals <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Combinar pasado y presente.</p>
+        <div class="example">If I <b>had taken</b> that job, I <b>would be</b> living in Sydney now.<br>(Pasado diferente → presente diferente)</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">📊 Relative Clauses <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Añadir información sin crear frases nuevas.</p>
+        <table>
+          <tr><th>Relative</th><th>Uso</th><th>Ejemplo</th></tr>
+          <tr><td>who/that</td><td>Personas (sujeto)</td><td>The man <b>who</b> called is my boss.</td></tr>
+          <tr><td>which/that</td><td>Cosas</td><td>The book <b>which</b> I read was great.</td></tr>
+          <tr><td>whose</td><td>Posesión</td><td>The girl <b>whose</b> phone rang...</td></tr>
+          <tr><td>where</td><td>Lugares</td><td>The city <b>where</b> I grew up...</td></tr>
+          <tr><td>when</td><td>Tiempo</td><td>Summer is the time <b>when</b> I relax.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">✂️ Participle Clauses <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Formas compactas de cláusulas (Writing avanzado).</p>
+        <div class="example"><b>Living</b> in a big city, she enjoys the nightlife. = Because she lives in a big city...<br><b>Exhausted</b> from work, he went to bed early. = Because he was exhausted...</div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">🎭 Cleft Sentences <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Uso:</b> Enfatizar diferentes partes de la frase (Writing y Speaking Band 6+).</p>
+        <div class="example">It was <b>yesterday</b> that I arrived. (enfasis en cuándo)<br>What I <b>need</b> is more time. (enfasis en qué)</div>
+      </div>
+    </div>
+
+    <!-- WRITING NIVEL 3 -->
+    <h3 class="sub">✍️ Writing Avanzado</h3>
+    <div class="card">
+      <span class="tag strat">Task 1 Academic</span>
+      <p>Describe gráficos, tablas, procesos o mapas <b>objetivamente</b>.</p>
+      <ul>
+        <li><b>Overview:</b> 1-2 frases con las tendencias principales (¡obligatorio para Band 6+!)</li>
+        <li><b>Datos específicos:</b> Agrupa información similar, compara</li>
+      </ul>
+      <div class="example"><b>Vocabulario útil:</b> rise, increase, climb, surge / fall, decline, decrease, drop / remain stable, plateau, level off</div>
+    </div>
+
+    <div class="card">
+      <span class="tag strat">Task 2 Essay</span>
+      <p>Estructura de 4 párrafos para Band 6+:</p>
+      <ul>
+        <li><b>Introducción:</b> Parafrasea + thesis statement clara</li>
+        <li><b>Párrafo 1:</b> Idea principal + explicación + ejemplo</li>
+        <li><b>Párrafo 2:</b> Segunda idea o contraargumento + explicación</li>
+        <li><b>Conclusión:</b> Resume sin repetir literalmente</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LISTENING ===================== -->
+<section id="tab-listening" class="tabpanel">
+  <h2 class="section-title">🎧 Listening — Comprensión auditiva</h2>
+  <div class="card">
+    <p>4 secciones, cada una se reproduce <b>una sola vez</b>. Para tu visa Work & Holiday necesitas entender conversaciones cotidianas.</p>
+    <table>
+      <tr><th>Sección</th><th>Contexto</th><th>Hablantes</th><th>Objetivo Visa</th></tr>
+      <tr><td>Section 1</td><td>Conversación cotidiana</td><td>2 personas</td><td>✅ Esencial</td></tr>
+      <tr><td>Section 2</td><td>Monólogo cotidiano</td><td>1 persona</td><td>✅ Importante</td></tr>
+      <tr><td>Section 3</td><td>Conversación académica</td><td>2-4 personas</td><td>⚠️ Difícil</td></tr>
+      <tr><td>Section 4</td><td>Monólogo académico</td><td>1 persona</td><td>❌ No necesario</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">🎯 Para tu visa Work & Holiday</h3>
+  <div class="card">
+    <p>Enfócate en <b>Section 1 y 2</b>. Necesitas entender:</p>
+    <ul>
+      <li>✅ Números de teléfono, direcciones, fechas</li>
+      <li>✅ Reservar hotel, alquilar casa, pedir comida</li>
+      <li>✅ Información personal y de contacto</li>
+      <li>✅ Instrucciones simples del día a día</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">💡 Estrategias clave</h3>
+  <div class="card">
+    <ul>
+      <li>Usa el tiempo antes de cada sección para leer las preguntas</li>
+      <li>Escribe la respuesta en el momento — no esperes</li>
+      <li>Si te pierdes una respuesta, sigue adelante</li>
+      <li>Presta atención a señales de corrección: "sorry, I mean..."</li>
+      <li>Revisa ortografía y plurales</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">📝 Práctica</h3>
+  <div class="card fillblank">
+    <p><b>Completa con la información correcta:</b></p>
+    <p>"I'd like to book a room for <input type="text" class="fb" data-answer="three"> nights, please."</p>
+    <p>"Could I have your <input type="text" class="fb" data-answer="surname"> and phone number?"</p>
+    <p>"The total cost is <input type="text" class="fb" data-answer="120"> dollars."</p>
+    <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
+  </div>
+</section>
+
+<!-- ===================== READING ===================== -->
+<section id="tab-reading" class="tabpanel">
+  <h2 class="section-title">📖 Reading — Comprensión de lectura</h2>
+  <div class="card">
+    <p>Para tu visa Work & Holiday, necesitas leer y entender textos cotidianos en inglés.</p>
+  </div>
+
+  <h3 class="sub">🎯 Tipos de texto para practicar</h3>
+  <div class="card">
+    <ul>
+      <li>✅ Menús de restaurantes</li>
+      <li>✅ Horarios de transporte público</li>
+      <li>✅ Contratos simples de alquiler</li>
+      <li>✅ Correos electrónicos formales</li>
+      <li>✅ Noticias cortas</li>
+      <li>✅ Instrucciones de trabajo</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">💡 Estrategias clave</h3>
+  <div class="card">
+    <ul>
+      <li><b>Skimming:</b> Lectura rápida para captar la idea general</li>
+      <li><b>Scanning:</b> Búsqueda rápida de datos concretos</li>
+      <li>Lee las preguntas antes que el texto</li>
+      <li>Gestiona el tiempo: ~20 minutos por texto</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">📝 Práctica — True / False / Not Given</h3>
+  <div class="card">
+    <p class="example"><b>Texto:</b> "Sydney has a mild climate with warm summers and cool winters. The city receives around 1,200mm of rainfall per year."</p>
+    <div class="quiz-q">
+      <p><b>1.</b> Sydney has hot summers all year round.</p>
+      <div class="opts">
+        <button onclick="checkAnswer(this, true)">True</button>
+        <button onclick="checkAnswer(this, false)">False</button>
+        <button onclick="checkAnswer(this, null)">Not Given</button>
+      </div>
+    </div>
+    <div class="quiz-q">
+      <p><b>2.</b> Sydney receives less than 1,000mm of rain per year.</p>
+      <div class="opts">
+        <button onclick="checkAnswer(this, true)">True</button>
+        <button onclick="checkAnswer(this, false)">False</button>
+        <button onclick="checkAnswer(this, null)">Not Given</button>
+      </div>
+    </div>
+    <div class="quiz-q">
+      <p><b>3.</b> The best time to visit Sydney is in summer.</p>
+      <div class="opts">
+        <button onclick="checkAnswer(this, true)">True</button>
+        <button onclick="checkAnswer(this, false)">False</button>
+        <button onclick="checkAnswer(this, null)">Not Given</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WRITING ===================== -->
+<section id="tab-writing" class="tabpanel">
+  <h2 class="section-title">✍️ Writing — Expresión escrita</h2>
+  <div class="card">
+    <p>Para tu visa Work & Holiday, necesitas escribir correos formales y describir experiencias.</p>
+  </div>
+
+  <h3 class="sub">📧 Correos formales (esencial para visa)</h3>
+  <div class="card">
+    <span class="tag strat">Estructura</span>
+    <ul>
+      <li><b>Saludo:</b> Dear Sir/Madam, / Dear Mr/Mrs [Name],</li>
+      <li><b>Introducción:</b> I am writing to...</li>
+      <li><b>Cuerpo:</b> Desarrolla los puntos</li>
+      <li><b>Cierre:</b> Yours sincerely, / Yours faithfully,</li>
+    </ul>
+    <div class="example"><b>Ejemplo:</b><br>Dear Sir/Madam,<br><br>I am writing to inquire about availability for a shared apartment in Melbourne. I am planning to arrive in Australia on March 15th and would like to find accommodation for 6 months.<br><br>I would appreciate it if you could provide information about rent, utilities, and any house rules.<br><br>Yours faithfully,<br>Juan Pérez</div>
+  </div>
+
+  <h3 class="sub">📝 Writing Task 2 (IELTS General)</h3>
+  <div class="card">
+    <span class="tag strat">Estructura de 4 párrafos</span>
+    <ul>
+      <li><b>Introducción:</b> Parafrasea la pregunta + tu opinión</li>
+      <li><b>Párrafo 1:</b> Primera razón + ejemplo</li>
+      <li><b>Párrafo 2:</b> Segunda razón + ejemplo</li>
+      <li><b>Conclusión:</b> Resume tu postura</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== SPEAKING ===================== -->
+<section id="tab-speaking" class="tabpanel">
+  <h2 class="section-title">🗣️ Speaking — Conversación oral</h2>
+  <div class="card">
+    <p>La entrevista dura <b>11-14 minutos</b> y tiene 3 partes. Para tu visa, necesitas comunicarte en situaciones cotidianas.</p>
+  </div>
+
+  <h3 class="sub">Part 1 — Preguntas personales (4-5 min)</h3>
+  <div class="card">
+    <p><b>Temas típicos:</b> Trabajo, estudios, hobbies, familia, rutina diaria.</p>
+    <span class="tag strat">Estrategia</span>
+    <ul>
+      <li>Respuestas de 2-4 oraciones</li>
+      <li>Añade siempre una razón o ejemplo</li>
+      <li>No respondas solo "Yes" o "No"</li>
+    </ul>
+    <div class="example"><b>Pregunta:</b> "What do you do for work?"<br><b>Respuesta:</b> "I'm a waiter at a restaurant in Lima. I've been working there for two years, and I really enjoy meeting new people from different countries."</div>
+  </div>
+
+  <h3 class="sub">Part 2 — Long Turn / Cue Card (3-4 min)</h3>
+  <div class="card">
+    <p>1 minuto de preparación + 1-2 minutos hablando sobre un tema.</p>
+    <span class="tag strat">Cómo usar tu minuto de preparación</span>
+    <ul>
+      <li>Anota 3-4 palabras clave por cada punto</li>
+      <li>No escribas oraciones completas</li>
+    </ul>
+    <div class="example"><b>Cue card ejemplo:</b> "Describe a place you would like to visit in Australia. You should say: where it is, why you want to go there, what you would do there, and explain why it interests you."</div>
+  </div>
+
+  <h3 class="sub">Part 3 — Discusión (4-5 min)</h3>
+  <div class="card">
+    <p>Preguntas más abstractas sobre el tema de Part 2.</p>
+    <span class="tag strat">Estructura de respuesta</span>
+    <ul>
+      <li>Opinión directa → Razón → Ejemplo</li>
+    </ul>
+    <div class="example"><b>Pregunta:</b> "Why do people like to travel?"<br><b>Respuesta:</b> "I think people enjoy travelling because it allows them to experience different cultures and escape their daily routine. For example, when I visit a new place, I feel more relaxed and open-minded."</div>
+  </div>
+</section>
+
+<!-- ===================== GRAMÁTICA ===================== -->
+<section id="tab-gramatica" class="tabpanel">
+  <h2 class="section-title">📐 Gramática — Banco completo</h2>
+  <p class="toc-mini">Gramática organizada por nivel, esencial para tu IELTS 4.5.</p>
+
+  <h3 class="sub">📗 Básico (A1-A2) — ¡Necesario para tu visa!</h3>
+  
+  <div class="acc"><div class="acc-head">⏰ Present Simple <span class="plus">+</span></div>
+    <div class="acc-body">
+      <p><b>Uso:</b> Acciones habituales, hechos, rutinas.</p>
+      <table>
+        <tr><th>Afirmativa</th><th>Negativa</th><th>Interrogativa</th></tr>
+        <tr><td>I work. She works.</td><td>I don't work. She doesn't work.</td><td>Do you work? Does she work?</td></tr>
+      </table>
+      <div class="example">I <b>work</b> in a restaurant. / She <b>doesn't speak</b> French.</div>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">⏪ Past Simple <span class="plus">+</span></div>
+    <div class="acc-body">
+      <p><b>Uso:</b> Acciones terminadas en el pasado.</p>
+      <div class="example">I <b>visited</b> Sydney last year. / She <b>didn't go</b> to the party.</div>
+      <p><b>Irregulares:</b> go→went, see→saw, eat→ate, have→had, make→made</p>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">⏳ Present Perfect <span class="plus">+</span></div>
+    <div class="acc-body">
+      <p><b>Uso:</b> Experiencias pasadas con conexión al presente.</p>
+      <div class="example">I <b>have visited</b> Australia twice. / She <b>has lived</b> here for 3 years.</div>
+      <p><b>Con "for" (duración):</b> for 2 years, for 3 months</p>
+      <p><b>Con "since" (punto):</b> since 2020, since Monday</p>
+    </div>
+  </div>
+
+  <h3 class="sub">📙 Intermedio (B1-B2)</h3>
+
+  <div class="acc"><div class="acc-head">🔮 Condicionales <span class="plus">+</span></div>
+    <div class="acc-body">
+      <table>
+        <tr><th>Tipo</th><th>Estructura</th><th>Uso</th></tr>
+        <tr><td>First</td><td>If + present, will + V</td><td>Futuro real/posible</td></tr>
+        <tr><td>Second</td><td>If + past, would + V</td><td>Hipotético presente</td></tr>
+        <tr><td>Third</td><td>If + past perfect, would have + V</td><td>Hipotético pasado</td></tr>
+      </table>
+      <div class="example">If it rains, I <b>will stay</b> home. / If I had more time, I <b>would travel</b>.</div>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">📝 Voz Pasiva <span class="plus">+</span></div>
+    <div class="acc-body">
+      <div class="example">The house <b>was built</b> in 2010. / English <b>is spoken</b> here.</div>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">📊 Reported Speech <span class="plus">+</span></div>
+    <div class="acc-body">
+      <div class="example">"I am tired." → She said she <b>was</b> tired.<br>"I will come." → He said he <b>would</b> come.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANDAS ===================== -->
+<section id="tab-bandas" class="tabpanel">
+  <h2 class="section-title">📊 Band Scores IELTS</h2>
+  <div class="card">
+    <table>
+      <tr><th>Band</th><th>Nivel</th><th>Descripción</th></tr>
+      <tr><td>9</td><td>Expert</td><td>Uso fluido y preciso del inglés</td></tr>
+      <tr><td>8</td><td>Very Good</td><td>Uso muy bueno con errores ocasionales</td></tr>
+      <tr><td>7</td><td>Good</td><td>Buen manejo, algunos errores</td></tr>
+      <tr><td>6</td><td>Competent</td><td>Uso efectivo, algunos errores</td></tr>
+      <tr><td>5</td><td>Modest</td><td>Uso parcial, muchos errores</td></tr>
+      <tr><td>4</td><td>Limited</td><td>Uso limitado, frecuentes errores</td></tr>
+      <tr><td>3</td><td>Extremely Limited</td><td>Solo situaciones muy básicas</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">🎯 Tu objetivo: 4.5</h3>
+  <div class="card">
+    <p>Necesitas <b>4.5 promedio</b> en las 4 destrezas. Esto significa:</p>
+    <ul>
+      <li>Entender conversaciones simples (Listening 4.0-4.5)</li>
+      <li>Leer textos básicos (Reading 4.0-4.5)</li>
+      <li>Escribir correos simples (Writing 4.0-4.5)</li>
+      <li>Hablar sobre temas familiares (Speaking 4.0-4.5)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== PLAN DE ESTUDIO ===================== -->
+<section id="tab-plan" class="tabpanel">
+  <h2 class="section-title">🗓️ Plan de Estudio</h2>
+  <div class="card">
+    <p>Sigue este checklist para tu preparación. Se guarda automáticamente en tu navegador.</p>
+    <div id="checklist"></div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>VisaWork Peru — Guía IELTS para Work & Holiday Australia 2026</p>
+  <p style="margin-top:8px; font-size:0.82rem; opacity:0.5;">Parte de la plataforma <a href="../index.html" style="color:var(--gold);">VisaWork Peru</a> | Información actualizada julio 2026</p>
+</footer>
+
+<script>
+/* ---------- Tab Navigation ---------- */
+const nav = document.getElementById('mainnav');
+const tabs = nav.querySelectorAll('a[data-tab]');
+const skillCards = document.querySelectorAll('.skillcard[data-tab]');
+
+function switchTab(id) {
+  document.querySelectorAll('.tabpanel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  tabs.forEach(t => t.classList.remove('active'));
+  const activeTab = nav.querySelector('[data-tab="'+id+'"]');
+  if(activeTab) activeTab.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+tabs.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+skillCards.forEach(c => c.addEventListener('click', () => switchTab(c.dataset.tab)));
+
+/* ---------- Accordion ---------- */
+document.querySelectorAll('.acc-head').forEach(h => {
+  h.addEventListener('click', () => {
+    const acc = h.parentElement;
+    acc.classList.toggle('open');
+  });
+});
+
+/* ---------- Fill Blank ---------- */
+function checkFill(btn) {
+  const card = btn.closest('.card');
+  const inputs = card.querySelectorAll('.fb');
+  let correct = 0;
+  inputs.forEach(inp => {
+    const ans = inp.getAttribute('data-answer').toLowerCase();
+    const val = inp.value.toLowerCase().trim();
+    if(val === ans){ inp.classList.add('ok'); inp.classList.remove('bad'); correct++; }
+    else { inp.classList.add('bad'); inp.classList.remove('ok'); }
+  });
+  card.querySelector('.quiz-score').textContent = correct + ' / ' + inputs.length + ' correctas';
+  updateProgress();
+}
+
+/* ---------- True/False Quiz ---------- */
+function checkAnswer(btn, correctAnswer) {
+  const opts = btn.parentElement;
+  const buttons = opts.querySelectorAll('button');
+  
+  // Disable all buttons
+  buttons.forEach(b => b.disabled = true);
+  
+  // Get the correct answer text
+  let correctText = '';
+  if(correctAnswer === true) correctText = 'True';
+  else if(correctAnswer === false) correctText = 'False';
+  else correctText = 'Not Given';
+  
+  // Check if clicked button is correct
+  const clickedText = btn.textContent.trim();
+  if(clickedText === correctText) {
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    // Highlight the correct answer
+    buttons.forEach(b => {
+      if(b.textContent.trim() === correctText) {
+        b.classList.add('correct');
+      }
+    });
+  }
+  updateProgress();
+}
+
+/* ---------- Checklist con localStorage ---------- */
+const planItems = [
+  "Aprender 10 palabras nuevas de Nivel 1 cada día",
+  "Practicar Present Simple y Past Simple",
+  "Escuchar 10 minutos de inglés (podcasts/videos)",
+  "Leer un texto corto en inglés",
+  "Practicar speaking: describir tu rutina diaria",
+  "Completar un ejercicio de fill-in-the-blank",
+  "Repasar 20 flashcards de vocabulario",
+  "Escribir un correo formal corto",
+  "Practicar Listening Section 1 del IELTS",
+  "Repasar grammar: Present Perfect",
+];
+const checklistDiv = document.getElementById('checklist');
+planItems.forEach((text,i)=>{
+  const id = 'plan-'+i;
+  const item = document.createElement('div');
+  item.className='check-item';
+  item.innerHTML = '<input type="checkbox" id="'+id+'"><label for="'+id+'">'+text+'</label>';
+  checklistDiv.appendChild(item);
+  const cb = item.querySelector('input');
+  cb.checked = localStorage.getItem(id) === 'true';
+  if(cb.checked) item.classList.add('done');
+  cb.addEventListener('change', ()=>{
+    localStorage.setItem(id, cb.checked);
+    item.classList.toggle('done', cb.checked);
+    updateProgress();
+  });
+});
+
+function updateProgress(){
+  const total = planItems.length;
+  const done = planItems.filter((_,i)=>localStorage.getItem('plan-'+i)==='true').length;
+  const pct = Math.round((done/total)*100);
+  document.getElementById('progress-bar-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = pct+'% del plan de estudio completado';
+}
+updateProgress();
+</script>
+
+</body>
+</html>
