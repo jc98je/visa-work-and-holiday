@@ -56,12 +56,6 @@
   .level-card.level-hard{border-top-color:var(--red);}
   .level-card.level-hard .level-badge{background:var(--red);}
 
-  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0;}
-  .skillcard{background:var(--card);border-radius:10px;padding:18px;border:1px solid #e8e4da;border-top:5px solid var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;transition:.2s;}
-  .skillcard:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.12);}
-  .skillcard h4{margin:6px 0;color:var(--navy);}
-  .skillcard .icon{font-size:1.8em;}
-
   /* Accordion */
   .acc{background:var(--card);border:1px solid #e8e4da;border-radius:10px;margin-bottom:10px;overflow:hidden;}
   .acc-head{padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff;font-weight:600;color:var(--navy);}
@@ -80,7 +74,6 @@
   .quiz-score{font-weight:bold;color:var(--navy);margin-top:10px;}
   .btn{background:var(--navy);color:#fff;border:none;padding:9px 16px;border-radius:20px;cursor:pointer;font-size:.9em;}
   .btn:hover{background:var(--red);}
-  .btn.reset{background:#888;}
 
   /* Fill blank */
   .fillblank input{border:none;border-bottom:2px solid var(--gold);background:#fdf6e3;padding:2px 6px;font-size:.95em;width:130px;text-align:center;font-family:inherit;}
@@ -105,10 +98,6 @@
   .band-scale{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;}
   .band-pill{background:var(--navy);color:#fff;padding:6px 10px;border-radius:16px;font-size:.8em;}
 
-  .toc-mini{font-size:.85em;color:var(--muted);margin-bottom:20px;}
-  .toc-mini a{color:var(--blue);text-decoration:none;}
-  .toc-mini a:hover{text-decoration:underline;}
-
   @media(max-width:600px){header h1{font-size:1.6em;} nav a{font-size:.78em;padding:6px 10px;}}
 </style>
 </head>
@@ -129,12 +118,6 @@
   <a data-tab="nivel1">📗 Nivel 1</a>
   <a data-tab="nivel2">📙 Nivel 2</a>
   <a data-tab="nivel3">📕 Nivel 3</a>
-  <a data-tab="listening">🎧 Listening</a>
-  <a data-tab="reading">📖 Reading</a>
-  <a data-tab="writing">✍️ Writing</a>
-  <a data-tab="speaking">🗣️ Speaking</a>
-  <a data-tab="gramatica">📐 Gramática</a>
-  <a data-tab="vocabulario">🧩 Vocabulario</a>
   <a data-tab="bandas">📊 Bandas</a>
   <a data-tab="plan">🗓️ Plan</a>
 </nav>
@@ -144,45 +127,34 @@
 <!-- ===================== INICIO ===================== -->
 <section id="tab-inicio" class="tabpanel active">
   <h2 class="section-title">Bienvenido/a — Elige tu nivel</h2>
-  
   <div class="card">
-    <p>Esta guía está organizada en <b>3 niveles de dificultad</b>. Comienza desde el más fácil y avanza cuando te sientas cómodo/a. Cada nivel incluye vocabulario, gramática, listening, reading y ejercicios interactivos.</p>
+    <p>Esta guía está organizada en <b>3 niveles de dificultad</b>. Comienza desde el más fácil y avanza cuando te sientas cómodo/a. Cada nivel incluye vocabulario, gramática, listening, reading, writing, speaking y ejercicios interactivos.</p>
   </div>
-
   <div class="level-grid">
     <div class="level-card level-easy" data-tab="nivel1">
       <div class="level-icon">📗</div>
       <h3>Nivel 1 — Fácil</h3>
-      <div class="level-desc">Vocabulario básico, gramática esencial, frases simples. Para empezar desde cero.</div>
+      <div class="level-desc">Vocabulario básico, gramática esencial, frases simples. Listening y Reading para empezar.</div>
       <span class="level-badge">A1-A2</span>
     </div>
     <div class="level-card level-medium" data-tab="nivel2">
       <div class="level-icon">📙</div>
       <h3>Nivel 2 — Intermedio</h3>
-      <div class="level-desc">Vocabulario intermedio, gramática compleja, textos más largos. Para consolidar.</div>
+      <div class="level-desc">Vocabulario intermedio, gramática compleja, textos más largos. Writing y Speaking.</div>
       <span class="level-badge">B1</span>
     </div>
     <div class="level-card level-hard" data-tab="nivel3">
       <div class="level-icon">📕</div>
       <h3>Nivel 3 — Difícil</h3>
-      <div class="level-desc">Vocabulario académico, gramática avanzada, textos complejos. Para alcanzar tu banda.</div>
+      <div class="level-desc">Vocabulario académico, gramática avanzada, textos complejos. Task 2 Writing.</div>
       <span class="level-badge">B2+</span>
     </div>
   </div>
-
-  <h3 class="sub">Explora cada destreza</h3>
-  <div class="grid4">
-    <div class="skillcard" data-tab="listening"><span class="icon">🎧</span><h4>Listening</h4><p style="font-size:.85em;color:var(--muted)">4 secciones, audio único, dificultad creciente.</p></div>
-    <div class="skillcard" data-tab="reading"><span class="icon">📖</span><h4>Reading</h4><p style="font-size:.85em;color:var(--muted)">3 textos, 40 preguntas, sin tiempo extra.</p></div>
-    <div class="skillcard" data-tab="writing"><span class="icon">✍️</span><h4>Writing</h4><p style="font-size:.85em;color:var(--muted)">Informe/carta + ensayo argumentativo.</p></div>
-    <div class="skillcard" data-tab="speaking"><span class="icon">🗣️</span><h4>Speaking</h4><p style="font-size:.85em;color:var(--muted)">Entrevista cara a cara con examinador.</p></div>
-  </div>
-
   <div class="card">
     <ul>
-      <li>Marca casillas en <b>Plan de estudio</b> para seguir tu progreso (se guarda en este navegador).</li>
+      <li>Marca casillas en <b>Plan de estudio</b> para seguir tu progreso.</li>
       <li>Cada nivel tiene teoría, ejemplos y <b>ejercicios interactivos autocorregibles</b>.</li>
-      <li>Las tarjetas de <b>Vocabulario</b> se voltean al hacer clic — úsalas como repaso rápido.</li>
+      <li>Las tarjetas de <b>Vocabulario</b> se voltean al hacer clic.</li>
       <li>Avanza de nivel cuando domines el anterior — ¡la constancia es clave!</li>
     </ul>
   </div>
@@ -191,65 +163,56 @@
 <!-- ===================== NIVEL 1: A1-A2 (FÁCIL) ===================== -->
 <section id="tab-nivel1" class="tabpanel">
   <h2 class="section-title">📗 Nivel 1 — A1-A2 (Fácil)</h2>
-  
   <div class="card" style="border-left:4px solid var(--green);">
     <span class="tag vocab">Nivel</span> <b>A1-A2 — Principiante</b><br>
-    <p>Vocabulario básico del día a día, gramática esencial (presente, pasado, futuro simple), frases cortas y directas. Ideal para empezar tu preparación.</p>
+    <p>Vocabulario del día a día, gramática esencial, frases simples. Listening Section 1 y Reading básico.</p>
   </div>
 
   <!-- VOCABULARIO NIVEL 1 -->
   <h3 class="sub">🧩 Vocabulario Básico</h3>
   
   <div class="acc"><div class="acc-head">😊 Emociones y Sentimientos <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Happy</div><div class="flash-face flash-back">Feliz<br><small>I am very <b>happy</b> today.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sad</div><div class="flash-face flash-back">Triste<br><small>She feels <b>sad</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Excited</div><div class="flash-face flash-back">Emocionado<br><small>I'm <b>excited</b> about the trip!</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tired</div><div class="flash-face flash-back">Cansado<br><small>I'm so <b>tired</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Nervous</div><div class="flash-face flash-back">Nervioso<br><small>I feel <b>nervous</b> about the exam.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Confident</div><div class="flash-face flash-back">Seguro de sí mismo<br><small>She is very <b>confident</b>.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Happy</div><div class="flash-face flash-back">Feliz<br><small>I am very <b>happy</b> today.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sad</div><div class="flash-face flash-back">Triste<br><small>She feels <b>sad</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Excited</div><div class="flash-face flash-back">Emocionado<br><small>I'm <b>excited</b> about the trip!</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tired</div><div class="flash-face flash-back">Cansado<br><small>I'm so <b>tired</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Nervous</div><div class="flash-face flash-back">Nervioso<br><small>I feel <b>nervous</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Confident</div><div class="flash-face flash-back">Seguro de sí mismo<br><small>She is very <b>confident</b>.</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">🍽️ Comida y Restaurante <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Breakfast</div><div class="flash-face flash-back">Desayuno<br><small>I eat <b>breakfast</b> at 7am.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lunch</div><div class="flash-face flash-back">Almuerzo<br><small>We have <b>lunch</b> at noon.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Dinner</div><div class="flash-face flash-back">Cena<br><small><b>Dinner</b> is at 8pm.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Order</div><div class="flash-face flash-back">Orden/Pedido<br><small>Can I <b>order</b> a coffee?</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Bill</div><div class="flash-face flash-back">Cuenta<br><small>Can I have the <b>bill</b>, please?</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Reservation</div><div class="flash-face flash-back">Reservación<br><small>I have a <b>reservation</b> for two.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Breakfast</div><div class="flash-face flash-back">Desayuno<br><small>I eat <b>breakfast</b> at 7am.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lunch</div><div class="flash-face flash-back">Almuerzo<br><small>We have <b>lunch</b> at noon.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Dinner</div><div class="flash-face flash-back">Cena<br><small><b>Dinner</b> is at 8pm.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Order</div><div class="flash-face flash-back">Orden/Pedido<br><small>Can I <b>order</b> a coffee?</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Bill</div><div class="flash-face flash-back">Cuenta<br><small>Can I have the <b>bill</b>?</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Reservation</div><div class="flash-face flash-back">Reservación<br><small>I have a <b>reservation</b>.</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">💼 Trabajos y Profesiones <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Teacher</div><div class="flash-face flash-back">Profesor<br><small>She is a <b>teacher</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Doctor</div><div class="flash-face flash-back">Médico<br><small>I need to see a <b>doctor</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Engineer</div><div class="flash-face flash-back">Ingeniero<br><small>He works as an <b>engineer</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Office</div><div class="flash-face flash-back">Oficina<br><small>I work in an <b>office</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Meeting</div><div class="flash-face flash-back">Reunión<br><small>We have a <b>meeting</b> at 3pm.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Salary</div><div class="flash-face flash-back">Salario<br><small>What is your monthly <b>salary</b>?</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Teacher</div><div class="flash-face flash-back">Profesor<br><small>She is a <b>teacher</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Doctor</div><div class="flash-face flash-back">Médico<br><small>I need a <b>doctor</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Engineer</div><div class="flash-face flash-back">Ingeniero<br><small>He is an <b>engineer</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Office</div><div class="flash-face flash-back">Oficina<br><small>I work in an <b>office</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Meeting</div><div class="flash-face flash-back">Reunión<br><small>We have a <b>meeting</b> at 3pm.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Salary</div><div class="flash-face flash-back">Salario<br><small>What is your <b>salary</b>?</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">🏙️ Ciudad y Direcciones <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Turn left</div><div class="flash-face flash-back">Girar a la izquierda<br><small><b>Turn left</b> at the corner.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Turn right</div><div class="flash-face flash-back">Girar a la derecha<br><small><b>Turn right</b> at the traffic light.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Go straight</div><div class="flash-face flash-back">Ir derecho<br><small><b>Go straight</b> for 200 metres.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Next to</div><div class="flash-face flash-back">Al lado de<br><small>The bank is <b>next to</b> the park.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Opposite</div><div class="flash-face flash-back">Enfrente de<br><small>The hotel is <b>opposite</b> the station.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Between</div><div class="flash-face flash-back">Entre<br><small>It's <b>between</b> the bank and the shop.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Turn left</div><div class="flash-face flash-back">Girar a la izquierda<br><small><b>Turn left</b> at the corner.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Turn right</div><div class="flash-face flash-back">Girar a la derecha<br><small><b>Turn right</b> at the light.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Go straight</div><div class="flash-face flash-back">Ir derecho<br><small><b>Go straight</b> for 200m.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Next to</div><div class="flash-face flash-back">Al lado de<br><small>The bank is <b>next to</b> the park.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Opposite</div><div class="flash-face flash-back">Enfrente de<br><small>The hotel is <b>opposite</b> the station.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Between</div><div class="flash-face flash-back">Entre<br><small>It's <b>between</b> the bank and shop.</small></div></div></div>
+    </div></div>
   </div>
 
   <!-- GRAMÁTICA NIVEL 1 -->
@@ -258,43 +221,29 @@
   <div class="acc"><div class="acc-head">Presente Simple <span class="plus">+</span></div>
     <div class="acc-body">
       <p><b>Uso:</b> Hábitos, rutinas, hechos generales.</p>
-      <p><b>Estructura:</b> Sujeto + verbo (s/es en 3ra persona)</p>
-      <div class="example">
-        ✅ I <b>work</b> from home every Monday.<br>
-        ✅ She <b>plays</b> tennis on weekends.<br>
-        ✅ The train <b>leaves</b> at 8am.
-      </div>
-      <p><b>Adverbios de frecuencia:</b> always, usually, often, sometimes, rarely, never</p>
+      <div class="example">✅ I <b>work</b> from home. ✅ She <b>plays</b> tennis. ✅ The train <b>leaves</b> at 8am.</div>
+      <p><b>Adverbios:</b> always, usually, often, sometimes, rarely, never</p>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Pasado Simple <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>Uso:</b> Acciones terminadas en el pasado con momento definido.</p>
-      <p><b>Estructura:</b> Sujeto + verbo pasado (-ed o irregular)</p>
-      <div class="example">
-        ✅ I <b>visited</b> Cusco last year.<br>
-        ✅ She <b>went</b> to the bank yesterday.<br>
-        ✅ We <b>watched</b> a movie last night.
-      </div>
+      <p><b>Uso:</b> Acciones terminadas con momento definido.</p>
+      <div class="example">✅ I <b>visited</b> Cusco last year. ✅ She <b>went</b> to the bank yesterday.</div>
       <p><b>Señales:</b> yesterday, last week, ago, in 2020</p>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Futuro con "Going to" y "Will" <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>Going to:</b> Planes e intenciones</p>
-      <div class="example">I <b>am going to</b> study English this weekend.</div>
-      <p><b>Will:</b> Decisiones espontáneas, predicciones</p>
-      <div class="example">I <b>will</b> help you with that.</div>
+      <p><b>Going to:</b> Planes → I <b>am going to</b> study English.</p>
+      <p><b>Will:</b> Decisiones espontáneas → I <b>will</b> help you.</p>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Artículos y Singular/Plural <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>A/An:</b> indefinite (a book, an apple)</p>
-      <p><b>The:</b> definite (the book on the table)</p>
-      <p><b>Plural:</b> book → books, child → children, man → men</p>
+      <p><b>A/An:</b> a book, an apple | <b>The:</b> the book on the table</p>
       <div class="example">I need <b>a</b> pen. <b>The</b> pen is on <b>the</b> table.</div>
     </div>
   </div>
@@ -302,81 +251,83 @@
   <!-- LISTENING NIVEL 1 -->
   <h3 class="sub">🎧 Listening Básico</h3>
   <div class="card">
-    <p><b>Sección 1:</b> Conversaciones cotidianas — reservar hotel, preguntar por precios, hacer una cita.</p>
-    <span class="tag strat">Estrategia clave</span>
+    <p><b>Sección 1:</b> Conversaciones cotidianas — reservar hotel, preguntar por precios.</p>
+    <span class="tag strat">Estrategia</span>
     <ul>
       <li>Escucha palabras clave: números, nombres, fechas.</li>
-      <li>No te preocupes por entender cada palabra — busca la idea principal.</li>
       <li>Respeta el límite de palabras: "NO MORE THAN TWO WORDS".</li>
     </ul>
   </div>
-
   <div class="card fillblank">
     <p><b>Completa con la palabra correcta:</b></p>
     <p>"I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights, please."</p>
     <p>"Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?"</p>
-    <p>"The total cost, including breakfast, is <input type="text" data-answer="120" class="fb"> pounds."</p>
     <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
   </div>
 
   <!-- READING NIVEL 1 -->
   <h3 class="sub">📖 Reading Básico</h3>
   <div class="card">
-    <p><b>Ejercicio True/False:</b> Lee el texto y decide si la afirmación es verdadera o falsa.</p>
     <p class="example"><b>Texto:</b> "Maria works in a bank in Lima. She starts work at 9am and finishes at 5pm. She likes her job because she enjoys helping people."</p>
     <div id="quiz-reading-n1"></div>
+  </div>
+
+  <!-- SPEAKING NIVEL 1 -->
+  <h3 class="sub">🗣️ Speaking Básico — Part 1</h3>
+  <div class="card">
+    <p><b>Preguntas personales:</b> trabajo, estudios, hobbies, rutina.</p>
+    <span class="tag strat">Estrategia</span>
+    <ul>
+      <li>Respuestas de 2-4 oraciones — añade siempre una razón.</li>
+      <li>Usa presente simple para hábitos: "I usually work from home."</li>
+    </ul>
+    <div class="example"><b>Pregunta:</b> "What do you usually do in your free time?"<br>
+    <b>Respuesta:</b> "In my free time, I mostly work on projects. I find it relaxing."</div>
   </div>
 </section>
 
 <!-- ===================== NIVEL 2: B1 (INTERMEDIO) ===================== -->
 <section id="tab-nivel2" class="tabpanel">
   <h2 class="section-title">📙 Nivel 2 — B1 (Intermedio)</h2>
-  
   <div class="card" style="border-left:4px solid var(--gold);">
     <span class="tag vocab">Nivel</span> <b>B1 — Intermedio</b><br>
-    <p>Vocabulario más amplio, gramática compleja (condicionales, voz pasiva, reported speech), textos más largos. Para consolidar tu inglés.</p>
+    <p>Vocabulario amplio, gramática compleja (condicionales, voz pasiva), textos más largos. Writing Task 1 y Speaking Part 2.</p>
   </div>
 
   <!-- VOCABULARIO NIVEL 2 -->
   <h3 class="sub">🧩 Vocabulario Intermedio</h3>
   
   <div class="acc"><div class="acc-head">🎓 Educación y Aprendizaje <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Curriculum</div><div class="flash-face flash-back">Plan de estudios<br><small>The school updated its <b>curriculum</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tuition fees</div><div class="flash-face flash-back">Matrícula universitaria<br><small><b>Tuition fees</b> are very expensive.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lifelong learning</div><div class="flash-face flash-back">Aprendizaje continuo<br><small><b>Lifelong learning</b> is essential today.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Rote learning</div><div class="flash-face flash-back">Aprendizaje memorístico<br><small><b>Rote learning</b> is not effective.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Critical thinking</div><div class="flash-face flash-back">Pensamiento crítico<br><small>Schools should teach <b>critical thinking</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Academic pressure</div><div class="flash-face flash-back">Presión académica<br><small>Many students suffer from <b>academic pressure</b>.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Curriculum</div><div class="flash-face flash-back">Plan de estudios<br><small>The school updated its <b>curriculum</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Tuition fees</div><div class="flash-face flash-back">Matrícula<br><small><b>Tuition fees</b> are expensive.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Lifelong learning</div><div class="flash-face flash-back">Aprendizaje continuo<br><small><b>Lifelong learning</b> is essential.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Rote learning</div><div class="flash-face flash-back">Aprendizaje memorístico<br><small><b>Rote learning</b> is not effective.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Critical thinking</div><div class="flash-face flash-back">Pensamiento crítico<br><small>Schools should teach <b>critical thinking</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Academic pressure</div><div class="flash-face flash-back">Presión académica<br><small>Students suffer from <b>academic pressure</b>.</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">💼 Trabajo y Sociedad <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Workforce</div><div class="flash-face flash-back">Fuerza laboral<br><small>The <b>workforce</b> is ageing.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Work-life balance</div><div class="flash-face flash-back">Equilibrio vida-trabajo<br><small>A good <b>work-life balance</b> is important.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Remote work</div><div class="flash-face flash-back">Trabajo remoto<br><small><b>Remote work</b> has become popular.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Job security</div><div class="flash-face flash-back">Estabilidad laboral<br><small>Young people value <b>job security</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Income inequality</div><div class="flash-face flash-back">Desigualdad de ingresos<br><small><b>Income inequality</b> is growing.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Urbanisation</div><div class="flash-face flash-back">Urbanización<br><small><b>Urbanisation</b> is increasing rapidly.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Workforce</div><div class="flash-face flash-back">Fuerza laboral<br><small>The <b>workforce</b> is ageing.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Work-life balance</div><div class="flash-face flash-back">Equilibrio vida-trabajo<br><small>A good <b>work-life balance</b> is important.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Remote work</div><div class="flash-face flash-back">Trabajo remoto<br><small><b>Remote work</b> has become popular.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Job security</div><div class="flash-face flash-back">Estabilidad laboral<br><small>People value <b>job security</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Income inequality</div><div class="flash-face flash-back">Desigualdad de ingresos<br><small><b>Income inequality</b> is growing.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Urbanisation</div><div class="flash-face flash-back">Urbanización<br><small><b>Urbanisation</b> is increasing.</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">🌍 Medio Ambiente <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Carbon footprint</div><div class="flash-face flash-back">Huella de carbono<br><small>Reduce your <b>carbon footprint</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Renewable energy</div><div class="flash-face flash-back">Energía renovable<br><small>We need more <b>renewable energy</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Deforestation</div><div class="flash-face flash-back">Deforestación<br><small><b>Deforestation</b> destroys habitats.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sustainability</div><div class="flash-face flash-back">Sostenibilidad<br><small>Companies must focus on <b>sustainability</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Biodiversity</div><div class="flash-face flash-back">Biodiversidad<br><small>We must protect <b>biodiversity</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Climate change</div><div class="flash-face flash-back">Cambio climático<br><small><b>Climate change</b> affects everyone.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Carbon footprint</div><div class="flash-face flash-back">Huella de carbono<br><small>Reduce your <b>carbon footprint</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Renewable energy</div><div class="flash-face flash-back">Energía renovable<br><small>We need more <b>renewable energy</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Deforestation</div><div class="flash-face flash-back">Deforestación<br><small><b>Deforestation</b> destroys habitats.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sustainability</div><div class="flash-face flash-back">Sostenibilidad<br><small>Focus on <b>sustainability</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Biodiversity</div><div class="flash-face flash-back">Biodiversidad<br><small>Protect <b>biodiversity</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Climate change</div><div class="flash-face flash-back">Cambio climático<br><small><b>Climate change</b> affects everyone.</small></div></div></div>
+    </div></div>
   </div>
 
   <!-- GRAMÁTICA NIVEL 2 -->
@@ -386,36 +337,28 @@
     <div class="acc-body">
       <table>
         <tr><th>Present Perfect</th><th>Past Simple</th></tr>
-        <tr><td>I <b>have visited</b> Australia. (experiencia)</td><td>I <b>visited</b> Australia in 2023. (momento definido)</td></tr>
-        <tr><td>She <b>has lived</b> here for 3 years. (duración)</td><td>She <b>lived</b> in Lima for 2 years. (terminó)</td></tr>
+        <tr><td>I <b>have visited</b> Australia.</td><td>I <b>visited</b> Australia in 2023.</td></tr>
+        <tr><td>She <b>has lived</b> here for 3 years.</td><td>She <b>lived</b> in Lima for 2 years.</td></tr>
       </table>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Condicionales 1 y 2 <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>1er condicional (posible):</b> If + presente, will + infinitivo</p>
-      <div class="example">If it rains, I <b>will</b> stay home.</div>
-      <p><b>2do condicional (hipotético):</b> If + pasado, would + infinitivo</p>
-      <div class="example">If I had money, I <b>would</b> travel to Australia.</div>
+      <p><b>1er:</b> If + presente, will + infinitivo → If it rains, I <b>will</b> stay home.</p>
+      <p><b>2do:</b> If + pasado, would + infinitivo → If I had money, I <b>would</b> travel.</p>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Voz Pasiva <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>Uso:</b> Cuando la acción es más importante que quién la realiza.</p>
-      <p><b>Estructura:</b> Sujeto + be + pasado participio</p>
-      <div class="example">
-        Active: They <b>built</b> the bridge in 1998.<br>
-        Passive: The bridge <b>was built</b> in 1998.
-      </div>
+      <div class="example">Active: They <b>built</b> the bridge in 1998.<br>Passive: The bridge <b>was built</b> in 1998.</div>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Reported Speech <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>Direct:</b> "I <b>am</b> tired," she said.</p>
-      <p><b>Reported:</b> She said she <b>was</b> tired.</p>
+      <p>Direct: "I <b>am</b> tired," she said. → Reported: She said she <b>was</b> tired.</p>
       <p><b>Cambios:</b> am→was, will→would, can→could, today→that day</p>
     </div>
   </div>
@@ -423,84 +366,89 @@
   <!-- LISTENING NIVEL 2 -->
   <h3 class="sub">🎧 Listening Intermedio</h3>
   <div class="card">
-    <p><b>Sección 2-3:</b> Monólogos y discusiones — guías turísticos, clases, entrevistas de trabajo.</p>
-    <span class="tag strat">Estrategia clave</span>
+    <p><b>Sección 2-3:</b> Monólogos y discusiones — guías turísticos, clases, entrevistas.</p>
+    <span class="tag strat">Estrategia</span>
     <ul>
-      <li>Presta atención a las <b>señales de corrección</b>: "sorry, I mean...", "actually..."</li>
       <li>Identifica la <b>actitud del hablante</b>: segura, dudosa, entusiasta.</li>
-      <li>Cuidado con los <b>distractores</b> — el audio menciona opciones parecidos antes de la correcta.</li>
+      <li>Cuidado con los <b>distractores</b> — mencionan opciones parecidos antes de la correcta.</li>
     </ul>
   </div>
 
   <!-- READING NIVEL 2 -->
   <h3 class="sub">📖 Reading Intermedio</h3>
   <div class="card">
-    <p><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park."</p>
+    <p class="example"><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park."</p>
     <div id="quiz-reading-n2"></div>
   </div>
 
   <!-- WRITING NIVEL 2 -->
-  <h3 class="sub">✍️ Writing Intermedio</h3>
+  <h3 class="sub">✍️ Writing — Task 1</h3>
   <div class="card">
-    <span class="tag strat">Task 1 — Informe de datos</span>
-    <p>Describe gráficos, tablas o procesos objetivamente.</p>
+    <span class="tag strat">Objetivo</span>
+    <p>Describe gráficos, tablas o procesos objetivamente — sin opinión personal.</p>
+    <p><b>Estructura:</b> Introducción → Overview → Detalles</p>
     <span class="tag vocab">Lenguaje útil</span>
     <ul>
-      <li>Tendencias: <b>rise, increase, grow, climb</b> / <b>fall, decline, decrease, drop</b></li>
-      <li>Velocidad: <b>sharply, dramatically, steadily, gradually, slightly</b></li>
-      <li>Comparación: <b>compared to, whereas, in contrast, similarly</b></li>
+      <li>Tendencias: <b>rise, increase, grow</b> / <b>fall, decline, drop</b></li>
+      <li>Velocidad: <b>sharply, steadily, gradually, slightly</b></li>
+      <li>Comparación: <b>compared to, whereas, in contrast</b></li>
     </ul>
-    <div class="example"><b>Overview modelo:</b> "Overall, while both countries saw an increase in internet usage, Country A experienced far more rapid growth."</div>
+    <div class="example"><b>Overview:</b> "Overall, Country A experienced far more rapid growth than Country B."</div>
+  </div>
+
+  <!-- SPEAKING NIVEL 2 -->
+  <h3 class="sub">🗣️ Speaking — Part 2 (Cue Card)</h3>
+  <div class="card">
+    <p>1 min preparación + 1-2 min hablando sobre un tema.</p>
+    <span class="tag strat">Cómo preparar</span>
+    <ul>
+      <li>Anota 3-4 palabras clave por cada punto de la tarjeta.</li>
+      <li>No escribas oraciones completas — solo ideas guía.</li>
+    </ul>
+    <div class="example"><b>Ejemplo:</b> "Describe a piece of technology you find useful."</div>
   </div>
 </section>
 
 <!-- ===================== NIVEL 3: B2+ (DIFÍCIL) ===================== -->
 <section id="tab-nivel3" class="tabpanel">
   <h2 class="section-title">📕 Nivel 3 — B2+ (Difícil)</h2>
-  
   <div class="card" style="border-left:4px solid var(--red);">
     <span class="tag vocab">Nivel</span> <b>B2+ — Avanzado</b><br>
-    <p>Vocabulario académico, gramática avanzada (3er condicional, cláusulas participiales), textos complejos. Para alcanzar banda 6.0+.</p>
+    <p>Vocabulario académico, gramática avanzada, textos complejos. Writing Task 2 y Speaking Part 3.</p>
   </div>
 
   <!-- VOCABULARIO NIVEL 3 -->
   <h3 class="sub">🧩 Vocabulario Académico</h3>
   
   <div class="acc"><div class="acc-head">🔬 Ciencia y Tecnología <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Artificial intelligence</div><div class="flash-face flash-back">Inteligencia artificial<br><small><b>Artificial intelligence</b> is transforming industries.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Digital divide</div><div class="flash-face flash-back">Brecha digital<br><small>The <b>digital divide</b> affects rural areas.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cutting-edge</div><div class="flash-face flash-back">De vanguardia<br><small>The company uses <b>cutting-edge</b> technology.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Automation</div><div class="flash-face flash-back">Automatización<br><small><b>Automation</b> is replacing many jobs.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Data privacy</div><div class="flash-face flash-back">Privacidad de datos<br><small><b>Data privacy</b> is a growing concern.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Innovation</div><div class="flash-face flash-back">Innovación<br><small>Companies need constant <b>innovation</b>.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Artificial intelligence</div><div class="flash-face flash-back">Inteligencia artificial<br><small><b>AI</b> is transforming industries.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Digital divide</div><div class="flash-face flash-back">Brecha digital<br><small>The <b>digital divide</b> affects rural areas.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Cutting-edge</div><div class="flash-face flash-back">De vanguardia<br><small>The company uses <b>cutting-edge</b> tech.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Automation</div><div class="flash-face flash-back">Automatización<br><small><b>Automation</b> is replacing jobs.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Data privacy</div><div class="flash-face flash-back">Privacidad de datos<br><small><b>Data privacy</b> is a concern.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Innovation</div><div class="flash-face flash-back">Innovación<br><small>Companies need <b>innovation</b>.</small></div></div></div>
+    </div></div>
   </div>
 
   <div class="acc"><div class="acc-head">🏥 Salud y Bienestar <span class="plus">+</span></div>
-    <div class="acc-body">
-      <div class="flash-grid">
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sedentary lifestyle</div><div class="flash-face flash-back">Estilo de vida sedentario<br><small>A <b>sedentary lifestyle</b> causes health problems.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Life expectancy</div><div class="flash-face flash-back">Esperanza de vida<br><small><b>Life expectancy</b> has increased.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Mental well-being</div><div class="flash-face flash-back">Bienestar mental<br><small>Exercise improves <b>mental well-being</b>.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Obesity rates</div><div class="flash-face flash-back">Tasas de obesidad<br><small><b>Obesity rates</b> are rising globally.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Preventive medicine</div><div class="flash-face flash-back">Medicina preventiva<br><small><b>Preventive medicine</b> saves lives.</small></div></div></div>
-        <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Public healthcare</div><div class="flash-face flash-back">Salud pública<br><small><b>Public healthcare</b> is free in many countries.</small></div></div></div>
-      </div>
-    </div>
+    <div class="acc-body"><div class="flash-grid">
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Sedentary lifestyle</div><div class="flash-face flash-back">Estilo de vida sedentario<br><small>A <b>sedentary lifestyle</b> causes problems.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Life expectancy</div><div class="flash-face flash-back">Esperanza de vida<br><small><b>Life expectancy</b> has increased.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Mental well-being</div><div class="flash-face flash-back">Bienestar mental<br><small>Exercise improves <b>mental well-being</b>.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Obesity rates</div><div class="flash-face flash-back">Tasas de obesidad<br><small><b>Obesity rates</b> are rising.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Preventive medicine</div><div class="flash-face flash-back">Medicina preventiva<br><small><b>Preventive medicine</b> saves lives.</small></div></div></div>
+      <div class="flash" onclick="this.classList.toggle('flipped')"><div class="flash-inner"><div class="flash-face flash-front">Public healthcare</div><div class="flash-face flash-back">Salud pública<br><small><b>Public healthcare</b> is free.</small></div></div></div>
+    </div></div>
   </div>
 
   <!-- GRAMÁTICA NIVEL 3 -->
   <h3 class="sub">📐 Gramática Avanzada</h3>
   
-  <div class="acc"><div class="acc-head">3er Condicional y Mixed Conditionals <span class="plus">+</span></div>
+  <div class="acc"><div class="acc-head">3er Condicional y Mixed <span class="plus">+</span></div>
     <div class="acc-body">
-      <p><b>3er condicional (pasado irreal):</b> If + pasado perfecto, would have + participio</p>
-      <div class="example">If I <b>had studied</b> harder, I <b>would have passed</b> the exam.</div>
-      <p><b>Mixed conditional:</b> Mezcla pasado y presente</p>
-      <div class="example">If I <b>had studied</b> medicine (pasado), I <b>would be</b> a doctor now (presente).</div>
+      <p><b>3er:</b> If + pasado perfecto, would have + participio → If I <b>had studied</b>, I <b>would have passed</b>.</p>
+      <p><b>Mixed:</b> If I <b>had studied</b> medicine (pasado), I <b>would be</b> a doctor now (presente).</p>
     </div>
   </div>
 
@@ -509,17 +457,15 @@
       <table>
         <tr><th>Relativo</th><th>Uso</th><th>Ejemplo</th></tr>
         <tr><td>which</td><td>Cosas</td><td>The book, <b>which</b> I borrowed, is interesting.</td></tr>
-        <tr><td>who/whom</td><td>Personas</td><td>The scientist, <b>who</b> won the award, will speak.</td></tr>
-        <tr><td>whose</td><td>Posesión</td><td>The student <b>whose</b> essay won is here.</td></tr>
-        <tr><td>where</td><td>Lugares</td><td>The university <b>where</b> I studied is in Sydney.</td></tr>
-        <tr><td>non-defining</td><td>Info adicional (comas)</td><td>Sydney, <b>which</b> is in Australia, is beautiful.</td></tr>
+        <tr><td>who/whom</td><td>Personas</td><td>The scientist, <b>who</b> won the award.</td></tr>
+        <tr><td>whose</td><td>Posesión</td><td>The student <b>whose</b> essay won.</td></tr>
+        <tr><td>where</td><td>Lugares</td><td>The university <b>where</b> I studied.</td></tr>
       </table>
     </div>
   </div>
 
   <div class="acc"><div class="acc-head">Participle Clauses <span class="plus">+</span></div>
     <div class="acc-body">
-      <p>Formas reducidas que hacen el texto más fluido y académico.</p>
       <div class="example">
         <b>Having finished</b> the report, she submitted it.<br>
         <b>Influenced by</b> globalisation, cultures are changing.<br>
@@ -530,7 +476,6 @@
 
   <div class="acc"><div class="acc-head">Cleft Sentences <span class="plus">+</span></div>
     <div class="acc-body">
-      <p>Enfatizan un elemento de la oración — útil en Writing y Speaking.</p>
       <div class="example">
         <b>It was</b> technology <b>that</b> changed everything.<br>
         <b>What</b> concerns me <b>is</b> the impact on children.<br>
@@ -540,215 +485,36 @@
   </div>
 
   <!-- WRITING NIVEL 3 -->
-  <h3 class="sub">✍️ Writing Avanzado — Task 2</h3>
+  <h3 class="sub">✍️ Writing — Task 2 (Ensayo)</h3>
   <div class="card">
-    <span class="tag strat">Estructura de ensayo</span>
+    <span class="tag strat">Estructura</span>
     <ul>
-      <li><b>Introducción:</b> Parafrasear la pregunta + thesis statement clara.</li>
-      <li><b>Párrafo 1:</b> Idea principal + explicación + ejemplo específico.</li>
-      <li><b>Párrafo 2:</b> Segunda idea o contraste + explicación + ejemplo.</li>
-      <li><b>Conclusión:</b> Resumen sin repetir literalmente la introducción.</li>
+      <li><b>Introducción:</b> Parafrasear + thesis statement.</li>
+      <li><b>Párrafo 1:</b> Idea principal + explicación + ejemplo.</li>
+      <li><b>Párrafo 2:</b> Segunda idea + explicación + ejemplo.</li>
+      <li><b>Conclusión:</b> Resumen sin repetir literalmente.</li>
     </ul>
-    <span class="tag vocab">Conectores avanzados</span>
+    <span class="tag vocab">Conectores</span>
     <ul>
-      <li>Añadir: <b>furthermore, moreover, in addition, what's more</b></li>
-      <li>Contrastar: <b>however, nevertheless, on the other hand, conversely</b></li>
-      <li>Consecuencia: <b>consequently, as a result, therefore, thus</b></li>
-      <li>Ejemplificar: <b>for instance, to illustrate, a clear example of this is...</b></li>
+      <li>Añadir: <b>furthermore, moreover, in addition</b></li>
+      <li>Contrastar: <b>however, nevertheless, conversely</b></li>
+      <li>Consecuencia: <b>consequently, therefore, thus</b></li>
     </ul>
-    <div class="example"><b>Thesis modelo:</b> "While there are valid arguments on both sides, I believe that the advantages of remote work ultimately outweigh its drawbacks."</div>
-  </div>
-</section>
-
-<!-- ===================== LISTENING COMPLETO ===================== -->
-<section id="tab-listening" class="tabpanel">
-  <h2 class="section-title">🎧 Listening — Comprensión auditiva</h2>
-  <div class="card">
-    <p>4 secciones, cada una se reproduce <b>una sola vez</b>. Dificultad y número de hablantes aumentan progresivamente.</p>
-    <table>
-      <tr><th>Sección</th><th>Contexto</th><th>Hablantes</th></tr>
-      <tr><td>Section 1</td><td>Conversación cotidiana</td><td>2 personas</td></tr>
-      <tr><td>Section 2</td><td>Monólogo cotidiano</td><td>1 persona</td></tr>
-      <tr><td>Section 3</td><td>Conversación académica</td><td>2-4 personas</td></tr>
-      <tr><td>Section 4</td><td>Monólogo académico</td><td>1 persona</td></tr>
-    </table>
+    <div class="example"><b>Thesis:</b> "I believe the advantages of remote work outweigh its drawbacks."</div>
   </div>
 
-  <h3 class="sub">Tipos de pregunta</h3>
-  <div class="acc"><div class="acc-head">Form / Note / Table completion <span class="plus">+</span></div>
-    <div class="acc-body"><p>Completar formularios con palabras del audio. Respeta el <b>límite de palabras</b>.</p></div></div>
-  <div class="acc"><div class="acc-head">Multiple choice <span class="plus">+</span></div>
-    <div class="acc-body"><p>Lee las opciones antes de escuchar — el audio suele mencionar distractores.</p></div></div>
-  <div class="acc"><div class="acc-head">Matching <span class="plus">+</span></div>
-    <div class="acc-body"><p>Relacionar elementos. Subraya palabras clave antes de escuchar.</p></div></div>
-  <div class="acc"><div class="acc-head">Map / Diagram labelling <span class="plus">+</span></div>
-    <div class="acc-body"><p>Ubicar lugares según preposiciones: next to, opposite, behind, between.</p></div></div>
-
-  <h3 class="sub">Estrategias clave</h3>
+  <!-- SPEAKING NIVEL 3 -->
+  <h3 class="sub">🗣️ Speaking — Part 3 (Discusión)</h3>
   <div class="card">
+    <p>Preguntas analíticas. Usa: opinión → razón → ejemplo → matización.</p>
+    <span class="tag vocab">Vocabulario clave</span>
     <ul>
-      <li>Usa el tiempo antes de cada sección para leer las preguntas.</li>
-      <li>Escribe la respuesta en el momento — no esperes a "estar seguro/a".</li>
-      <li>Si te pierdes una respuesta, sigue adelante inmediatamente.</li>
-      <li>Presta atención a las señales de corrección del hablante.</li>
+      <li>Opinión: <b>from my perspective, arguably, it's widely believed that</b></li>
+      <li>Matización: <b>to some extent, not necessarily, it depends on</b></li>
     </ul>
+    <div class="example"><b>Pregunta:</b> "Do you think technology has made people more isolated?"<br>
+    <b>Respuesta:</b> "To some extent, yes. While technology has made communication more convenient, it could be argued that it has reduced face-to-face interaction."</div>
   </div>
-
-  <h3 class="sub">Práctica interactiva</h3>
-  <div class="card fillblank">
-    <p><b>Completa con la palabra clave:</b></p>
-    <p>"I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights, please."</p>
-    <p>"Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?"</p>
-    <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
-  </div>
-</section>
-
-<!-- ===================== READING COMPLETO ===================== -->
-<section id="tab-reading" class="tabpanel">
-  <h2 class="section-title">📖 Reading — Comprensión de lectura</h2>
-  <div class="card">
-    <p>3 textos, 40 preguntas, 60 minutos <b>sin tiempo extra</b>.</p>
-  </div>
-
-  <h3 class="sub">Tipos de pregunta</h3>
-  <div class="acc"><div class="acc-head">True / False / Not Given <span class="plus">+</span></div>
-    <div class="acc-body"><p><b>True:</b> coincide. <b>False:</b> contradice. <b>Not Given:</b> no se menciona.</p></div></div>
-  <div class="acc"><div class="acc-head">Matching headings <span class="plus">+</span></div>
-    <div class="acc-body"><p>Busca la <b>idea general</b> del párrafo, no palabras repetidas.</p></div></div>
-  <div class="acc"><div class="acc-head">Multiple choice <span class="plus">+</span></div>
-    <div class="acc-body"><p>Descarta opciones incorrectas primero.</p></div></div>
-
-  <h3 class="sub">Estrategias clave</h3>
-  <div class="card">
-    <ul>
-      <li><b>Skimming:</b> lectura rápida para captar la idea general.</li>
-      <li><b>Scanning:</b> búsqueda rápida de datos concretos.</li>
-      <li>Gestiona el tiempo: ~20 minutos por texto.</li>
-    </ul>
-  </div>
-
-  <h3 class="sub">Práctica — True / False / Not Given</h3>
-  <div class="card">
-    <p class="example"><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park."</p>
-    <div id="quiz-reading-full"></div>
-  </div>
-</section>
-
-<!-- ===================== WRITING COMPLETO ===================== -->
-<section id="tab-writing" class="tabpanel">
-  <h2 class="section-title">✍️ Writing — Expresión escrita</h2>
-  <div class="card">
-    <p>60 minutos: <b>20 min Task 1</b> (150+ palabras) + <b>40 min Task 2</b> (250+ palabras).</p>
-  </div>
-
-  <div class="acc"><div class="acc-head">Task 1 — Academic (informe de datos) <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p>Describe gráficos objetivamente — sin opinión personal.</p>
-      <p><b>Estructura:</b> Introducción → Overview → Detalles</p>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Task 1 — General (carta) <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p>Carta formal, semi-formal o informal según el destinatario.</p>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Task 2 — Ensayo argumentativo <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p><b>Tipos:</b> Opinion, Discussion, Problem-Solution, Advantages/Disadvantages.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== SPEAKING COMPLETO ===================== -->
-<section id="tab-speaking" class="tabpanel">
-  <h2 class="section-title">🗣️ Speaking — Presentación e introducción</h2>
-
-  <div class="acc"><div class="acc-head">Part 1 — Entrevista (4-5 min) <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p>Preguntas personales: trabajo, estudios, hobbies, rutina.</p>
-      <div class="example"><b>Ejemplo:</b> "What do you usually do in your free time?"<br>
-      <b>Respuesta:</b> "In my free time, I mostly work on personal projects and take photos. I find it relaxing."</div>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Part 2 — Cue Card (3-4 min) <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p>1 min preparación + 1-2 min hablando sobre un tema.</p>
-      <div class="example"><b>Ejemplo:</b> "Describe a piece of technology you find useful."</div>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Part 3 — Discusión abstracta (4-5 min) <span class="plus">+</span></div>
-    <div class="acc-body">
-      <p>Preguntas analíticas. Usa: opinión → razón → ejemplo → matización.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== GRAMÁTICA COMPLETA ===================== -->
-<section id="tab-gramatica" class="tabpanel">
-  <h2 class="section-title">📐 Gramática — Banco consolidado</h2>
-
-  <div class="acc"><div class="acc-head">Tiempos verbales narrativos <span class="plus">+</span></div>
-    <div class="acc-body">
-      <table><tr><th>Tiempo</th><th>Uso</th><th>Ejemplo</th></tr>
-      <tr><td>Past Simple</td><td>Acción terminada</td><td>I visited Cusco in 2019.</td></tr>
-      <tr><td>Past Continuous</td><td>Acción en progreso interrumpida</td><td>I was studying when she called.</td></tr>
-      <tr><td>Past Perfect</td><td>Acción anterior a otra pasada</td><td>By the time I arrived, the film had started.</td></tr>
-      <tr><td>Present Perfect</td><td>Experiencia sin tiempo definido</td><td>I have never been to Japan.</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Condicionales <span class="plus">+</span></div>
-    <div class="acc-body">
-      <table><tr><th>Tipo</th><th>Estructura</th><th>Uso</th></tr>
-      <tr><td>First</td><td>If + present, will + infinitive</td><td>Situación futura real</td></tr>
-      <tr><td>Second</td><td>If + past, would + infinitive</td><td>Hipotético presente</td></tr>
-      <tr><td>Third</td><td>If + past perfect, would have + participle</td><td>Hipotético pasado</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Voz pasiva <span class="plus">+</span></div>
-    <div class="acc-body"><div class="example">"The bridge was completed in 1998." / "It is believed that..."</div></div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Cláusulas relativas <span class="plus">+</span></div>
-    <div class="acc-body"><ul><li>who/that → personas</li><li>which/that → cosas</li><li>whose → posesión</li><li>where → lugares</li></ul></div>
-  </div>
-
-  <div class="acc"><div class="acc-head">Modales <span class="plus">+</span></div>
-    <div class="acc-body"><ul><li>Certeza: must, can't</li><li>Posibilidad: might, could, may</li><li>Obligación: should, ought to, need to</li></ul></div>
-  </div>
-
-  <h3 class="sub">Práctica interactiva</h3>
-  <div class="card" id="quiz-grammar-full"></div>
-</section>
-
-<!-- ===================== VOCABULARIO COMPLETO ===================== -->
-<section id="tab-vocabulario" class="tabpanel">
-  <h2 class="section-title">🧩 Vocabulario — Tarjetas por tema</h2>
-  
-  <h3 class="sub">Medio ambiente</h3>
-  <div class="flash-grid" data-topic="environment"></div>
-
-  <h3 class="sub">Tecnología</h3>
-  <div class="flash-grid" data-topic="technology"></div>
-
-  <h3 class="sub">Educación</h3>
-  <div class="flash-grid" data-topic="education"></div>
-
-  <h3 class="sub">Trabajo y sociedad</h3>
-  <div class="flash-grid" data-topic="work"></div>
-
-  <h3 class="sub">Salud</h3>
-  <div class="flash-grid" data-topic="health"></div>
-
-  <h3 class="sub">Conectores académicos</h3>
-  <div class="flash-grid" data-topic="linkers"></div>
 </section>
 
 <!-- ===================== BANDAS ===================== -->
@@ -761,7 +527,6 @@
       <span class="band-pill">6 Competent</span><span class="band-pill">5 Modest</span><span class="band-pill">4 Limited</span>
     </div>
   </div>
-
   <h3 class="sub">Criterios de evaluación</h3>
   <div class="card">
     <table>
@@ -772,7 +537,6 @@
       <tr><td>Grammatical Range</td><td>Variedad de estructuras</td><td>Combina tiempos</td></tr>
     </table>
   </div>
-
   <h3 class="sub">Conversión de aciertos</h3>
   <div class="card">
     <table>
@@ -793,13 +557,12 @@
     <p>Marca cada punto conforme lo completes. Tu progreso se guarda automáticamente.</p>
     <div id="checklist"></div>
   </div>
-
   <h3 class="sub">Consejos para el día del examen</h3>
   <div class="card">
     <ul>
       <li>Duerme bien la noche anterior.</li>
       <li>Lleva documento de identidad válido.</li>
-      <li>Nunca dejes respuestas en blanco — adivina si no estás seguro/a.</li>
+      <li>Nunca dejes respuestas en blanco.</li>
       <li>En Speaking, habla con confianza — la fluidez importa más que la perfección.</li>
     </ul>
   </div>
@@ -814,7 +577,7 @@
 
 <script>
 /* ---------- Navegación por pestañas ---------- */
-const navLinks = document.querySelectorAll('#mainnav a, .skillcard, .level-card');
+const navLinks = document.querySelectorAll('#mainnav a, .level-card');
 navLinks.forEach(el=>{
   el.addEventListener('click', ()=>{
     const tab = el.getAttribute('data-tab');
@@ -888,7 +651,6 @@ function buildQuiz(containerId, questions){
   });
 }
 
-/* Reading quizzes */
 buildQuiz('quiz-reading-n1', [
   {q:'"Maria works in a bank." — Esto es:', options:["True","False"], correct:0},
   {q:'"She starts work at 10am." — Esto es:', options:["True","False"], correct:1},
@@ -899,89 +661,14 @@ buildQuiz('quiz-reading-n2', [
   {q:'"Researchers have studied urban parks." — Según el texto:', options:["True","False","Not Given"], correct:2},
 ]);
 
-buildQuiz('quiz-reading-full', [
-  {q:'"The effect is the same for every park." — Según el texto:', options:["True","False","Not Given"], correct:1},
-  {q:'"The study was conducted in 2024." — Según el texto:', options:["True","False","Not Given"], correct:2},
-]);
-
-buildQuiz('quiz-grammar-full', [
-  {q:'"By the time I arrived, the meeting ___ already started." — Completa:', options:["has","had","was"], correct:1},
-  {q:'"If I ___ more time, I would travel more often."', options:["have","had","will have"], correct:1},
-  {q:'"The report, ___ was published last year, contains important data."', options:["who","which","whose"], correct:1},
-]);
-
-/* ---------- Flashcards ---------- */
-const vocabData = {
-  environment: [
-    {en:"carbon footprint", es:"huella de carbono"},
-    {en:"renewable energy", es:"energía renovable"},
-    {en:"deforestation", es:"deforestación"},
-    {en:"greenhouse gas emissions", es:"emisiones de gases de efecto invernadero"},
-    {en:"sustainable development", es:"desarrollo sostenible"},
-    {en:"biodiversity", es:"biodiversidad"},
-  ],
-  technology: [
-    {en:"artificial intelligence", es:"inteligencia artificial"},
-    {en:"digital divide", es:"brecha digital"},
-    {en:"cutting-edge", es:"de vanguardia"},
-    {en:"data privacy", es:"privacidad de datos"},
-    {en:"automation", es:"automatización"},
-    {en:"streamline a process", es:"agilizar un proceso"},
-  ],
-  education: [
-    {en:"curriculum", es:"plan de estudios"},
-    {en:"rote learning", es:"aprendizaje memorístico"},
-    {en:"higher education", es:"educación superior"},
-    {en:"tuition fees", es:"matrícula universitaria"},
-    {en:"extracurricular activities", es:"actividades extracurriculares"},
-    {en:"lifelong learning", es:"aprendizaje continuo"},
-  ],
-  work: [
-    {en:"workforce", es:"fuerza laboral"},
-    {en:"work-life balance", es:"equilibrio vida-trabajo"},
-    {en:"job security", es:"estabilidad laboral"},
-    {en:"remote work", es:"trabajo remoto"},
-    {en:"income inequality", es:"desigualdad de ingresos"},
-    {en:"urbanisation", es:"urbanización"},
-  ],
-  health: [
-    {en:"sedentary lifestyle", es:"estilo de vida sedentario"},
-    {en:"life expectancy", es:"esperanza de vida"},
-    {en:"public healthcare system", es:"sistema de salud pública"},
-    {en:"mental well-being", es:"bienestar mental"},
-    {en:"obesity rates", es:"tasas de obesidad"},
-    {en:"preventive medicine", es:"medicina preventiva"},
-  ],
-  linkers: [
-    {en:"furthermore / moreover", es:"además"},
-    {en:"however / nevertheless", es:"sin embargo"},
-    {en:"as a result / consequently", es:"como resultado"},
-    {en:"for instance / to illustrate", es:"por ejemplo"},
-    {en:"to some extent", es:"hasta cierto punto"},
-    {en:"in conclusion / to sum up", es:"en conclusión"},
-  ]
-};
-
-document.querySelectorAll('.flash-grid').forEach(grid=>{
-  const topic = grid.getAttribute('data-topic');
-  if(!vocabData[topic]) return;
-  vocabData[topic].forEach(item=>{
-    const card = document.createElement('div');
-    card.className = 'flash';
-    card.innerHTML = '<div class="flash-inner"><div class="flash-face flash-front">'+item.en+'</div><div class="flash-face flash-back">'+item.es+'</div></div>';
-    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
-    grid.appendChild(card);
-  });
-});
-
 /* ---------- Checklist ---------- */
 const planItems = [
-  "Completar Nivel 1 (A1-A2) — Vocabulario y gramática básica",
+  "Completar Nivel 1 — Vocabulario y gramática básica",
   "Completar Nivel 1 — Listening y Reading básicos",
-  "Completar Nivel 2 (B1) — Vocabulario intermedio",
+  "Completar Nivel 2 — Vocabulario intermedio",
   "Completar Nivel 2 — Gramática (condicionales, voz pasiva)",
   "Completar Nivel 2 — Writing Task 1",
-  "Completar Nivel 3 (B2) — Vocabulario académico",
+  "Completar Nivel 3 — Vocabulario académico",
   "Completar Nivel 3 — Gramática avanzada (3er condicional)",
   "Completar Nivel 3 — Writing Task 2",
   "Repasar Speaking Part 1, 2 y 3",
