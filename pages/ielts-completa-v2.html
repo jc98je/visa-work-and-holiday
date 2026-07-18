@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS — Guía de Estudio Completa</title>
+<style>
+  :root{--navy:#0b2942;--navy2:#164066;--red:#c8102e;--gold:#d4a017;--bg:#f7f5f0;--card:#fff;--text:#1c1c1c;--muted:#5a5a5a;--green:#2e7d32;--blue:#1565c0;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:56px 20px 34px;text-align:center;border-bottom:6px solid var(--gold);}
+  header h1{margin:0 0 8px;font-size:2.3em;}
+  header p{color:#dbe6f0;margin:4px 0;}
+
+  /* Barra de progreso */
+  #progress-wrap{max-width:1000px;margin:18px auto 0;padding:0 20px;}
+  #progress-bar-bg{background:rgba(255,255,255,.15);border-radius:20px;height:10px;overflow:hidden;}
+  #progress-bar-fill{background:var(--gold);height:100%;width:0%;transition:width .4s ease;}
+  #progress-text{color:#dbe6f0;font-size:.8em;margin-top:6px;text-align:center;}
+
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:var(--navy);padding:12px 10px;position:sticky;top:0;z-index:200;box-shadow:0 3px 10px rgba(0,0,0,.2);}
+  nav a{color:#fff;text-decoration:none;padding:7px 13px;border-radius:18px;font-size:.85em;background:rgba(255,255,255,.08);cursor:pointer;transition:.2s;}
+  nav a:hover, nav a.active{background:var(--gold);color:var(--navy);}
+
+  .container{max-width:1000px;margin:0 auto;padding:40px 20px 90px;}
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;animation:fadein .35s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  h2.section-title{font-size:1.8em;color:var(--navy);border-bottom:3px solid var(--red);padding-bottom:8px;margin-top:10px;}
+  h3.sub{color:var(--red);font-size:1.2em;margin-top:26px;border-left:4px solid var(--gold);padding-left:10px;}
+  .card{background:var(--card);border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #e8e4da;}
+  .tag{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;font-size:.75em;padding:3px 10px;border-radius:12px;margin-bottom:8px;text-transform:uppercase;}
+  .tag.gram{background:#c8102e;color:#fff;} .tag.vocab{background:#2e7d32;color:#fff;} .tag.strat{background:#1565c0;color:#fff;} .tag.band{background:var(--navy);color:#fff;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em;}
+  th,td{border:1px solid #ddd;padding:7px 10px;text-align:left;}
+  th{background:var(--navy);color:#fff;}
+  tr:nth-child(even){background:#f2efe8;}
+  .example{background:#fdf6e3;border-left:4px solid var(--gold);padding:9px 14px;margin:8px 0;border-radius:4px;}
+  ul{padding-left:22px;} li{margin-bottom:5px;}
+  footer{text-align:center;padding:30px;background:var(--navy);color:#cfd9e3;font-size:.85em;}
+
+  /* Overview cards */
+  .grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0;}
+  .skillcard{background:var(--card);border-radius:10px;padding:18px;border:1px solid #e8e4da;border-top:5px solid var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;transition:.2s;}
+  .skillcard:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.12);}
+  .skillcard h4{margin:6px 0;color:var(--navy);}
+  .skillcard .icon{font-size:1.8em;}
+
+  /* Accordion */
+  .acc{background:var(--card);border:1px solid #e8e4da;border-radius:10px;margin-bottom:10px;overflow:hidden;}
+  .acc-head{padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff;font-weight:600;color:var(--navy);}
+  .acc-head:hover{background:#f2efe8;}
+  .acc-head .plus{font-size:1.3em;color:var(--red);transition:.25s;}
+  .acc.open .plus{transform:rotate(45deg);}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 18px;}
+  .acc.open .acc-body{padding:0 18px 16px;}
+
+  /* Quiz */
+  .quiz-q{margin-bottom:14px;padding:12px 14px;border:1px solid #e8e4da;border-radius:8px;background:#fcfbf8;}
+  .quiz-q .opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:.92em;}
+  .quiz-q .opts button:hover{background:#f0ece0;}
+  .quiz-q .opts button.correct{background:#d9f2d9;border-color:var(--green);font-weight:bold;}
+  .quiz-q .opts button.wrong{background:#fbdcdc;border-color:var(--red);}
+  .quiz-score{font-weight:bold;color:var(--navy);margin-top:10px;}
+  .btn{background:var(--navy);color:#fff;border:none;padding:9px 16px;border-radius:20px;cursor:pointer;font-size:.9em;}
+  .btn:hover{background:var(--red);}
+  .btn.reset{background:#888;}
+
+  /* Fill blank */
+  .fillblank input{border:none;border-bottom:2px solid var(--gold);background:#fdf6e3;padding:2px 6px;font-size:.95em;width:130px;text-align:center;font-family:inherit;}
+  .fillblank input.ok{background:#d9f2d9;border-color:var(--green);}
+  .fillblank input.bad{background:#fbdcdc;border-color:var(--red);}
+  .check-row{margin-top:10px;}
+
+  /* Flashcards */
+  .flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:14px 0;}
+  .flash{perspective:1000px;height:130px;cursor:pointer;}
+  .flash-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+  .flash.flipped .flash-inner{transform:rotateY(180deg);}
+  .flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:.92em;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+  .flash-front{background:var(--navy);color:#fff;font-weight:600;}
+  .flash-back{background:var(--gold);color:var(--navy);transform:rotateY(180deg);font-size:.85em;}
+
+  /* Checklist / study plan */
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px dashed #ddd;}
+  .check-item input{margin-top:4px;width:16px;height:16px;}
+  .check-item.done label{text-decoration:line-through;color:#999;}
+
+  .band-scale{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;}
+  .band-pill{background:var(--navy);color:#fff;padding:6px 10px;border-radius:16px;font-size:.8em;}
+
+  .toc-mini{font-size:.85em;color:var(--muted);margin-bottom:20px;}
+  .toc-mini a{color:var(--blue);text-decoration:none;}
+  .toc-mini a:hover{text-decoration:underline;}
+
+  @media(max-width:600px){header h1{font-size:1.6em;} nav a{font-size:.78em;padding:6px 10px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📘 IELTS — Guía de Estudio Completa</h1>
+  <p>Listening · Reading · Writing · Speaking · Gramática · Vocabulario · Práctica interactiva</p>
+  <p style="font-size:.85em;color:var(--gold)">Preparación integral para Work & Holiday</p>
+  <div id="progress-wrap">
+    <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+    <div id="progress-text">0% completado</div>
+  </div>
+</header>
+
+<nav id="mainnav">
+  <a data-tab="inicio" class="active">🏠 Inicio</a>
+  <a data-tab="listening">🎧 Listening</a>
+  <a data-tab="reading">📖 Reading</a>
+  <a data-tab="writing">✍️ Writing</a>
+  <a data-tab="speaking">🗣️ Speaking</a>
+  <a data-tab="gramatica">📐 Gramática</a>
+  <a data-tab="vocabulario">🧩 Vocabulario</a>
+  <a data-tab="bandas">📊 Bandas</a>
+  <a data-tab="plan">🗓️ Plan de estudio</a>
+</nav>
+
+<div class="container">
+
+<!-- ===================== INICIO ===================== -->
+<section id="tab-inicio" class="tabpanel active">
+  <h2 class="section-title">Bienvenido/a a tu guía IELTS</h2>
+  <div class="card">
+    <p>El IELTS (International English Language Testing System) evalúa tu inglés en cuatro destrezas: <b>Listening, Reading, Writing y Speaking</b>. Existen dos versiones: <b>Academic</b> (para estudios superiores) y <b>General Training</b> (para trabajo/migración). Listening y Speaking son iguales en ambas; Reading y Writing cambian de contenido.</p>
+    <table>
+      <tr><th>Módulo</th><th>Duración</th><th>Partes</th><th>Preguntas</th></tr>
+      <tr><td>Listening</td><td>30 min + 10 min de traspaso</td><td>4 secciones</td><td>40</td></tr>
+      <tr><td>Reading</td><td>60 min</td><td>3 secciones</td><td>40</td></tr>
+      <tr><td>Writing</td><td>60 min</td><td>Task 1 + Task 2</td><td>2 tareas</td></tr>
+      <tr><td>Speaking</td><td>11-14 min</td><td>Part 1, 2, 3</td><td>Entrevista oral</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">Explora cada destreza</h3>
+  <div class="grid4">
+    <div class="skillcard" data-tab="listening"><span class="icon">🎧</span><h4>Listening</h4><p style="font-size:.85em;color:var(--muted)">4 secciones, audio único, dificultad creciente.</p></div>
+    <div class="skillcard" data-tab="reading"><span class="icon">📖</span><h4>Reading</h4><p style="font-size:.85em;color:var(--muted)">3 textos, 40 preguntas, sin tiempo extra.</p></div>
+    <div class="skillcard" data-tab="writing"><span class="icon">✍️</span><h4>Writing</h4><p style="font-size:.85em;color:var(--muted)">Informe/carta + ensayo argumentativo.</p></div>
+    <div class="skillcard" data-tab="speaking"><span class="icon">🗣️</span><h4>Speaking</h4><p style="font-size:.85em;color:var(--muted)">Entrevista cara a cara con examinador.</p></div>
+  </div>
+
+  <h3 class="sub">Cómo usar esta guía</h3>
+  <div class="card">
+    <ul>
+      <li>Marca casillas en <b>Plan de estudio</b> para seguir tu progreso (se guarda en este navegador).</li>
+      <li>Cada sección tiene teoría, ejemplos y <b>ejercicios interactivos autocorregibles</b>.</li>
+      <li>Las tarjetas de <b>Vocabulario</b> se voltean al hacer clic — úsalas como repaso rápido.</li>
+      <li>Revisa <b>Bandas</b> para entender exactamente qué evalúa el examinador en cada destreza.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== LISTENING ===================== -->
+<section id="tab-listening" class="tabpanel">
+  <h2 class="section-title">🎧 Listening — Comprensión auditiva</h2>
+  <div class="card">
+    <p>4 secciones, cada una se reproduce <b>una sola vez</b>. Dificultad y número de hablantes aumentan progresivamente.</p>
+    <table>
+      <tr><th>Sección</th><th>Contexto</th><th>Hablantes</th></tr>
+      <tr><td>Section 1</td><td>Conversación cotidiana (ej. reservar un hotel)</td><td>2 personas</td></tr>
+      <tr><td>Section 2</td><td>Monólogo cotidiano (ej. guía de un museo)</td><td>1 persona</td></tr>
+      <tr><td>Section 3</td><td>Conversación académica (ej. estudiantes con tutor)</td><td>2-4 personas</td></tr>
+      <tr><td>Section 4</td><td>Monólogo académico (ej. clase magistral)</td><td>1 persona</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">Tipos de pregunta</h3>
+  <div class="acc"><div class="acc-head">Form / Note / Table completion <span class="plus">+</span></div>
+    <div class="acc-body"><p>Completar formularios, notas o tablas con palabras del audio. Respeta el <b>límite de palabras</b> indicado ("NO MORE THAN TWO WORDS"). Cuidado con plurales y ortografía — cuentan como error.</p></div></div>
+  <div class="acc"><div class="acc-head">Multiple choice <span class="plus">+</span></div>
+    <div class="acc-body"><p>Lee las opciones antes de escuchar; el audio suele mencionar distractores parecidos antes de dar la respuesta correcta — escucha hasta el final de la idea.</p></div></div>
+  <div class="acc"><div class="acc-head">Matching <span class="plus">+</span></div>
+    <div class="acc-body"><p>Relacionar elementos (ej. personas con opiniones). Subraya palabras clave de cada opción antes de escuchar.</p></div></div>
+  <div class="acc"><div class="acc-head">Plan / Map / Diagram labelling <span class="plus">+</span></div>
+    <div class="acc-body"><p>Ubicar lugares en un mapa o partes de un diagrama según preposiciones de lugar: next to, opposite, on the left of, behind, between.</p></div></div>
+  <div class="acc"><div class="acc-head">Sentence completion / Summary <span class="plus">+</span></div>
+    <div class="acc-body"><p>La gramática de la frase indica qué tipo de palabra falta (sustantivo, verbo, adjetivo) — anticipa la categoría gramatical antes de escuchar.</p></div></div>
+
+  <h3 class="sub">Estrategias clave</h3>
+  <div class="card">
+    <ul>
+      <li>Usa el tiempo antes de cada sección para leer las preguntas y predecir el tipo de respuesta.</li>
+      <li>Escribe la respuesta en el momento en que la escuches — no esperes a "estar seguro/a".</li>
+      <li>Si te pierdes una respuesta, sigue adelante inmediatamente; no te quedes pensando en ella.</li>
+      <li>Presta atención a las señales de corrección del hablante: "sorry, I mean...", "actually, let's change that to...".</li>
+      <li>En la fase de traspaso final (10 min en el examen en papel), revisa ortografía y gramática (singular/plural).</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Práctica interactiva</h3>
+  <div class="card fillblank">
+    <p><b>Completa con la palabra clave (basado en un audio típico de reserva de hotel):</b></p>
+    <p>"I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights, please."</p>
+    <p>"Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?"</p>
+    <p>"The total cost, including breakfast, is <input type="text" data-answer="120" class="fb"> pounds."</p>
+    <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+  </div>
+
+  <div id="quiz-listening" class="card"></div>
+</section>
+
+<!-- ===================== READING ===================== -->
+<section id="tab-reading" class="tabpanel">
+  <h2 class="section-title">📖 Reading — Comprensión de lectura</h2>
+  <div class="card">
+    <p>3 textos (en Academic, de revistas/publicaciones académicas; en General, de la vida cotidiana/laboral), 40 preguntas, 60 minutos <b>sin tiempo extra</b> para traspasar respuestas — escríbelas directamente en la hoja de respuestas.</p>
+  </div>
+
+  <h3 class="sub">Tipos de pregunta</h3>
+  <div class="acc"><div class="acc-head">True / False / Not Given <span class="plus">+</span></div>
+    <div class="acc-body"><p><b>True:</b> coincide con el texto. <b>False:</b> contradice el texto. <b>Not Given:</b> no se menciona esa información. Error común: confundir "False" con "Not Given" — si el texto no lo dice, es Not Given, no False.</p></div></div>
+  <div class="acc"><div class="acc-head">Yes / No / Not Given <span class="plus">+</span></div>
+    <div class="acc-body"><p>Igual que True/False/Not Given pero para opiniones o afirmaciones del autor, no hechos.</p></div></div>
+  <div class="acc"><div class="acc-head">Matching headings <span class="plus">+</span></div>
+    <div class="acc-body"><p>Asignar un título a cada párrafo. Busca la <b>idea general</b> del párrafo, no una palabra repetida (suele ser un distractor).</p></div></div>
+  <div class="acc"><div class="acc-head">Matching information / features <span class="plus">+</span></div>
+    <div class="acc-body"><p>Encontrar en qué párrafo aparece un dato específico, o relacionar afirmaciones con personas/teorías mencionadas.</p></div></div>
+  <div class="acc"><div class="acc-head">Sentence / Summary / Table completion <span class="plus">+</span></div>
+    <div class="acc-body"><p>Similar a Listening: identifica el tipo de palabra que falta y localiza sinónimos del texto original (rara vez se repite la palabra exacta).</p></div></div>
+  <div class="acc"><div class="acc-head">Multiple choice <span class="plus">+</span></div>
+    <div class="acc-body"><p>Descarta primero las opciones claramente incorrectas; cuidado con las que son "verdaderas pero no responden la pregunta".</p></div></div>
+
+  <h3 class="sub">Estrategias clave</h3>
+  <div class="card">
+    <ul>
+      <li><b>Skimming:</b> lectura rápida para captar la idea general antes de responder.</li>
+      <li><b>Scanning:</b> búsqueda rápida de datos concretos (nombres, fechas, cifras).</li>
+      <li>Lee las preguntas antes que el texto completo — te dice qué buscar.</li>
+      <li>Gestiona el tiempo: ~20 minutos por texto; no te quedes atascado/a en una pregunta.</li>
+      <li>Las respuestas suelen aparecer en el mismo orden que las preguntas (excepto en matching headings/features).</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Práctica interactiva — True / False / Not Given</h3>
+  <div class="card">
+    <p class="example"><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park."</p>
+    <div id="quiz-reading"></div>
+  </div>
+</section>
+
+<!-- ===================== WRITING ===================== -->
+<section id="tab-writing" class="tabpanel">
+  <h2 class="section-title">✍️ Writing — Expresión escrita</h2>
+  <div class="card">
+    <p>60 minutos para dos tareas. Se recomienda dedicar <b>20 min a Task 1</b> (mínimo 150 palabras) y <b>40 min a Task 2</b> (mínimo 250 palabras) — Task 2 vale el doble en la nota final.</p>
+  </div>
+
+  <h3 class="sub">Task 1 — Academic (informe de datos)</h3>
+  <div class="card">
+    <span class="tag strat">Objetivo</span>
+    <p>Describir objetivamente un gráfico, tabla, diagrama o proceso — sin dar opinión personal.</p>
+    <span class="tag gram">Estructura recomendada</span>
+    <ul>
+      <li><b>Introducción:</b> parafrasea el título del gráfico.</li>
+      <li><b>Overview:</b> 1-2 frases con las tendencias más generales (obligatorio para banda alta).</li>
+      <li><b>Párrafos de detalle:</b> compara datos específicos agrupando información similar.</li>
+    </ul>
+    <span class="tag vocab">Lenguaje útil</span>
+    <ul>
+      <li>Tendencias: rise, increase, grow, climb / fall, decline, decrease, drop / remain stable, plateau, level off</li>
+      <li>Velocidad: sharply, dramatically, steadily, gradually, slightly</li>
+      <li>Comparación: compared to, whereas, in contrast, similarly, while</li>
+    </ul>
+    <div class="example"><b>Overview modelo:</b> "Overall, while both countries saw an increase in internet usage over the period, Country A experienced far more rapid growth, eventually overtaking Country B by 2020."</div>
+  </div>
+
+  <h3 class="sub">Task 1 — General Training (carta)</h3>
+  <div class="card">
+    <span class="tag strat">Objetivo</span>
+    <p>Escribir una carta formal, semi-formal o informal según a quién va dirigida (desconocido, colega, amigo).</p>
+    <span class="tag gram">Estructura</span>
+    <ul>
+      <li>Saludo apropiado al registro (Dear Sir/Madam / Dear Mr Lee / Dear John).</li>
+      <li>Explicar el motivo de la carta.</li>
+      <li>Desarrollar los 3 puntos (bullet points) que da la tarea.</li>
+      <li>Cierre y despedida acorde al registro (Yours faithfully / Best wishes).</li>
+    </ul>
+    <div class="example"><b>Apertura formal modelo:</b> "I am writing to draw your attention to a problem I have recently experienced with..."</div>
+  </div>
+
+  <h3 class="sub">Task 2 — Ensayo argumentativo</h3>
+  <div class="card">
+    <span class="tag strat">Tipos de pregunta</span>
+    <ul>
+      <li><b>Opinion (Agree/Disagree):</b> da tu postura clara y mantenla.</li>
+      <li><b>Discussion:</b> "Discuss both views and give your opinion" — presenta ambos lados y luego tu opinión.</li>
+      <li><b>Problem-Solution:</b> analiza causas/problemas y propone soluciones.</li>
+      <li><b>Advantages/Disadvantages:</b> compara pros y contras, a veces con opinión final.</li>
+      <li><b>Two-part question:</b> responde ambas preguntas por separado.</li>
+    </ul>
+    <span class="tag gram">Estructura de 4 párrafos</span>
+    <ul>
+      <li><b>Introducción:</b> parafrasea la pregunta + presenta tu postura (thesis statement).</li>
+      <li><b>Párrafo 1:</b> idea principal + explicación + ejemplo.</li>
+      <li><b>Párrafo 2:</b> segunda idea (o el otro punto de vista) + explicación + ejemplo.</li>
+      <li><b>Conclusión:</b> resume tu postura sin repetir literalmente la introducción.</li>
+    </ul>
+    <span class="tag vocab">Conectores útiles</span>
+    <ul>
+      <li>Añadir: furthermore, in addition, moreover</li>
+      <li>Contrastar: however, on the other hand, nevertheless</li>
+      <li>Consecuencia: as a result, consequently, therefore</li>
+      <li>Ejemplificar: for instance, a clear example of this is...</li>
+    </ul>
+    <div class="example"><b>Thesis statement modelo:</b> "While there are valid arguments on both sides, I believe that the advantages of remote work ultimately outweigh its drawbacks."</div>
+  </div>
+
+  <h3 class="sub">Errores comunes que bajan la nota</h3>
+  <div class="card">
+    <ul>
+      <li>No responder directamente a la pregunta (task achievement bajo).</li>
+      <li>Memorizar párrafos genéricos que no encajan con la pregunta específica.</li>
+      <li>No incluir overview en Task 1 Academic.</li>
+      <li>Escribir menos del mínimo de palabras (penalización).</li>
+      <li>Repetir las mismas palabras sin usar sinónimos (lexical resource bajo).</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Práctica interactiva</h3>
+  <div class="card" id="quiz-writing"></div>
+</section>
+
+<!-- ===================== SPEAKING ===================== -->
+<section id="tab-speaking" class="tabpanel">
+  <h2 class="section-title">🗣️ Speaking — Presentación e introducción</h2>
+
+  <h3 class="sub">Part 1 — Presentación e introducción (4-5 min)</h3>
+  <div class="card">
+    <p>Preguntas personales sobre temas familiares: trabajo/estudios, ciudad natal, hobbies, familia, rutina.</p>
+    <span class="tag gram">Gramática clave</span>
+    <ul>
+      <li>Presente simple para hábitos/rutinas: "I usually work from home."</li>
+      <li>Presente perfecto para experiencias/duración: "I've lived here for three years."</li>
+      <li>Adverbios de frecuencia: usually, occasionally, rarely, hardly ever, from time to time</li>
+      <li>Pasado simple si preguntan por el pasado: "I studied mechatronics at university."</li>
+    </ul>
+    <span class="tag vocab">Vocabulario clave</span>
+    <ul>
+      <li>Personal: hometown, upbringing, leisure, routine, hobby, background</li>
+      <li>Gustos/preferencias: fond of, keen on, into (informal), passionate about, not particularly into</li>
+    </ul>
+    <span class="tag strat">Estrategia</span>
+    <ul>
+      <li>Respuestas de 2-4 oraciones — ni muy cortas ("Yes, I do.") ni un monólogo largo.</li>
+      <li>Añade siempre una razón o ejemplo: "I enjoy photography because it lets me capture moments that tell a story."</li>
+    </ul>
+    <div class="example"><b>Pregunta ejemplo:</b> "What do you usually do in your free time?"<br>
+    <b>Respuesta modelo:</b> "In my free time, I mostly work on personal tech projects and take photos around the city. I find it really relaxing because it takes my mind off work-related stress."</div>
+  </div>
+
+  <h3 class="sub">Part 2 — Long Turn / Cue Card (3-4 min)</h3>
+  <div class="card">
+    <p>1 minuto de preparación + hablas 1-2 minutos sobre un tema con pistas (persona, lugar, objeto, evento).</p>
+    <span class="tag gram">Gramática clave</span>
+    <ul>
+      <li>Pasado simple y pasado continuo para narrar: "I was living in Tacna when I decided to move to Lima."</li>
+      <li>Pasado perfecto para dar contexto anterior: "By the time I arrived, the event had already started."</li>
+      <li>Conectores narrativos: first of all, after that, eventually, in the end, meanwhile</li>
+      <li>Cláusulas relativas para dar detalle: "a place which I visited when I was a child"</li>
+    </ul>
+    <span class="tag vocab">Vocabulario clave</span>
+    <ul>
+      <li>Adjetivos descriptivos variados: memorable, fascinating, overwhelming, rewarding, unforgettable</li>
+      <li>Expresiones de sentimiento: it meant a lot to me, I'll never forget..., it left a lasting impression on me</li>
+    </ul>
+    <span class="tag strat">Cómo usar tu minuto de preparación</span>
+    <ul>
+      <li>Anota 3-4 palabras clave por cada punto de la tarjeta (qué/cuándo/dónde/por qué).</li>
+      <li>No escribas oraciones completas — solo ideas guía.</li>
+    </ul>
+    <div class="example"><b>Cue card ejemplo:</b> "Describe a piece of technology you find useful. You should say: what it is, how often you use it, what you use it for, and explain why you find it useful."<br>
+    <b>Apertura modelo:</b> "I'd like to talk about my laptop, which I use for pretty much everything — from work to entertainment. I've had it for about two years now, and to be honest, I can't imagine my daily routine without it..."</div>
+  </div>
+
+  <h3 class="sub">Part 3 — Discusión abstracta (4-5 min)</h3>
+  <div class="card">
+    <p>Preguntas analíticas relacionadas con el tema de Part 2. Requiere opinión, argumentación y especulación.</p>
+    <span class="tag gram">Gramática clave</span>
+    <ul>
+      <li>Condicionales tipo 2 y 3 (hipotéticos): "If governments invested more in public transport, congestion would decrease."</li>
+      <li>Modales de especulación: might, could, may well, is likely to</li>
+      <li>Comparaciones entre generaciones/culturas: "compared to the past", "unlike previous generations"</li>
+      <li>Discurso de matización (hedging): "to some extent", "not necessarily", "it depends on..."</li>
+    </ul>
+    <span class="tag vocab">Vocabulario clave</span>
+    <ul>
+      <li>Opinión formal: from my perspective, arguably, it's widely believed that, there's a strong case for...</li>
+      <li>Temas típicos: globalisation, sustainability, workforce, curriculum, digital divide, urbanisation</li>
+    </ul>
+    <span class="tag strat">Estrategia</span>
+    <ul>
+      <li>Estructura de respuesta: opinión directa → razón → ejemplo → matización o contraste.</li>
+      <li>Está bien no tener una respuesta 100% segura — el examinador evalúa cómo argumentas, no si "aciertas".</li>
+    </ul>
+    <div class="example"><b>Pregunta ejemplo:</b> "Do you think technology has made people more isolated?"<br>
+    <b>Respuesta modelo:</b> "To some extent, yes. While technology has made communication more convenient, it could be argued that it has also reduced face-to-face interaction, especially among younger generations. That said, it really depends on how people choose to use it."</div>
+  </div>
+
+  <h3 class="sub">Práctica interactiva — completa la respuesta</h3>
+  <div class="card fillblank">
+    <p>"I'd like to talk about a trip I took last year. I <input type="text" class="fb" data-answer="was travelling"> through the mountains when the weather suddenly changed."</p>
+    <p>"To some <input type="text" class="fb" data-answer="extent"> , I agree with that statement, although it really depends on the context."</p>
+    <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="quiz-score"></span></div>
+  </div>
+</section>
+
+<!-- ===================== GRAMÁTICA ===================== -->
+<section id="tab-gramatica" class="tabpanel">
+  <h2 class="section-title">📐 Gramática — Banco consolidado</h2>
+  <p class="toc-mini">Gramática esencial organizada por función comunicativa, útil en las cuatro destrezas.</p>
+
+  <div class="acc"><div class="acc-head">Tiempos verbales narrativos <span class="plus">+</span></div>
+    <div class="acc-body">
+      <table><tr><th>Tiempo</th><th>Uso</th><th>Ejemplo</th></tr>
+      <tr><td>Past Simple</td><td>Acción terminada en momento definido</td><td>I visited Cusco in 2019.</td></tr>
+      <tr><td>Past Continuous</td><td>Acción en progreso interrumpida</td><td>I was studying when she called.</td></tr>
+      <tr><td>Past Perfect</td><td>Acción anterior a otra pasada</td><td>By the time I arrived, the film had started.</td></tr>
+      <tr><td>Present Perfect</td><td>Experiencia sin tiempo definido / conexión con el presente</td><td>I have never been to Japan.</td></tr>
+      <tr><td>Present Perfect Continuous</td><td>Duración hasta el presente</td><td>I've been working here for five years.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Condicionales <span class="plus">+</span></div>
+    <div class="acc-body">
+      <table><tr><th>Tipo</th><th>Estructura</th><th>Uso</th></tr>
+      <tr><td>Zero</td><td>If + present, present</td><td>Hechos generales/científicos</td></tr>
+      <tr><td>First</td><td>If + present, will + infinitive</td><td>Situación futura real/posible</td></tr>
+      <tr><td>Second</td><td>If + past simple, would + infinitive</td><td>Hipotético presente/futuro improbable</td></tr>
+      <tr><td>Third</td><td>If + past perfect, would have + participle</td><td>Hipotético pasado (irreal)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Voz pasiva (frecuente en Reading/Writing académico) <span class="plus">+</span></div>
+    <div class="acc-body"><p>Se usa cuando la acción importa más que quién la realiza, típico en textos académicos y reportes.</p>
+    <div class="example">"The bridge was completed in 1998." / "It is believed that the policy will reduce emissions."</div></div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Cláusulas relativas <span class="plus">+</span></div>
+    <div class="acc-body"><p>Añaden detalle sin crear frases nuevas — suben la puntuación en Grammatical Range.</p>
+    <ul><li>who / that → personas (sujeto)</li><li>which / that → cosas</li><li>whose → posesión</li><li>where → lugares</li></ul>
+    <div class="example">"The scientist, who has published over 40 papers, will present her findings."</div></div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Modales de especulación y obligación <span class="plus">+</span></div>
+    <div class="acc-body">
+      <ul>
+        <li>Certeza: must, can't (deducción) — "That must be the reason."</li>
+        <li>Posibilidad: might, could, may — "It could take longer than expected."</li>
+        <li>Obligación/recomendación: should, ought to, need to</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Comparativos y superlativos <span class="plus">+</span></div>
+    <div class="acc-body"><ul>
+      <li>Comparativo: more + adj / adj+er + than</li>
+      <li>Superlativo: the most + adj / the + adj+est</li>
+      <li>Igualdad: as...as / not as...as</li>
+      <li>Avanzado: "by far the most", "considerably higher than", "nowhere near as"</li>
+    </ul></div>
+  </div>
+
+  <h3 class="sub">Práctica interactiva</h3>
+  <div class="card" id="quiz-grammar"></div>
+</section>
+
+<!-- ===================== VOCABULARIO ===================== -->
+<section id="tab-vocabulario" class="tabpanel">
+  <h2 class="section-title">🧩 Vocabulario — Tarjetas por tema</h2>
+  <p class="toc-mini">Haz clic en cada tarjeta para ver la traducción / colocación útil. Organizado por los temas más frecuentes del examen.</p>
+
+  <h3 class="sub">Medio ambiente</h3>
+  <div class="flash-grid" data-topic="environment"></div>
+
+  <h3 class="sub">Tecnología</h3>
+  <div class="flash-grid" data-topic="technology"></div>
+
+  <h3 class="sub">Educación</h3>
+  <div class="flash-grid" data-topic="education"></div>
+
+  <h3 class="sub">Trabajo y sociedad</h3>
+  <div class="flash-grid" data-topic="work"></div>
+
+  <h3 class="sub">Salud</h3>
+  <div class="flash-grid" data-topic="health"></div>
+
+  <h3 class="sub">Conectores académicos (Writing/Speaking Part 3)</h3>
+  <div class="flash-grid" data-topic="linkers"></div>
+</section>
+
+<!-- ===================== BANDAS ===================== -->
+<section id="tab-bandas" class="tabpanel">
+  <h2 class="section-title">📊 Escala de bandas y criterios</h2>
+  <div class="card">
+    <p>IELTS se puntúa de <b>1 a 9</b> por destreza; la nota global (Overall Band Score) es el promedio redondeado al 0.5 más cercano.</p>
+    <div class="band-scale">
+      <span class="band-pill">9 Expert</span><span class="band-pill">8 Very good</span><span class="band-pill">7 Good</span>
+      <span class="band-pill">6 Competent</span><span class="band-pill">5 Modest</span><span class="band-pill">4 Limited</span>
+      <span class="band-pill">≤3 Extremely limited</span>
+    </div>
+  </div>
+
+  <h3 class="sub">Writing &amp; Speaking — 4 criterios (25% cada uno)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Criterio</th><th>Qué evalúa</th><th>Cómo mejorarlo</th></tr>
+      <tr><td>Task Achievement / Response</td><td>Si respondes completamente a la tarea</td><td>Lee la pregunta 2 veces; cubre todos los puntos pedidos</td></tr>
+      <tr><td>Coherence and Cohesion</td><td>Organización lógica y conectores</td><td>Un párrafo = una idea; usa linkers variados sin abusar</td></tr>
+      <tr><td>Lexical Resource</td><td>Variedad y precisión de vocabulario</td><td>Sinónimos, colocaciones naturales, evita repetir palabras</td></tr>
+      <tr><td>Grammatical Range and Accuracy</td><td>Variedad de estructuras y corrección</td><td>Combina tiempos, condicionales, voz pasiva y cláusulas relativas</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">Speaking — criterio adicional</h3>
+  <div class="card">
+    <table>
+      <tr><th>Criterio</th><th>Qué evalúa</th><th>Cómo mejorarlo</th></tr>
+      <tr><td>Fluency and Coherence</td><td>Fluidez, ritmo natural, uso de conectores</td><td>Evitar pausas largas; usar "well", "actually", "I mean" para ganar tiempo naturalmente</td></tr>
+      <tr><td>Pronunciation</td><td>Claridad, entonación, acento</td><td>Practicar word stress e intonation; grabarte y comparar</td></tr>
+    </table>
+    <p><strong>Nota:</strong> no necesitas sonar "nativo" — necesitas ser claro, natural y consistente.</p>
+  </div>
+
+  <h3 class="sub">Listening &amp; Reading — conversión de aciertos</h3>
+  <div class="card">
+    <p>Se puntúa por número de respuestas correctas (sobre 40) convertidas a banda mediante una tabla oficial que varía ligeramente entre exámenes. Referencia aproximada:</p>
+    <table>
+      <tr><th>Aciertos (de 40)</th><th>Banda aprox.</th></tr>
+      <tr><td>39-40</td><td>9.0</td></tr>
+      <tr><td>35-36</td><td>8.0</td></tr>
+      <tr><td>30-31</td><td>7.0</td></tr>
+      <tr><td>23-26</td><td>6.0</td></tr>
+      <tr><td>16-19</td><td>5.0</td></tr>
+    </table>
+    <p style="font-size:.85em;color:var(--muted)">*Tabla orientativa; la conversión exacta depende de la dificultad de cada versión del examen.</p>
+  </div>
+</section>
+
+<!-- ===================== PLAN DE ESTUDIO ===================== -->
+<section id="tab-plan" class="tabpanel">
+  <h2 class="section-title">🗓️ Plan de estudio y checklist</h2>
+  <div class="card">
+    <p>Marca cada punto conforme lo completes. Tu progreso se guarda automáticamente en este navegador.</p>
+    <div id="checklist"></div>
+  </div>
+
+  <h3 class="sub">Consejos generales para el día del examen</h3>
+  <div class="card">
+    <ul>
+      <li>Duerme bien la noche anterior — el examen dura más de 2 horas de concentración continua.</li>
+      <li>Lleva documento de identidad válido (pasaporte en la mayoría de centros).</li>
+      <li>En Listening/Reading, nunca dejes una respuesta en blanco — adivina si no estás seguro/a.</li>
+      <li>En Writing, reserva 2-3 minutos al final para revisar ortografía y concordancia verbal.</li>
+      <li>En Speaking, habla con confianza aunque cometas un error — la fluidez importa más que la perfección.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>Guía de estudio IELTS — uso personal de preparación · Practica un poco cada día 💪</p>
+  <p style="margin-top:8px; font-size:0.82rem; opacity:0.5;">Parte de la plataforma <a href="../index.html" style="color:var(--gold); text-decoration:none;">VisaWork Peru</a> | Información actualizada julio 2026</p>
+</footer>
+
+<script>
+/* ---------- Navegación por pestañas ---------- */
+const navLinks = document.querySelectorAll('#mainnav a, .skillcard');
+navLinks.forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const tab = el.getAttribute('data-tab');
+    if(!tab) return;
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));
+    document.querySelector('#mainnav a[data-tab="'+tab+'"]').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ---------- Acordeones ---------- */
+document.querySelectorAll('.acc-head').forEach(h=>{
+  h.addEventListener('click', ()=>{
+    const acc = h.parentElement;
+    const body = h.nextElementSibling;
+    const isOpen = acc.classList.contains('open');
+    acc.classList.toggle('open');
+    body.style.maxHeight = isOpen ? null : body.scrollHeight + 'px';
+  });
+});
+
+/* ---------- Fill-in-the-blank checker ---------- */
+function checkFill(btn){
+  const card = btn.closest('.card');
+  const inputs = card.querySelectorAll('input.fb');
+  let correct = 0;
+  inputs.forEach(inp=>{
+    const ans = inp.getAttribute('data-answer').toLowerCase().trim();
+    const val = inp.value.toLowerCase().trim();
+    if(val === ans){ inp.classList.add('ok'); inp.classList.remove('bad'); correct++; }
+    else { inp.classList.add('bad'); inp.classList.remove('ok'); }
+  });
+  card.querySelector('.quiz-score').textContent = correct + ' / ' + inputs.length + ' correctas';
+  updateProgress();
+}
+
+/* ---------- Multiple choice quiz generator ---------- */
+function buildQuiz(containerId, questions){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  questions.forEach((q, qi)=>{
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>'+(qi+1)+'. '+q.q+'</b></p><div class="opts"></div>';
+    const optsDiv = qDiv.querySelector('.opts');
+    q.options.forEach((opt, oi)=>{
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', ()=>{
+        if(b.disabled) return;
+        optsDiv.querySelectorAll('button').forEach(x=>x.disabled=true);
+        if(oi === q.correct){ b.classList.add('correct'); }
+        else {
+          b.classList.add('wrong');
+          optsDiv.children[q.correct].classList.add('correct');
+        }
+        updateProgress();
+      });
+      optsDiv.appendChild(b);
+    });
+    container.appendChild(qDiv);
+  });
+}
+
+buildQuiz('quiz-listening', [
+  {q:"En Section 3, lo más probable es que escuches a:", options:["Un solo hablante en una conferencia","Estudiantes hablando con un tutor","Un anuncio en un aeropuerto"], correct:1},
+  {q:'Si la instrucción dice "NO MORE THAN TWO WORDS", y la respuesta correcta es "a small blue car", ¿qué deberías escribir?', options:['"a small blue car" (3 palabras, inválido)','"small car" o "blue car"','No responder'], correct:1},
+]);
+
+buildQuiz('quiz-reading', [
+  {q:'"Green spaces reduce stress in all city residents equally." — según el texto, esto es:', options:["True","False","Not Given"], correct:1},
+  {q:'"Researchers have studied urban parks." — según el texto, esto es:', options:["True","False","Not Given"], correct:2},
+]);
+
+buildQuiz('quiz-writing', [
+  {q:"¿Qué debe incluir siempre un Task 1 Academic de banda alta?", options:["Tu opinión personal sobre los datos","Un overview con las tendencias generales","Una conclusión con recomendaciones"], correct:1},
+  {q:'En una pregunta tipo "Discuss both views and give your opinion", ¿qué es obligatorio?', options:["Elegir solo un lado y defenderlo","Presentar ambos puntos de vista y luego tu opinión","Ignorar la pregunta y escribir sobre el tema en general"], correct:1},
+]);
+
+buildQuiz('quiz-grammar', [
+  {q:'"By the time I arrived, the meeting ___ already started." — completa correctamente:', options:["has","had","was"], correct:1},
+  {q:'"If I ___ more time, I would travel more often." (hipotético presente)', options:["have","had","will have"], correct:1},
+  {q:'"The report, ___ was published last year, contains important data."', options:["who","which","whose"], correct:1},
+]);
+
+/* ---------- Flashcards ---------- */
+const vocabData = {
+  environment: [
+    {en:"carbon footprint", es:"huella de carbono — the amount of CO2 a person/activity produces"},
+    {en:"renewable energy", es:"energía renovable — solar, wind, etc."},
+    {en:"deforestation", es:"deforestación — clearing of forests"},
+    {en:"greenhouse gas emissions", es:"emisiones de gases de efecto invernadero"},
+    {en:"sustainable development", es:"desarrollo sostenible"},
+    {en:"biodiversity", es:"biodiversidad — variety of species in an ecosystem"},
+  ],
+  technology: [
+    {en:"artificial intelligence", es:"inteligencia artificial"},
+    {en:"digital divide", es:"brecha digital — gap in access to technology"},
+    {en:"cutting-edge", es:"de vanguardia / puntero (adj)"},
+    {en:"data privacy", es:"privacidad de datos"},
+    {en:"automation", es:"automatización"},
+    {en:"streamline a process", es:"agilizar / optimizar un proceso"},
+  ],
+  education: [
+    {en:"curriculum", es:"plan de estudios"},
+    {en:"rote learning", es:"aprendizaje memorístico"},
+    {en:"higher education", es:"educación superior"},
+    {en:"tuition fees", es:"tasas / matrícula universitaria"},
+    {en:"extracurricular activities", es:"actividades extracurriculares"},
+    {en:"lifelong learning", es:"aprendizaje continuo / a lo largo de la vida"},
+  ],
+  work: [
+    {en:"workforce", es:"fuerza laboral"},
+    {en:"work-life balance", es:"equilibrio entre vida laboral y personal"},
+    {en:"job security", es:"estabilidad laboral"},
+    {en:"remote work", es:"trabajo remoto"},
+    {en:"income inequality", es:"desigualdad de ingresos"},
+    {en:"urbanisation", es:"urbanización"},
+  ],
+  health: [
+    {en:"sedentary lifestyle", es:"estilo de vida sedentario"},
+    {en:"life expectancy", es:"esperanza de vida"},
+    {en:"public healthcare system", es:"sistema de salud pública"},
+    {en:"mental well-being", es:"bienestar mental"},
+    {en:"obesity rates", es:"tasas de obesidad"},
+    {en:"preventive medicine", es:"medicina preventiva"},
+  ],
+  linkers: [
+    {en:"furthermore / moreover", es:"además — para añadir una idea"},
+    {en:"however / nevertheless", es:"sin embargo — para contrastar"},
+    {en:"as a result / consequently", es:"como resultado — para consecuencia"},
+    {en:"for instance / to illustrate", es:"por ejemplo — para ejemplificar"},
+    {en:"to some extent", es:"hasta cierto punto — para matizar"},
+    {en:"in conclusion / to sum up", es:"en conclusión — para cerrar"},
+  ]
+};
+
+document.querySelectorAll('.flash-grid').forEach(grid=>{
+  const topic = grid.getAttribute('data-topic');
+  vocabData[topic].forEach(item=>{
+    const card = document.createElement('div');
+    card.className = 'flash';
+    card.innerHTML = '<div class="flash-inner"><div class="flash-face flash-front">'+item.en+'</div><div class="flash-face flash-back">'+item.es+'</div></div>';
+    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+    grid.appendChild(card);
+  });
+});
+
+/* ---------- Checklist con localStorage ---------- */
+const planItems = [
+  "Leer la guía completa de Listening y hacer la práctica",
+  "Leer la guía completa de Reading y hacer la práctica",
+  "Estudiar estructura de Writing Task 1 (Academic o General)",
+  "Estudiar estructura de Writing Task 2 y practicar un ensayo",
+  "Repasar Speaking Part 1, 2 y 3 con ejemplos propios",
+  "Repasar el banco de Gramática completo",
+  "Repasar las tarjetas de Vocabulario de todos los temas",
+  "Hacer un simulacro completo de Listening cronometrado",
+  "Hacer un simulacro completo de Reading cronometrado",
+  "Escribir un Task 1 y un Task 2 completos en tiempo real",
+  "Practicar Speaking en voz alta grabándote",
+  "Revisar los criterios de banda y autoevaluar tus prácticas",
+];
+const checklistDiv = document.getElementById('checklist');
+planItems.forEach((text,i)=>{
+  const id = 'plan-'+i;
+  const item = document.createElement('div');
+  item.className='check-item';
+  item.innerHTML = '<input type="checkbox" id="'+id+'"><label for="'+id+'">'+text+'</label>';
+  checklistDiv.appendChild(item);
+  const cb = item.querySelector('input');
+  cb.checked = localStorage.getItem(id) === 'true';
+  if(cb.checked) item.classList.add('done');
+  cb.addEventListener('change', ()=>{
+    localStorage.setItem(id, cb.checked);
+    item.classList.toggle('done', cb.checked);
+    updateProgress();
+  });
+});
+
+function updateProgress(){
+  const total = planItems.length;
+  const done = planItems.filter((_,i)=>localStorage.getItem('plan-'+i)==='true').length;
+  const pct = Math.round((done/total)*100);
+  document.getElementById('progress-bar-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = pct+'% del plan de estudio completado';
+}
+updateProgress();
+</script>
+
+</body>
+</html>
