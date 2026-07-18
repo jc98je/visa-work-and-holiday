@@ -54,6 +54,14 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 .qs{font-weight:bold;color:var(--navy);margin-top:8px;font-size:.88em;}
 .btn{background:var(--navy);color:#fff;border:none;padding:7px 14px;border-radius:18px;cursor:pointer;font-size:.85em;}.btn:hover{background:var(--red);}
 .fb input{border:none;border-bottom:2px solid var(--gold);background:#fdf6e3;padding:2px 5px;font-size:.9em;width:120px;text-align:center;font-family:inherit;}
+.audio-player{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:10px;padding:12px 16px;margin:10px 0;display:flex;align-items:center;gap:12px;color:#fff;}
+.audio-player .play-btn{background:var(--gold);color:var(--navy);border:none;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s;}
+.audio-player .play-btn:hover{transform:scale(1.1);background:#fff;}
+.audio-player .audio-info{flex:1;}
+.audio-player .audio-label{font-size:.8em;color:#dbe6f0;margin-bottom:2px;}
+.audio-player .audio-text{font-size:.85em;font-weight:500;}
+.audio-player .speed-btn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:3px 8px;border-radius:8px;font-size:.72em;cursor:pointer;}
+.audio-player .speed-btn:hover{background:rgba(255,255,255,.3);}
 .fb input.ok{background:#d9f2d9;border-color:var(--green);}.fb input.no{background:#fbdcdc;border-color:var(--red);}
 .cr{margin-top:8px;}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:10px 0;}
@@ -319,12 +327,42 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <li>Si no escuchas algo, sigue adelante — no te quedes pensando.</li>
 </ul>
 </div>
+
+<div class="audio-player" id="audio-n1-1" data-text="Good morning. I would like to book a room for three nights, please. Could I have your surname and phone number? Of course. My surname is Garcia, and my phone number is nine one two, three four five, six seven eight. Thank you, Mr Garcia. The total cost, including breakfast, is one hundred and twenty pounds. And your room number is two zero five. Perfect. Thank you very much." data-rate="0.8">
+<button class="play-btn" onclick="playAudio('audio-n1-1')">▶</button>
+<div class="audio-info">
+<div class="audio-label">🔊 Escucha la conversación — Velocidad lenta</div>
+<div class="audio-text">Reservar un hotel (Sección 1)</div>
+</div>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.65');playAudio('audio-n1-1')">🐢 Más lento</button>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.85');playAudio('audio-n1-1')">🚶 Normal</button>
+<button class="speed-btn" onclick="stopAll()">⏹ Parar</button>
+</div>
+
 <div class="card fb">
-<p><b>✏️ Ejercicio de Listening — Completa:</b></p>
-<p>"I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights."</p>
-<p>"Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?"</p>
-<p>"The total cost is <input type="text" data-answer="120" class="fb"> pounds."</p>
-<p>"Your room number is <input type="text" data-answer="205" class="fb">."</p>
+<p><b>✏️ Ejercicio — Completa basándote en el audio:</b></p>
+<p>1. I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights.</p>
+<p>2. Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?</p>
+<p>3. The total cost is <input type="text" data-answer="120" class="fb"> pounds.</p>
+<p>4. Your room number is <input type="text" data-answer="205" class="fb">.</p>
+<div class="cr"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="qs"></span></div>
+</div>
+
+<div class="audio-player" id="audio-n1-2" data-text="Hello, I need to make an appointment with the doctor, please. What is your name? My name is Maria Lopez. When would you like to come? Could I come on Tuesday morning? I am sorry, Tuesday morning is fully available. What about Wednesday afternoon? Yes, that works for me. Wednesday at three thirty. Thank you very much. You are welcome." data-rate="0.8">
+<button class="play-btn" onclick="playAudio('audio-n1-2')">▶</button>
+<div class="audio-info">
+<div class="audio-label">🔊 Escucha la segunda conversación</div>
+<div class="audio-text">Hacer una cita médica</div>
+</div>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.65');playAudio('audio-n1-2')">🐢 Más lento</button>
+<button class="speed-btn" onclick="stopAll()">⏹ Parar</button>
+</div>
+
+<div class="card fb">
+<p><b>✏️ Ejercicio 2 — Completa:</b></p>
+<p>1. My name is <input type="text" data-answer="Maria Lopez" class="fb">.</p>
+<p>2. I want to come on <input type="text" data-answer="Tuesday" class="fb"> morning.</p>
+<p>3. Wednesday at <input type="text" data-answer="3:30" class="fb"> works for me.</p>
 <div class="cr"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="qs"></span></div>
 </div>
 
@@ -504,6 +542,43 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="card"><span class="tag s">Estrategia</span>
 <ul><li>Identifica la <b>actitud del hablante</b>.</li><li>Cuidado con los <b>distractores</b>.</li><li>Presta atención a señales de corrección: "sorry, I mean..."</li></ul></div>
 
+<div class="audio-player" id="audio-n2-1" data-text="Good morning, everyone. Welcome to the City Museum. My name is Sarah, and I will be your guide today. The museum was established in nineteen eighty-five, and it houses over five thousand artefacts from around the world. We will start our tour in the ancient Egypt gallery, which is on the ground floor. Please do not touch any of the exhibits, and feel free to ask questions at any time. The tour will last approximately two hours. If you need to use the restroom, they are located near the main entrance. Let us begin." data-rate="0.85">
+<button class="play-btn" onclick="playAudio('audio-n2-1')">▶</button>
+<div class="audio-info">
+<div class="audio-label">🔊 Escucha la guía del museo — Sección 2</div>
+<div class="audio-text">Guía turística del City Museum</div>
+</div>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.7');playAudio('audio-n2-1')">🐢 Más lento</button>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.85');playAudio('audio-n2-1')">🚶 Normal</button>
+<button class="speed-btn" onclick="stopAll()">⏹ Parar</button>
+</div>
+
+<div class="card fb">
+<p><b>✏️ Ejercicio — Completa basándote en el audio:</b></p>
+<p>1. The museum was established in <input type="text" data-answer="1985" class="fb">.</p>
+<p>2. It houses over <input type="text" data-answer="5000" class="fb"> artefacts.</p>
+<p>3. The tour starts in the <input type="text" data-answer="ancient Egypt" class="fb"> gallery.</p>
+<p>4. The tour will last approximately <input type="text" data-answer="two hours" class="fb">.</p>
+<div class="cr"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="qs"></span></div>
+</div>
+
+<div class="audio-player" id="audio-n2-2" data-text="I am writing to inform you about a change in our meeting schedule. The original meeting, which was planned for Monday at ten o'clock, has been moved to Wednesday at two thirty. Unfortunately, the conference room B is no longer available, so we will use room one zero one instead. I apologise for any inconvenience this may cause. Please confirm your attendance by replying to this email. If you have any questions, do not hesitate to contact me. Thank you for your understanding." data-rate="0.85">
+<button class="play-btn" onclick="playAudio('audio-n2-2')">▶</button>
+<div class="audio-info">
+<div class="audio-label">🔊 Escucha el segundo audio — Sección 3</div>
+<div class="audio-text">Cambio de horario de reunión</div>
+</div>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.7');playAudio('audio-n2-2')">🐢 Más lento</button>
+<button class="speed-btn" onclick="stopAll()">⏹ Parar</button>
+</div>
+
+<div class="card fb">
+<p><b>✏️ Ejercicio 2 — Completa:</b></p>
+<p>1. The meeting was moved to <input type="text" data-answer="Wednesday" class="fb"> at <input type="text" data-answer="2:30" class="fb">.</p>
+<p>2. We will use room <input type="text" data-answer="101" class="fb"> instead.</p>
+<div class="cr"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="qs"></span></div>
+</div>
+
 <h3 class="sub">📖 Reading Intermedio</h3>
 <div class="card">
 <p class="ex"><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park."</p>
@@ -607,6 +682,31 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 </div></div>
 
 <!-- GRAMÁTICA NIVEL 3 -->
+<h3 class="sub">🎧 Listening Avanzado</h3>
+<div class="card"><span class="tag s">Estrategia</span>
+<ul><li>Identifica la <b>posición del hablante</b> sobre un tema académico.</li><li>Presta atención a <b>datos y cifras</b> — suelen ser respuestas.</li><li>La sección 4 es un <b>monólogo</b> continuo — no hay pausas.</li></ul></div>
+
+<div class="audio-player" id="audio-n3-1" data-text="Today I would like to discuss the impact of artificial intelligence on the healthcare industry. According to recent studies, AI has the potential to reduce diagnostic errors by up to thirty percent. Machine learning algorithms can now detect certain types of cancer with accuracy rates that surpass those of human radiologists. However, there are significant concerns regarding data privacy and the ethical implications of automated diagnosis. Critics argue that over-reliance on technology could lead to a dehumanisation of patient care. Nevertheless, the consensus among researchers is that AI should be viewed as a tool to augment, rather than replace, medical professionals." data-rate="0.9">
+<button class="play-btn" onclick="playAudio('audio-n3-1')">▶</button>
+<div class="audio-info">
+<div class="audio-label">🔊 Escucha la conferencia académica — Sección 4</div>
+<div class="audio-text">IA en la industria de la salud</div>
+</div>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.75');playAudio('audio-n3-1')">🐢 Más lento</button>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','0.9');playAudio('audio-n3-1')">🚶 Normal</button>
+<button class="speed-btn" onclick="this.closest('.audio-player').setAttribute('data-rate','1.1');playAudio('audio-n3-1')">🏃 Rápido</button>
+<button class="speed-btn" onclick="stopAll()">⏹ Parar</button>
+</div>
+
+<div class="card fb">
+<p><b>✏️ Ejercicio — Completa basándote en el audio:</b></p>
+<p>1. AI can reduce diagnostic errors by up to <input type="text" data-answer="30" class="fb"> percent.</p>
+<p>2. AI can detect certain types of <input type="text" data-answer="cancer" class="fb">.</p>
+<p>3. Concerns include <input type="text" data-answer="data privacy" class="fb"> and ethical implications.</p>
+<p>4. AI should be viewed as a tool to <input type="text" data-answer="augment" class="fb">, not replace doctors.</p>
+<div class="cr"><button class="btn" onclick="checkFill(this)">Comprobar</button> <span class="qs"></span></div>
+</div>
+
 <h3 class="sub">📐 Gramática Avanzada</h3>
 
 <div class="acc"><div class="acc-h">3er Condicional y Mixed <span class="p">+</span></div>
@@ -735,6 +835,30 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 document.querySelectorAll('#mainnav a,.level-card').forEach(el=>{
 el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)return;document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));const n=document.querySelector('#mainnav a[data-tab="'+t+'"]');if(n)n.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});});
 });
+/* Audio Player - Speech Synthesis */
+let synth=window.speechSynthesis;
+let audioVoices=[];
+function loadVoices(){audioVoices=synth.getVoices();}
+if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
+loadVoices();
+function playAudio(id){
+  synth.cancel();
+  var el=document.getElementById(id);
+  if(!el)return;
+  var text=el.getAttribute('data-text');
+  var rate=parseFloat(el.getAttribute('data-rate')||'0.85');
+  var utt=new SpeechSynthesisUtterance(text);
+  utt.lang='en-GB';
+  utt.rate=rate;
+  var voice=audioVoices.find(function(v){return v.lang==='en-GB';})||audioVoices.find(function(v){return v.lang.startsWith('en');});
+  if(voice)utt.voice=voice;
+  var btn=el.querySelector('.play-btn');
+  if(btn)btn.textContent='⏸';
+  utt.onend=function(){if(btn)btn.textContent='▶';};
+  synth.speak(utt);
+}
+function stopAll(){synth.cancel();document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});}
+
 /* Accordion */
 document.querySelectorAll('.acc-h').forEach(function(h){h.addEventListener('click',function(){this.parentElement.classList.toggle('open');});});
 /* Progress */
