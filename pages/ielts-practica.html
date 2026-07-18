@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS — Práctica Interactiva por Nivel</title>
+<style>
+  :root{--navy:#0b2942;--navy2:#164066;--red:#c8102e;--gold:#d4a017;--bg:#f7f5f0;--card:#fff;--text:#1c1c1c;--muted:#5a5a5a;--green:#2e7d32;--blue:#1565c0;}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:56px 20px 34px;text-align:center;border-bottom:6px solid var(--gold);}
+  header h1{margin:0 0 8px;font-size:2.3em;}
+  header p{color:#dbe6f0;margin:4px 0;}
+
+  /* Barra de progreso */
+  #progress-wrap{max-width:1000px;margin:18px auto 0;padding:0 20px;}
+  #progress-bar-bg{background:rgba(255,255,255,.15);border-radius:20px;height:10px;overflow:hidden;}
+  #progress-bar-fill{background:var(--gold);height:100%;width:0%;transition:width .4s ease;}
+  #progress-text{color:#dbe6f0;font-size:.8em;margin-top:6px;text-align:center;}
+
+  /* Nivel selector */
+  .nivel-selector{display:flex;justify-content:center;gap:12px;margin:24px 0;flex-wrap:wrap;}
+  .nivel-btn{padding:12px 28px;border-radius:30px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:1em;font-weight:600;cursor:pointer;transition:.3s;}
+  .nivel-btn:hover,.nivel-btn.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+  .nivel-btn .emoji{font-size:1.2em;margin-right:6px;}
+
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;background:var(--navy);padding:12px 10px;position:sticky;top:0;z-index:200;box-shadow:0 3px 10px rgba(0,0,0,.2);}
+  nav a{color:#fff;text-decoration:none;padding:7px 13px;border-radius:18px;font-size:.85em;background:rgba(255,255,255,.08);cursor:pointer;transition:.2s;}
+  nav a:hover, nav a.active{background:var(--gold);color:var(--navy);}
+
+  .container{max-width:1000px;margin:0 auto;padding:40px 20px 90px;}
+  .tabpanel{display:none;}
+  .tabpanel.active{display:block;animation:fadein .35s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  h2.section-title{font-size:1.8em;color:var(--navy);border-bottom:3px solid var(--red);padding-bottom:8px;margin-top:10px;}
+  h3.sub{color:var(--red);font-size:1.2em;margin-top:26px;border-left:4px solid var(--gold);padding-left:10px;}
+  .card{background:var(--card);border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border:1px solid #e8e4da;}
+  .tag{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;font-size:.75em;padding:3px 10px;border-radius:12px;margin-bottom:8px;text-transform:uppercase;}
+  .tag.gram{background:#c8102e;color:#fff;} .tag.vocab{background:#2e7d32;color:#fff;} .tag.strat{background:#1565c0;color:#fff;} .tag.band{background:var(--navy);color:#fff;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.92em;}
+  th,td{border:1px solid #ddd;padding:7px 10px;text-align:left;}
+  th{background:var(--navy);color:#fff;}
+  tr:nth-child(even){background:#f2efe8;}
+  .example{background:#fdf6e3;border-left:4px solid var(--gold);padding:9px 14px;margin:8px 0;border-radius:4px;}
+  ul{padding-left:22px;} li{margin-bottom:5px;}
+  footer{text-align:center;padding:30px;background:var(--navy);color:#cfd9e3;font-size:.85em;}
+
+  /* Accordion */
+  .acc{background:var(--card);border:1px solid #e8e4da;border-radius:10px;margin-bottom:10px;overflow:hidden;}
+  .acc-head{padding:14px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#fff;font-weight:600;color:var(--navy);}
+  .acc-head:hover{background:#f2efe8;}
+  .acc-head .plus{font-size:1.3em;color:var(--red);transition:.25s;}
+  .acc.open .plus{transform:rotate(45deg);}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 18px;}
+  .acc.open .acc-body{padding:0 18px 16px;}
+
+  /* Quiz */
+  .quiz-q{margin-bottom:14px;padding:12px 14px;border:1px solid #e8e4da;border-radius:8px;background:#fcfbf8;}
+  .quiz-q .opts button{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border-radius:6px;border:1px solid #ccc;background:#fff;cursor:pointer;font-size:.92em;}
+  .quiz-q .opts button:hover{background:#f0ece0;}
+  .quiz-q .opts button.correct{background:#d9f2d9;border-color:var(--green);font-weight:bold;}
+  .quiz-q .opts button.wrong{background:#fbdcdc;border-color:var(--red);}
+  .quiz-score{font-weight:bold;color:var(--navy);margin-top:10px;}
+  .btn{background:var(--navy);color:#fff;border:none;padding:9px 16px;border-radius:20px;cursor:pointer;font-size:.9em;}
+  .btn:hover{background:var(--red);}
+  .btn.reset{background:#888;}
+
+  /* Fill blank */
+  .fillblank input{border:none;border-bottom:2px solid var(--gold);background:#fdf6e3;padding:2px 6px;font-size:.95em;width:150px;text-align:center;font-family:inherit;}
+  .fillblank input.ok{background:#d9f2d9;border-color:var(--green);}
+  .fillblank input.bad{background:#fbdcdc;border-color:var(--red);}
+  .check-row{margin-top:10px;}
+
+  /* Flashcards */
+  .flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin:14px 0;}
+  .flash{perspective:1000px;height:130px;cursor:pointer;}
+  .flash-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+  .flash.flipped .flash-inner{transform:rotateY(180deg);}
+  .flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:.92em;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+  .flash-front{background:var(--navy);color:#fff;font-weight:600;}
+  .flash-back{background:var(--gold);color:var(--navy);transform:rotateY(180deg);font-size:.85em;}
+
+  /* Band pills */
+  .nivel-indicator{display:inline-block;padding:4px 12px;border-radius:14px;font-size:.75em;font-weight:bold;margin-left:8px;}
+  .nivel-basico{background:#d9f2d9;color:#1b5e20;}
+  .nivel-intermedio{background:#fff3cd;color:#856404;}
+  .nivel-avanzado{background:#f8d7da;color:#721c24;}
+
+  /* Checklist */
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px dashed #ddd;}
+  .check-item input{margin-top:4px;width:16px;height:16px;}
+  .check-item.done label{text-decoration:line-through;color:#999;}
+
+  .toc-mini{font-size:.85em;color:var(--muted);margin-bottom:20px;}
+  .toc-mini a{color:var(--blue);text-decoration:none;}
+  .toc-mini a:hover{text-decoration:underline;}
+
+  @media(max-width:600px){header h1{font-size:1.6em;} nav a{font-size:.78em;padding:6px 10px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📝 IELTS — Práctica Interactiva</h1>
+  <p>Listening · Reading · Writing · Speaking</p>
+  <p style="font-size:.85em;color:var(--gold)">Dividido por niveles: Básico · Intermedio · Avanzado</p>
+  <div class="nivel-selector">
+    <button class="nivel-btn active" onclick="cambiarNivel('basico')"><span class="emoji">🟢</span>Básico</button>
+    <button class="nivel-btn" onclick="cambiarNivel('intermedio')"><span class="emoji">🟡</span>Intermedio</button>
+    <button class="nivel-btn" onclick="cambiarNivel('avanzado')"><span class="emoji">🔴</span>Avanzado</button>
+  </div>
+  <div id="progress-wrap">
+    <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+    <div id="progress-text">0% completado</div>
+  </div>
+</header>
+
+<nav id="mainnav">
+  <a data-tab="listening" class="active">🎧 Listening</a>
+  <a data-tab="reading">📖 Reading</a>
+  <a data-tab="writing">✍️ Writing</a>
+  <a data-tab="speaking">🗣️ Speaking</a>
+  <a data-tab="vocabulario">🧩 Vocabulario</a>
+  <a data-tab="gramatica">📐 Gramática</a>
+</nav>
+
+<div class="container">
+
+<!-- ===================== LISTENING ===================== -->
+<section id="tab-listening" class="tabpanel active">
+  <h2 class="section-title">🎧 Listening — Comprensión Auditiva</h2>
+
+  <!-- ====== BÁSICO ====== -->
+  <div class="nivel-basico-content">
+    <h3 class="sub">🟢 Nivel Básico <span class="nivel-indicator nivel-basico">BÁSICO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Entender ideas generales en conversaciones simples. Capturar información clave como nombres, números, fechas y ubicaciones.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Sección 1 — Conversaciones cotidianas <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Contexto:</b> Dos personas hablando en una situación diaria (reservar hotel, llamar por teléfono, preguntar direcciones).</p>
+        <span class="tag vocab">Vocabulario clave</span>
+        <ul>
+          <li><b>Booking:</b> reservation, check-in, check-out, single/double room</li>
+          <li><b>Direcciones:</b> turn left/right, go straight, next to, opposite, between</li>
+          <li><b>Números:</b> phone numbers, dates, prices, times</li>
+        </ul>
+        <div class="example">
+          <b>Ejemplo de audio:</b> "Good morning, I'd like to book a room for three nights, starting from the 15th of March."<br>
+          <b>Pregunta:</b> How many nights does the caller want to book?<br>
+          <b>Respuesta:</b> Three / 3
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Sección 2 — Monólogos simples <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Contexto:</b> Una persona explicando algo: un tour por un museo, horarios de un evento, instrucciones.</p>
+        <span class="tag strat">Estrategia básica</span>
+        <ul>
+          <li>Escucha palabras como <b>"first", "second", "finally"</b> para seguir el orden</li>
+          <li>Presta atención a <b>números y fechas</b></li>
+          <li>Si no entiendes una palabra, <b>sigue escuchando</b> — no te detengas</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Básico</h3>
+    <div class="card fillblank">
+      <p><b>Completa con la información que escucharías en una reserva de hotel:</b></p>
+      <p>"I'd like to book a room for <input type="text" data-answer="three" class="fb"> nights, please."</p>
+      <p>"Could I have your <input type="text" data-answer="surname" class="fb"> and phone number?"</p>
+      <p>"The total cost, including breakfast, is <input type="text" data-answer="120" class="fb"> pounds."</p>
+      <p>"Your room number will be <input type="text" data-answer="205" class="fb"> on the second floor."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-listening-basico" class="card"></div>
+  </div>
+
+  <!-- ====== INTERMEDIO ====== -->
+  <div class="nivel-intermedio-content" style="display:none;">
+    <h3 class="sub">🟡 Nivel Intermedio <span class="nivel-indicator nivel-intermedio">INTERMEDIO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Seguir conversaciones con múltiples hablantes. Identificar opiniones, intenciones y actitudes. Detectar correcciones en el audio.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Sección 3 — Conversaciones académicas <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Contexto:</b> 2-4 estudiantes/discutientes hablando sobre un proyecto, tarea o presentación con un tutor o profesor.</p>
+        <span class="tag strat">Señales importantes</span>
+        <ul>
+          <li><b>Correcciones:</b> "Sorry, I meant...", "Actually, let me change that to..."</li>
+          <li><b>Acuerdos/Desacuerdos:</b> "I see your point, but...", "I completely agree with..."</li>
+          <li><b>Opiniones:</b> "In my opinion...", "I tend to think that..."</li>
+        </ul>
+        <div class="example">
+          <b>Pregunta tipo:</b> "What does the woman think about the proposed topic?"<br>
+          <b>Estrategia:</b> No confundas lo que ella dice primero con su opinión final — escucha hasta que termine su idea.
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Tipos de pregunta intermedios <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Matching:</b> Relacionar elementos (personas con opiniones, lugares con características).</p>
+        <p><b>Multiple Choice:</b> Lee las 3 opciones ANTES de escuchar. El audio mencionará distractores antes de la respuesta correcta.</p>
+        <p><b>Map/Diagram labelling:</b> Identificar ubicaciones usando preposiciones: next to, opposite, behind, between, on the corner.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Intermedio</h3>
+    <div class="card fillblank">
+      <p><b>Completa las oraciones con la información del audio académico:</b></p>
+      <p>"The professor suggested that the students should <input type="text" data-answer="redesign" class="fb"> their project proposal."</p>
+      <p>"According to the woman, the main problem is the <input type="text" data-answer="budget" class="fb"> constraints."</p>
+      <p>"The deadline has been extended to the <input type="text" data-answer="28th" class="fb> of November."</p>
+      <p>"They decided to meet at the <input type="text" data-answer="library" class="fb"> every Tuesday."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-listening-intermedio" class="card"></div>
+  </div>
+
+  <!-- ====== AVANZADO ====== -->
+  <div class="nivel-avanzado-content" style="display:none;">
+    <h3 class="sub">🔴 Nivel Avanzado <span class="nivel-indicator nivel-avanzado">AVANZADO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Comprender monólogos académicos complejos. Identificar argumentos implícitos, actitudes sutiles y relaciones entre ideas.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Sección 4 — Monólogo académico <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>Contexto:</b> Conferencia o clase magistral sobre un tema académico (medio ambiente, tecnología, historia, ciencia).</p>
+        <span class="tag gram">Desafíos</span>
+        <ul>
+          <li><b>Sin repeticiones:</b> El audio se escucha UNA sola vez</li>
+          <li><b>Vocabulario técnico:</b> Términos académicos que pueden ser nuevos</li>
+          <li><b>Ideas implícitas:</b> El hablante puede implicar cosas sin decirlas directamente</li>
+          <li><b>Estructura compleja:</b> Hipótesis, contra-argumentos, conclusiones</li>
+        </ul>
+        <div class="example">
+          <b>Pregunta avanzada:</b> "What is the lecturer's attitude towards the new environmental policy?"<br>
+          <b>Respuesta correcta:</b> Cautiously optimistic (no "fully supportive" ni "completely against")<br>
+          <b>Clave:</b> Las respuestas avanzadas raramente son extremas — busca matices como "partially", "to some extent", "with reservations".
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Estrategias avanzadas <span class="plus">+</span></div>
+      <div class="acc-body">
+        <ul>
+          <li><b>Predicción avanzada:</b> Analiza la gramática de la oración para predecir qué tipo de palabra falta (sustantivo, adjetivo, verbo)</li>
+          <li><b>Señales discursivas:</b> "Having said that...", "This brings me to...", "The crux of the matter is..."</li>
+          <li><b>Inferencia:</b> Si el hablante dice "Some might argue X, but...", su posición real es Y</li>
+          <li><b>No perder el hilo:</b> Si pierdes una respuesta, sigue inmediatamente con la siguiente</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Avanzado</h3>
+    <div class="card fillblank">
+      <p><b>Completa con vocabulario académico avanzado:</b></p>
+      <p>"The <input type="text" data-answer="correlation" class="fb"> between urbanisation and pollution has been well documented."</p>
+      <p>"This theory remains <input type="text" data-answer="controversial" class="fb"> among researchers in the field."</p>
+      <p>"The findings <input type="text" data-answer="contradict" class="fb"> previous studies on the same topic."</p>
+      <p>"<input type="text" data-answer="Nevertheless" class="fb">, the evidence suggests that further research is needed."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-listening-avanzado" class="card"></div>
+  </div>
+</section>
+
+<!-- ===================== READING ===================== -->
+<section id="tab-reading" class="tabpanel">
+  <h2 class="section-title">📖 Reading — Comprensión Lectora</h2>
+
+  <!-- ====== BÁSICO ====== -->
+  <div class="nivel-basico-content">
+    <h3 class="sub">🟢 Nivel Básico <span class="nivel-indicator nivel-basico">BÁSICO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Entender textos simples (noticias, anuncios, guías). Encontrar información específica como fechas, nombres y números.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Tipos de texto básicos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <ul>
+          <li><b>Anuncios:</b> horarios, precios, ubicaciones</li>
+          <li><b>Guías:</b> instrucciones, reglas, consejos</li>
+          <li><b>Noticias simples:</b> eventos locales, resultados deportivos</li>
+          <li><b>Cartas/emails:</b> mensajes personales, solicitudes</li>
+        </ul>
+        <span class="tag strat">Estrategia básica: Scanning</span>
+        <p>Busca palabras específicas (nombres, fechas, cifras) directamente en el texto sin leer todo.</p>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Vocabulario de lectura básico <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Palabra</th><th>Sinónimo</th><th>Ejemplo en contexto</th></tr>
+          <tr><td>begin</td><td>start, commence</td><td>The course begins in September.</td></tr>
+          <tr><td>big</td><td>large, huge, enormous</td><td>A large number of people attended.</td></tr>
+          <tr><td>important</td><td>significant, crucial, vital</td><td>This is a crucial decision.</td></tr>
+          <tr><td>help</td><td>assist, support, aid</td><td>The government will assist families.</td></tr>
+          <tr><td>good</td><td>excellent, outstanding, superb</td><td>The results were outstanding.</td></tr>
+          <tr><td>bad</td><td>terrible, awful, dreadful</td><td>The weather was dreadful.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Básico</h3>
+    <div class="card">
+      <p class="example"><b>Texto:</b> "The City Library is open Monday to Friday from 9am to 6pm, and on Saturdays from 10am to 4pm. It is closed on Sundays and public holidays. Entry is free for all residents."</p>
+      <div id="quiz-reading-basico"></div>
+    </div>
+  </div>
+
+  <!-- ====== INTERMEDIO ====== -->
+  <div class="nivel-intermedio-content" style="display:none;">
+    <h3 class="sub">🟡 Nivel Intermedio <span class="nivel-indicator nivel-intermedio">INTERMEDIO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Leer artículos de revistas y periódicos. Entender la idea principal y detalles específicos. Distinguir entre hechos y opiniones.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Tipos de pregunta intermedios <span class="plus">+</span></div>
+      <div class="acc-body">
+        <p><b>True / False / Not Given:</b></p>
+        <ul>
+          <li><b>True:</b> La afirmación coincide con el texto</li>
+          <li><b>False:</b> La afirmación contradice el texto</li>
+          <li><b>Not Given:</b> El texto no menciona esa información</li>
+        </ul>
+        <div class="example">
+          <b>Error común:</b> Confundir "False" con "Not Given". Si el texto no lo dice, es Not Given, NO False.
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Skimming vs Scanning <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Técnica</th><th>Para qué</th><th>Cómo</th></tr>
+          <tr><td><b>Skimming</b></td><td>Idea general</td><td>Lee primer y último párrafo, títulos, subtítulos</td></tr>
+          <tr><td><b>Scanning</b></td><td>Info específica</td><td>Busca palabras clave del enunciado en el texto</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Intermedio</h3>
+    <div class="card">
+      <p class="example"><b>Texto:</b> "Urban green spaces have been shown to reduce stress levels among city residents, although researchers note that the effect varies depending on the size and accessibility of the park. A 2023 study found that parks larger than 2 hectares had significantly greater health benefits than smaller pocket parks."</p>
+      <div id="quiz-reading-intermedio"></div>
+    </div>
+  </div>
+
+  <!-- ====== AVANZADO ====== -->
+  <div class="nivel-avanzado-content" style="display:none;">
+    <h3 class="sub">🔴 Nivel Avanzado <span class="nivel-indicator nivel-avanzado">AVANZADO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Leer textos académicos complejos. Entender argumentos implícitos, inferencias y la postura del autor. Gestionar el tiempo eficientemente.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Matching headings — Estrategia avanzada <span class="plus">+</span></div>
+      <div class="acc-body">
+        <ul>
+          <li><b>Idea general:</b> Busca la idea PRINCIPAL del párrafo, no una palabra repetida</li>
+          <li><b>El título no es literal:</b> La respuesta nunca es copiar una frase del párrafo</li>
+          <li><b>Elimina opciones:</b> Usa el descarte para reducir opciones</li>
+          <li><b>Párrafo intro/conclusión:</b> Generalmente llevan títulos sobre "introducción" o "conclusión"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Sentence completion avanzado <span class="plus">+</span></div>
+      <div class="acc-body">
+        <ul>
+          <li>Lee la oración incompleta PRIMERO para entender qué información falta</li>
+          <li>Identifica la categoría gramatical (¿falta un sustantivo? ¿un adjetivo? ¿un verbo?)</li>
+          <li>Busca sinónimos en el texto — rara vez se repite la palabra exacta</li>
+          <li>Respeta el límite de palabras estrictamente</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Avanzado</h3>
+    <div class="card">
+      <p class="example"><b>Texto:</b> "The notion that technology inherently promotes social isolation has been increasingly challenged by recent empirical research. While early studies suggested a negative correlation between screen time and face-to-face interactions, more nuanced analyses have revealed that digital platforms often serve as facilitators of — rather than substitutes for — in-person social engagement. Nevertheless, the quality of these mediated interactions remains a subject of considerable academic debate."</p>
+      <div id="quiz-reading-avanzado"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WRITING ===================== -->
+<section id="tab-writing" class="tabpanel">
+  <h2 class="section-title">✍️ Writing — Expresión Escrita</h2>
+
+  <!-- ====== BÁSICO ====== -->
+  <div class="nivel-basico-content">
+    <h3 class="sub">🟢 Nivel Básico <span class="nivel-indicator nivel-basico">BÁSICO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Escribir oraciones claras y párrafos simples. Usar vocabulario básico correctamente. Mantener una estructura básica.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Writing Task 1 (General) — Carta básica <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag gram">Estructura</span>
+        <ol>
+          <li><b>Saludo:</b> Dear Sir/Madam / Dear Mr Smith</li>
+          <li><b>Motivo:</b> I am writing to...</li>
+          <li><b>Desarrollo:</b> Explicar los 3 puntos del enunciado</li>
+          <li><b>Despedida:</b> Yours faithfully / Yours sincerely</li>
+        </ol>
+        <div class="example">
+          <b>Ejemplo de apertura:</b> "I am writing to inform you about a problem I have experienced with your service."
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Writing Task 2 — Ensayo simple <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag gram">Estructura de 4 párrafos</span>
+        <ul>
+          <li><b>Párrafo 1 — Introducción:</b> Parafrasea la pregunta + tu opinión</li>
+          <li><b>Párrafo 2 — Razón 1:</b> Idea + explicación + ejemplo</li>
+          <li><b>Párrafo 3 — Razón 2:</b> Idea + explicación + ejemplo</li>
+          <li><b>Párrafo 4 — Conclusión:</b> Resume tu opinión</li>
+        </ul>
+        <div class="example">
+          <b>Modelo de tesis:</b> "In my opinion, technology has more advantages than disadvantages for young people."
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Básico</h3>
+    <div class="card fillblank">
+      <p><b>Completa la carta formal:</b></p>
+      <p>Dear Sir/Madam,</p>
+      <p>I am writing to <input type="text" data-answer="complain" class="fb"> about a problem with my recent order.</p>
+      <p>I would be <input type="text" data-answer="grateful" class="fb"> if you could look into this matter.</p>
+      <p>I look forward to <input type="text" data-answer="hearing" class="fb"> from you.</p>
+      <p>Yours <input type="text" data-answer="faithfully" class="fb">,</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-writing-basico" class="card"></div>
+  </div>
+
+  <!-- ====== INTERMEDIO ====== -->
+  <div class="nivel-intermedio-content" style="display:none;">
+    <h3 class="sub">🟡 Nivel Intermedio <span class="nivel-indicator nivel-intermedio">INTERMEDIO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Desarrollar ideas con coherencia. Usar vocabulario variado y conectores. Escribir ensayos bien estructurados.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Task 1 (Academic) — Describir gráficos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag vocab">Vocabulario de tendencias</span>
+        <table>
+          <tr><th>Tendencia</th><th>Verbos</th><th>Adverbios</th></tr>
+          <tr><td>Subida</td><td>rise, increase, grow, climb, surge</td><td>sharply, dramatically, steadily, gradually, slightly</td></tr>
+          <tr><td>Bajada</td><td>fall, decline, decrease, drop, plummet</td><td>sharply, dramatically, steadily, gradually, slightly</td></tr>
+          <tr><td>Estabilidad</td><td>remain stable, plateau, level off</td><td>completely, roughly, approximately</td></tr>
+        </table>
+        <div class="example">
+          <b>Overview modelo:</b> "Overall, while both countries saw an increase in internet usage, Country A experienced far more rapid growth, eventually overtaking Country B by 2020."
+        </div>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Conectores académicos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Función</th><th>Conectores</th></tr>
+          <tr><td>Añadir</td><td>moreover, furthermore, in addition, besides</td></tr>
+          <tr><td>Contraste</td><td>however, nevertheless, on the other hand, although</td></tr>
+          <tr><td>Causa/Efecto</td><td>consequently, as a result, therefore, thus</td></tr>
+          <tr><td>Ejemplo</td><td>for instance, such as, to illustrate, for example</td></tr>
+          <tr><td>Conclusión</td><td>in conclusion, to sum up, overall, in summary</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Intermedio</h3>
+    <div id="quiz-writing-intermedio" class="card"></div>
+  </div>
+
+  <!-- ====== AVANZADO ====== -->
+  <div class="nivel-avanzado-content" style="display:none;">
+    <h3 class="sub">🔴 Nivel Avanzado <span class="nivel-indicator nivel-avanzado">AVANZADO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Escribir ensayos con argumentación sofisticada. Usar vocabulario preciso y estructuras gramaticales variadas. Alcanzar Band 7+.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Tipos de ensayo avanzados <span class="plus">+</span></div>
+      <div class="acc-body">
+        <ul>
+          <li><b>Discussion + Opinion:</b> "Discuss both views and give your own opinion" — presenta ambos lados equitativamente antes de dar tu postura</li>
+          <li><b>Problem-Solution:</b> Analiza causas/problemas y propone soluciones realistas</li>
+          <li><b>Advantages/Disadvantages:</b> Evalúa pros y contras con ejemplos concretos</li>
+          <li><b>Two-part question:</b> Responde ambas preguntas por separado pero con conexión lógica</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc"><div class="acc-head">Vocabulario avanzado para ensayos <span class="plus">+</span></div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Uso básico</th><th>Uso avanzado</th></tr>
+          <tr><td>I think...</td><td>From my perspective / I would argue that</td></tr>
+          <td>very important</td><td>of paramount importance / crucial / indispensable</td></tr>
+          <tr><td>a lot of</td><td>a substantial number of / a considerable proportion</td></tr>
+          <tr><td>because</td><td>owing to / due to / on account of</td></tr>
+          <tr><td>so</td><td>consequently / as a result / hence</td></tr>
+          <tr><td>but</td><td>nevertheless / nonetheless / conversely</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Avanzado</h3>
+    <div class="card fillblank">
+      <p><b>Reescribe usando vocabulario avanzado:</b></p>
+      <p>"I think technology is very important for education" →</p>
+      <p>"From my perspective, technology is <input type="text" data-answer="indispensable" class="fb"> in modern education."</p>
+      <p>"A lot of students use computers" →</p>
+      <p>"A <input type="text" data-answer="substantial" class="fb"> proportion of students utilize computers."</p>
+      <p>"Technology has improved but also caused problems" →</p>
+      <p>"Technology has <input type="text" data-answer="revolutionized" class="fb"> many aspects of life; <input type="text" data-answer="nevertheless" class="fb">, it has also introduced significant challenges."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-writing-avanzado" class="card"></div>
+  </div>
+</section>
+
+<!-- ===================== SPEAKING ===================== -->
+<section id="tab-speaking" class="tabpanel">
+  <h2 class="section-title">🗣️ Speaking — Expresión Oral</h2>
+
+  <!-- ====== BÁSICO ====== -->
+  <div class="nivel-basico-content">
+    <h3 class="sub">🟢 Nivel Básico <span class="nivel-indicator nivel-basico">BÁSICO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Responder preguntas personales de forma clara. Hablar de temas familiares (trabajo, estudios, familia, hobbies).</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Part 1 — Preguntas personales <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag gram">Gramática clave</span>
+        <ul>
+          <li><b>Presente simple</b> para hábitos: "I usually work from home."</li>
+          <li><b>Presente perfecto</b> para experiencias: "I've lived here for three years."</li>
+          <li><b>Pasado simple</b> para el pasado: "I studied engineering at university."</li>
+        </ul>
+        <div class="example">
+          <b>Pregunta:</b> "What do you usually do in your free time?"<br>
+          <b>Respuesta modelo:</b> "In my free time, I mostly work on personal projects and take photos around the city. I find it really relaxing because it takes my mind off work-related stress."
+        </div>
+        <span class="tag strat">Estrategia</span>
+        <p>Respuestas de 2-4 oraciones. Siempre añade una razón o ejemplo.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Básico</h3>
+    <div class="card fillblank">
+      <p><b>Completa la respuesta:</b></p>
+      <p>"I'm <input type="text" data-answer="from" class="fb"> Lima, Peru. I've lived there <input type="text" data-answer="all" class="fb"> my life."</p>
+      <p>"In my free time, I <input type="text" data-answer="enjoy" class="fb"> reading and watching movies."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+
+    <div id="quiz-speaking-basico" class="card"></div>
+  </div>
+
+  <!-- ====== INTERMEDIO ====== -->
+  <div class="nivel-intermedio-content" style="display:none;">
+    <h3 class="sub">🟡 Nivel Intermedio <span class="nivel-indicator nivel-intermedio">INTERMEDIO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Hablar extensamente sobre un tema durante 1-2 minutos. Usar conectores y vocabulario variado. Desarrollar ideas con ejemplos.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Part 2 — Long Turn / Cue Card <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag gram">Gramática clave</span>
+        <ul>
+          <li><b>Pasado simple/continuo:</b> Para narrar eventos</li>
+          <li><b>Pasado perfecto:</b> Para dar contexto anterior</li>
+          <li><b>Conectores narrativos:</b> first of all, after that, eventually, in the end</li>
+        </ul>
+        <div class="example">
+          <b>Cue Card ejemplo:</b> "Describe a piece of technology you find useful."<br>
+          <b>Apertura modelo:</b> "I'd like to talk about my laptop, which I use for pretty much everything — from work to entertainment. I've had it for about two years now, and to be honest, I can't imagine my daily routine without it..."
+        </div>
+        <span class="tag strat">Cómo usar tu minuto de preparación</span>
+        <ul>
+          <li>Anota 3-4 palabras clave por cada punto de la tarjeta</li>
+          <li>No escribas oraciones completas — solo ideas guía</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Intermedio</h3>
+    <div class="card fillblank">
+      <p><b>Completa la respuesta del Cue Card:</b></p>
+      <p>"I'd like to talk about a trip I took last year. I <input type="text" data-answer="was travelling" class="fb"> through the mountains when the weather suddenly changed."</p>
+      <p>"The most <input type="text" data-answer="memorable" class="fb"> part was when we reached the summit at sunrise."</p>
+      <p>"It <input type="text" data-answer="left" class="fb"> a lasting impression on me because..."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+  </div>
+
+  <!-- ====== AVANZADO ====== -->
+  <div class="nivel-avanzado-content" style="display:none;">
+    <h3 class="sub">🔴 Nivel Avanzado <span class="nivel-indicator nivel-avanzado">AVANZADO</span></h3>
+
+    <div class="card">
+      <span class="tag strat">Objetivo del nivel</span>
+      <p>Discutir temas abstractos con fluidez. Expresar opiniones matizadas. Usar vocabulario preciso y estructuras complejas.</p>
+    </div>
+
+    <div class="acc"><div class="acc-head">Part 3 — Discusión abstracta <span class="plus">+</span></div>
+      <div class="acc-body">
+        <span class="tag gram">Gramática clave</span>
+        <ul>
+          <li><b>Condicionales tipo 2/3:</b> "If governments invested more in public transport, congestion would decrease."</li>
+          <li><b>Modales de especulación:</b> might, could, may well, is likely to</li>
+          <li><b>Hedging:</b> "to some extent", "not necessarily", "it depends on..."</li>
+        </ul>
+        <div class="example">
+          <b>Pregunta:</b> "Do you think technology has made people more isolated?"<br>
+          <b>Respuesta modelo:</b> "To some extent, yes. While technology has made communication more convenient, it could be argued that it has also reduced face-to-face interaction, especially among younger generations. That said, it really depends on how people choose to use it."
+        </div>
+        <span class="tag strat">Estructura de respuesta</span>
+        <p>Opinión directa → Razón → Ejemplo → Matización o contraste.</p>
+      </div>
+    </div>
+
+    <h3 class="sub">Práctica Interactiva — Avanzado</h3>
+    <div class="card fillblank">
+      <p><b>Completa con vocabulario avanzado de Speaking:</b></p>
+      <p>"<input type="text" data-answer="From" class="fb"> my perspective, education plays a <input type="text" data-answer="paramount" class="fb"> role in reducing inequality."</p>
+      <p>"<input type="text" data-answer="Nevertheless" class="fb">, it would be <input type="text" data-answer="naive" class="fb"> to suggest that education alone can solve all societal problems."</p>
+      <div class="check-row"><button class="btn" onclick="checkFill(this)">Comprobar respuestas</button> <span class="quiz-score"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VOCABULARIO ===================== -->
+<section id="tab-vocabulario" class="tabpanel">
+  <h2 class="section-title">🧩 Vocabulario — Tarjetas por Tema</h2>
+  <p class="toc-mini">Haz clic en cada tarjeta para ver la traducción / colocación. Organizado por temas frecuentes del examen.</p>
+
+  <h3 class="sub">🌍 Medio Ambiente</h3>
+  <div class="flash-grid" data-topic="environment"></div>
+
+  <h3 class="sub">💻 Tecnología</h3>
+  <div class="flash-grid" data-topic="technology"></div>
+
+  <h3 class="sub">📚 Educación</h3>
+  <div class="flash-grid" data-topic="education"></div>
+
+  <h3 class="sub">💼 Trabajo y Sociedad</h3>
+  <div class="flash-grid" data-topic="work"></div>
+
+  <h3 class="sub">🏥 Salud</h3>
+  <div class="flash-grid" data-topic="health"></div>
+
+  <h3 class="sub">🔗 Conectores Académicos</h3>
+  <div class="flash-grid" data-topic="linkers"></div>
+</section>
+
+<!-- ===================== GRAMÁTICA ===================== -->
+<section id="tab-gramatica" class="tabpanel">
+  <h2 class="section-title">📐 Gramática — Banco Consolidado</h2>
+  <p class="toc-mini">Gramática esencial organizada por función comunicativa.</p>
+
+  <div class="acc"><div class="acc-head">Tiempos verbales narrativos <span class="plus">+</span></div>
+    <div class="acc-body">
+      <table>
+        <tr><th>Tiempo</th><th>Uso</th><th>Ejemplo</th></tr>
+        <tr><td>Past Simple</td><td>Acción terminada en momento definido</td><td>I visited Cusco in 2019.</td></tr>
+        <tr><td>Past Continuous</td><td>Acción en progreso interrumpida</td><td>I was studying when she called.</td></tr>
+        <tr><td>Past Perfect</td><td>Acción anterior a otra pasada</td><td>By the time I arrived, the film had started.</td></tr>
+        <tr><td>Present Perfect</td><td>Experiencia sin tiempo definido</td><td>I have never been to Japan.</td></tr>
+        <tr><td>Present Perfect Continuous</td><td>Duración hasta el presente</td><td>I've been working here for five years.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Condicionales <span class="plus">+</span></div>
+    <div class="acc-body">
+      <table>
+        <tr><th>Tipo</th><th>Estructura</th><th>Uso</th></tr>
+        <tr><td>Zero</td><td>If + present, present</td><td>Hechos generales</td></tr>
+        <tr><td>First</td><td>If + present, will + infinitive</td><td>Situación futura real</td></tr>
+        <tr><td>Second</td><td>If + past simple, would + infinitive</td><td>Hipotético presente</td></tr>
+        <tr><td>Third</td><td>If + past perfect, would have + participle</td><td>Hipotético pasado</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Voz pasiva <span class="plus">+</span></div>
+    <div class="acc-body">
+      <p>Se usa cuando la acción importa más que quién la realiza.</p>
+      <div class="example">"The bridge was completed in 1998." / "It is believed that the policy will reduce emissions."</div>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Cláusulas relativas <span class="plus">+</span></div>
+    <div class="acc-body">
+      <ul>
+        <li><b>who / that</b> → personas (sujeto)</li>
+        <li><b>which / that</b> → cosas</li>
+        <li><b>whose</b> → posesión</li>
+        <li><b>where</b> → lugares</li>
+      </ul>
+      <div class="example">"The scientist, who has published over 40 papers, will present her findings."</div>
+    </div>
+  </div>
+
+  <div class="acc"><div class="acc-head">Modales de especulación <span class="plus">+</span></div>
+    <div class="acc-body">
+      <ul>
+        <li><b>Certeza:</b> must, can't (deducción) — "That must be the reason."</li>
+        <li><b>Posibilidad:</b> might, could, may — "It could take longer than expected."</li>
+        <li><b>Obligación:</b> should, ought to, need to</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub">Práctica Interactiva</h3>
+  <div id="quiz-grammar" class="card"></div>
+</section>
+
+</div>
+
+<footer>
+  <p>📝 Práctica Interactiva IELTS — Preparación integral para tu visa Work & Holiday Australia 💪</p>
+</footer>
+
+<script>
+/* ========== Navegación por pestañas ========== */
+const navLinks = document.querySelectorAll('#mainnav a, .skillcard');
+navLinks.forEach(el=>{
+  el.addEventListener('click', ()=>{
+    const tab = el.getAttribute('data-tab');
+    if(!tab) return;
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));
+    document.querySelector('#mainnav a[data-tab="'+tab+'"]').classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ========== Selector de nivel ========== */
+let nivelActual = 'basico';
+function cambiarNivel(nivel){
+  nivelActual = nivel;
+  document.querySelectorAll('.nivel-btn').forEach(b=>b.classList.remove('active'));
+  event.target.closest('.nivel-btn').classList.add('active');
+  document.querySelectorAll('.nivel-basico-content').forEach(e=>e.style.display = nivel==='basico' ? 'block' : 'none');
+  document.querySelectorAll('.nivel-intermedio-content').forEach(e=>e.style.display = nivel==='intermedio' ? 'block' : 'none');
+  document.querySelectorAll('.nivel-avanzado-content').forEach(e=>e.style.display = nivel==='avanzado' ? 'block' : 'none');
+  updateProgress();
+}
+
+/* ========== Acordeones ========== */
+document.querySelectorAll('.acc-head').forEach(h=>{
+  h.addEventListener('click', ()=>{
+    const acc = h.parentElement;
+    const body = h.nextElementSibling;
+    const isOpen = acc.classList.contains('open');
+    acc.classList.toggle('open');
+    body.style.maxHeight = isOpen ? null : body.scrollHeight + 'px';
+  });
+});
+
+/* ========== Fill-in-the-blank checker ========== */
+function checkFill(btn){
+  const card = btn.closest('.card');
+  const inputs = card.querySelectorAll('input.fb');
+  let correct = 0;
+  inputs.forEach(inp=>{
+    const ans = inp.getAttribute('data-answer').toLowerCase().trim();
+    const val = inp.value.toLowerCase().trim();
+    if(val === ans){ inp.classList.add('ok'); inp.classList.remove('bad'); correct++; }
+    else { inp.classList.add('bad'); inp.classList.remove('ok'); }
+  });
+  card.querySelector('.quiz-score').textContent = correct + ' / ' + inputs.length + ' correctas';
+  updateProgress();
+}
+
+/* ========== Multiple choice quiz generator ========== */
+function buildQuiz(containerId, questions){
+  const container = document.getElementById(containerId);
+  if(!container) return;
+  container.innerHTML = '';
+  questions.forEach((q, qi)=>{
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-q';
+    qDiv.innerHTML = '<p><b>'+(qi+1)+'. '+q.q+'</b></p><div class="opts"></div>';
+    const optsDiv = qDiv.querySelector('.opts');
+    q.options.forEach((opt, oi)=>{
+      const b = document.createElement('button');
+      b.textContent = opt;
+      b.addEventListener('click', ()=>{
+        if(b.disabled) return;
+        optsDiv.querySelectorAll('button').forEach(x=>x.disabled=true);
+        if(oi === q.correct){ b.classList.add('correct'); }
+        else {
+          b.classList.add('wrong');
+          optsDiv.children[q.correct].classList.add('correct');
+        }
+        updateProgress();
+      });
+      optsDiv.appendChild(b);
+    });
+    container.appendChild(qDiv);
+  });
+}
+
+/* ========== QUIZ DATA ========== */
+
+// LISTENING BÁSICO
+buildQuiz('quiz-listening-basico', [
+  {q:"En Section 1, lo más probable es que escuches:", options:["Un solo hablante en una conferencia","Dos personas hablando en una situación cotidiana","Un debate entre varios profesores"], correct:1},
+  {q:'Si la instrucción dice "NO MORE THAN ONE WORD", ¿qué debes escribir?', options:['Cualquier cantidad de palabras','Exactamente una palabra','Una frase corta'], correct:1},
+  {q:"¿Qué tipo de información debes captar en Section 1?", options:["Opiniones complejas del hablante","Números, nombres, fechas y ubicaciones","Argumentos académicos detallados"], correct:1},
+  {q:"¿Cuántas veces se reproduce cada audio en el IELTS Listening?", options:["Dos veces","Tres veces","Una sola vez"], correct:2},
+]);
+
+// LISTENING INTERMEDIO
+buildQuiz('quiz-listening-intermedio', [
+  {q:"Cuando el hablante dice 'Sorry, I meant...':", options:["Está dando su opinión final","Está corrigiendo lo que dijo antes","Está terminando su intervención"], correct:1},
+  {q:"En Matching, ¿qué debes hacer primero?", options:["Leer todas las opciones y subrayar palabras clave","Escuchar el audio sin mirar las preguntas","Escribir la respuesta inmediatamente"], correct:0},
+  {q:"¿Qué preposiciones son comunes en Map/Diagram labelling?", options:["about, for, with","next to, opposite, behind, between","above, below, inside"], correct:1},
+  {q:"En Multiple Choice, las opciones trampa suelen:", options:["Ser la primera opción siempre","Mencionar palabras del audio pero no responder la pregunta","No tener relación con el audio"], correct:1},
+]);
+
+// LISTENING AVANZADO
+buildQuiz('quiz-listening-avanzado', [
+  {q:"Si el hablante dice 'Some might argue X, but...', su posición real es:", options:["A favor de X","En contra de X","Neutral sobre X"], correct:1},
+  {q:"¿Cuál es una señal de discurso avanzada para indicar una nueva idea?", options:["And...","This brings me to...","Also..."], correct:1},
+  {q:"En Section 4, si pierdes una respuesta:", options:["Debes intentar recordarla durante los siguientes 30 segundos","Debes seguir inmediatamente con la siguiente","Debes pedir al examinador que repita"], correct:1},
+  {q:"Las respuestas avanzadas raramente son extremas. ¿Qué significa esto?", options:["La respuesta correcta suele ser 'completely' o 'never'","La respuesta correcta incluye matices como 'partially' o 'to some extent'","Todas las respuestas son igual de válidas"], correct:1},
+]);
+
+// READING BÁSICO
+buildQuiz('quiz-reading-basico', [
+  {q:"Según el texto de la biblioteca, ¿cuándo cierra?", options:["Los sábados a las 6pm","Los domingos y feriados","Solo los domingos"], correct:1},
+  {q:"¿Cuánto cuesta la entrada a la biblioteca?", options:["$5 para residentes","$10 para todos","Es gratis para todos los residentes"], correct:2},
+  {q:"¿A qué hora abre la biblioteca los sábados?", options:["9am","10am","12pm"], correct:1},
+  {q:"¿Cuál es la técnica de lectura para encontrar información específica?", options:["Skimming","Scanning","Close reading"], correct:1},
+]);
+
+// READING INTERMEDIO
+buildQuiz('quiz-reading-intermedio', [
+  {q:'"Green spaces reduce stress in ALL city residents EQUALLY." — según el texto:', options:["True","False","Not Given"], correct:1},
+  {q:'"Researchers have studied urban parks." — según el texto:', options:["True","False","Not Given"], correct:0},
+  {q:'"Parks larger than 2 hectares have greater benefits." — según el texto:', options:["True","False","Not Given"], correct:0},
+  {q:"¿Cuál es el error más común en True/False/Not Given?", options:["Confundir False con Not Given","No leer el texto completo","Escribir respuestas muy largas"], correct:0},
+]);
+
+// READING AVANZADO
+buildQuiz('quiz-reading-avanzado', [
+  {q:'Según el texto, la postura del autor sobre tecnología e interacción social es:', options:["Totalmente a favor de la tecnología","Totalmente en contra de la tecnología","Una postura matizada — reconoce ambos lados"], correct:2},
+  {q:'"It could be argued that..." indica:', options:["Un hecho científico","Una opinión presentada como posibilidad","Una instrucción al lector"], correct:1},
+  {q:"En Matching Headings, la respuesta correcta:", options:["Siempre usa palabras exactas del párrafo","Nunca es copiar una frase del párrafo","Solo se encuentra en el primer párrafo"], correct:1},
+  {q:"El autor dice que 'the quality remains a subject of debate'. Esto significa:", options:["La calidad es mala","Hay desacuerdo sobre la calidad","La calidad ha mejorado"], correct:1},
+]);
+
+// WRITING BÁSICO
+buildQuiz('quiz-writing-basico', [
+  {q:"¿Cuántas palabras mínimo necesitas en Task 1?", options:["100","150","250"], correct:1},
+  {q:"¿Cuántas palabras mínimo necesitas en Task 2?", options:["150","200","250"], correct:2},
+  {q:"¿Qué saludo usas en una carta formal cuando NO conoces al destinatario?", options:["Dear John,","Dear Sir/Madam,","Hi there,"], correct:1},
+  {q:"¿Qué vale más en la nota final de Writing?", options:["Task 1","Task 2","Ambas valen igual"], correct:1},
+]);
+
+// WRITING INTERMEDIO
+buildQuiz('quiz-writing-intermedio', [
+  {q:"¿Qué debe incluir SIEMPRE un Task 1 Academic de banda alta?", options:["Tu opinión personal sobre los datos","Un overview con las tendencias generales","Una conclusión con recomendaciones"], correct:1},
+  {q:"En 'Discuss both views', ¿qué es obligatorio?", options:["Elegir solo un lado","Presentar ambos puntos y luego tu opinión","Ignorar un lado"], correct:1},
+  {q:"¿Cuál es el conector correcto para expresar contraste?", options:["Furthermore","However","Therefore"], correct:1},
+  {q:"¿Cuánto tiempo debes dedicar a Task 2?", options:["20 minutos","30 minutos","40 minutos"], correct:2},
+]);
+
+// WRITING AVANZADO
+buildQuiz('quiz-writing-avanzado', [
+  {q:"'Indispensable' es un sinónimo avanzado de:", options:["important","possible","available"], correct:0},
+  {q:"'Substantial proportion' reemplaza a:", options:["a big part of","a lot of","some of"], correct:1},
+  {q:"'Revolutionized' significa:", options:["mejorado ligeramente","cambiado completamente","ignorado"], correct:1},
+  {q:"En Writing avanzado, ¿qué estructura se recomienda para Discussion essays?", options:["5 párrafos con 3 opiniones","4 párrafos: intro, vista 1, vista 2, conclusión","3 párrafos: intro, desarrollo, conclusión"], correct:1},
+]);
+
+// SPEAKING BÁSICO
+buildQuiz('quiz-speaking-basico', [
+  {q:"¿Cuántas oraciones debe tener una respuesta típica de Part 1?", options:["1 oración","2-4 oraciones","Más de 10 oraciones"], correct:1},
+  {q:"¿Qué tiempo verbal usas para hablar de hábitos?", options:["Pasado simple","Presente perfecto","Presente simple"], correct:2},
+  {q:"Si preguntan 'Where are you from?', ¿cómo debes responder?", options:["Solo la ciudad","La ciudad + información adicional","No responder"], correct:1},
+  {q:"¿Qué es el método ARE?", options:["Answer, Reason, Example","Ask, Respond, Evaluate","Analyze, Review, Edit"], correct:0},
+]);
+
+// GRAMMAR
+buildQuiz('quiz-grammar', [
+  {q:'"By the time I arrived, the meeting ___ already started."', options:["has","had","was"], correct:1},
+  {q:'"If I ___ more time, I would travel more often."', options:["have","had","will have"], correct:1},
+  {q:'"The report, ___ was published last year, contains important data."', options:["who","which","whose"], correct:1},
+  {q:'"The new law ___ introduced in 2020."', options:["is","was","has"], correct:1},
+  {q:'"It is believed that this policy will ___ emissions."', options:["reduce","reduced","reducing"], correct:0},
+]);
+
+/* ========== Flashcards ========== */
+const vocabData = {
+  environment: [
+    {en:"carbon footprint", es:"huella de carbono — the amount of CO2 a person produces"},
+    {en:"renewable energy", es:"energía renovable — solar, wind, etc."},
+    {en:"deforestation", es:"deforestación — clearing of forests"},
+    {en:"greenhouse gas emissions", es:"emisiones de gases de efecto invernadero"},
+    {en:"sustainable development", es:"desarrollo sostenible"},
+    {en:"biodiversity", es:"biodiversidad — variety of species"},
+    {en:"ecosystem", es:"ecosistema — community of living organisms"},
+    {en:"conservation", es:"conservación — protecting natural resources"},
+  ],
+  technology: [
+    {en:"artificial intelligence", es:"inteligencia artificial"},
+    {en:"digital divide", es:"brecha digital — gap in tech access"},
+    {en:"cutting-edge", es:"de vanguardia / puntero (adj)"},
+    {en:"data privacy", es:"privacidad de datos"},
+    {en:"automation", es:"automatización"},
+    {en:"streamline a process", es:"agilizar / optimizar un proceso"},
+    {en:"cybersecurity", es:"ciberseguridad"},
+    {en:"innovation", es:"innovación"},
+  ],
+  education: [
+    {en:"curriculum", es:"plan de estudios"},
+    {en:"rote learning", es:"aprendizaje memorístico"},
+    {en:"higher education", es:"educación superior"},
+    {en:"tuition fees", es:"tasas / matrícula universitaria"},
+    {en:"extracurricular activities", es:"actividades extracurriculares"},
+    {en:"lifelong learning", es:"aprendizaje continuo / a lo largo de la vida"},
+    {en:"academic performance", es:"rendimiento académico"},
+    {en:"distance learning", es:"educación a distancia"},
+  ],
+  work: [
+    {en:"workforce", es:"fuerza laboral"},
+    {en:"work-life balance", es:"equilibrio vida-trabajo"},
+    {en:"job security", es:"estabilidad laboral"},
+    {en:"remote work", es:"trabajo remoto"},
+    {en:"income inequality", es:"desigualdad de ingresos"},
+    {en:"urbanisation", es:"urbanización"},
+    {en:"unemployment rate", es:"tasa de desempleo"},
+    {en:"career progression", es:"progresión profesional"},
+  ],
+  health: [
+    {en:"sedentary lifestyle", es:"estilo de vida sedentario"},
+    {en:"life expectancy", es:"esperanza de vida"},
+    {en:"public healthcare system", es:"sistema de salud pública"},
+    {en:"mental well-being", es:"bienestar mental"},
+    {en:"obesity rates", es:"tasas de obesidad"},
+    {en:"preventive medicine", es:"medicina preventiva"},
+    {en:"epidemic", es:"epidemia — widespread outbreak of disease"},
+    {en:"chronic disease", es:"enfermedad crónica"},
+  ],
+  linkers: [
+    {en:"furthermore / moreover", es:"además — para añadir una idea"},
+    {en:"however / nevertheless", es:"sin embargo — para contrastar"},
+    {en:"as a result / consequently", es:"como resultado — consecuencia"},
+    {en:"for instance / to illustrate", es:"por ejemplo — ejemplificar"},
+    {en:"to some extent", es:"hasta cierto punto — matizar"},
+    {en:"in conclusion / to sum up", es:"en conclusión — cerrar"},
+    {en:"on the other hand", es:"por otro lado — contraste"},
+    {en:"it is widely believed that", es:"se cree ampliamente que — opinión general"},
+  ]
+};
+
+document.querySelectorAll('.flash-grid').forEach(grid=>{
+  const topic = grid.getAttribute('data-topic');
+  if(!vocabData[topic]) return;
+  vocabData[topic].forEach(item=>{
+    const card = document.createElement('div');
+    card.className = 'flash';
+    card.innerHTML = '<div class="flash-inner"><div class="flash-face flash-front">'+item.en+'</div><div class="flash-face flash-back">'+item.es+'</div></div>';
+    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+    grid.appendChild(card);
+  });
+});
+
+/* ========== Progress tracking ========== */
+function updateProgress(){
+  const total = 20;
+  const fillInputs = document.querySelectorAll('.fillblank input.fb');
+  let answered = 0;
+  fillInputs.forEach(inp=>{
+    if(inp.classList.contains('ok') || inp.classList.contains('bad')) answered++;
+  });
+  const correctInputs = document.querySelectorAll('.fillblank input.fb.ok').length;
+  const correctQuizzes = document.querySelectorAll('.quiz-q .opts button.correct').length;
+  const totalQuizzes = document.querySelectorAll('.quiz-q').length;
+  const pct = Math.round(((answered + correctQuizzes) / (fillInputs.length + totalQuizzes)) * 100);
+  document.getElementById('progress-bar-fill').style.width = Math.min(pct, 100)+'%';
+  document.getElementById('progress-text').textContent = Math.min(pct, 100)+'% completado';
+}
+updateProgress();
+</script>
+</body>
+</html>
