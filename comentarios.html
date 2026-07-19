@@ -301,7 +301,7 @@
     <a href="index.html#costos" class="nav-link">Costos</a>
     <div class="nav-spacer"></div>
     <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
-    <div class="user-menu" id="userMenu" style="display:flex;">
+    <div class="user-menu" id="userMenu" style="display:none;">
       <div class="user-dropdown" onclick="toggleUserDropdown(event)">
         <div class="user-avatar" id="userAvatar">?</div>
         <span class="user-name" id="userName">Usuario</span>
@@ -713,18 +713,27 @@ function initFirebase() {
 
     auth.onAuthStateChanged((user) => {
       currentUser = user;
+      const loginBtn = document.getElementById('loginBtn');
+      const userMenu = document.getElementById('userMenu');
+
       if (user) {
+        // User is logged in: show user menu, hide login button
         const displayName = user.displayName || user.email.split('@')[0];
         const initial = displayName[0].toUpperCase();
         document.getElementById('userAvatar').textContent = initial;
         document.getElementById('userName').textContent = displayName;
-        document.getElementById('loginBtn').style.display = 'none';
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (userMenu) userMenu.style.display = 'flex';
 
         // Pre-fill form if logged in
         const nameInput = document.getElementById('commentName');
         const emailInput = document.getElementById('commentEmail');
         if (nameInput && !nameInput.value) nameInput.value = displayName;
         if (emailInput && !emailInput.value) emailInput.value = user.email;
+      } else {
+        // User is NOT logged in: show login button, hide user menu
+        if (loginBtn) loginBtn.style.display = '';
+        if (userMenu) userMenu.style.display = 'none';
       }
     });
   } catch (error) {
