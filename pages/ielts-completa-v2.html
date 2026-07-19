@@ -907,8 +907,8 @@ function playAudio(id,speed){
       var bar=box.querySelector('.audio-progress-fill');
       var timeEl=box.querySelector('.audio-time');
       var statusEl=box.querySelector('.audio-status');
-      if(btn)btn.textContent='\u23F8';
-      if(statusEl)statusEl.textContent='\uD83D\uDD0A Reproduciendo...';
+      if(btn)btn.textContent='⏸';
+      if(statusEl)statusEl.textContent='🔊 Reproduciendo...';
       if(bar){bar.style.width='0%';bar.style.transition='none';}
       var wordCount=text.split(/\s+/).length;
       var estSeconds=Math.ceil((wordCount/150)*60/rate);
@@ -937,16 +937,16 @@ function playAudio(id,speed){
       }
       if(voice)utt.voice=voice;
       utt.onend=function(){
-        if(btn)btn.textContent='\u25B6';
-        if(statusEl)statusEl.textContent='\uD83D\uDD0A Listo para reproducir';
+        if(btn)btn.textContent='▶';
+        if(statusEl)statusEl.textContent='🔊 Listo para reproducir';
         if(bar){bar.style.transition='width 0.3s';bar.style.width='100%';}
         if(timeEl){var tMins=Math.floor(estSeconds/60);var tSecs=Math.floor(estSeconds%60);timeEl.textContent=tMins+':'+(tSecs<10?'0':'')+tSecs+' / '+tMins+':'+(tSecs<10?'0':'')+tSecs;}
         clearInterval(audioTimers[id]);delete audioTimers[id];
         setTimeout(function(){if(bar){bar.style.transition='width 0.5s';bar.style.width='0%';}},2000);
       };
       utt.onerror=function(){
-        if(btn)btn.textContent='\u25B6';
-        if(statusEl)statusEl.textContent='\u26A0 Audio no disponible';
+        if(btn)btn.textContent='▶';
+        if(statusEl)statusEl.textContent='⚠ Audio no disponible';
         clearInterval(audioTimers[id]);delete audioTimers[id];
         if(bar)bar.style.width='0%';
       };
@@ -958,10 +958,10 @@ function playAudio(id,speed){
 function stopAll(){
   try{synth.cancel();}catch(e){}
   Object.keys(audioTimers).forEach(function(k){clearInterval(audioTimers[k]);delete audioTimers[k];});
-  document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='\u25B6';});
+  document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});
   document.querySelectorAll('.audio-progress-fill').forEach(function(b){b.style.width='0%';b.style.transition='none';});
   document.querySelectorAll('.audio-time').forEach(function(t){t.textContent='';});
-  document.querySelectorAll('.audio-status').forEach(function(s){s.textContent='\uD83D\uDD0A Listo para reproducir';});
+  document.querySelectorAll('.audio-status').forEach(function(s){s.textContent='🔊 Listo para reproducir';});
 }
 
 
