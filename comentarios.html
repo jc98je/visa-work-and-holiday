@@ -300,23 +300,6 @@
     <a href="index.html#vuelos" class="nav-link">✈️ Vuelos</a>
     <a href="index.html#costos" class="nav-link">Costos</a>
     <div class="nav-spacer"></div>
-    <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
-    <div class="user-menu" id="userMenu" style="display:none;">
-      <div class="user-dropdown" onclick="toggleUserDropdown(event)">
-        <div class="user-avatar" id="userAvatar">?</div>
-        <span class="user-name" id="userName">Usuario</span>
-        <span class="user-dropdown-arrow">▾</span>
-      </div>
-      <div class="user-dropdown-menu" id="userDropdownMenu">
-        <a href="mi-cuenta.html" class="dropdown-item"><span class="dropdown-icon">👤</span> Mi Cuenta</a>
-        <a href="mi-proceso.html" class="dropdown-item"><span class="dropdown-icon">📋</span> Mi Proceso</a>
-        <a href="pages/ielts-guia.html" class="dropdown-item"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
-        <a href="comentarios.html" class="dropdown-item active" style="background:rgba(249,115,22,0.1);"><span class="dropdown-icon">💬</span> Comentarios</a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item" onclick="closeUserDropdown(); return false;"><span class="dropdown-icon">⚙️</span> Configuracion</a>
-        <a href="#" class="dropdown-item dropdown-logout" onclick="logout(); closeUserDropdown();"><span class="dropdown-icon">🚪</span> Cerrar Sesion</a>
-      </div>
-    </div>
   </div>
 </nav>
 
@@ -440,36 +423,6 @@
   </div>
 </footer>
 
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="login-modal" style="display:none;">
-  <div class="login-modal-content">
-    <button class="login-close" onclick="closeLoginModal()">&times;</button>
-    <div class="login-header">
-      <div class="login-logo">Visa<span>Work</span></div>
-      <h2>Iniciar Sesion</h2>
-      <p>Accede a tu cuenta para guardar tu progreso</p>
-    </div>
-    <button class="login-google-btn" onclick="loginWithGoogle()">
-      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      Continuar con Google
-    </button>
-    <div class="login-divider"><span>o</span></div>
-    <form class="login-form" onsubmit="handleEmailLogin(event)">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="tu@email.com" required>
-      </div>
-      <div class="form-group">
-        <label>Contrasena</label>
-        <input type="password" id="loginPassword" placeholder="••••••••" required>
-      </div>
-      <button type="submit" class="login-submit-btn">Iniciar Sesion</button>
-    </form>
-    <div class="login-footer">
-      ¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Crear cuenta</a>
-    </div>
-  </div>
-</div>
 
 <script>
 // ==========================================
@@ -692,120 +645,9 @@ function escapeHtml(text) {
 }
 
 // ==========================================
-// FIREBASE AUTH (same as other pages)
-// ==========================================
-const firebaseConfig = {
-  apiKey: "AIzaSyC1xxrXlRo7MjEqCOD3te-nfWv6Aof3MrE",
-  authDomain: "pinpon-77a21.firebaseapp.com",
-  projectId: "pinpon-77a21",
-  storageBucket: "pinpon-77a21.firebasestorage.app",
-  messagingSenderId: "538191080129",
-  appId: "1:538191080129:web:0a19e177c0b0b803f7c240"
-};
-
-let auth = null;
-let currentUser = null;
-
-function initFirebase() {
-  try {
-    firebase.initializeApp(firebaseConfig);
-    auth = firebase.auth();
-
-    auth.onAuthStateChanged((user) => {
-      currentUser = user;
-      const loginBtn = document.getElementById('loginBtn');
-      const userMenu = document.getElementById('userMenu');
-
-      if (user) {
-        // User is logged in: show user menu, hide login button
-        const displayName = user.displayName || user.email.split('@')[0];
-        const initial = displayName[0].toUpperCase();
-        document.getElementById('userAvatar').textContent = initial;
-        document.getElementById('userName').textContent = displayName;
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (userMenu) userMenu.style.display = 'flex';
-
-        // Pre-fill form if logged in
-        const nameInput = document.getElementById('commentName');
-        const emailInput = document.getElementById('commentEmail');
-        if (nameInput && !nameInput.value) nameInput.value = displayName;
-        if (emailInput && !emailInput.value) emailInput.value = user.email;
-      } else {
-        // User is NOT logged in: show login button, hide user menu
-        if (loginBtn) loginBtn.style.display = '';
-        if (userMenu) userMenu.style.display = 'none';
-      }
-    });
-  } catch (error) {
-    console.log('Firebase init error:', error.message);
-  }
-}
-
-function logout() {
-  if (auth) auth.signOut().then(() => { window.location.href = 'index.html'; });
-}
-
-function toggleUserDropdown(e) {
-  e.stopPropagation();
-  const menu = document.getElementById('userDropdownMenu');
-  const arrow = document.querySelector('.user-dropdown-arrow');
-  if (menu) {
-    menu.classList.toggle('show');
-    if (arrow) arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : '';
-  }
-}
-
-function closeUserDropdown() {
-  const menu = document.getElementById('userDropdownMenu');
-  const arrow = document.querySelector('.user-dropdown-arrow');
-  if (menu) menu.classList.remove('show');
-  if (arrow) arrow.style.transform = '';
-}
-
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('userDropdownMenu');
-  if (menu && !e.target.closest('.user-dropdown') && !e.target.closest('.user-dropdown-menu')) {
-    closeUserDropdown();
-  }
-  const modal = document.getElementById('loginModal');
-  if (modal && e.target === modal) closeLoginModal();
-});
-
-function openLoginModal() {
-  const modal = document.getElementById('loginModal');
-  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-}
-
-function closeLoginModal() {
-  const modal = document.getElementById('loginModal');
-  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
-}
-
-function loginWithGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
-    .then(() => closeLoginModal())
-    .catch((error) => alert('Error al iniciar sesion: ' + error.message));
-}
-
-function handleEmailLogin(e) {
-  e.preventDefault();
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => closeLoginModal())
-    .catch((error) => alert('Error: ' + error.message));
-}
-
-function showRegisterForm() {
-  alert('Para crear una cuenta, usa el boton "Iniciar Sesion" y selecciona "Crear cuenta".');
-}
-
-// ==========================================
 // INIT
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-  initFirebase();
   loadPreviousComments();
 });
 </script>
