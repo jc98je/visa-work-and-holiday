@@ -1723,11 +1723,16 @@ function playAudio(id,speed){
       var utt=new SpeechSynthesisUtterance(text);
       utt.lang='en-GB';
       utt.rate=rate;
-      var voice=null;
-      for(var i=0;i<audioVoices.length;i++){
-        if(audioVoices[i].lang.startsWith('en')){voice=audioVoices[i];break;}
+      utt.pitch=1.0;
+      // Use the best available voice
+      if(preferredVoice){
+        utt.voice=preferredVoice;
+      }else{
+        // Fallback: find any English voice
+        for(var i=0;i<audioVoices.length;i++){
+          if(audioVoices[i].lang.startsWith('en')){utt.voice=audioVoices[i];break;}
+        }
       }
-      if(voice)utt.voice=voice;
       utt.onend=function(){
         if(btn)btn.textContent='▶';
         if(statusEl)statusEl.textContent='🔊 Listo para reproducir';
