@@ -68,7 +68,7 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 .audio-box .transcript-toggle:hover{background:rgba(255,255,255,.15);}
 .audio-box .transcript-text{display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,.1);border-radius:8px;font-size:.88em;line-height:1.6;color:#fff;}
 .audio-box .transcript-text.show{display:block;}
-.audio-box .transcript-text b{color:var(--gold);}
+.audio-box .transcript-text b{color:var(--gold);}.audio-box .audio-progress{margin-top:10px;background:rgba(255,255,255,.15);border-radius:10px;height:8px;overflow:hidden;}.audio-box .audio-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),#f0c040);border-radius:10px;transition:width 0.5s linear;}.audio-box .audio-info-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:.75em;color:#dbe6f0;}
 .fb input.ok{background:#d9f2d9;border-color:var(--green);}.fb input.no{background:#fbdcdc;border-color:var(--red);}
 .cr{margin-top:8px;}
 .fg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:10px 0;}
@@ -349,6 +349,9 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="transcript-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Ver transcript / Ocultar</div>
 <div class="transcript-text">Good morning. I would like to book a room for <b>three</b> nights, please. Could I have your <b>surname</b> and phone number? Of course. My surname is Garcia, and my phone number is <b>nine one two, three four five, six seven eight</b>. Thank you, Mr Garcia. The total cost, including breakfast, is <b>one hundred and twenty pounds</b>. And your room number is <b>two zero five</b>. Perfect. Thank you very much.</div>
 <div id="audio-n1-1" data-text="Good morning. I would like to book a room for three nights, please. Could I have your surname and phone number? Of course. My surname is Garcia, and my phone number is nine one two, three four five, six seven eight. Thank you, Mr Garcia. The total cost, including breakfast, is one hundred and twenty pounds. And your room number is two zero five. Perfect. Thank you very much." data-rate="0.8" style="display:none"></div>
+<div class="audio-progress"><div class="audio-progress-fill"></div></div>
+<div class="audio-info-row"><span class="audio-status">🔊 Listo para reproducir</span><span class="audio-time"></span></div>
+
 </div>
 
 <div class="card fb">
@@ -374,6 +377,9 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="transcript-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Ver transcript / Ocultar</div>
 <div class="transcript-text">Hello, I need to make an appointment with the doctor, please. What is your name? My name is <b>Maria Lopez</b>. When would you like to come? Could I come on <b>Tuesday</b> morning? I am sorry, Tuesday morning is fully available. What about <b>Wednesday afternoon</b>? Yes, that works for me. <b>Wednesday at three thirty</b>. Thank you very much. You are welcome.</div>
 <div id="audio-n1-2" data-text="Hello, I need to make an appointment with the doctor, please. What is your name? My name is Maria Lopez. When would you like to come? Could I come on Tuesday morning? I am sorry, Tuesday morning is fully available. What about Wednesday afternoon? Yes, that works for me. Wednesday at three thirty. Thank you very much. You are welcome." data-rate="0.8" style="display:none"></div>
+<div class="audio-progress"><div class="audio-progress-fill"></div></div>
+<div class="audio-info-row"><span class="audio-status">🔊 Listo para reproducir</span><span class="audio-time"></span></div>
+
 </div>
 
 <div class="card fb">
@@ -574,6 +580,9 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="transcript-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Ver transcript / Ocultar</div>
 <div class="transcript-text">Good morning, everyone. Welcome to the City Museum. My name is Sarah, and I will be your guide today. The museum was established in <b>nineteen eighty-five</b>, and it houses over <b>five thousand</b> artefacts from around the world. We will start our tour in the <b>ancient Egypt</b> gallery, which is on the ground floor. Please do not touch any of the exhibits, and feel free to ask questions at any time. The tour will last approximately <b>two hours</b>. If you need to use the restroom, they are located near the main entrance. Let us begin.</div>
 <div id="audio-n2-1" data-text="Good morning, everyone. Welcome to the City Museum. My name is Sarah, and I will be your guide today. The museum was established in nineteen eighty-five, and it houses over five thousand artefacts from around the world. We will start our tour in the ancient Egypt gallery, which is on the ground floor. Please do not touch any of the exhibits, and feel free to ask questions at any time. The tour will last approximately two hours. If you need to use the restroom, they are located near the main entrance. Let us begin." data-rate="0.85" style="display:none"></div>
+<div class="audio-progress"><div class="audio-progress-fill"></div></div>
+<div class="audio-info-row"><span class="audio-status">🔊 Listo para reproducir</span><span class="audio-time"></span></div>
+
 </div>
 
 <div class="card fb">
@@ -599,6 +608,9 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="transcript-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Ver transcript / Ocultar</div>
 <div class="transcript-text">I am writing to inform you about a change in our meeting schedule. The original meeting, which was planned for Monday at ten o'clock, has been moved to <b>Wednesday at two thirty</b>. Unfortunately, the conference room B is no longer available, so we will use <b>room one zero one</b> instead. I apologise for any inconvenience this may cause. Please confirm your attendance by replying to this email. If you have any questions, do not hesitate to contact me. Thank you for your understanding.</div>
 <div id="audio-n2-2" data-text="I am writing to inform you about a change in our meeting schedule. The original meeting, which was planned for Monday at ten o'clock, has been moved to Wednesday at two thirty. Unfortunately, the conference room B is no longer available, so we will use room one zero one instead. I apologise for any inconvenience this may cause. Please confirm your attendance by replying to this email. If you have any questions, do not hesitate to contact me. Thank you for your understanding." data-rate="0.85" style="display:none"></div>
+<div class="audio-progress"><div class="audio-progress-fill"></div></div>
+<div class="audio-info-row"><span class="audio-status">🔊 Listo para reproducir</span><span class="audio-time"></span></div>
+
 </div>
 
 <div class="card fb">
@@ -730,6 +742,9 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 <div class="transcript-toggle" onclick="this.nextElementSibling.classList.toggle('show')">📝 Ver transcript / Ocultar</div>
 <div class="transcript-text">Today I would like to discuss the impact of artificial intelligence on the healthcare industry. According to recent studies, AI has the potential to reduce diagnostic errors by up to thirty percent. Machine learning algorithms can now detect certain types of cancer with accuracy rates that surpass those of human radiologists. However, there are significant concerns regarding data privacy and the ethical implications of automated diagnosis. Critics argue that over-reliance on technology could lead to a dehumanisation of patient care. Nevertheless, the consensus among researchers is that <b>AI should be viewed as a tool to augment, rather than replace, medical professionals</b>.</div>
 <div id="audio-n3-1" data-text="Today I would like to discuss the impact of artificial intelligence on the healthcare industry. According to recent studies, AI has the potential to reduce diagnostic errors by up to thirty percent. Machine learning algorithms can now detect certain types of cancer with accuracy rates that surpass those of human radiologists. However, there are significant concerns regarding data privacy and the ethical implications of automated diagnosis. Critics argue that over-reliance on technology could lead to a dehumanisation of patient care. Nevertheless, the consensus among researchers is that AI should be viewed as a tool to augment, rather than replace, medical professionals." data-rate="0.9" style="display:none"></div>
+<div class="audio-progress"><div class="audio-progress-fill"></div></div>
+<div class="audio-info-row"><span class="audio-status">🔊 Listo para reproducir</span><span class="audio-time"></span></div>
+
 </div>
 
 <div class="card fb">
@@ -869,17 +884,17 @@ footer{text-align:center;padding:24px;background:var(--navy);color:#cfd9e3;font-
 document.querySelectorAll('#mainnav a,.level-card').forEach(el=>{
 el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)return;document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('#mainnav a').forEach(a=>a.classList.remove('active'));const n=document.querySelector('#mainnav a[data-tab="'+t+'"]');if(n)n.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});});
 });
-/* Audio Player - Speech Synthesis */
+/* Audio Player - Speech Synthesis with Progress Bar */
 var synth=window.speechSynthesis;
 var audioVoices=[];
+var audioTimers={};
+var currentAudioId=null;
 function loadVoices(){audioVoices=synth.getVoices();}
 if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
 loadVoices();
 
 function playAudio(id,speed){
-  // First, stop any current audio
-  try{synth.cancel();}catch(e){}
-  // Wait a moment then speak
+  stopAll();
   setTimeout(function(){
     try{
       var el=document.getElementById(id);
@@ -887,32 +902,67 @@ function playAudio(id,speed){
       var text=el.getAttribute('data-text');
       if(!text)return;
       var rate=(speed!==undefined&&speed!==null)?parseFloat(speed):parseFloat(el.getAttribute('data-rate')||'0.85');
+      var box=el.closest('.audio-box');
+      if(!box)return;
+      var btn=box.querySelector('.play-btn');
+      var bar=box.querySelector('.audio-progress-fill');
+      var timeEl=box.querySelector('.audio-time');
+      currentAudioId=id;
+      if(btn)btn.textContent='⏸';
+      if(bar){bar.style.width='0%';bar.style.transition='none';}
+      var wordCount=text.split(/\s+/).length;
+      var estSeconds=Math.ceil((wordCount/150)*60/rate);
+      var elapsed=0;
+      if(bar){
+        setTimeout(function(){bar.style.transition='width 0.5s linear';},50);
+        audioTimers[id]=setInterval(function(){
+          elapsed+=0.5;
+          var pct=Math.min((elapsed/estSeconds)*100,98);
+          if(bar)bar.style.width=pct+'%';
+          if(timeEl){
+            var mins=Math.floor(elapsed/60);
+            var secs=Math.floor(elapsed%60);
+            var tMins=Math.floor(estSeconds/60);
+            var tSecs=Math.floor(estSeconds%60);
+            timeEl.textContent=mins+':'+(secs<10?'0':'')+secs+' / '+tMins+':'+(tSecs<10?'0':'')+tSecs;
+          }
+        },500);
+      }
       var utt=new SpeechSynthesisUtterance(text);
       utt.lang='en-GB';
       utt.rate=rate;
-      // Try to find an English voice
       var voice=null;
       for(var i=0;i<audioVoices.length;i++){
         if(audioVoices[i].lang==='en-GB'){voice=audioVoices[i];break;}
       }
-      if(!voice){
-        for(var j=0;j<audioVoices.length;j++){
-          if(audioVoices[j].lang.startsWith('en')){voice=audioVoices[j];break;}
-        }
-      }
+      if(!voice){for(var j=0;j<audioVoices.length;j++){if(audioVoices[j].lang.startsWith('en')){voice=audioVoices[j];break;}}}
       if(voice)utt.voice=voice;
-      var btn=el.querySelector('.play-btn');
-      if(btn)btn.textContent='⏸';
-      utt.onend=function(){if(btn)btn.textContent='▶';};
-      utt.onerror=function(){if(btn)btn.textContent='▶';};
+      utt.onend=function(){
+        if(btn)btn.textContent='▶';
+        if(bar){bar.style.transition='width 0.3s';bar.style.width='100%';}
+        if(timeEl){var tMins=Math.floor(estSeconds/60);var tSecs=Math.floor(estSeconds%60);timeEl.textContent=tMins+':'+(tSecs<10?'0':'')+tSecs+' / '+tMins+':'+(tSecs<10?'0':'')+tSecs;}
+        clearInterval(audioTimers[id]);delete audioTimers[id];
+        setTimeout(function(){if(bar){bar.style.transition='width 0.5s';bar.style.width='0%';}},2000);
+      };
+      utt.onerror=function(){
+        if(btn)btn.textContent='▶';
+        clearInterval(audioTimers[id]);delete audioTimers[id];
+        if(bar)bar.style.width='0%';
+        if(timeEl)timeEl.textContent='Audio no disponible en este navegador';
+        currentAudioId=null;
+      };
       synth.speak(utt);
     }catch(e){console.log('Audio error:',e);}
-  },100);
+  },200);
 }
 
 function stopAll(){
   try{synth.cancel();}catch(e){}
+  Object.keys(audioTimers).forEach(function(k){clearInterval(audioTimers[k]);delete audioTimers[k];});
+  currentAudioId=null;
   document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});
+  document.querySelectorAll('.audio-progress-fill').forEach(function(b){b.style.width='0%';b.style.transition='none';});
+  document.querySelectorAll('.audio-time').forEach(function(t){t.textContent='';});
 }
 
 /* Accordion */
