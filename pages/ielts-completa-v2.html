@@ -1680,7 +1680,26 @@ el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)retur
 var synth=window.speechSynthesis;
 var audioVoices=[];
 var audioTimers={};
-function loadVoices(){audioVoices=synth.getVoices();}
+var preferredVoice=null;
+  function loadVoices(){
+    audioVoices=synth.getVoices();
+    var bestVoice=null;
+    var bestScore=0;
+    for(var i=0;i<audioVoices.length;i++){
+      var v=audioVoices[i];
+      var score=0;
+      var name=(v.name||'').toLowerCase();
+      var lang=(v.lang||'').toLowerCase();
+      if(!lang.startsWith('en'))continue;
+      if(name.indexOf('google')!==-1)score+=100;
+      if(name.indexOf('microsoft')!==-1)score+=50;
+      if(name.indexOf('samantha')!==-1||name.indexOf('karen')!==-1||name.indexOf('zira')!==-1||name.indexOf('hazel')!==-1)score+=30;
+      if(lang==='en-gb'||lang==='en-us')score+=20;
+      if(!v.localService)score+=40;
+      if(score>bestScore){bestScore=score;bestVoice=v;}
+    }
+    preferredVoice=bestVoice;
+  }
 if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
 loadVoices();
 
