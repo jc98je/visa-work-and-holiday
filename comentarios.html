@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Deja tu comentario y sugerencia para mejorar VisaWork Peru. Tu feedback nos ayuda a crear una mejor plataforma.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Comentarios - VisaWork Peru</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/home.css">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    .comments-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: white;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+    .comments-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .comments-hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .comments-hero p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .comments-container {
+      max-width: 800px;
+      margin: -30px auto 32px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .comments-card {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .comments-card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .comments-card > p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .form-group label .required {
+      color: var(--red);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: var(--bg);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+      background: white;
+    }
+    .form-group textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+    .form-group .hint {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--accent), #ea580c);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(249,115,22,0.3);
+    }
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .submit-btn .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .submit-btn.loading .spinner {
+      display: block;
+    }
+    .submit-btn.loading .btn-text {
+      display: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success / Error messages */
+    .form-message {
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      animation: slideDown 0.3s ease;
+    }
+    .form-message.show {
+      display: flex;
+    }
+    .form-message.success {
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+    .form-message.error {
+      background: var(--red-light);
+      color: var(--red);
+      border: 1px solid var(--red);
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Guidelines card */
+    .guidelines {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+      border: 1px solid #bfdbfe;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .guidelines h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e40af;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .guidelines ul {
+      padding-left: 20px;
+      color: #334155;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .guidelines li strong {
+      color: #1e40af;
+    }
+
+    /* Character counter */
+    .char-counter {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .char-counter.warning {
+      color: var(--yellow);
+    }
+    .char-counter.limit {
+      color: var(--red);
+    }
+
+    /* Rate limit notice */
+    .rate-notice {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Previous comments section */
+    .prev-comments-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .prev-comments-header h2 {
+      margin-bottom: 0;
+    }
+    .comment-count {
+      background: var(--accent);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .no-comments {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+    }
+    .no-comments .emoji {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .no-comments p {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .comments-hero h1 {
+        font-size: 1.8rem;
+      }
+      .comments-card {
+        padding: 24px 20px;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">Visa<span>Work</span></a>
+    <a href="index.html#requisitos" class="nav-link">Requisitos</a>
+    <a href="index.html#carta-mre" class="nav-link">Carta MRE</a>
+    <a href="pages/ielts-guia.html" class="nav-link">🇬🇧 Ingles</a>
+    <a href="index.html#proceso" class="nav-link">Proceso</a>
+    <a href="index.html#vuelos" class="nav-link">✈️ Vuelos</a>
+    <a href="index.html#costos" class="nav-link">Costos</a>
+    <div class="nav-spacer"></div>
+    <a href="#" id="loginBtn" class="nav-btn" onclick="openLoginModal(); return false;">Iniciar Sesion</a>
+    <div class="user-menu" id="userMenu" style="display:flex;">
+      <div class="user-dropdown" onclick="toggleUserDropdown(event)">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <span class="user-name" id="userName">Usuario</span>
+        <span class="user-dropdown-arrow">▾</span>
+      </div>
+      <div class="user-dropdown-menu" id="userDropdownMenu">
+        <a href="mi-cuenta.html" class="dropdown-item"><span class="dropdown-icon">👤</span> Mi Cuenta</a>
+        <a href="mi-proceso.html" class="dropdown-item"><span class="dropdown-icon">📋</span> Mi Proceso</a>
+        <a href="pages/ielts-guia.html" class="dropdown-item"><span class="dropdown-icon">🇬🇧</span> Ingles</a>
+        <a href="comentarios.html" class="dropdown-item active" style="background:rgba(249,115,22,0.1);"><span class="dropdown-icon">💬</span> Comentarios</a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item" onclick="closeUserDropdown(); return false;"><span class="dropdown-icon">⚙️</span> Configuracion</a>
+        <a href="#" class="dropdown-item dropdown-logout" onclick="logout(); closeUserDropdown();"><span class="dropdown-icon">🚪</span> Cerrar Sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="comments-hero">
+  <h1>Tu <span>Feedback</span></h1>
+  <p>Tu opinion nos ayuda a mejorar la plataforma. Deja tu comentario, sugerencia o reporta un problema.</p>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="comments-container">
+
+  <!-- Guidelines -->
+  <div class="guidelines">
+    <h3>📋 Lineas para tu comentario</h3>
+    <ul>
+      <li><strong>Sugerencias:</strong> Ideas para mejorar funcionalidades o contenido existente.</li>
+      <li><strong>Problemas:</strong> Errores encontrados en la pagina (links rotos, contenido incorrecto, etc).</li>
+      <li><strong>Contenido:</strong> Temas que te gustaria ver agregados o profundizados.</li>
+      <li><strong>Experiencia:</strong> Que te parecio la plataforma y como podemos hacerla mejor.</li>
+    </ul>
+  </div>
+
+  <!-- Comment Form -->
+  <div class="comments-card">
+    <h2>💬 Deja tu Comentario</h2>
+    <p>Completa el formulario y te notificaremos cuando revisemos tu feedback. Los comentarios se envian directamente al equipo de desarrollo.</p>
+
+    <!-- Status message -->
+    <div class="form-message" id="formMessage">
+      <span id="messageIcon"></span>
+      <span id="messageText"></span>
+    </div>
+
+    <form id="commentForm" onsubmit="submitComment(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tu Nombre <span class="required">*</span></label>
+          <input type="text" id="commentName" placeholder="Ej: Juan Perez" required maxlength="100">
+        </div>
+        <div class="form-group">
+          <label>Tu Email <span class="required">*</span></label>
+          <input type="email" id="commentEmail" placeholder="tu@email.com" required maxlength="150">
+          <div class="hint">No compartiremos tu email con terceros.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo de Comentario <span class="required">*</span></label>
+        <select id="commentType" required>
+          <option value="" disabled selected>Selecciona una opcion</option>
+          <option value="sugerencia">💡 Sugerencia de mejora</option>
+          <option value="problema">🐛 Reportar un problema</option>
+          <option value="contenido">📚 Solicitud de contenido</option>
+          <option value="experiencia">⭐ Experiencia general</option>
+          <option value="otro">📝 Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Tu Comentario <span class="required">*</span></label>
+        <textarea id="commentText" placeholder="Escribe tu comentario aqui... Sé lo más especifico posible para poder ayudarte mejor." required maxlength="2000" oninput="updateCharCounter()"></textarea>
+        <div class="char-counter" id="charCounter">0 / 2000 caracteres</div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span class="btn-text">📨 Enviar Comentario</span>
+        <div class="spinner"></div>
+      </button>
+
+      <div class="rate-notice">
+        ⏳ Para evitar spam, solo puedes enviar 1 comentario cada 5 minutos.
+      </div>
+    </form>
+  </div>
+
+  <!-- Previous Comments (stored in localStorage) -->
+  <div class="comments-card">
+    <div class="prev-comments-header">
+      <h2>📋 Tus Comentarios Enviados</h2>
+      <span class="comment-count" id="commentCount">0</span>
+    </div>
+    <div id="previousComments">
+      <div class="no-comments">
+        <div class="emoji">💭</div>
+        <p>Aun no has enviado comentarios.</p>
+        <p style="font-size:0.85rem; margin-top:8px;">Tus comentarios enviados apareceran aqui.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>Visa<span>Work</span> Peru</h3>
+      <p>Tu plataforma completa para la visa Work and Holiday Australia 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Recursos</h4>
+      <a href="index.html#requisitos">Requisitos</a>
+      <a href="index.html#carta-mre">Carta del MRE</a>
+      <a href="pages/ielts-guia.html">Guia IELTS</a>
+    </div>
+    <div class="footer-col">
+      <h4>Mi Cuenta</h4>
+      <a href="mi-proceso.html">Mi Proceso</a>
+      <a href="mi-cuenta.html">Configuracion</a>
+      <a href="index.html">Volver al inicio</a>
+    </div>
+    <div class="footer-col">
+      <h4>Oficiales</h4>
+      <a href="https://immi.homeaffairs.gov.au/">Departamento de Inmigracion</a>
+      <a href="https://online.immi.gov.au/">ImmiAccount</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>Informacion recopilada en julio 2026. Siempre verifica en immi.homeaffairs.gov.au</p>
+  </div>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="login-modal" style="display:none;">
+  <div class="login-modal-content">
+    <button class="login-close" onclick="closeLoginModal()">&times;</button>
+    <div class="login-header">
+      <div class="login-logo">Visa<span>Work</span></div>
+      <h2>Iniciar Sesion</h2>
+      <p>Accede a tu cuenta para guardar tu progreso</p>
+    </div>
+    <button class="login-google-btn" onclick="loginWithGoogle()">
+      <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continuar con Google
+    </button>
+    <div class="login-divider"><span>o</span></div>
+    <form class="login-form" onsubmit="handleEmailLogin(event)">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Contrasena</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="login-submit-btn">Iniciar Sesion</button>
+    </form>
+    <div class="login-footer">
+      ¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Crear cuenta</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// EMAILJS CONFIGURATION
+// ==========================================
+// IMPORTANTE: Reemplaza estos valores con tus credenciales de EmailJS
+// 1. Crea cuenta gratis en https://www.emailjs.com/
+// 2. Crea un Email Service (conecta tu Gmail u otro correo)
+// 3. Crea un Email Template con las variables: {{from_name}}, {{from_email}}, {{comment_type}}, {{message}}, {{timestamp}}
+// 4. Reemplaza los valores de abajo con tus IDs
+const EMAILJS_SERVICE_ID = 'TU_SERVICE_ID';        // Ej: 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'TU_TEMPLATE_ID';      // Ej: 'template_xyz789'
+const EMAILJS_PUBLIC_KEY = 'TU_PUBLIC_KEY';         // Ej: 'abcDefGhiJklMno'
+
+// Initialize EmailJS
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ==========================================
+// RATE LIMITING (5 minutos entre comentarios)
+// ==========================================
+const RATE_LIMIT_MS = 5 * 60 * 1000; // 5 minutes
+
+function canSubmit() {
+  const lastSubmit = localStorage.getItem('lastCommentTime');
+  if (!lastSubmit) return true;
+  const elapsed = Date.now() - parseInt(lastSubmit);
+  return elapsed >= RATE_LIMIT_MS;
+}
+
+function getTimeUntilNext() {
+  const lastSubmit = localStorage.getItem('lastCommentTime');
+  if (!lastSubmit) return 0;
+  const elapsed = Date.now() - parseInt(lastSubmit);
+  const remaining = RATE_LIMIT_MS - elapsed;
+  return remaining > 0 ? remaining : 0;
+}
+
+// ==========================================
+// FORM SUBMISSION
+// ==========================================
+async function submitComment(e) {
+  e.preventDefault();
+
+  // Rate limit check
+  if (!canSubmit()) {
+    const remaining = getTimeUntilNext();
+    const minutes = Math.ceil(remaining / 60000);
+    showMessage('error', `⏳ Debes esperar ${minutes} minuto(s) antes de enviar otro comentario.`);
+    return;
+  }
+
+  const name = document.getElementById('commentName').value.trim();
+  const email = document.getElementById('commentEmail').value.trim();
+  const type = document.getElementById('commentType').value;
+  const text = document.getElementById('commentText').value.trim();
+
+  if (!name || !email || !type || !text) {
+    showMessage('error', '⚠️ Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  if (text.length < 10) {
+    showMessage('error', '⚠️ Tu comentario debe tener al menos 10 caracteres.');
+    return;
+  }
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.classList.add('loading');
+  submitBtn.disabled = true;
+
+  const typeLabels = {
+    'sugerencia': '💡 Sugerencia de mejora',
+    'problema': '🐛 Reportar un problema',
+    'contenido': '📚 Solicitud de contenido',
+    'experiencia': '⭐ Experiencia general',
+    'otro': '📝 Otro'
+  };
+
+  const timestamp = new Date().toLocaleString('es-PE', {
+    timeZone: 'America/Lima',
+    year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+
+  const templateParams = {
+    from_name: name,
+    from_email: email,
+    comment_type: typeLabels[type] || type,
+    message: text,
+    timestamp: timestamp,
+    page_url: window.location.href
+  };
+
+  try {
+    // Send email via EmailJS
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+
+    // Save to localStorage
+    saveCommentToHistory(name, email, type, text, timestamp);
+
+    // Set rate limit
+    localStorage.setItem('lastCommentTime', Date.now().toString());
+
+    // Show success
+    showMessage('success', '✅ ¡Comentario enviado correctamente! Gracias por tu feedback. Te notificaremos cuando lo revisemos.');
+
+    // Reset form
+    document.getElementById('commentForm').reset();
+    document.getElementById('charCounter').textContent = '0 / 2000 caracteres';
+    document.getElementById('charCounter').className = 'char-counter';
+
+    // Reload comments list
+    loadPreviousComments();
+
+  } catch (error) {
+    console.error('EmailJS error:', error);
+    showMessage('error', '❌ Error al enviar el comentario. Por favor intenta de nuevo o contactanos directamente.');
+  } finally {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+}
+
+// ==========================================
+// UI HELPERS
+// ==========================================
+function showMessage(type, text) {
+  const msgEl = document.getElementById('formMessage');
+  const iconEl = document.getElementById('messageIcon');
+  const textEl = document.getElementById('messageText');
+
+  msgEl.className = 'form-message show ' + type;
+  textEl.textContent = text;
+
+  // Auto-hide after 8 seconds
+  setTimeout(() => {
+    msgEl.classList.remove('show');
+  }, 8000);
+}
+
+function updateCharCounter() {
+  const textarea = document.getElementById('commentText');
+  const counter = document.getElementById('charCounter');
+  const len = textarea.value.length;
+  counter.textContent = len + ' / 2000 caracteres';
+
+  counter.className = 'char-counter';
+  if (len > 1800) counter.classList.add('warning');
+  if (len >= 2000) counter.classList.add('limit');
+}
+
+// ==========================================
+// COMMENT HISTORY (localStorage)
+// ==========================================
+function saveCommentToHistory(name, email, type, text, timestamp) {
+  const comments = JSON.parse(localStorage.getItem('userComments') || '[]');
+  comments.unshift({
+    name, email, type, text, timestamp,
+    id: Date.now()
+  });
+  // Keep only last 20 comments
+  if (comments.length > 20) comments.length = 20;
+  localStorage.setItem('userComments', JSON.stringify(comments));
+}
+
+function loadPreviousComments() {
+  const container = document.getElementById('previousComments');
+  const countEl = document.getElementById('commentCount');
+  const comments = JSON.parse(localStorage.getItem('userComments') || '[]');
+
+  countEl.textContent = comments.length;
+
+  if (comments.length === 0) {
+    container.innerHTML = `
+      <div class="no-comments">
+        <div class="emoji">💭</div>
+        <p>Aun no has enviado comentarios.</p>
+        <p style="font-size:0.85rem; margin-top:8px;">Tus comentarios enviados apareceran aqui.</p>
+      </div>`;
+    return;
+  }
+
+  const typeEmojis = {
+    'sugerencia': '💡',
+    'problema': '🐛',
+    'contenido': '📚',
+    'experiencia': '⭐',
+    'otro': '📝'
+  };
+
+  container.innerHTML = comments.map(c => `
+    <div style="padding:16px 20px; background:var(--bg); border-radius:12px; border:1px solid var(--border); margin-bottom:12px; transition:all 0.2s;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-weight:600; font-size:0.9rem; color:var(--primary);">${typeEmojis[c.type] || '📝'} ${capitalizeType(c.type)}</span>
+        <span style="font-size:0.8rem; color:var(--text-secondary);">${c.timestamp}</span>
+      </div>
+      <p style="font-size:0.9rem; color:var(--text-secondary); line-height:1.6; margin:0;">${escapeHtml(c.text)}</p>
+      <div style="margin-top:8px; display:flex; align-items:center; gap:8px;">
+        <span style="display:inline-block; padding:3px 10px; background:#dcfce7; color:#16a34a; border-radius:20px; font-size:0.75rem; font-weight:600;">✅ Enviado</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function capitalizeType(type) {
+  const labels = {
+    'sugerencia': 'Sugerencia',
+    'problema': 'Problema',
+    'contenido': 'Solicitud de contenido',
+    'experiencia': 'Experiencia',
+    'otro': 'Otro'
+  };
+  return labels[type] || type;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ==========================================
+// FIREBASE AUTH (same as other pages)
+// ==========================================
+const firebaseConfig = {
+  apiKey: "AIzaSyC1xxrXlRo7MjEqCOD3te-nfWv6Aof3MrE",
+  authDomain: "pinpon-77a21.firebaseapp.com",
+  projectId: "pinpon-77a21",
+  storageBucket: "pinpon-77a21.firebasestorage.app",
+  messagingSenderId: "538191080129",
+  appId: "1:538191080129:web:0a19e177c0b0b803f7c240"
+};
+
+let auth = null;
+let currentUser = null;
+
+function initFirebase() {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+
+    auth.onAuthStateChanged((user) => {
+      currentUser = user;
+      if (user) {
+        const displayName = user.displayName || user.email.split('@')[0];
+        const initial = displayName[0].toUpperCase();
+        document.getElementById('userAvatar').textContent = initial;
+        document.getElementById('userName').textContent = displayName;
+        document.getElementById('loginBtn').style.display = 'none';
+
+        // Pre-fill form if logged in
+        const nameInput = document.getElementById('commentName');
+        const emailInput = document.getElementById('commentEmail');
+        if (nameInput && !nameInput.value) nameInput.value = displayName;
+        if (emailInput && !emailInput.value) emailInput.value = user.email;
+      }
+    });
+  } catch (error) {
+    console.log('Firebase init error:', error.message);
+  }
+}
+
+function logout() {
+  if (auth) auth.signOut().then(() => { window.location.href = 'index.html'; });
+}
+
+function toggleUserDropdown(e) {
+  e.stopPropagation();
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) {
+    menu.classList.toggle('show');
+    if (arrow) arrow.style.transform = menu.classList.contains('show') ? 'rotate(180deg)' : '';
+  }
+}
+
+function closeUserDropdown() {
+  const menu = document.getElementById('userDropdownMenu');
+  const arrow = document.querySelector('.user-dropdown-arrow');
+  if (menu) menu.classList.remove('show');
+  if (arrow) arrow.style.transform = '';
+}
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('userDropdownMenu');
+  if (menu && !e.target.closest('.user-dropdown') && !e.target.closest('.user-dropdown-menu')) {
+    closeUserDropdown();
+  }
+  const modal = document.getElementById('loginModal');
+  if (modal && e.target === modal) closeLoginModal();
+});
+
+function openLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+}
+
+function closeLoginModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(() => closeLoginModal())
+    .catch((error) => alert('Error al iniciar sesion: ' + error.message));
+}
+
+function handleEmailLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => closeLoginModal())
+    .catch((error) => alert('Error: ' + error.message));
+}
+
+function showRegisterForm() {
+  alert('Para crear una cuenta, usa el boton "Iniciar Sesion" y selecciona "Crear cuenta".');
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  initFirebase();
+  loadPreviousComments();
+});
+</script>
+
+<script src="js/main.js"></script>
+</body>
+</html>
