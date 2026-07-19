@@ -838,52 +838,46 @@ el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)retur
 /* Audio Player - Speech Synthesis */
 var synth=window.speechSynthesis;
 var audioVoices=[];
-var currentPlayingId=null;
 function loadVoices(){audioVoices=synth.getVoices();}
 if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
 loadVoices();
 
 function playAudio(id){
-  // Stop any currently playing audio first
-  synth.cancel();
-  // Small delay to ensure cancel is processed before speaking
+  // First, stop any current audio
+  try{synth.cancel();}catch(e){}
+  // Wait a moment then speak
   setTimeout(function(){
-    var el=document.getElementById(id);
-    if(!el)return;
-    var text=el.getAttribute('data-text');
-    var rate=parseFloat(el.getAttribute('data-rate')||'0.85');
-    var utt=new SpeechSynthesisUtterance(text);
-    utt.lang='en-GB';
-    utt.rate=rate;
-    var voice=audioVoices.find(function(v){return v.lang==='en-GB';})||audioVoices.find(function(v){return v.lang.startsWith('en');});
-    if(voice)utt.voice=voice;
-    var btn=el.querySelector('.play-btn');
-    if(btn)btn.textContent='⏸';
-    currentPlayingId=id;
-    utt.onend=function(){
-      if(btn)btn.textContent='▶';
-      currentPlayingId=null;
-    };
-    utt.onerror=function(){
-      if(btn)btn.textContent='▶';
-      currentPlayingId=null;
-    };
-    synth.speak(utt);
-  },50);
-}
-
-function restartAudio(id){
-  synth.cancel();
-  setTimeout(function(){
-    synth.resume();
-    playAudio(id);
+    try{
+      var el=document.getElementById(id);
+      if(!el)return;
+      var text=el.getAttribute('data-text');
+      if(!text)return;
+      var rate=parseFloat(el.getAttribute('data-rate')||'0.85');
+      var utt=new SpeechSynthesisUtterance(text);
+      utt.lang='en-GB';
+      utt.rate=rate;
+      // Try to find an English voice
+      var voice=null;
+      for(var i=0;i<audioVoices.length;i++){
+        if(audioVoices[i].lang==='en-GB'){voice=audioVoices[i];break;}
+      }
+      if(!voice){
+        for(var j=0;j<audioVoices.length;j++){
+          if(audioVoices[j].lang.startsWith('en')){voice=audioVoices[j];break;}
+        }
+      }
+      if(voice)utt.voice=voice;
+      var btn=el.querySelector('.play-btn');
+      if(btn)btn.textContent='⏸';
+      utt.onend=function(){if(btn)btn.textContent='▶';};
+      utt.onerror=function(){if(btn)btn.textContent='▶';};
+      synth.speak(utt);
+    }catch(e){console.log('Audio error:',e);}
   },100);
 }
 
 function stopAll(){
-  synth.cancel();
-  synth.resume();
-  currentPlayingId=null;
+  try{synth.cancel();}catch(e){}
   document.querySelectorAll('.play-btn').forEach(function(b){b.textContent='▶';});
 }
 
