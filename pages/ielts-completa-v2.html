@@ -1680,26 +1680,7 @@ el.addEventListener('click',()=>{const t=el.getAttribute('data-tab');if(!t)retur
 var synth=window.speechSynthesis;
 var audioVoices=[];
 var audioTimers={};
-var preferredVoice=null;
-  function loadVoices(){
-    audioVoices=synth.getVoices();
-    var bestVoice=null;
-    var bestScore=0;
-    for(var i=0;i<audioVoices.length;i++){
-      var v=audioVoices[i];
-      var score=0;
-      var name=(v.name||'').toLowerCase();
-      var lang=(v.lang||'').toLowerCase();
-      if(!lang.startsWith('en'))continue;
-      if(name.indexOf('google')!==-1)score+=100;
-      if(name.indexOf('microsoft')!==-1)score+=50;
-      if(name.indexOf('samantha')!==-1||name.indexOf('karen')!==-1||name.indexOf('zira')!==-1||name.indexOf('hazel')!==-1)score+=30;
-      if(lang==='en-gb'||lang==='en-us')score+=20;
-      if(!v.localService)score+=40;
-      if(score>bestScore){bestScore=score;bestVoice=v;}
-    }
-    preferredVoice=bestVoice;
-  }
+function loadVoices(){audioVoices=synth.getVoices();}
 if(synth.onvoiceschanged!==undefined){synth.onvoiceschanged=loadVoices;}
 loadVoices();
 
@@ -1742,16 +1723,11 @@ function playAudio(id,speed){
       var utt=new SpeechSynthesisUtterance(text);
       utt.lang='en-GB';
       utt.rate=rate;
-      utt.pitch=1.0;
-      // Use the best available voice
-      if(preferredVoice){
-        utt.voice=preferredVoice;
-      }else{
-        // Fallback: find any English voice
-        for(var i=0;i<audioVoices.length;i++){
-          if(audioVoices[i].lang.startsWith('en')){utt.voice=audioVoices[i];break;}
-        }
+      var voice=null;
+      for(var i=0;i<audioVoices.length;i++){
+        if(audioVoices[i].lang.startsWith('en')){voice=audioVoices[i];break;}
       }
+      if(voice)utt.voice=voice;
       utt.onend=function(){
         if(btn)btn.textContent='▶';
         if(statusEl)statusEl.textContent='🔊 Listo para reproducir';
