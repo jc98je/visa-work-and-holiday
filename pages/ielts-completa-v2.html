@@ -886,7 +886,7 @@ function playAudio(id,speed){
       if(!el)return;
       var text=el.getAttribute('data-text');
       if(!text)return;
-      var rate=speed?parseFloat(speed):parseFloat(el.getAttribute('data-rate')||'0.85');
+      var rate=(speed!==undefined&&speed!==null)?parseFloat(speed):parseFloat(el.getAttribute('data-rate')||'0.85');
       var utt=new SpeechSynthesisUtterance(text);
       utt.lang='en-GB';
       utt.rate=rate;
